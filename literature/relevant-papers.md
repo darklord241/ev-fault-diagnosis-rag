@@ -1,13 +1,16 @@
 ### Core papers I'd prioritize
 
 - “An Evaluation Framework for Fault Diagnosis Using Technical Manuals in Retrieval-Augmented Large Language Models” — Lukens et al., PHM Society, 2025
+    * [md file for this](paper01.md)
     Focus: RAG + technical manuals + fault diagnosis + evaluation
 
 - “Applying knowledge structure to the usable fault diagnosis assistance system: A case study of motorcycle maintenance in Taiwan” — Su, Hwang & Chou, 2006
     Focus: Motorcycle maintenance + knowledge-based fault diagnosis
+    * [md file for this](paper02.md)
 
 - “Large Language Model Based Intelligent Fault Information Retrieval System for New Energy Vehicles” — 2025, Applied Sciences
     Focus: NEV fault information + LLM + knowledge graph + RAG
+    * [md file for this](paper03.md)
 
 - “Knowledge Management for Automobile Failure Analysis Using Graph RAG” — IEEE Big Data, 2024
     Focus: Automobile failure analysis + knowledge graph + Graph RAG + LLM
