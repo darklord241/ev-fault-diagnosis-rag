@@ -1,0 +1,7 @@
+.venv
+__pycache__/
+*.pyc
+
+scraper/data/raw/
+scraper/data/incoming/
+scraper/data/processed/
