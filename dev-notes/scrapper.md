@@ -16,3 +16,68 @@
 ### process_html.py 
 - what is bs4 ? : 
 - what is shutil ? : `pathlib` is used for managing file paths and checking metadata, while `shutil` is used for high-level file operations like copying, moving, and deleting files or directories.
+
+### inspection of the html pages
+- i am taking only faq from these pages now and the way they are structured are different so i have handle them separately 
+- this structure is then used to parse into clean data with only the important bits 
+- i am only currently taking faqs cuz they r properly structured and easier to parse than other stuff 
+
+### document_processor.py
+``` 
+    print("FAQ data found.")
+
+    for category, groups in faq_data.items():
+        print(f"\nCategory: {category}")
+
+        for group in groups:
+            print(f"  Group: {group['name']}")
+            print(f"  Questions: {len(group['questions'])}")
+```
+- the first version of it just checks if the faq are actually present and possible to be extracted and yeah there are 349 faqs across the 6 html pages 
+```
+    count = 0
+    for category, groups in faq_data.items():
+        for group in groups:
+            for question in group["questions"]:
+                print()
+                print("Category:", category)
+                print("Group:", group["name"])
+                print("Question:", question["question"])
+                print("Answer:", question["answer"])
+
+                count += 1
+                if count == 5:
+                    return
+```
+- the second version just checks the html structure around the question so as to know what to remove and how 
+- the third version then checks if the output is cleaned by adding `clean_html()` func which works using soup
+- (committed) the fourth version extracts the faq and also error checks for none answer and saves it in `JSONL` format where each faq is across a line instead of in json sub objects format 
+- the next version which was done before the commit checks the topicData
+
+## Current Status
+
+### Completed
+
+- [x] Identified initial official Ather sources
+- [x] Implemented automated PDF collection
+- [x] Identified HTTP 403 responses for automated HTML requests
+- [x] Collected required HTML pages through browser saving
+- [x] Organized raw documents and metadata
+- [x] Implemented `process-html.py`
+- [x] Generated metadata for collected HTML documents
+- [x] Inspected embedded HTML/JavaScript structure
+- [x] Verified FAQ data exists in structured JSON
+- [x] Verified the structure of all six HTML FAQ pages
+- [x] Identified `faqData` structure for the main FAQ page
+- [x] Identified `topicData` structure for the other FAQ pages
+
+### In Progress
+
+- [ ] Implement `document_processor.py`
+- [ ] Extract structured FAQ records
+- [ ] Clean HTML from question/answer fields
+- [ ] Process PDF documents into page-aware text
+- [ ] Design common processed-document format
+- [ ] Implement chunking
+- [ ] Design database schema
+- [ ] Store processed data in PostgreSQL + pgvector
