@@ -10,14 +10,14 @@ PROCESSED_DIR = Path("data/processed")
 PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
 
 
-def find_faq_data(file_path):
+def find_faq_groups(file_path):
     with open(file_path, "r", encoding="utf-8") as file:
         soup = BeautifulSoup(file, "html.parser")
 
     for script in soup.find_all("script"):
         content = script.string or script.get_text()
 
-        if '"faqData"' not in content:
+        if '"faqData"' not in content and '"topicData"' not in content:
             continue
 
         try:
@@ -27,7 +27,28 @@ def find_faq_data(file_path):
 
         page_props = data["props"]["pageProps"]
 
-        return page_props["faqData"]
+        if "faqData" in page_props:
+            faq_data = page_props["faqData"]
+
+            groups = []
+
+            for category, category_groups in faq_data.items():
+                for group in category_groups:
+                    groups.append((category, group))
+
+            return groups
+
+        if "topicData" in page_props:
+            topic_data = page_props["topicData"]
+
+            groups = []
+
+            for group in topic_data:
+                category = group["category"]["slug"]
+
+                groups.append((category, group))
+
+            return groups
 
     return None
 
@@ -41,24 +62,26 @@ def save_records(records, output_path):
             file.write(json.dumps(record, ensure_ascii=False) + "\n")
 
 def main():
-    file_path = (
-        RAW_DIR
-        / "ather_electric_scooter_faqs___support_&_help_center.html"
-    )
+    html_files = list(RAW_DIR.glob("*.html"))
 
-    faq_data = find_faq_data(file_path)
+    for file_path in html_files:
+        print("=" * 60)
+        print(f"Processing: {file_path.name}")
 
-    if faq_data is None:
-        print("FAQ data not found.")
-        return
+        groups = find_faq_groups(file_path)
 
-    print("FAQ data found.")
+        if groups is None:
+            print("FAQ data not found.")
+            continue
 
-    records = []
-    for category, groups in faq_data.items():
-        for group in groups:
+        records = []
+        skipped = 0
+
+        for category, group in groups:
             for question in group["questions"]:
-                if question["answer"] == None:
+
+                if question["answer"] is None:
+                    skipped += 1
                     print("WARNING: Missing answer")
                     print("Category:", category)
                     print("Group:", group["name"])
@@ -77,12 +100,14 @@ def main():
                 }
 
                 records.append(record)
-    
-    output_path = (PROCESSED_DIR / "ather_electric_scooter_faqs.jsonl")
-    save_records(records,output_path)
 
-    print(f"Processed {len(records)} FAQ records")
-    print(f"Saved to {output_path}")
+        output_path = PROCESSED_DIR / f"{file_path.stem}.jsonl"
+
+        save_records(records, output_path)
+
+        print(f"Processed {len(records)} FAQ records")
+        print(f"Skipped {skipped} records with missing answers")
+        print(f"Saved to {output_path}")
                     
 
 
