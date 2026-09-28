@@ -72,14 +72,14 @@
 - [x] Identified topicData structure for the other FAQ pages
 - [x] Implemented document_processor.py
 - [x] Extracted structured FAQ records
-- [x] Removed HTML formatting from question/answer fields
+- [x] Cleaned HTML from question/answer fields
 - [x] Added handling for FAQ records with missing answers
 - [x] Saved processed FAQ data in JSONL format
-- [x] Verified processed FAQ records
+- [x] Processed PDF documents into page-aware text
+- [x] Saved processed PDF pages in JSONL format
 
 ### In Progress
 
-- [ ] Process PDF documents into page-aware text
 - [ ] Design common processed-document format
 - [ ] Implement chunking
 - [ ] Design database schema
