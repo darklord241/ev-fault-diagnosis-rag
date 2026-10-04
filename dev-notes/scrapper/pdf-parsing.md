@@ -1,3 +1,28 @@
+### overview 
+- Everything entering the retrieval pipeline should have a common core: source + text + metadata.
+
+---
+[YOU ARE HERE]
+407 processed records
+        ↓
+1. Common document schema       ← NEXT
+        ↓
+2. Normalize FAQ + PDF records
+        ↓
+3. Chunking
+        ↓
+4. Inspect chunks
+        ↓
+5. PostgreSQL schema
+        ↓
+6. pgvector
+        ↓
+7. Embeddings
+        ↓
+8. Retrieval test
+
+---
+
 ### test-pdf.py
 - **pypdf** : A Python package used for reading and working with PDF files.
 - `PdfReader` opens a PDF using its path and creates a reader object representing the document. The pages attribute provides access to the individual pages, 

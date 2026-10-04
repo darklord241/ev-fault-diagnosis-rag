@@ -89,14 +89,21 @@ def main():
                     print("Question:", clean_html(question["question"]))
                     continue
 
+                question_text = clean_html(question["question"])
+                answer_text = clean_html(question["answer"])
+
                 record = {
-                    "faq_id": question["id"],
-                    "category": category,
-                    "group": group["name"],
-                    "question": clean_html(question["question"]),
-                    "answer": clean_html(question["answer"]),
+                    "record_id": f"{file_path.stem}_{question['id']}",
                     "source_document": file_path.stem,
                     "source_type": "official",
+                    "content_type": "faq",
+                    "title": question_text,
+                    "text": f"{question_text}\n\n{answer_text}",
+                    "metadata": {
+                        "category": category,
+                        "group": group["name"],
+                        "page": None
+                    }
                 }
 
                 records.append(record)

@@ -25,10 +25,17 @@ def save_pdf_pages(pages, pdf_path):
     with open(output_path, "w", encoding="utf-8") as file:
         for page_number, text in enumerate(pages, start=1):
             record = {
+                "record_id": f"{pdf_path.stem}_page_{page_number}",
                 "source_document": pdf_path.stem,
                 "source_type": "official",
-                "page": page_number,
+                "content_type": "pdf",
+                "title": pdf_path.stem,
                 "text": text.strip(),
+                "metadata": {
+                    "category": None,
+                    "group": None,
+                    "page": page_number
+                }
             }
 
             file.write(
