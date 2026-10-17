@@ -5,9 +5,10 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 
 # Directories
-INCOMING_DIR = Path("data/incoming")
-RAW_DIR = Path("data/raw")
-METADATA_DIR = Path("data/metadata")
+DATA_DIR = Path(__file__).resolve().parent / "data"
+INCOMING_DIR = DATA_DIR / "incoming"
+RAW_DIR = DATA_DIR / "raw"
+METADATA_DIR = DATA_DIR / "metadata"
 
 RAW_DIR.mkdir(parents=True, exist_ok=True)
 METADATA_DIR.mkdir(parents=True, exist_ok=True)

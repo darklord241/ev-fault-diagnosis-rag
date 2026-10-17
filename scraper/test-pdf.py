@@ -1,6 +1,13 @@
+from pathlib import Path
+
 from pypdf import PdfReader
 
-pdf_path = "data/raw/ather_warranty_policy_2024.pdf"
+pdf_path = (
+    Path(__file__).resolve().parent
+    / "data"
+    / "raw"
+    / "ather_warranty_policy_2024.pdf"
+)
 
 reader = PdfReader(pdf_path)
 

@@ -1,7 +1,8 @@
 import json
 from pathlib import Path
 
-PROCESSED_DIR = Path("data/processed")
+DATA_DIR = Path(__file__).resolve().parent / "data"
+PROCESSED_DIR = DATA_DIR / "processed"
 
 for file_path in PROCESSED_DIR.glob("*.jsonl"):
 

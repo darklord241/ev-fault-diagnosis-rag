@@ -5,9 +5,10 @@ from pathlib import Path
 from provenance import get_provenance, load_sidecar_metadata
 
 
-RAW_DIR = Path("data/raw")
-METADATA_DIR = Path("data/metadata")
-PROCESSED_DIR = Path("data/processed")
+DATA_DIR = Path(__file__).resolve().parent / "data"
+RAW_DIR = DATA_DIR / "raw"
+METADATA_DIR = DATA_DIR / "metadata"
+PROCESSED_DIR = DATA_DIR / "processed"
 PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
 
 def extract_pdf_pages(pdf_path):

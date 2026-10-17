@@ -6,8 +6,9 @@ from urllib.parse import urlparse
 import requests
 
 # Configuration
-RAW_DIR = Path("./scraper/data/raw")
-METADATA_DIR = Path("./scraper/data/metadata")
+DATA_DIR = Path(__file__).resolve().parent / "data"
+RAW_DIR = DATA_DIR / "raw"
+METADATA_DIR = DATA_DIR / "metadata"
 
 RAW_DIR.mkdir(parents=True,exist_ok=True)
 METADATA_DIR.mkdir(parents=True,exist_ok=True)
