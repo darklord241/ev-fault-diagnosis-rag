@@ -3,8 +3,11 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
+from provenance import get_provenance, load_sidecar_metadata
+
 
 RAW_DIR = Path("data/raw")
+METADATA_DIR = Path("data/metadata")
 PROCESSED_DIR = Path("data/processed")
 
 PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
@@ -63,11 +66,13 @@ def save_records(records, output_path):
 
 def main():
     html_files = list(RAW_DIR.glob("*.html"))
+    sidecars = load_sidecar_metadata(METADATA_DIR)
 
     for file_path in html_files:
         print("=" * 60)
         print(f"Processing: {file_path.name}")
 
+        provenance = get_provenance(sidecars, file_path.stem)
         groups = find_faq_groups(file_path)
 
         if groups is None:
@@ -95,10 +100,11 @@ def main():
                 record = {
                     "record_id": f"{file_path.stem}_{question['id']}",
                     "source_document": file_path.stem,
-                    "source_type": "official",
+                    "source_type": provenance["source_type"],
                     "content_type": "faq",
                     "title": question_text,
                     "text": f"{question_text}\n\n{answer_text}",
+                    "provenance": provenance,
                     "metadata": {
                         "category": category,
                         "group": group["name"],

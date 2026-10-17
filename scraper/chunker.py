@@ -42,6 +42,7 @@ def create_chunks(record):
             "content_type": record["content_type"],
             "title": record["title"],
             "text": record["text"],
+            "provenance": record["provenance"],
             "metadata": record["metadata"]
         }]
 
@@ -58,6 +59,7 @@ def create_chunks(record):
                 "content_type": record["content_type"],
                 "title": record["title"],
                 "text": text,
+                "provenance": record["provenance"],
                 "metadata": record["metadata"]
             })
 
