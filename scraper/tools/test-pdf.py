@@ -3,7 +3,7 @@ from pathlib import Path
 from pypdf import PdfReader
 
 pdf_path = (
-    Path(__file__).resolve().parent
+    Path(__file__).resolve().parent.parent
     / "data"
     / "raw"
     / "ather_warranty_policy_2024.pdf"

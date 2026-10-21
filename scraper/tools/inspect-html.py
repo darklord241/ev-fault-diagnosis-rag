@@ -3,7 +3,7 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 
 
-RAW_DIR = Path(__file__).resolve().parent / "data" / "raw"
+RAW_DIR = Path(__file__).resolve().parent.parent / "data" / "raw"
 
 KEYWORDS = [
     '"questions"',
