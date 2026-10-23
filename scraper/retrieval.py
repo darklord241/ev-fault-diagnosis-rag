@@ -121,10 +121,12 @@ def _normalized_vector(vector: Sequence[float], source: str) -> tuple[float, ...
             raise ValueError(f"{source}[{index}] must be a finite number")
         normalized_values.append(numeric_value)
 
-    norm = math.hypot(*normalized_values)
-    if norm == 0:
+    scale = max(abs(value) for value in normalized_values)
+    if scale == 0:
         raise ValueError(f"{source} must not have zero norm")
-    return tuple(value / norm for value in normalized_values)
+    scaled = tuple(value / scale for value in normalized_values)
+    norm = math.hypot(*scaled)
+    return tuple(value / norm for value in scaled)
 
 
 class CosineIndex:

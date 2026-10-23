@@ -6,3 +6,4 @@ scraper/data/raw/
 scraper/data/incoming/
 scraper/data/processed/
 scraper/data/chunked/
+scraper/data/embeddings/
