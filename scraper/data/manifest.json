@@ -1,0 +1,830 @@
+{
+  "schema_version": 1,
+  "documents": {
+    "2025-450-Apex-QSG": {
+      "source": {
+        "filename": "2025-450-Apex-QSG.pdf",
+        "path": "incoming/2025-450-Apex-QSG.pdf",
+        "input_type": "pdf",
+        "source_url": null,
+        "sha256": "5f052500ba5535329234dffeefcbf4d2b9187dae311de63a2786d6cd8926f483",
+        "size_bytes": 6664192,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "pending",
+        "sidecar_path": null,
+        "last_error": null
+      },
+      "extraction": {
+        "status": "pending",
+        "output_path": null,
+        "record_count": null,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "pending",
+        "output_path": null,
+        "chunk_count": null,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "2025-450S-QSG": {
+      "source": {
+        "filename": "2025-450S-QSG.pdf",
+        "path": "incoming/2025-450S-QSG.pdf",
+        "input_type": "pdf",
+        "source_url": null,
+        "sha256": "91885e8bd479898684182fc74ecd1d9ef66a8fc9d02ec833043aeadb54bca46f",
+        "size_bytes": 943640,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "pending",
+        "sidecar_path": null,
+        "last_error": null
+      },
+      "extraction": {
+        "status": "pending",
+        "output_path": null,
+        "record_count": null,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "pending",
+        "output_path": null,
+        "chunk_count": null,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "2025-450X-QSG": {
+      "source": {
+        "filename": "2025-450X-QSG.pdf",
+        "path": "incoming/2025-450X-QSG.pdf",
+        "input_type": "pdf",
+        "source_url": null,
+        "sha256": "d8afcb4d4355b41792189e30f4e4f3348d4e0f40cb90db2bb134482f2722f629",
+        "size_bytes": 964416,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "pending",
+        "sidecar_path": null,
+        "last_error": null
+      },
+      "extraction": {
+        "status": "pending",
+        "output_path": null,
+        "record_count": null,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "pending",
+        "output_path": null,
+        "chunk_count": null,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "450S_User_Manual_Jan_24": {
+      "source": {
+        "filename": "450S_User_Manual_Jan_24.pdf",
+        "path": "incoming/450S_User_Manual_Jan_24.pdf",
+        "input_type": "pdf",
+        "source_url": null,
+        "sha256": "5cfdb1470e738c122b10051707985018c2fa5b54e9d8d00c4582c4258180954c",
+        "size_bytes": 1083682,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "pending",
+        "sidecar_path": null,
+        "last_error": null
+      },
+      "extraction": {
+        "status": "pending",
+        "output_path": null,
+        "record_count": null,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "pending",
+        "output_path": null,
+        "chunk_count": null,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "450X_Gen_4_2023_QSG": {
+      "source": {
+        "filename": "450X_Gen_4_2023_QSG.pdf",
+        "path": "incoming/450X_Gen_4_2023_QSG.pdf",
+        "input_type": "pdf",
+        "source_url": null,
+        "sha256": "c153ac3b5e590d03942307a22356433e54a2201d14c69d01b155f0a167fde430",
+        "size_bytes": 1097944,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "pending",
+        "sidecar_path": null,
+        "last_error": null
+      },
+      "extraction": {
+        "status": "pending",
+        "output_path": null,
+        "record_count": null,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "pending",
+        "output_path": null,
+        "chunk_count": null,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "ather_450_series_faqs___450x_vs_450s,_charging,_warranty": {
+      "source": {
+        "filename": "Ather 450 Series FAQs _ 450X vs 450S, Charging, Warranty.html",
+        "path": "incoming/Ather 450 Series FAQs _ 450X vs 450S, Charging, Warranty.html",
+        "input_type": "html",
+        "source_url": "https://www.atherenergy.com/faq/explore-buy/ather-450-series",
+        "sha256": "20839d4a092bd05ececfa2644baca258192b44118b22d0f20f9df7c1146a3630",
+        "size_bytes": 587775,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "complete",
+        "sidecar_path": "metadata/ather_450_series_faqs___450x_vs_450s,_charging,_warranty.json",
+        "last_error": null
+      },
+      "extraction": {
+        "status": "complete",
+        "output_path": "processed/ather_450_series_faqs___450x_vs_450s,_charging,_warranty.jsonl",
+        "record_count": 22,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "complete",
+        "output_path": "chunked/ather_450_series_faqs___450x_vs_450s,_charging,_warranty.jsonl",
+        "chunk_count": 22,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "ather_charging_faqs": {
+      "source": {
+        "filename": "Ather Charging FAQs.html",
+        "path": "incoming/Ather Charging FAQs.html",
+        "input_type": "html",
+        "source_url": "https://www.atherenergy.com/faq/charging-grid/charging",
+        "sha256": "768931fdc7c1b9d8e05fa86aaec7eb7a80a2a008bdb431cb2312534a0ffddea1",
+        "size_bytes": 573209,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "complete",
+        "sidecar_path": "metadata/ather_charging_faqs.json",
+        "last_error": null
+      },
+      "extraction": {
+        "status": "complete",
+        "output_path": "processed/ather_charging_faqs.jsonl",
+        "record_count": 16,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "complete",
+        "output_path": "chunked/ather_charging_faqs.jsonl",
+        "chunk_count": 16,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "ather_ecw_warranty_faqs": {
+      "source": {
+        "filename": "Ather ECW Warranty FAQs.html",
+        "path": "incoming/Ather ECW Warranty FAQs.html",
+        "input_type": "html",
+        "source_url": "https://www.atherenergy.com/faq/owning-ather/ecw-warranty",
+        "sha256": "dc1f85b0a4c914dd4d89f4327dbe2ee547545253ff084bcc882a24f371e9354e",
+        "size_bytes": 549079,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "complete",
+        "sidecar_path": "metadata/ather_ecw_warranty_faqs.json",
+        "last_error": null
+      },
+      "extraction": {
+        "status": "complete",
+        "output_path": "processed/ather_ecw_warranty_faqs.jsonl",
+        "record_count": 1,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "complete",
+        "output_path": "chunked/ather_ecw_warranty_faqs.jsonl",
+        "chunk_count": 1,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "ather_electric_scooter_faqs___support_&_help_center": {
+      "source": {
+        "filename": "Ather Electric Scooter FAQs _ Support & Help Center.html",
+        "path": "incoming/Ather Electric Scooter FAQs _ Support & Help Center.html",
+        "input_type": "html",
+        "source_url": "https://www.atherenergy.com/faq",
+        "sha256": "8d26021cdbbda069d8a81005366f4d5659dcf35734e3f9ea1b7e0f37f42a8b1e",
+        "size_bytes": 555406,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "complete",
+        "sidecar_path": "metadata/ather_electric_scooter_faqs___support_&_help_center.json",
+        "last_error": null
+      },
+      "extraction": {
+        "status": "complete",
+        "output_path": "processed/ather_electric_scooter_faqs___support_&_help_center.jsonl",
+        "record_count": 335,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "complete",
+        "output_path": "chunked/ather_electric_scooter_faqs___support_&_help_center.jsonl",
+        "chunk_count": 335,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "ather_roadside_assistance_faqs": {
+      "source": {
+        "filename": "Ather Roadside Assistance FAQs.html",
+        "path": "incoming/Ather Roadside Assistance FAQs.html",
+        "input_type": "html",
+        "source_url": "https://www.atherenergy.com/faq/owning-ather/ather_roadside_assistance",
+        "sha256": "c6966370aae153598a6e1cda44d16959ef4a9bb3dce348d5d33b44d3722fa76a",
+        "size_bytes": 565042,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "complete",
+        "sidecar_path": "metadata/ather_roadside_assistance_faqs.json",
+        "last_error": null
+      },
+      "extraction": {
+        "status": "complete",
+        "output_path": "processed/ather_roadside_assistance_faqs.jsonl",
+        "record_count": 12,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "complete",
+        "output_path": "chunked/ather_roadside_assistance_faqs.jsonl",
+        "chunk_count": 12,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "Ather-450-Spec-Sheet-Oct-2024": {
+      "source": {
+        "filename": "Ather-450-Spec-Sheet-Oct-2024.pdf",
+        "path": "incoming/Ather-450-Spec-Sheet-Oct-2024.pdf",
+        "input_type": "pdf",
+        "source_url": null,
+        "sha256": "3812f95496d1e2781c755081ace91973a147d2a6881d7a100f94b5898ae0a2ed",
+        "size_bytes": 54800,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "pending",
+        "sidecar_path": null,
+        "last_error": null
+      },
+      "extraction": {
+        "status": "pending",
+        "output_path": null,
+        "record_count": null,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "pending",
+        "output_path": null,
+        "chunk_count": null,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "Ather-450-specsheet": {
+      "source": {
+        "filename": "Ather-450-specsheet.pdf",
+        "path": "incoming/Ather-450-specsheet.pdf",
+        "input_type": "pdf",
+        "source_url": null,
+        "sha256": "f089f2b8f6bef2c4263256698487fd83e7e4f64cf1488dbccb7512f9c1ffd206",
+        "size_bytes": 712564,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "pending",
+        "sidecar_path": null,
+        "last_error": null
+      },
+      "extraction": {
+        "status": "pending",
+        "output_path": null,
+        "record_count": null,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "pending",
+        "output_path": null,
+        "chunk_count": null,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "Allofficialdocsather": {
+      "source": {
+        "filename": "Allofficialdocsather.zip",
+        "path": "incoming/ather-batch/Allofficialdocsather.zip",
+        "input_type": "archive",
+        "source_url": null,
+        "sha256": "4eafe1c7cc8683feb28f350989abc0037e5cc9454972255a23aef8e8d7d1321c",
+        "size_bytes": 39533217,
+        "status": "unsupported_format"
+      },
+      "metadata": {
+        "status": "skipped",
+        "sidecar_path": null,
+        "last_error": null
+      },
+      "extraction": {
+        "status": "skipped",
+        "output_path": null,
+        "record_count": null,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "skipped",
+        "output_path": null,
+        "chunk_count": null,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "Ather-Half-Face-Digital-Manual-17FEB26": {
+      "source": {
+        "filename": "Ather-Half-Face-Digital-Manual-17FEB26.pdf",
+        "path": "incoming/Ather-Half-Face-Digital-Manual-17FEB26.pdf",
+        "input_type": "pdf",
+        "source_url": null,
+        "sha256": "e0d7516076bf54172349fb0796c913381244c81829f4b5791cdc884e465de8f4",
+        "size_bytes": 635253,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "pending",
+        "sidecar_path": null,
+        "last_error": null
+      },
+      "extraction": {
+        "status": "pending",
+        "output_path": null,
+        "record_count": null,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "pending",
+        "output_path": null,
+        "chunk_count": null,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "Ather-HALO-Bit-Half-Face-Manual": {
+      "source": {
+        "filename": "Ather-HALO-Bit-Half-Face-Manual.pdf",
+        "path": "incoming/Ather-HALO-Bit-Half-Face-Manual.pdf",
+        "input_type": "pdf",
+        "source_url": null,
+        "sha256": "a4d847c69dcfd9ec6e2351f68b749a3c63b3501b0eb4e99fd3b4a27cac81e8e5",
+        "size_bytes": 2429402,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "pending",
+        "sidecar_path": null,
+        "last_error": null
+      },
+      "extraction": {
+        "status": "pending",
+        "output_path": null,
+        "record_count": null,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "pending",
+        "output_path": null,
+        "chunk_count": null,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "ather_subscription_terms_and_conditions": {
+      "source": {
+        "filename": "ather_subscription_terms_and_conditions.pdf",
+        "path": "incoming/ather_subscription_terms_and_conditions.pdf",
+        "input_type": "pdf",
+        "source_url": "https://assets.atherenergy.com/subs_terms_and_condition.pdf",
+        "sha256": "d10a76cbe7ef45dd8b0b509fb1c788e9598090faf010a8233893de40fc34b845",
+        "size_bytes": 94278,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "complete",
+        "sidecar_path": "metadata/ather_subscription_terms_and_conditions.json",
+        "last_error": null
+      },
+      "extraction": {
+        "status": "complete",
+        "output_path": "processed/ather_subscription_terms_and_conditions.jsonl",
+        "record_count": 6,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "complete",
+        "output_path": "chunked/ather_subscription_terms_and_conditions.jsonl",
+        "chunk_count": 6,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "ather_warranty_policy_2024": {
+      "source": {
+        "filename": "ather_warranty_policy_2024.pdf",
+        "path": "incoming/ather_warranty_policy_2024.pdf",
+        "input_type": "pdf",
+        "source_url": "https://media.atherenergy.com/Warranty_Policy_2024.pdf",
+        "sha256": "a018313d75d06da4fa1e6d9a2b7bca49d3592b0e4d5f1e2e769d4ad6f5aa35f2",
+        "size_bytes": 78911,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "complete",
+        "sidecar_path": "metadata/ather_warranty_policy_2024.json",
+        "last_error": null
+      },
+      "extraction": {
+        "status": "complete",
+        "output_path": "processed/ather_warranty_policy_2024.jsonl",
+        "record_count": 5,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "complete",
+        "output_path": "chunked/ather_warranty_policy_2024.jsonl",
+        "chunk_count": 5,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "ather_warranty_policy_2024_text": {
+      "source": {
+        "filename": "ather_warranty_policy_2024.txt",
+        "path": "incoming/ather_warranty_policy_2024.txt",
+        "input_type": "txt",
+        "source_url": null,
+        "sha256": "a000deaaa5871fbbfac1c78ce8b753f95a5cf3d86e4805a3334aa9ea9c8b18f6",
+        "size_bytes": 15349,
+        "status": "unsupported_format"
+      },
+      "metadata": {
+        "status": "skipped",
+        "sidecar_path": null,
+        "last_error": null
+      },
+      "extraction": {
+        "status": "skipped",
+        "output_path": null,
+        "record_count": null,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "skipped",
+        "output_path": null,
+        "chunk_count": null,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "battery_warranty_details_for_ather_scooters___faqs": {
+      "source": {
+        "filename": "Battery Warranty Details for Ather Scooters _ FAQs.html",
+        "path": "incoming/Battery Warranty Details for Ather Scooters _ FAQs.html",
+        "input_type": "html",
+        "source_url": "https://www.atherenergy.com/faq/owning-ather/ather-battery-warranty",
+        "sha256": "55fec91dc9939f27c0dddcf9416e160ce5fd4dd446047d2c6be40d468f6788a7",
+        "size_bytes": 575900,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "complete",
+        "sidecar_path": "metadata/battery_warranty_details_for_ather_scooters___faqs.json",
+        "last_error": null
+      },
+      "extraction": {
+        "status": "complete",
+        "output_path": "processed/battery_warranty_details_for_ather_scooters___faqs.jsonl",
+        "record_count": 10,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "complete",
+        "output_path": "chunked/battery_warranty_details_for_ather_scooters___faqs.jsonl",
+        "chunk_count": 10,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "duomanualvfin": {
+      "source": {
+        "filename": "duomanualvfin.pdf",
+        "path": "incoming/duomanualvfin.pdf",
+        "input_type": "pdf",
+        "source_url": null,
+        "sha256": "db857a81afefdb17f38e3fae219c7ed05ca59dd02a83fee2c4cf2230f4330a16",
+        "size_bytes": 157191,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "pending",
+        "sidecar_path": null,
+        "last_error": null
+      },
+      "extraction": {
+        "status": "pending",
+        "output_path": null,
+        "record_count": null,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "pending",
+        "output_path": null,
+        "chunk_count": null,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "Halo-Digital-User-Manual": {
+      "source": {
+        "filename": "Halo-Digital-User-Manual.pdf",
+        "path": "incoming/Halo-Digital-User-Manual.pdf",
+        "input_type": "pdf",
+        "source_url": null,
+        "sha256": "d415fdebd4d77a56d671da576138aa9f450e86796468917dedbfe7f5ea9e34e5",
+        "size_bytes": 4090316,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "pending",
+        "sidecar_path": null,
+        "last_error": null
+      },
+      "extraction": {
+        "status": "pending",
+        "output_path": null,
+        "record_count": null,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "pending",
+        "output_path": null,
+        "chunk_count": null,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "Portable-charger": {
+      "source": {
+        "filename": "Portable-charger.pdf",
+        "path": "incoming/Portable-charger.pdf",
+        "input_type": "pdf",
+        "source_url": null,
+        "sha256": "ff3489f3a5347577e8a4a9ddce7ef78964812b8c631fa47ae51b0fc1c7a5df30",
+        "size_bytes": 4271557,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "pending",
+        "sidecar_path": null,
+        "last_error": null
+      },
+      "extraction": {
+        "status": "pending",
+        "output_path": null,
+        "record_count": null,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "pending",
+        "output_path": null,
+        "chunk_count": null,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "Rizta S Quick Start Guide": {
+      "source": {
+        "filename": "Rizta S Quick Start Guide.pdf",
+        "path": "incoming/Rizta S Quick Start Guide.pdf",
+        "input_type": "pdf",
+        "source_url": null,
+        "sha256": "838bb5f1519600ed14d6c491aaa59a0bc8b784532222fd2874169886fb753264",
+        "size_bytes": 8761666,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "pending",
+        "sidecar_path": null,
+        "last_error": null
+      },
+      "extraction": {
+        "status": "pending",
+        "output_path": null,
+        "record_count": null,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "pending",
+        "output_path": null,
+        "chunk_count": null,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "Rizta Z Quick Start Guide": {
+      "source": {
+        "filename": "Rizta Z Quick Start Guide.pdf",
+        "path": "incoming/Rizta Z Quick Start Guide.pdf",
+        "input_type": "pdf",
+        "source_url": null,
+        "sha256": "bb990baca35d8c2cf90eaf2e577fdf6f9a33847d50ed5f4029cc138955610ca2",
+        "size_bytes": 5891337,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "pending",
+        "sidecar_path": null,
+        "last_error": null
+      },
+      "extraction": {
+        "status": "pending",
+        "output_path": null,
+        "record_count": null,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "pending",
+        "output_path": null,
+        "chunk_count": null,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    },
+    "Rizta_specifications": {
+      "source": {
+        "filename": "Rizta_specifications.pdf",
+        "path": "incoming/Rizta_specifications.pdf",
+        "input_type": "pdf",
+        "source_url": null,
+        "sha256": "4aac898d2020c098dbf517960ce542794400268c82557c549c5f21fe00a3feaa",
+        "size_bytes": 3176371,
+        "status": "registered"
+      },
+      "metadata": {
+        "status": "pending",
+        "sidecar_path": null,
+        "last_error": null
+      },
+      "extraction": {
+        "status": "pending",
+        "output_path": null,
+        "record_count": null,
+        "last_error": null
+      },
+      "chunking": {
+        "status": "pending",
+        "output_path": null,
+        "chunk_count": null,
+        "last_error": null
+      },
+      "archival": {
+        "status": "pending",
+        "archive_path": null,
+        "last_error": null
+      }
+    }
+  }
+}
