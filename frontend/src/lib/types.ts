@@ -96,6 +96,8 @@ export interface HealthResponse {
   default_llm_model?: string;
   mcp_transport?: string;
   backend_retrieval_mode?: string;
+  retrieval_backend_ready?: boolean;
+  retrieval_backend_error?: string | null;
   active_mcp_tools?: string[];
   [key: string]: unknown;
 }

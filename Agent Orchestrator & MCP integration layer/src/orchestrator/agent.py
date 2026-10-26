@@ -89,6 +89,11 @@ class AgentOrchestrator:
                             try:
                                 tool_result = await tool_fn.ainvoke(tool_args)
                             except Exception as err:
+                                if (
+                                    tool_name == "retrieve_technical_evidence"
+                                    and not settings.HYBRID_RETRIEVAL_USE_MOCK
+                                ):
+                                    raise
                                 tool_result = json.dumps({"error": str(err)})
                         else:
                             tool_result = json.dumps({"error": f"Tool {tool_name} not found"})

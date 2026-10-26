@@ -84,3 +84,32 @@ async def test_live_backend_search_sends_bearer_api_key(monkeypatch):
         "subsystem": "Battery/BMS",
         "top_k": 4,
     }
+
+
+@pytest.mark.asyncio
+async def test_live_backend_failure_does_not_fall_back_to_sample_evidence(monkeypatch):
+    class Response:
+        status_code = 503
+
+    class Client:
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, *_):
+            return None
+
+        async def post(self, *_args, **_kwargs):
+            return Response()
+
+    monkeypatch.setattr(
+        backend_adapter_module.httpx,
+        "AsyncClient",
+        lambda **_: Client(),
+    )
+    adapter = backend_adapter_module.BackendRetrievalAdapter()
+    adapter.use_mock = False
+    adapter.base_url = "http://retrieval.example/api/v1/retrieval"
+    adapter.api_key = "test-backend-key"
+
+    with pytest.raises(RuntimeError, match="sample evidence was not used"):
+        await adapter.search_hybrid_evidence(query="battery loses power")

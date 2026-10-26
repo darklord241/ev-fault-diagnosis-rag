@@ -15,7 +15,7 @@ import {
   Wrench,
   Zap,
 } from 'lucide-react';
-import { diagnose } from '@/lib/api';
+import { diagnose, fetchHealth } from '@/lib/api';
 import type { GroundedAnswer, EvidenceSource } from '@/lib/types';
 import { PageTitle, ErrorBox } from '@/components/Shell';
 import { EvidenceDrawer } from '@/components/EvidenceDrawer';
@@ -55,9 +55,23 @@ function DiagnoseContent() {
   const [error, setError] = useState('');
   const [selectedSource, setSelectedSource] = useState<EvidenceSource | null>(null);
   const [showTrace, setShowTrace] = useState(false);
+  const [retrievalHealth, setRetrievalHealth] = useState<{
+    mode?: string;
+    ready?: boolean;
+  } | null>(null);
+  const [retrievalHealthError, setRetrievalHealthError] = useState(false);
 
   // Auto-run if query params present
   useEffect(() => {
+    fetchHealth()
+      .then((health) => {
+        setRetrievalHealth({
+          mode: health.backend_retrieval_mode,
+          ready: health.retrieval_backend_ready,
+        });
+      })
+      .catch(() => setRetrievalHealthError(true));
+
     const q = searchParams.get('query');
     if (q && !result && !loading) {
       runDiagnosis(q, searchParams.get('vehicle') || '', searchParams.get('subsystem') || '');
@@ -97,6 +111,27 @@ function DiagnoseContent() {
         title="AI-powered fault analysis."
         description="Describe the fault symptom, DTC code, or technical question. The agent retrieves evidence and delivers a grounded diagnosis."
       />
+
+      {retrievalHealth?.mode === 'mock_domain_db' && (
+        <div className="notice" role="status">
+          Demo retrieval is enabled. This diagnosis uses sample evidence, not your live corpus.
+        </div>
+      )}
+      {retrievalHealth?.mode === 'live_hybrid_api' && retrievalHealth.ready === false && (
+        <div className="notice error" role="alert">
+          Live retrieval is configured, but the corpus backend is not ready. Diagnosis will fail rather than use sample evidence.
+        </div>
+      )}
+      {retrievalHealth?.mode === 'live_hybrid_api' && retrievalHealth.ready === true && (
+        <div className="notice success" role="status">
+          Live corpus retrieval is ready.
+        </div>
+      )}
+      {retrievalHealthError && (
+        <div className="notice error" role="alert">
+          Retrieval mode could not be verified. Check the System page and backend status before relying on a diagnosis.
+        </div>
+      )}
 
       {/* ── Input Form ── */}
       <section className="card" style={{ marginBottom: 24 }}>

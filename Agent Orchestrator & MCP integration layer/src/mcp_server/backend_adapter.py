@@ -203,9 +203,8 @@ SAMPLE_COMPONENT_SPECS: Dict[str, Dict[str, Any]] = {
 
 class BackendRetrievalAdapter:
     """
-    Adapter layer connecting to the teammate's Backend API / Hybrid Retrieval pipeline.
-    If the Backend API is not available or HYBRID_RETRIEVAL_USE_MOCK is true,
-    it falls back seamlessly to the embedded EV diagnostic knowledge base.
+    Adapter connecting the agent to the backend retrieval service.
+    Sample evidence is used only when mock mode is explicitly enabled.
     """
 
     def __init__(self):
@@ -222,8 +221,7 @@ class BackendRetrievalAdapter:
         top_k: int = 4
     ) -> List[EvidenceSource]:
         """
-        Executes hybrid retrieval (Dense Vector + BM25 Sparse + Reranker)
-        via the Backend API or fallback domain database.
+        Search the live corpus, or use sample evidence in explicit demo mode.
         """
         if not self.use_mock:
             try:
@@ -242,9 +240,13 @@ class BackendRetrievalAdapter:
                         logger.info(f"Retrieved {len(results)} items from live Backend API")
                         return results
                     else:
-                        logger.warning(f"Backend API returned status {resp.status_code}. Falling back to domain mock.")
+                        raise RuntimeError(
+                            f"Live retrieval backend returned HTTP {resp.status_code}."
+                        )
             except Exception as e:
-                logger.warning(f"Failed to connect to live Backend API ({e}). Falling back to domain mock.")
+                raise RuntimeError(
+                    "Live retrieval request failed; sample evidence was not used."
+                ) from e
 
         # Domain Mock Matching Logic (Keyword + Subsystem semantic relevance)
         q_lower = query.lower()
@@ -283,15 +285,24 @@ class BackendRetrievalAdapter:
                     resp = await client.get(f"{self.base_url}/dtc/{code_clean}")
                     if resp.status_code == 200:
                         return DTCRecord(**resp.json())
+                    if resp.status_code == 404:
+                        return None
+                    raise RuntimeError(
+                        f"Live DTC lookup returned HTTP {resp.status_code}."
+                    )
             except Exception as e:
-                logger.warning(f"DTC API lookup failed: {e}. Checking fallback store.")
+                raise RuntimeError(
+                    "Live DTC lookup failed; sample data was not used."
+                ) from e
 
-        if code_clean in SAMPLE_DTC_DATABASE:
+        if self.use_mock and code_clean in SAMPLE_DTC_DATABASE:
             return DTCRecord(**SAMPLE_DTC_DATABASE[code_clean])
         return None
 
     async def get_component_specifications(self, component_name: str) -> Optional[ComponentSpec]:
         """Lookup component pinouts and operating thresholds."""
+        if not self.use_mock:
+            return None
         comp_key = component_name.lower().replace(" ", "_")
         for key, spec_data in SAMPLE_COMPONENT_SPECS.items():
             if key in comp_key or comp_key in key or any(w in comp_key for w in key.split("_")):
