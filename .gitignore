@@ -7,3 +7,4 @@ scraper/data/incoming/
 scraper/data/processed/
 scraper/data/chunked/
 scraper/data/embeddings/
+scraper/data/metadata/
