@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "ev_retrieval_service": {
+      "transport": "sse",
+      "url": "http://127.0.0.1:8001/sse",
+      "description": "Electric Two-Wheeler Technical Evidence & Hybrid Retrieval MCP Server"
+    },
+    "ev_retrieval_stdio": {
+      "transport": "stdio",
+      "command": "python",
+      "args": ["-m", "src.mcp_server.server", "--transport", "stdio"],
+      "description": "Local stdio instance of the EV Retrieval MCP Server"
+    }
+  }
+}
