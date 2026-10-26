@@ -9,6 +9,7 @@ from src.pipeline.models import WebsiteCardPayload, BatchWebsiteDelivery, Cleane
 from src.pipeline.cleaner import RetrievalCleaner
 from src.pipeline.summarizer import EVSummarizer
 from src.pipeline.batch_processor import BatchPipelineProcessor
+from src.pipeline.service import live_pipeline_service
 from src.orchestrator.agent import AgentOrchestrator
 from src.mcp_server.backend_adapter import backend_adapter
 from src.common.logging import logger
@@ -21,6 +22,17 @@ orchestrator = AgentOrchestrator()
 batch_processor = BatchPipelineProcessor()
 summarizer = EVSummarizer()
 cleaner = RetrievalCleaner()
+
+class LiveQueryRequest(BaseModel):
+    query: str
+    vehicle_model: Optional[str] = "Ather 450S"
+    top_k: int = 5
+    case_id: Optional[str] = None
+
+class DirectChunksRequest(BaseModel):
+    query: str
+    chunks: List[Dict[str, Any]]
+    case_id: Optional[str] = None
 
 class OnDemandSummarizeRequest(BaseModel):
     case_id: str
@@ -52,6 +64,48 @@ async def diagnose_fault(request: QueryRequest) -> GroundedAnswer:
     except Exception as e:
         logger.error(f"Error during fault diagnosis: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Diagnostic orchestrator error: {str(e)}")
+
+# =====================================================================
+# Live Retrieval & Gemini Summarization Endpoints (Website Delivery)
+# =====================================================================
+
+@router.post("/query", response_model=WebsiteCardPayload, summary="Live Query: Calls Backend API (5 chunks) -> Cleans -> Gemini Summarizes -> Returns Website Payload")
+async def process_live_query(req: LiveQueryRequest) -> WebsiteCardPayload:
+    """
+    Live end-to-end endpoint for the website:
+    1. Calls generic backend retrieval API to get 5 separate chunks.
+    2. Cleans HTML tags, whitespace, and deduplicates.
+    3. Runs Gemini LLM to synthesize direct answer, specs, takeaways, and citations.
+    4. Delivers formatted WebsiteCardPayload for instant UI rendering.
+    """
+    try:
+        result = await live_pipeline_service.process_query_live(
+            query=req.query,
+            vehicle_model=req.vehicle_model,
+            top_k=req.top_k,
+            case_id=req.case_id
+        )
+        return result
+    except Exception as e:
+        logger.error(f"Error processing live query: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Live query processing error: {str(e)}")
+
+@router.post("/process-chunks", response_model=WebsiteCardPayload, summary="Process 5 Separate Chunks Directly: Cleans -> Gemini Summarizes -> Returns Website Payload")
+async def process_chunks_direct(req: DirectChunksRequest) -> WebsiteCardPayload:
+    """
+    Accepts 5 separate chunks directly from the backend API teammate,
+    cleans them, generates a Gemini grounded summary, and formats for website display.
+    """
+    try:
+        result = await live_pipeline_service.process_raw_chunks_live(
+            query=req.query,
+            raw_chunks=req.chunks,
+            case_id=req.case_id
+        )
+        return result
+    except Exception as e:
+        logger.error(f"Error processing raw chunks: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Direct chunk processing error: {str(e)}")
 
 # =====================================================================
 # Website Delivery & Evaluation Pipeline Endpoints (Your Assigned Part)
@@ -141,7 +195,7 @@ async def list_mcp_tools() -> Dict[str, Any]:
             {
                 "name": t.name,
                 "description": t.description,
-                "args_schema": t.args_schema.schema() if t.args_schema else {}
+                "args_schema": t.args_schema.model_json_schema() if t.args_schema and hasattr(t.args_schema, "model_json_schema") else (t.args_schema.schema() if t.args_schema else {})
             }
             for t in orchestrator.tools
         ]

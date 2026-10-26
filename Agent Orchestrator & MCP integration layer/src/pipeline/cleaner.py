@@ -165,3 +165,83 @@ class RetrievalCleaner:
             ))
 
         return results
+
+    @classmethod
+    def clean_api_chunks(
+        cls,
+        raw_chunks: List[Dict[str, Any]],
+        query_text: str = "",
+        case_id: str = "query-live"
+    ) -> QueryCleanedEvidence:
+        """
+        Cleans and deduplicates a list of chunks received from the Backend API.
+        Accepts the exact JSON chunk format:
+        {
+            "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+            "record_id": "2025-450S-QSG_page_1",
+            "source_document": "2025-450S-QSG",
+            "source_type": "official",
+            "content_type": "pdf",
+            "title": "2025-450S-QSG",
+            "text": "...",
+            "score": 0.89,  (or similarity_score)
+            "provenance": { ... },
+            "metadata": { ... }
+        }
+        """
+        parsed_chunks: List[CleanedChunk] = []
+
+        for idx, item in enumerate(raw_chunks):
+            # Extract text/content
+            raw_text = item.get("text") or item.get("content") or ""
+            clean_content = cls.clean_text(raw_text)
+
+            # Extract title / document identifier
+            raw_title = item.get("title") or item.get("source_document") or item.get("source_id") or f"Document {idx+1}"
+            clean_title = cls.clean_text(raw_title)
+
+            # Extract similarity score (supports score, similarity_score, cosine_similarity)
+            sim_score = item.get("score") or item.get("similarity_score") or item.get("cosine_similarity") or 0.85
+            try:
+                sim_score = float(sim_score)
+            except (ValueError, TypeError):
+                sim_score = 0.85
+
+            chunk_id = item.get("chunk_id") or f"chunk_{case_id}_{idx}"
+            content_type = item.get("content_type", "pdf")
+
+            # Extract provenance metadata
+            prov = item.get("provenance") or {}
+            meta = item.get("metadata") or {}
+
+            url = prov.get("url") or item.get("url")
+            doc_id = prov.get("document_id") or item.get("record_id") or item.get("source_document")
+            mfg = prov.get("manufacturer", "Ather Energy")
+            vehicle_model = prov.get("vehicle_model") or item.get("vehicle_model")
+            category = meta.get("category")
+            group = meta.get("group")
+
+            parsed_chunks.append(CleanedChunk(
+                chunk_id=chunk_id,
+                title=clean_title,
+                content=clean_content,
+                similarity_score=sim_score,
+                content_type=content_type,
+                document_id=doc_id,
+                url=url,
+                manufacturer=mfg,
+                vehicle_model=vehicle_model,
+                category=category,
+                group=group
+            ))
+
+        # Deduplicate identical chunks
+        deduped = cls.deduplicate_chunks(parsed_chunks)
+        logger.info(f"clean_api_chunks: Cleaned {len(raw_chunks)} API chunks -> {len(deduped)} unique chunks for query: '{query_text}'")
+
+        return QueryCleanedEvidence(
+            case_id=case_id,
+            query=query_text,
+            raw_chunk_count=len(raw_chunks),
+            cleaned_chunks=deduped
+        )

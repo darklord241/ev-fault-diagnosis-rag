@@ -28,7 +28,20 @@ class BatchPipelineProcessor:
         output_md: str = "data/website_payload.md"
     ):
         self.baseline_file = Path(baseline_file)
+        if not self.baseline_file.exists():
+            # Fall back to project root resolution
+            proj_root = Path(__file__).resolve().parent.parent.parent
+            alt_path = proj_root / baseline_file
+            if alt_path.exists():
+                self.baseline_file = alt_path
+
         self.eval_file = Path(eval_file)
+        if not self.eval_file.exists():
+            proj_root = Path(__file__).resolve().parent.parent.parent
+            alt_eval = proj_root / eval_file
+            if alt_eval.exists():
+                self.eval_file = alt_eval
+
         self.output_json = Path(output_json)
         self.output_md = Path(output_md)
         self.cleaner = RetrievalCleaner()
