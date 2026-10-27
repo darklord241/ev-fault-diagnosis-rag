@@ -751,6 +751,22 @@ input::placeholder, textarea::placeholder { color: #9aa7a2; }
   margin: 14px 0;
 }
 .knowledge-results { margin: 26px 0; }
+.knowledge-start {
+  margin: 24px 0;
+  padding: 22px;
+  border: 1px dashed #bfd3ca;
+  border-radius: 9px;
+  background: #f7faf8;
+}
+.knowledge-start p { margin-top: 6px; }
+.knowledge-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 15px;
+}
+.knowledge-suggestions .button { font-size: 12px; }
+.knowledge-saved-answers { margin-top: 32px; }
 .knowledge-chunk { margin: 12px 0; }
 .knowledge-chunk-heading {
   display: flex;

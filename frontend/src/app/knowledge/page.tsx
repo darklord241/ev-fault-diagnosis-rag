@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   BookOpen,
   ChevronDown,
@@ -10,7 +10,11 @@ import {
   Search,
   X,
 } from 'lucide-react';
-import { fetchEvalAnswers, searchKnowledge } from '@/lib/api';
+import {
+  fetchDiagnosisHistory,
+  fetchEvalAnswers,
+  searchKnowledge,
+} from '@/lib/api';
 import type {
   KnowledgeChunk,
   WebsiteCardPayload,
@@ -31,26 +35,25 @@ export default function KnowledgePage() {
   const [chunkSearchLoading, setChunkSearchLoading] = useState(false);
   const [chunkSearchError, setChunkSearchError] = useState('');
 
-  useEffect(() => {
-    fetchEvalAnswers()
-      .then(setData)
-      .catch((e) => setError(e.message))
-      .finally(() => setLoading(false));
-  }, []);
+  const runChunkSearch = useCallback(async (
+    query: string,
+    model: string,
+    targetSubsystem: string,
+  ) => {
+    const trimmedQuery = query.trim();
+    if (trimmedQuery.length < 3) return;
 
-  async function handleChunkSearch(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const query = chunkQuery.trim();
-    if (query.length < 3) return;
-
+    setChunkQuery(trimmedQuery);
+    setVehicleModel(model);
+    setSubsystem(targetSubsystem);
     setChunkSearchLoading(true);
     setChunkSearchError('');
     setChunks([]);
     try {
       const response = await searchKnowledge({
-        query,
-        vehicle_model: vehicleModel || undefined,
-        subsystem: subsystem || undefined,
+        query: trimmedQuery,
+        vehicle_model: model || undefined,
+        subsystem: targetSubsystem || undefined,
       });
       setChunks(response.chunks);
     } catch (e) {
@@ -58,6 +61,42 @@ export default function KnowledgePage() {
     } finally {
       setChunkSearchLoading(false);
     }
+  }, []);
+
+  useEffect(() => {
+    fetchEvalAnswers()
+      .then(setData)
+      .catch((e) => setError((e as Error).message))
+      .finally(() => setLoading(false));
+
+    const params = new URLSearchParams(window.location.search);
+    const queryFromUrl = params.get('query') || '';
+    const vehicleFromUrl = params.get('vehicle') || '';
+    const subsystemFromUrl = params.get('subsystem') || '';
+    if (queryFromUrl.trim().length >= 3) {
+      void runChunkSearch(queryFromUrl, vehicleFromUrl, subsystemFromUrl);
+      return;
+    }
+
+    fetchDiagnosisHistory()
+      .then(({ items }) => {
+        const latest = items[0];
+        if (latest) {
+          void runChunkSearch(
+            latest.query,
+            latest.vehicle_model || '',
+            latest.subsystem || '',
+          );
+        }
+      })
+      .catch(() => {
+        // History is optional; the user can still search the corpus directly.
+      });
+  }, [runChunkSearch]);
+
+  async function handleChunkSearch(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    await runChunkSearch(chunkQuery, vehicleModel, subsystem);
   }
 
   const filtered =
@@ -186,20 +225,41 @@ export default function KnowledgePage() {
       {!chunkSearchLoading && !chunkSearchError && chunkQuery && chunks.length === 0 && (
         <p className="muted knowledge-no-results">No matching document chunks found.</p>
       )}
+      {!chunkSearchLoading && !chunkSearchError && !chunkQuery && (
+        <section className="knowledge-start">
+          <h2>Explore the technical documents</h2>
+          <p>Run a diagnosis first, or search for a topic above to see matching manual and FAQ passages here.</p>
+          <div className="knowledge-suggestions">
+            {[
+              'Battery not charging',
+              'Battery loses power under acceleration',
+              'Charger indicator blinking',
+            ].map((suggestion) => (
+              <button
+                className="button secondary"
+                key={suggestion}
+                onClick={() => void runChunkSearch(suggestion, '', '')}
+              >
+                {suggestion}
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
 
-      <div className="section-heading knowledge-answer-heading">
-        <h2>Pre-processed answers</h2>
-        <span className="muted small">Saved evaluation summaries</span>
-      </div>
       {error && <ErrorBox message={error} />}
-
-      {loading ? (
+      {loading && (
         <div className="loading">
           <span className="loading-dot" />
-          Loading knowledge base…
+          Loading saved answers…
         </div>
-      ) : (
-        <>
+      )}
+      {!loading && data && filtered.length > 0 && (
+        <section className="knowledge-saved-answers">
+          <div className="section-heading knowledge-answer-heading">
+            <h2>Saved evaluation answers</h2>
+            <span className="muted small">{data.total_cases} prepared summaries</span>
+          </div>
           {/* Search Bar */}
           <div className="search-field" style={{ marginBottom: 20 }}>
             <Search size={16} style={{ color: 'var(--muted)', marginRight: 8 }} />
@@ -248,7 +308,7 @@ export default function KnowledgePage() {
               ))}
             </div>
           )}
-        </>
+        </section>
       )}
     </>
   );

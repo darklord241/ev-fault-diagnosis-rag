@@ -2,6 +2,7 @@
 
 import { Suspense, useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import {
   ArrowRight,
@@ -280,7 +281,22 @@ function DiagnoseContent() {
 
           {result.sources.length > 0 && (
             <section style={{ marginBottom: 20 }}>
-              <div className="section-heading"><h2>Evidence sources</h2></div>
+              <div className="section-heading">
+                <h2>Evidence sources</h2>
+                <Link
+                  className="source-link"
+                  href={{
+                    pathname: '/knowledge',
+                    query: {
+                      query: result.query,
+                      ...(result.vehicle_model ? { vehicle: result.vehicle_model } : {}),
+                      ...(subsystem ? { subsystem } : {}),
+                    },
+                  }}
+                >
+                  Explore related chunks <ArrowRight size={14} />
+                </Link>
+              </div>
               <div className="evidence-list">
                 {result.sources.map((source) => (
                   <article className="evidence-item" key={source.chunk_id}>
