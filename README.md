@@ -2,6 +2,21 @@
 
 The repository connects a Next.js website, a FastAPI backend/retrieval service, and a FastAPI agent pipeline. The website query path retrieves evidence, cleans it, creates a structured answer, and saves the result in local SQLite history.
 
+## Project status
+
+The retrieval-first website flow, local diagnosis history, Gemini synthesis support, and query-driven Knowledge Base are implemented on `feature/retrieval-first-website-integration`. The changes are pushed to [PR #3](https://github.com/darklord241/ev-fault-diagnosis-rag/pull/3), which targets `full-integration`; they are not yet merged into that branch.
+
+The app can run in demo mode without a corpus or API key. Live retrieval requires the locally supplied chunk corpus and matching embedding cache (or the ability to build the cache with the local embedding model). Gemini is optional and is used only for answer synthesis; without a working provider, the pipeline uses its labeled deterministic fallback. Query history is stored on the local machine in SQLite. Hosting and a shared/production database are not configured.
+
+### Changes covered by this integration
+
+- Connected the website's main diagnosis form to the retrieval-first `/api/v1/query` pipeline through the backend gateway and agent API.
+- Added authenticated calls from the agent to the scraper's vector-search implementation, including vehicle/subsystem filtering before top-k ranking.
+- Added top-five Knowledge Base chunk search with full passage text, document/page/source details, and relevance scores.
+- Made the Knowledge Base search automatically use the current diagnosis context, or the latest saved diagnosis when opened directly. Suggested searches and manual query/vehicle/subsystem filters are also available.
+- Added local SQLite diagnosis history, Gemini response handling, and UI display for evidence and fallback mode.
+- Kept corpus data, embedding caches, and `.env` files local and out of Git.
+
 ## Run the local demo
 
 The demo works without Google credentials, a running Ollama server, a prepared corpus, or a downloaded embedding model. It uses the agent's explicitly enabled sample retrieval and deterministic answer fallback. The website labels demo/fallback output so it is not mistaken for live RAG.
@@ -21,7 +36,7 @@ npm install --no-package-lock
 
 ### Start the three services
 
-Open three terminal windows in the repository root.
+Open three terminal windows. In each, replace `/path/to/ev-fault-diagnosis-rag` with the actual path to this checkout.
 
 **Terminal 1 — backend gateway/retrieval API (port 8000):**
 
@@ -44,9 +59,27 @@ cd /path/to/ev-fault-diagnosis-rag/frontend
 npm run dev
 ```
 
-Replace `/path/to/ev-fault-diagnosis-rag` with the checkout's actual path. Open <http://localhost:3000>, enter a question, and select **Run Diagnosis**. The diagnosis page also shows the retrieval mode and recent local query history; use **Clear** to delete that history.
+Open <http://localhost:3000>, enter a question, and select **Run Diagnosis**. The diagnosis page shows the retrieval mode, evidence, and recent local query history; use **Clear** to delete that history. Open **Knowledge Base** from a diagnosis result to see the top five chunks for that query. Opening the Knowledge Base directly runs a search using the latest saved diagnosis; if there is no history, use a suggested search or enter a question manually.
 
-If the local corpus or model is not prepared, the backend reports `retrieval_ready: false`; demo requests still use sample evidence in the agent while the backend proxies the website API. Stop each server with `Ctrl+C`.
+If the local corpus or model is not prepared, the backend reports `retrieval_ready: false`; demo diagnosis requests still use sample evidence in the agent while the backend proxies the website API. The Knowledge Base searches the real retrieval service, so it needs live retrieval configured to return document chunks. Stop each server with `Ctrl+C`.
+
+### Verify the services
+
+With the three services running, check backend health:
+
+```sh
+curl -sS http://127.0.0.1:8000/health
+```
+
+For live retrieval, the response should include `"retrieval_ready": true`. In demo mode it may be `false`; that means real corpus retrieval is unavailable, not that the frontend or demo diagnosis path is stopped. Submit a diagnosis in the website to verify the demo UI flow. To verify Knowledge Base chunk search, enable live retrieval first, then call:
+
+```sh
+curl -sS -X POST http://127.0.0.1:8000/api/v1/knowledge/search \
+  -H 'Content-Type: application/json' \
+  -d '{"query":"Battery loses power under acceleration","vehicle_model":"Ather 450S"}'
+```
+
+The response contains up to five chunks. With live retrieval enabled, each result should include passage content and available document metadata such as page number, source URL, and similarity score. Demo retrieval is not evidence that the local corpus is loaded.
 
 ## Enable live corpus retrieval
 
@@ -90,7 +123,7 @@ flowchart LR
 5. `BackendRetrievalAdapter` sends the query, vehicle, subsystem, and top-k to `/api/v1/retrieval/search`. It maps backend `EvidenceSource` results to the chunk shape consumed by the cleaner and preserves source IDs, URLs, scores, and provenance.
 6. The service stores the resulting `WebsiteCardPayload` locally and returns it through the gateway. The UI renders the answer, technical details, safety notes, and source links.
 
-The Knowledge Base page also sends searches to `POST /api/v1/knowledge/search`. It returns the top five matching chunks with full passage text, document title, page number, source URL, and similarity score; the chunk ID is available as a secondary reference rather than the primary display.
+The Knowledge Base page sends searches to `POST /api/v1/knowledge/search`. It returns up to five matching chunks with full passage text, document title, page number, source URL, and similarity score; the chunk ID is available as a secondary reference rather than the primary display. The diagnosis result links to this page with the query and selected vehicle/subsystem in the URL. If opened without a query, it uses the most recent local diagnosis, and if no history exists it offers suggested searches.
 
 `POST /api/v1/diagnose` remains a separate agent/MCP diagnosis path; the website's main diagnosis form uses the retrieval-first `/api/v1/query` contract and `WebsiteCardPayload`.
 
