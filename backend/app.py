@@ -22,8 +22,10 @@ ALLOWED_AGENT_PATHS = {
     "diagnose",
     "eval-answers",
     "health",
+    "history",
     "mcp/tools",
     "pipeline/run-batch",
+    "query",
     "summarize",
 }
 
@@ -229,7 +231,7 @@ def create_app(
 
     @app.api_route(
         "/api/v1/{path:path}",
-        methods=["GET", "POST"],
+        methods=["GET", "POST", "DELETE"],
         include_in_schema=False,
     )
     async def forward_to_agent(path: str, request: Request):

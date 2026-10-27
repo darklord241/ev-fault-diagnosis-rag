@@ -9,6 +9,14 @@ export interface QueryRequest {
   llm_model?: string;
 }
 
+export interface LiveQueryRequest {
+  query: string;
+  vehicle_model?: string;
+  subsystem?: string;
+  top_k?: number;
+  case_id?: string;
+}
+
 export interface DiagnosticStep {
   step_number: number;
   action: string;
@@ -52,6 +60,7 @@ export interface SourceCitation {
   url?: string;
   similarity_score: number;
   relevance_rationale?: string;
+  metadata?: Record<string, unknown>;
 }
 
 export interface WebsiteCardPayload {
@@ -69,6 +78,15 @@ export interface WebsiteCardPayload {
   unique_chunks_used: number;
   model_used: string;
   processed_at: string;
+}
+
+export interface DiagnosisHistoryEntry {
+  case_id: string;
+  query: string;
+  vehicle_model?: string;
+  subsystem?: string;
+  processed_at: string;
+  result: WebsiteCardPayload;
 }
 
 export interface BatchWebsiteDelivery {

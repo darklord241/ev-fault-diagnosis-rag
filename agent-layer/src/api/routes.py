@@ -1,8 +1,10 @@
 import json
+import asyncio
 from pathlib import Path
 from fastapi import APIRouter, HTTPException, Depends
+from fastapi import Query
 from typing import Dict, Any, List, Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from src.common.models import QueryRequest, GroundedAnswer, DTCRecord
 from src.pipeline.models import WebsiteCardPayload, BatchWebsiteDelivery, CleanedChunk, QueryCleanedEvidence
@@ -10,6 +12,7 @@ from src.pipeline.cleaner import RetrievalCleaner
 from src.pipeline.summarizer import EVSummarizer
 from src.pipeline.batch_processor import BatchPipelineProcessor
 from src.pipeline.service import live_pipeline_service
+from src.pipeline.history import diagnosis_history_store
 from src.orchestrator.agent import AgentOrchestrator
 from src.mcp_server.backend_adapter import backend_adapter
 from src.common.logging import logger
@@ -24,9 +27,10 @@ summarizer = EVSummarizer()
 cleaner = RetrievalCleaner()
 
 class LiveQueryRequest(BaseModel):
-    query: str
-    vehicle_model: Optional[str] = "Ather 450S"
-    top_k: int = 5
+    query: str = Field(min_length=3, max_length=4000)
+    vehicle_model: Optional[str] = None
+    subsystem: Optional[str] = None
+    top_k: int = Field(default=5, ge=1, le=10)
     case_id: Optional[str] = None
 
 class DirectChunksRequest(BaseModel):
@@ -83,12 +87,37 @@ async def process_live_query(req: LiveQueryRequest) -> WebsiteCardPayload:
             query=req.query,
             vehicle_model=req.vehicle_model,
             top_k=req.top_k,
-            case_id=req.case_id
+            case_id=req.case_id,
+            subsystem=req.subsystem,
         )
         return result
     except Exception as e:
         logger.error(f"Error processing live query: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Live query processing error: {str(e)}")
+
+@router.get("/history", summary="Get recent live diagnosis history")
+async def get_diagnosis_history(limit: int = Query(default=20, ge=1, le=50)):
+    """Return locally stored website query results, newest first."""
+    try:
+        return {
+            "items": await asyncio.to_thread(
+                diagnosis_history_store.list_recent,
+                limit,
+            )
+        }
+    except Exception as e:
+        logger.error("Could not read diagnosis history: %s", e, exc_info=True)
+        raise HTTPException(status_code=500, detail="Could not read diagnosis history.")
+
+@router.delete("/history", summary="Clear local live diagnosis history")
+async def clear_diagnosis_history():
+    """Delete locally stored website query results."""
+    try:
+        deleted = await asyncio.to_thread(diagnosis_history_store.clear)
+        return {"deleted": deleted}
+    except Exception as e:
+        logger.error("Could not clear diagnosis history: %s", e, exc_info=True)
+        raise HTTPException(status_code=500, detail="Could not clear diagnosis history.")
 
 @router.post("/process-chunks", response_model=WebsiteCardPayload, summary="Process 5 Separate Chunks Directly: Cleans -> Gemini Summarizes -> Returns Website Payload")
 async def process_chunks_direct(req: DirectChunksRequest) -> WebsiteCardPayload:

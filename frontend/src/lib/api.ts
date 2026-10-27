@@ -6,6 +6,8 @@ import type {
   DTCRecord,
   HealthResponse,
   MCPTool,
+  LiveQueryRequest,
+  DiagnosisHistoryEntry,
 } from "./types";
 
 /* ── Helper ── */
@@ -55,6 +57,27 @@ export async function diagnose(
   return request<GroundedAnswer>("/api/v1/diagnose", {
     method: "POST",
     body: JSON.stringify(payload),
+  });
+}
+
+export async function queryLive(
+  payload: LiveQueryRequest
+): Promise<WebsiteCardPayload> {
+  return request<WebsiteCardPayload>("/api/v1/query", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function fetchDiagnosisHistory(): Promise<{
+  items: DiagnosisHistoryEntry[];
+}> {
+  return request<{ items: DiagnosisHistoryEntry[] }>("/api/v1/history");
+}
+
+export async function clearDiagnosisHistory(): Promise<{ deleted: number }> {
+  return request<{ deleted: number }>("/api/v1/history", {
+    method: "DELETE",
   });
 }
 

@@ -214,6 +214,50 @@ class BackendRetrievalAdapter:
         self.api_key = settings.HYBRID_RETRIEVAL_API_KEY
         logger.info(f"Initialized BackendRetrievalAdapter (Mock Mode: {self.use_mock}, URL: {self.base_url})")
 
+    async def _fetch_live_evidence(
+        self,
+        query: str,
+        vehicle_model: Optional[str],
+        subsystem: Optional[str],
+        top_k: int,
+    ) -> List[EvidenceSource]:
+        if not self.api_key:
+            raise RuntimeError(
+                "Live retrieval is enabled, but HYBRID_RETRIEVAL_API_KEY is not configured."
+            )
+        try:
+            async with httpx.AsyncClient(timeout=10.0) as client:
+                response = await client.post(
+                    f"{self.base_url.rstrip('/')}/search",
+                    json={
+                        "query": query,
+                        "vehicle_model": vehicle_model,
+                        "subsystem": subsystem,
+                        "top_k": top_k,
+                    },
+                    headers={"Authorization": f"Bearer {self.api_key}"},
+                )
+            if response.status_code != 200:
+                raise RuntimeError(
+                    f"Retrieval backend returned HTTP {response.status_code}."
+                )
+            data = response.json()
+            if not isinstance(data, dict) or not isinstance(data.get("results"), list):
+                raise ValueError(
+                    "Retrieval backend response must contain a results array."
+                )
+            return [
+                EvidenceSource.model_validate(item)
+                for item in data["results"]
+            ]
+        except RuntimeError:
+            raise
+        except (httpx.RequestError, ValueError, TypeError) as error:
+            raise RuntimeError(
+                "Live retrieval failed or returned an invalid response; "
+                "sample evidence was not used."
+            ) from error
+
     async def search_hybrid_evidence(
         self,
         query: str,
@@ -226,25 +270,11 @@ class BackendRetrievalAdapter:
         via the Backend API or fallback domain database.
         """
         if not self.use_mock:
-            try:
-                headers = {"Authorization": f"Bearer {self.api_key}"} if self.api_key else {}
-                payload = {
-                    "query": query,
-                    "vehicle_model": vehicle_model,
-                    "subsystem": subsystem,
-                    "top_k": top_k
-                }
-                async with httpx.AsyncClient(timeout=10.0) as client:
-                    resp = await client.post(f"{self.base_url}/search", json=payload, headers=headers)
-                    if resp.status_code == 200:
-                        data = resp.json()
-                        results = [EvidenceSource(**item) for item in data.get("results", [])]
-                        logger.info(f"Retrieved {len(results)} items from live Backend API")
-                        return results
-                    else:
-                        logger.warning(f"Backend API returned status {resp.status_code}. Falling back to domain mock.")
-            except Exception as e:
-                logger.warning(f"Failed to connect to live Backend API ({e}). Falling back to domain mock.")
+            results = await self._fetch_live_evidence(
+                query, vehicle_model, subsystem, top_k
+            )
+            logger.info(f"Retrieved {len(results)} items from live Backend API")
+            return results
 
         # Domain Mock Matching Logic (Keyword + Subsystem semantic relevance)
         q_lower = query.lower()
@@ -278,13 +308,29 @@ class BackendRetrievalAdapter:
         """Lookup diagnostic trouble code details."""
         code_clean = dtc_code.strip().upper()
         if not self.use_mock:
+            if not self.api_key:
+                raise RuntimeError(
+                    "Live retrieval is enabled, but HYBRID_RETRIEVAL_API_KEY is not configured."
+                )
             try:
                 async with httpx.AsyncClient(timeout=5.0) as client:
-                    resp = await client.get(f"{self.base_url}/dtc/{code_clean}")
-                    if resp.status_code == 200:
-                        return DTCRecord(**resp.json())
-            except Exception as e:
-                logger.warning(f"DTC API lookup failed: {e}. Checking fallback store.")
+                    response = await client.get(
+                        f"{self.base_url.rstrip('/')}/dtc/{code_clean}",
+                        headers={"Authorization": f"Bearer {self.api_key}"},
+                    )
+                if response.status_code == 404:
+                    return None
+                if response.status_code != 200:
+                    raise RuntimeError(
+                        f"Live DTC lookup returned HTTP {response.status_code}."
+                    )
+                return DTCRecord.model_validate(response.json())
+            except RuntimeError:
+                raise
+            except (httpx.RequestError, ValueError, TypeError) as error:
+                raise RuntimeError(
+                    "Live DTC lookup failed; sample data was not used."
+                ) from error
 
         if code_clean in SAMPLE_DTC_DATABASE:
             return DTCRecord(**SAMPLE_DTC_DATABASE[code_clean])
@@ -292,6 +338,8 @@ class BackendRetrievalAdapter:
 
     async def get_component_specifications(self, component_name: str) -> Optional[ComponentSpec]:
         """Lookup component pinouts and operating thresholds."""
+        if not self.use_mock:
+            return None
         comp_key = component_name.lower().replace(" ", "_")
         for key, spec_data in SAMPLE_COMPONENT_SPECS.items():
             if key in comp_key or comp_key in key or any(w in comp_key for w in key.split("_")):
@@ -302,7 +350,8 @@ class BackendRetrievalAdapter:
         self,
         query: str,
         top_k: int = 5,
-        vehicle_model: Optional[str] = None
+        vehicle_model: Optional[str] = None,
+        subsystem: Optional[str] = None,
     ) -> List[Dict[str, Any]]:
         """
         Generic call to retrieve N separate chunks (default 5) from the teammate's vector search / backend API.
@@ -315,34 +364,43 @@ class BackendRetrievalAdapter:
         ========================================================================
         """
         if not self.use_mock:
-            try:
-                headers = {"Content-Type": "application/json"}
-                if self.api_key:
-                    headers["Authorization"] = f"Bearer {self.api_key}"
-
-                payload = {
-                    "query": query,
-                    "top_k": top_k,
-                    "vehicle_model": vehicle_model or "Ather 450S"
-                }
-
-                # Generic POST call to backend retrieval endpoint (e.g. http://localhost:8000/search)
-                async with httpx.AsyncClient(timeout=8.0) as client:
-                    resp = await client.post(f"{self.base_url}/search", json=payload, headers=headers)
-                    if resp.status_code == 200:
-                        data = resp.json()
-                        # Support direct list or wrapped list
-                        if isinstance(data, list):
-                            logger.info(f"Retrieved {len(data)} raw chunks directly from backend API")
-                            return data[:top_k]
-                        elif isinstance(data, dict):
-                            chunks = data.get("chunks") or data.get("results") or data.get("data") or []
-                            logger.info(f"Retrieved {len(chunks)} raw chunks from backend API response dictionary")
-                            return chunks[:top_k]
-                    else:
-                        logger.warning(f"Backend API returned status {resp.status_code}. Using fallback chunks.")
-            except Exception as e:
-                logger.warning(f"Could not connect to Backend API ({self.base_url}/search): {e}. Using fallback chunks.")
+            sources = await self._fetch_live_evidence(
+                query, vehicle_model, subsystem, top_k
+            )
+            chunks: List[Dict[str, Any]] = []
+            for source in sources:
+                metadata = source.metadata
+                provenance = metadata.get("provenance")
+                provenance = provenance if isinstance(provenance, dict) else {}
+                chunk_metadata = metadata.get("chunk_metadata")
+                chunk_metadata = (
+                    dict(chunk_metadata)
+                    if isinstance(chunk_metadata, dict)
+                    else {}
+                )
+                if source.section:
+                    chunk_metadata.setdefault("section", source.section)
+                if source.subsystem:
+                    chunk_metadata.setdefault("subsystem", source.subsystem)
+                if source.page_number is not None:
+                    chunk_metadata.setdefault("page", source.page_number)
+                chunks.append(
+                    {
+                        "chunk_id": source.source_id,
+                        "record_id": metadata.get("record_id"),
+                        "source_document": metadata.get("source_document"),
+                        "source_type": source.document_type,
+                        "content_type": metadata.get(
+                            "content_type", source.document_type
+                        ),
+                        "title": source.document_title,
+                        "text": source.content,
+                        "score": source.relevance_score,
+                        "provenance": provenance,
+                        "metadata": chunk_metadata,
+                    }
+                )
+            return chunks
 
         # ========================================================================
         # Realistic fallback: 5 separate chunks matching user's exact JSON schema

@@ -2,7 +2,9 @@ import pytest
 from httpx import AsyncClient, ASGITransport
 from src.api.main import app
 from src.pipeline.cleaner import RetrievalCleaner
+from src.pipeline.history import diagnosis_history_store
 from src.pipeline.service import live_pipeline_service
+from src.pipeline.summarizer import EVSummarizer
 
 SAMPLE_USER_CHUNK = {
     "chunk_id": "2025-450S-QSG_page_1_chunk_0",
@@ -28,6 +30,14 @@ SAMPLE_USER_CHUNK = {
     }
 }
 
+@pytest.fixture
+def history_database(tmp_path, monkeypatch):
+    monkeypatch.setattr(
+        diagnosis_history_store,
+        "path",
+        tmp_path / "diagnosis-history.sqlite3",
+    )
+
 @pytest.mark.asyncio
 async def test_clean_api_chunks():
     chunks = [SAMPLE_USER_CHUNK]
@@ -41,8 +51,70 @@ async def test_clean_api_chunks():
     assert cleaned.vehicle_model == "Ather 450S"
     assert cleaned.url == "https://media.atherenergy.com/2025-450S-QSG.pdf"
 
+def test_clean_api_chunks_maps_backend_evidence_contract():
+    evidence = RetrievalCleaner.clean_api_chunks(
+        [{
+            "source_id": "chunk-42",
+            "document_title": "Battery service guide",
+            "document_type": "service manual",
+            "section": "Cell balancing",
+            "page_number": 42,
+            "vehicle_model": "Ather 450S",
+            "subsystem": "BMS",
+            "content": "Check cell voltage deviation under load.",
+            "relevance_score": 0.73,
+            "metadata": {
+                "record_id": "record-42",
+                "source_document": "service-guide.pdf",
+                "content_type": "pdf",
+                "provenance": {
+                    "url": "https://example.test/service-guide.pdf",
+                    "manufacturer": "Ather",
+                    "vehicle_model": "Ather 450S",
+                },
+                "chunk_metadata": {"page_number": 42},
+            },
+        }],
+        query_text="battery fault",
+    )
+
+    chunk = evidence.cleaned_chunks[0]
+    assert chunk.chunk_id == "chunk-42"
+    assert chunk.title == "Battery service guide"
+    assert chunk.document_id == "record-42"
+    assert chunk.url == "https://example.test/service-guide.pdf"
+    assert chunk.vehicle_model == "Ather 450S"
+    assert chunk.similarity_score == 0.73
+    assert chunk.source_metadata["chunk_metadata"]["page_number"] == 42
+
+def test_clean_api_chunks_rejects_missing_ids_and_empty_content():
+    for chunk in (
+        {"content": "evidence without stable source id"},
+        {"source_id": "empty-content", "content": "   "},
+    ):
+        with pytest.raises(ValueError):
+            RetrievalCleaner.clean_api_chunks([chunk])
+
 @pytest.mark.asyncio
-async def test_live_pipeline_service():
+async def test_empty_evidence_returns_explicit_no_evidence_payload():
+    evidence = RetrievalCleaner.clean_api_chunks(
+        [],
+        query_text="battery fault",
+        case_id="no-evidence",
+    )
+
+    result = await EVSummarizer().summarize(evidence, vehicle_model="Ather 450S")
+
+    assert result.model_used == "no-evidence"
+    assert result.grounding_score == 0
+    assert result.sources == []
+    assert result.vehicle_model == "Ather 450S"
+    assert "No relevant source evidence" in result.direct_answer
+
+@pytest.mark.asyncio
+async def test_live_pipeline_service(history_database, monkeypatch):
+    monkeypatch.setattr("src.pipeline.summarizer.settings.GOOGLE_API_KEY", None)
+    monkeypatch.delenv("GOOGLE_API_KEY", raising=False)
     card = await live_pipeline_service.process_query_live(
         query="Can I use my existing 700W charger with the Ather 450S?",
         vehicle_model="Ather 450S",
@@ -52,14 +124,18 @@ async def test_live_pipeline_service():
     assert len(card.key_takeaways) > 0
     assert len(card.sources) > 0
     assert card.grounding_score >= 0.8
+    assert diagnosis_history_store.list_recent()[0]["case_id"] == card.case_id
 
 @pytest.mark.asyncio
-async def test_api_live_query_endpoint():
+async def test_api_live_query_endpoint(history_database, monkeypatch):
+    monkeypatch.setattr("src.pipeline.summarizer.settings.GOOGLE_API_KEY", None)
+    monkeypatch.delenv("GOOGLE_API_KEY", raising=False)
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as client:
         resp = await client.post("/api/v1/query", json={
             "query": "What home charging time is listed for the Ather 450S?",
             "vehicle_model": "Ather 450S",
+            "subsystem": "Charging",
             "top_k": 5
         })
         assert resp.status_code == 200
@@ -68,6 +144,12 @@ async def test_api_live_query_endpoint():
         assert "key_takeaways" in data
         assert "sources" in data
         assert len(data["sources"]) > 0
+        history = await client.get("/api/v1/history")
+        assert history.status_code == 200
+        assert history.json()["items"][0]["query"] == "What home charging time is listed for the Ather 450S?"
+        cleared = await client.delete("/api/v1/history")
+        assert cleared.status_code == 200
+        assert cleared.json()["deleted"] == 1
 
 @pytest.mark.asyncio
 async def test_api_direct_chunks_endpoint():

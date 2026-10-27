@@ -2,6 +2,7 @@ import re
 import html
 import json
 import hashlib
+import math
 from typing import List, Dict, Any, Optional
 from src.pipeline.models import CleanedChunk, QueryCleanedEvidence
 from src.common.logging import logger
@@ -116,7 +117,7 @@ class RetrievalCleaner:
                 prov_match = re.search(r"<pre>(\{.*?\})</pre>", body, re.DOTALL)
                 url = None
                 doc_id = None
-                mfg = "Ather Energy"
+                mfg = None
                 v_model = None
                 category = None
                 group = None
@@ -192,34 +193,89 @@ class RetrievalCleaner:
         parsed_chunks: List[CleanedChunk] = []
 
         for idx, item in enumerate(raw_chunks):
-            # Extract text/content
-            raw_text = item.get("text") or item.get("content") or ""
+            if not isinstance(item, dict):
+                raise ValueError(f"Backend chunk {idx} must be an object.")
+
+            raw_text = item.get("text") or item.get("content")
+            if not isinstance(raw_text, str) or not raw_text.strip():
+                raise ValueError(f"Backend chunk {idx} has no usable text.")
             clean_content = cls.clean_text(raw_text)
 
-            # Extract title / document identifier
-            raw_title = item.get("title") or item.get("source_document") or item.get("source_id") or f"Document {idx+1}"
+            raw_title = (
+                item.get("title")
+                or item.get("document_title")
+                or item.get("source_document")
+                or ""
+            )
+            if not isinstance(raw_title, str):
+                raise ValueError(f"Backend chunk {idx} title must be a string.")
             clean_title = cls.clean_text(raw_title)
 
-            # Extract similarity score (supports score, similarity_score, cosine_similarity)
-            sim_score = item.get("score") or item.get("similarity_score") or item.get("cosine_similarity") or 0.85
+            sim_score = next(
+                (
+                    item[key]
+                    for key in (
+                        "score",
+                        "similarity_score",
+                        "cosine_similarity",
+                        "relevance_score",
+                    )
+                    if item.get(key) is not None
+                ),
+                0.0,
+            )
             try:
                 sim_score = float(sim_score)
-            except (ValueError, TypeError):
-                sim_score = 0.85
+            except (ValueError, TypeError, OverflowError) as error:
+                raise ValueError(f"Backend chunk {idx} has an invalid score.") from error
+            if not math.isfinite(sim_score):
+                raise ValueError(f"Backend chunk {idx} has a non-finite score.")
 
-            chunk_id = item.get("chunk_id") or f"chunk_{case_id}_{idx}"
-            content_type = item.get("content_type", "pdf")
+            chunk_id = item.get("chunk_id") or item.get("source_id")
+            if not isinstance(chunk_id, str) or not chunk_id.strip():
+                raise ValueError(f"Backend chunk {idx} has no source/chunk ID.")
+            content_type = (
+                item.get("content_type")
+                or item.get("document_type")
+                or "unknown"
+            )
+            if not isinstance(content_type, str):
+                raise ValueError(f"Backend chunk {idx} content type must be a string.")
 
-            # Extract provenance metadata
-            prov = item.get("provenance") or {}
-            meta = item.get("metadata") or {}
+            raw_metadata = item.get("metadata") or {}
+            if not isinstance(raw_metadata, dict):
+                raise ValueError(f"Backend chunk {idx} metadata must be an object.")
+            prov = item.get("provenance") or raw_metadata.get("provenance") or {}
+            if not isinstance(prov, dict):
+                raise ValueError(f"Backend chunk {idx} provenance must be an object.")
+            meta = raw_metadata.get("chunk_metadata") or raw_metadata
+            if not isinstance(meta, dict):
+                raise ValueError(f"Backend chunk {idx} chunk metadata must be an object.")
 
             url = prov.get("url") or item.get("url")
-            doc_id = prov.get("document_id") or item.get("record_id") or item.get("source_document")
-            mfg = prov.get("manufacturer", "Ather Energy")
+            doc_id = (
+                prov.get("document_id")
+                or item.get("record_id")
+                or raw_metadata.get("record_id")
+                or item.get("source_document")
+                or raw_metadata.get("source_document")
+            )
+            mfg = prov.get("manufacturer")
             vehicle_model = prov.get("vehicle_model") or item.get("vehicle_model")
             category = meta.get("category")
-            group = meta.get("group")
+            group = meta.get("group") or item.get("section")
+            if not isinstance(url, str):
+                url = None
+            if not isinstance(doc_id, str):
+                doc_id = None
+            if not isinstance(mfg, str):
+                mfg = None
+            if not isinstance(vehicle_model, str):
+                vehicle_model = None
+            if not isinstance(category, str):
+                category = None
+            if not isinstance(group, str):
+                group = None
 
             parsed_chunks.append(CleanedChunk(
                 chunk_id=chunk_id,
@@ -232,7 +288,12 @@ class RetrievalCleaner:
                 manufacturer=mfg,
                 vehicle_model=vehicle_model,
                 category=category,
-                group=group
+                group=group,
+                source_metadata={
+                    **raw_metadata,
+                    "provenance": dict(prov),
+                    "chunk_metadata": dict(meta),
+                },
             ))
 
         # Deduplicate identical chunks

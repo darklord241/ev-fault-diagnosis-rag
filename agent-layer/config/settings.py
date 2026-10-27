@@ -29,6 +29,7 @@ class Settings(BaseSettings):
     # Orchestrator Gateway API (Dashboard connector)
     ORCHESTRATOR_API_HOST: str = "0.0.0.0"
     ORCHESTRATOR_API_PORT: int = 8080
+    DIAGNOSIS_DB_PATH: str = "data/diagnosis_history.sqlite3"
     LOG_LEVEL: str = "INFO"
 
     model_config = SettingsConfigDict(
