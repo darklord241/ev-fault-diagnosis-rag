@@ -62,7 +62,7 @@ The existing retrieval code expects validated JSONL chunks in `scraper/data/chun
 4. Set `HYBRID_RETRIEVAL_USE_MOCK=false` in `agent-layer/.env`. Set `HYBRID_RETRIEVAL_API_KEY` there to the same secret as `BACKEND_API_KEY` in `backend/.env`.
 5. Restart the backend and agent. Confirm <http://127.0.0.1:8000/health> reports `retrieval_ready: true`; then submit a query in the website.
 
-When the backend is live, an unavailable service, invalid response, missing key, or empty evidence does not become a sample-based or confident live answer. A Google API key is optional for the demo. To use Gemini for live synthesis, place a valid key in the local `agent-layer/.env` as `GOOGLE_API_KEY` and select `DEFAULT_LLM_PROVIDER=gemini`. Never put keys in frontend code or `NEXT_PUBLIC_*` variables, and do not paste them into GitHub.
+When the backend is live, an unavailable service, invalid response, missing key, or empty evidence does not become a sample-based or confident live answer. A Google API key is optional for retrieval and for the demo. To test Gemini synthesis, create `agent-layer/.env` from `.env.example`, keep `DEFAULT_LLM_PROVIDER=gemini` and `DEFAULT_LLM_MODEL=gemini-3.5-flash-lite`, and enter your key as `GOOGLE_API_KEY` locally. Restart the agent and submit one query; `model_used` should be `gemini-3.5-flash-lite` if Gemini succeeds. If the key is missing or Gemini errors, the UI labels the deterministic fallback instead. Never put keys in frontend code or `NEXT_PUBLIC_*` variables, paste them into chat/GitHub, or include local `.env` files in a commit.
 
 ## How one website query flows
 

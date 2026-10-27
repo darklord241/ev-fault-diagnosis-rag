@@ -80,7 +80,10 @@ class EVSummarizer:
             try:
                 return await self._call_llm_summarizer(evidence, vehicle_model)
             except Exception as e:
-                logger.warning(f"LLM summarization failed ({e}). Using deterministic domain fallback.")
+                logger.warning(
+                    "LLM summarization failed (%s). Using deterministic domain fallback.",
+                    type(e).__name__,
+                )
                 return self._deterministic_fallback(evidence, vehicle_model)
         else:
             logger.info("No LLM API key detected in environment. Using deterministic domain summarizer.")

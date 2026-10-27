@@ -63,7 +63,7 @@ class WebsiteCardPayload(BaseModel):
     grounding_score: float = Field(1.0, description="Calculated grounding confidence score (0.0 to 1.0)")
     raw_chunks_retrieved: int = Field(0, description="Chunks received from retriever before deduplication")
     unique_chunks_used: int = Field(0, description="Unique chunks after cleaning & deduplication")
-    model_used: str = Field("gemini-2.5-flash", description="LLM used for synthesis")
+    model_used: str = Field("gemini-3.5-flash-lite", description="LLM used for synthesis")
     processed_at: datetime = Field(default_factory=utc_now)
 
 class BatchWebsiteDelivery(BaseModel):

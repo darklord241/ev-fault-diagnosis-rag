@@ -5,7 +5,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     # LLM Settings
     DEFAULT_LLM_PROVIDER: Literal["gemini", "openai", "anthropic", "ollama", "groq"] = "gemini"
-    DEFAULT_LLM_MODEL: str = "gemini-2.5-flash"
+    DEFAULT_LLM_MODEL: str = "gemini-3.5-flash-lite"
     LLM_TEMPERATURE: float = 0.2
 
     # Provider API Keys
