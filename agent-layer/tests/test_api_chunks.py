@@ -1,3 +1,5 @@
+import json
+
 import pytest
 from httpx import AsyncClient, ASGITransport
 from src.api.main import app
@@ -94,6 +96,50 @@ def test_clean_api_chunks_rejects_missing_ids_and_empty_content():
     ):
         with pytest.raises(ValueError):
             RetrievalCleaner.clean_api_chunks([chunk])
+
+
+@pytest.mark.asyncio
+async def test_gemini_text_blocks_are_parsed_as_structured_summary(monkeypatch):
+    class FakeResponse:
+        content = [{
+            "type": "text",
+            "text": json.dumps({
+                "direct_answer": "The cited manual describes a low-charge power reduction.",
+                "key_takeaways": ["Check the dashboard charge level."],
+                "technical_specs": {},
+                "conditions_and_safety": ["Use an authorized service center for repairs."],
+                "formatted_markdown": "### Answer\nThe manual describes a low-charge power reduction.",
+                "grounding_confidence": 0.8,
+            }),
+        }]
+
+    class FakeLLM:
+        async def ainvoke(self, _messages):
+            return FakeResponse()
+
+    monkeypatch.setattr(
+        "src.pipeline.summarizer.LLMFactory.get_llm",
+        lambda **_kwargs: FakeLLM(),
+    )
+    evidence = RetrievalCleaner.clean_api_chunks(
+        [SAMPLE_USER_CHUNK],
+        query_text="Battery loses power under acceleration",
+        case_id="gemini-test",
+    )
+    summarizer = EVSummarizer(
+        provider="gemini",
+        model="gemini-3.5-flash-lite",
+    )
+
+    result = await summarizer._call_llm_summarizer(
+        evidence,
+        vehicle_model="Ather 450S",
+    )
+
+    assert result.model_used == "gemini-3.5-flash-lite"
+    assert result.direct_answer.startswith("The cited manual")
+    assert result.sources[0].chunk_id == SAMPLE_USER_CHUNK["chunk_id"]
+
 
 @pytest.mark.asyncio
 async def test_empty_evidence_returns_explicit_no_evidence_payload():

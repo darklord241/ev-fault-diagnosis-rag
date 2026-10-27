@@ -38,6 +38,21 @@ class EVSummarizer:
         self.provider = provider or settings.DEFAULT_LLM_PROVIDER
         self.model_name = model or settings.DEFAULT_LLM_MODEL
 
+    @staticmethod
+    def _response_text(content: Any) -> str:
+        if isinstance(content, str):
+            return content
+        if isinstance(content, list):
+            text_blocks = []
+            for block in content:
+                if isinstance(block, str):
+                    text_blocks.append(block)
+                elif isinstance(block, dict) and isinstance(block.get("text"), str):
+                    text_blocks.append(block["text"])
+            if text_blocks:
+                return "\n".join(text_blocks)
+        raise ValueError("LLM response did not contain readable text.")
+
     async def summarize(
         self,
         evidence: QueryCleanedEvidence,
@@ -124,7 +139,7 @@ Produce the structured JSON summary adhering to the schema. Return ONLY valid JS
         ]
 
         response = await llm.ainvoke(messages)
-        resp_text = response.content if isinstance(response.content, str) else str(response.content)
+        resp_text = self._response_text(response.content)
 
         # Parse JSON from response
         json_clean = re.sub(r"^```(?:json)?\s*", "", resp_text.strip())
