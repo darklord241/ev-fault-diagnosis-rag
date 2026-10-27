@@ -8,6 +8,8 @@ import type {
   MCPTool,
   LiveQueryRequest,
   DiagnosisHistoryEntry,
+  KnowledgeSearchRequest,
+  KnowledgeSearchResponse,
 } from "./types";
 
 /* ── Helper ── */
@@ -78,6 +80,15 @@ export async function fetchDiagnosisHistory(): Promise<{
 export async function clearDiagnosisHistory(): Promise<{ deleted: number }> {
   return request<{ deleted: number }>("/api/v1/history", {
     method: "DELETE",
+  });
+}
+
+export async function searchKnowledge(
+  payload: KnowledgeSearchRequest
+): Promise<KnowledgeSearchResponse> {
+  return request<KnowledgeSearchResponse>("/api/v1/knowledge/search", {
+    method: "POST",
+    body: JSON.stringify(payload),
   });
 }
 

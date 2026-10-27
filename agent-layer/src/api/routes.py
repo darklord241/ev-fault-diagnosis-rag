@@ -33,6 +33,28 @@ class LiveQueryRequest(BaseModel):
     top_k: int = Field(default=5, ge=1, le=10)
     case_id: Optional[str] = None
 
+class KnowledgeSearchRequest(BaseModel):
+    query: str = Field(min_length=3, max_length=4000)
+    vehicle_model: Optional[str] = Field(default=None, max_length=200)
+    subsystem: Optional[str] = Field(default=None, max_length=200)
+
+class KnowledgeChunkResult(BaseModel):
+    chunk_id: str
+    title: str
+    source_type: str
+    content_type: str
+    content: str
+    page_number: Optional[int] = None
+    section: Optional[str] = None
+    vehicle_model: Optional[str] = None
+    subsystem: Optional[str] = None
+    url: Optional[str] = None
+    relevance_score: float
+
+class KnowledgeSearchResponse(BaseModel):
+    query: str
+    chunks: List[KnowledgeChunkResult]
+
 class DirectChunksRequest(BaseModel):
     query: str
     chunks: List[Dict[str, Any]]
@@ -94,6 +116,59 @@ async def process_live_query(req: LiveQueryRequest) -> WebsiteCardPayload:
     except Exception as e:
         logger.error(f"Error processing live query: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Live query processing error: {str(e)}")
+
+@router.post(
+    "/knowledge/search",
+    response_model=KnowledgeSearchResponse,
+    summary="Retrieve the five most relevant source chunks for the knowledge base",
+)
+async def search_knowledge_base(req: KnowledgeSearchRequest) -> KnowledgeSearchResponse:
+    try:
+        raw_chunks = await backend_adapter.fetch_raw_chunks_from_backend(
+            query=req.query,
+            top_k=5,
+            vehicle_model=req.vehicle_model,
+            subsystem=req.subsystem,
+        )
+        chunks = []
+        for item in raw_chunks[:5]:
+            provenance = item.get("provenance") or {}
+            metadata = item.get("metadata") or {}
+            if not isinstance(provenance, dict):
+                provenance = {}
+            if not isinstance(metadata, dict):
+                metadata = {}
+            page_number = metadata.get("page_number") or metadata.get("page")
+            if isinstance(page_number, bool) or not isinstance(page_number, int):
+                page_number = None
+            section = metadata.get("section") or item.get("section")
+            if not isinstance(section, str):
+                section = None
+            vehicle_model = provenance.get("vehicle_model") or item.get("vehicle_model")
+            subsystem = metadata.get("subsystem") or item.get("subsystem")
+            url = provenance.get("url") or item.get("url")
+            chunks.append(
+                KnowledgeChunkResult(
+                    chunk_id=item["chunk_id"],
+                    title=item.get("title") or item.get("source_document") or "Untitled source",
+                    source_type=item.get("source_type") or "unknown",
+                    content_type=item.get("content_type") or "unknown",
+                    content=item["text"],
+                    page_number=page_number,
+                    section=section,
+                    vehicle_model=vehicle_model if isinstance(vehicle_model, str) else None,
+                    subsystem=subsystem if isinstance(subsystem, str) else None,
+                    url=url if isinstance(url, str) else None,
+                    relevance_score=float(item.get("score", 0.0)),
+                )
+            )
+        return KnowledgeSearchResponse(query=req.query, chunks=chunks)
+    except Exception as e:
+        logger.error("Knowledge-base retrieval failed: %s", e, exc_info=True)
+        raise HTTPException(
+            status_code=503,
+            detail="Knowledge-base retrieval is unavailable. Check retrieval backend readiness.",
+        ) from e
 
 @router.get("/history", summary="Get recent live diagnosis history")
 async def get_diagnosis_history(limit: int = Query(default=20, ge=1, le=50)):

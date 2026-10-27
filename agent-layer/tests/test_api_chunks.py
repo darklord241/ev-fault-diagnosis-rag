@@ -7,6 +7,7 @@ from src.pipeline.cleaner import RetrievalCleaner
 from src.pipeline.history import diagnosis_history_store
 from src.pipeline.service import live_pipeline_service
 from src.pipeline.summarizer import EVSummarizer
+from src.mcp_server.backend_adapter import backend_adapter
 
 SAMPLE_USER_CHUNK = {
     "chunk_id": "2025-450S-QSG_page_1_chunk_0",
@@ -139,6 +140,54 @@ async def test_gemini_text_blocks_are_parsed_as_structured_summary(monkeypatch):
     assert result.model_used == "gemini-3.5-flash-lite"
     assert result.direct_answer.startswith("The cited manual")
     assert result.sources[0].chunk_id == SAMPLE_USER_CHUNK["chunk_id"]
+    assert result.sources[0].page_number == 1
+    assert "700W charger is backwards compatible" in result.sources[0].content
+
+
+@pytest.mark.asyncio
+async def test_knowledge_search_returns_five_readable_ranked_chunks(monkeypatch):
+    requested = {}
+
+    async def fetch_chunks(**kwargs):
+        requested.update(kwargs)
+        return [
+            {
+                "chunk_id": f"manual_page_{index}_chunk_0",
+                "title": f"Service manual {index}",
+                "source_type": "official",
+                "content_type": "pdf",
+                "text": f"Full evidence text for page {index}.",
+                "score": 0.9 - index / 100,
+                "provenance": {"url": f"https://example.test/manual#{index}"},
+                "metadata": {"page": index, "section": "Battery service"},
+            }
+            for index in range(1, 8)
+        ]
+
+    monkeypatch.setattr(backend_adapter, "fetch_raw_chunks_from_backend", fetch_chunks)
+    transport = ASGITransport(app=app)
+    async with AsyncClient(transport=transport, base_url="http://test") as client:
+        response = await client.post(
+            "/api/v1/knowledge/search",
+            json={
+                "query": "battery service",
+                "vehicle_model": "Ather 450S",
+                "subsystem": "BMS",
+            },
+        )
+
+    assert response.status_code == 200
+    assert requested == {
+        "query": "battery service",
+        "top_k": 5,
+        "vehicle_model": "Ather 450S",
+        "subsystem": "BMS",
+    }
+    results = response.json()["chunks"]
+    assert len(results) == 5
+    assert results[0]["page_number"] == 1
+    assert results[0]["content"] == "Full evidence text for page 1."
+    assert results[0]["url"] == "https://example.test/manual#1"
 
 
 @pytest.mark.asyncio

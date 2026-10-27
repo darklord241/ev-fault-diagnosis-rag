@@ -193,6 +193,34 @@ def test_diagnosis_gateway_forwards_to_agent_and_preserves_response(monkeypatch)
     assert captured["headers"] == {"content-type": "application/json"}
 
 
+def test_knowledge_search_is_allowed_through_gateway(monkeypatch):
+    captured = {}
+
+    class Client:
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, *_args):
+            return None
+
+        async def request(self, method, url, *, content, headers):
+            captured.update(method=method, url=url, content=content)
+            return httpx.Response(200, json={"query": "battery", "chunks": []})
+
+    monkeypatch.setattr(backend_module.httpx, "AsyncClient", lambda **_: Client())
+    app = backend_module.create_app(agent_base_url="http://agent.test")
+
+    with TestClient(app) as client:
+        response = client.post(
+            "/api/v1/knowledge/search",
+            json={"query": "battery fault"},
+        )
+
+    assert response.status_code == 200
+    assert captured["method"] == "POST"
+    assert captured["url"] == "http://agent.test/api/v1/knowledge/search"
+
+
 def test_invalid_search_payload_is_rejected():
     app = backend_module.create_app(
         retriever=FakeRetriever(),

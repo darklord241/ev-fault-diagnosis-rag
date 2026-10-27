@@ -90,6 +90,8 @@ flowchart LR
 5. `BackendRetrievalAdapter` sends the query, vehicle, subsystem, and top-k to `/api/v1/retrieval/search`. It maps backend `EvidenceSource` results to the chunk shape consumed by the cleaner and preserves source IDs, URLs, scores, and provenance.
 6. The service stores the resulting `WebsiteCardPayload` locally and returns it through the gateway. The UI renders the answer, technical details, safety notes, and source links.
 
+The Knowledge Base page also sends searches to `POST /api/v1/knowledge/search`. It returns the top five matching chunks with full passage text, document title, page number, source URL, and similarity score; the chunk ID is available as a secondary reference rather than the primary display.
+
 `POST /api/v1/diagnose` remains a separate agent/MCP diagnosis path; the website's main diagnosis form uses the retrieval-first `/api/v1/query` contract and `WebsiteCardPayload`.
 
 ## Local database

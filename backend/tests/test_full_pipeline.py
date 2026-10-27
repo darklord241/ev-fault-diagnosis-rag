@@ -122,6 +122,8 @@ def test_full_website_gateway_retrieval_agent_and_database_flow(
     assert result["vehicle_model"] == "Ather 450S"
     assert result["sources"][0]["chunk_id"] == "fixture-battery-chunk"
     assert result["sources"][0]["url"] == "https://example.test/fixture-manual.pdf"
+    assert result["sources"][0]["page_number"] == 12
+    assert "inspect battery connector continuity" in result["sources"][0]["content"]
     assert result["sources"][0]["similarity_score"] == 0.82
     assert result["model_used"] == "deterministic-domain-engine"
     assert history_response.status_code == 200

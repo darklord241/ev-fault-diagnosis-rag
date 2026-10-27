@@ -658,6 +658,28 @@ input::placeholder, textarea::placeholder { color: #9aa7a2; }
   overflow-wrap: anywhere;
 }
 
+.evidence-meta { font-size: 11px; margin-top: 4px; }
+.evidence-quote {
+  margin: 0;
+  padding: 14px 18px;
+  border-top: 1px solid var(--line);
+  color: #435951;
+  font-size: 13px;
+  line-height: 1.75;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.source-reference { padding: 0 18px 12px; color: var(--muted); font-size: 11px; }
+.source-reference summary,
+.knowledge-chunk-reference summary { cursor: pointer; }
+.source-reference code,
+.knowledge-chunk-reference code {
+  display: block;
+  margin-top: 6px;
+  overflow-wrap: anywhere;
+  font-size: 11px;
+}
+
 /* ── Evidence Drawer ── */
 .evidence-drawer {
   position: fixed;
@@ -719,6 +741,46 @@ input::placeholder, textarea::placeholder { color: #9aa7a2; }
 .knowledge-detail {
   margin-top: 20px;
 }
+
+.knowledge-search-card { margin-bottom: 22px; }
+.knowledge-search-card textarea { margin-top: 7px; }
+.knowledge-search-filters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 14px 0;
+}
+.knowledge-results { margin: 26px 0; }
+.knowledge-chunk { margin: 12px 0; }
+.knowledge-chunk-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+.knowledge-chunk-heading h3 { margin: 10px 0 7px; font-size: 16px; }
+.knowledge-chunk-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 14px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.knowledge-chunk-content {
+  margin-top: 16px;
+  padding: 16px;
+  border-left: 3px solid #a9d8c8;
+  border-radius: 0 6px 6px 0;
+  background: #f6f9f7;
+  color: #334d45;
+  font-size: 13px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.knowledge-chunk-reference { margin-top: 12px; color: var(--muted); font-size: 11px; }
+.knowledge-no-results { margin: 18px 0; }
+.knowledge-answer-heading { margin-top: 32px; }
 
 .specs-table {
   width: 100%;
@@ -974,4 +1036,6 @@ footer {
   .home-aside { grid-template-columns: 1fr; }
   .metric-grid { grid-template-columns: 1fr 1fr; }
   footer { flex-direction: column; }
+  .knowledge-search-filters { grid-template-columns: 1fr; }
+  .knowledge-chunk-heading { flex-direction: column; }
 }

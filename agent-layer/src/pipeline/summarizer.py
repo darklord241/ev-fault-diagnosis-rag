@@ -53,6 +53,26 @@ class EVSummarizer:
                 return "\n".join(text_blocks)
         raise ValueError("LLM response did not contain readable text.")
 
+    @staticmethod
+    def _citation_for_chunk(chunk) -> SourceCitation:
+        chunk_metadata = chunk.source_metadata.get("chunk_metadata", {})
+        page_number = (
+            chunk_metadata.get("page_number") or chunk_metadata.get("page")
+            if isinstance(chunk_metadata, dict)
+            else None
+        )
+        if isinstance(page_number, bool) or not isinstance(page_number, int):
+            page_number = None
+        return SourceCitation(
+            title=chunk.title,
+            chunk_id=chunk.chunk_id,
+            url=chunk.url,
+            page_number=page_number,
+            content=chunk.content,
+            similarity_score=chunk.similarity_score,
+            metadata=chunk.source_metadata,
+        )
+
     async def summarize(
         self,
         evidence: QueryCleanedEvidence,
@@ -146,16 +166,7 @@ Produce the structured JSON summary adhering to the schema. Return ONLY valid JS
         json_clean = re.sub(r"\s*```$", "", json_clean)
         data = json.loads(json_clean)
 
-        citations = [
-            SourceCitation(
-                title=c.title,
-                chunk_id=c.chunk_id,
-                url=c.url,
-                similarity_score=c.similarity_score,
-                metadata=c.source_metadata,
-            )
-            for c in evidence.cleaned_chunks
-        ]
+        citations = [self._citation_for_chunk(chunk) for chunk in evidence.cleaned_chunks]
 
         return WebsiteCardPayload(
             case_id=evidence.case_id,
@@ -292,16 +303,7 @@ Produce the structured JSON summary adhering to the schema. Return ONLY valid JS
 {conditions_md}
 """
 
-        citations = [
-            SourceCitation(
-                title=c.title,
-                chunk_id=c.chunk_id,
-                url=c.url,
-                similarity_score=c.similarity_score,
-                metadata=c.source_metadata,
-            )
-            for c in evidence.cleaned_chunks
-        ]
+        citations = [self._citation_for_chunk(chunk) for chunk in evidence.cleaned_chunks]
 
         return WebsiteCardPayload(
             case_id=evidence.case_id,

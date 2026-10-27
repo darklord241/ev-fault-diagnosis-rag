@@ -287,8 +287,10 @@ function DiagnoseContent() {
                     <div className="evidence-header">
                       <div>
                         <strong>{source.title || 'Source title unavailable'}</strong>
-                        <p className="muted" style={{ fontSize: 10, overflowWrap: 'anywhere' }}>
-                          {source.chunk_id} · {(source.similarity_score * 100).toFixed(1)}% relevance
+                        <p className="muted evidence-meta">
+                          {source.page_number != null ? `Page ${source.page_number}` : 'Page not specified'}
+                          {' · '}
+                          {(source.similarity_score * 100).toFixed(1)}% relevance
                         </p>
                       </div>
                       {source.url && (
@@ -297,6 +299,13 @@ function DiagnoseContent() {
                         </a>
                       )}
                     </div>
+                    {source.content && (
+                      <blockquote className="evidence-quote">{source.content}</blockquote>
+                    )}
+                    <details className="source-reference">
+                      <summary>Chunk reference</summary>
+                      <code>{source.chunk_id}</code>
+                    </details>
                   </article>
                 ))}
               </div>

@@ -34,6 +34,8 @@ class SourceCitation(BaseModel):
     title: str
     chunk_id: str
     url: Optional[str] = None
+    page_number: Optional[int] = None
+    content: Optional[str] = None
     similarity_score: float
     relevance_rationale: Optional[str] = None
     metadata: Dict[str, Any] = Field(default_factory=dict)
