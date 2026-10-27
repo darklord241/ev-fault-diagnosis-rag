@@ -46,11 +46,11 @@ npm run dev
 
 Replace `/path/to/ev-fault-diagnosis-rag` with the checkout's actual path. Open <http://localhost:3000>, enter a question, and select **Run Diagnosis**. The diagnosis page also shows the retrieval mode and recent local query history; use **Clear** to delete that history.
 
-The backend's live retriever may report `retrieval_ready: false` in demo mode because this checkout has no chunked corpus/model. That is expected: demo requests use sample evidence in the agent, while the backend still proxies the website API. Stop each server with `Ctrl+C`.
+If the local corpus or model is not prepared, the backend reports `retrieval_ready: false`; demo requests still use sample evidence in the agent while the backend proxies the website API. Stop each server with `Ctrl+C`.
 
 ## Enable live corpus retrieval
 
-The existing retrieval code expects validated JSONL chunks in `scraper/data/chunked/` and the local `sentence-transformers/all-MiniLM-L6-v2` model. This checkout includes metadata manifests but **does not contain chunked corpus files or the model cache**, so real-corpus retrieval cannot be verified until those assets are prepared.
+The existing retrieval code expects validated JSONL chunks in `scraper/data/chunked/` and the local `sentence-transformers/all-MiniLM-L6-v2` model. The repository intentionally does not track corpus files, embedding caches, or model weights. Obtain authorized corpus files separately and keep them local; if you have a matching embedding cache, place it at `scraper/data/embeddings/chunk_vectors.json`. If no cache is supplied, the retriever builds one from the chunk files and the model.
 
 1. Prepare authorized chunk JSONL files using the schema in `scraper/vector_search/retrieval.py`.
 2. Install/download the model once into the local Hugging Face model cache:

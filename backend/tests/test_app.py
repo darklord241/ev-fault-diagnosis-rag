@@ -3,7 +3,9 @@ import httpx
 from fastapi.testclient import TestClient
 
 from backend import app as backend_module
+from scraper.vector_search.embedding import EmbeddingIdentity
 from scraper.vector_search.retrieval import SearchResult
+from scraper.vector_search.retriever import Retriever
 
 
 def make_record(chunk_id, vehicle_model):
@@ -41,6 +43,18 @@ class FakeRetriever:
         ]
 
 
+class FixtureEmbeddingBackend:
+    identity = EmbeddingIdentity(
+        model_id="fixture",
+        revision="1",
+        preprocessing="identity",
+        dimension=2,
+    )
+
+    def embed(self, _text):
+        return (1.0, 0.0)
+
+
 def test_live_search_requires_key_and_returns_vehicle_scoped_evidence():
     retriever = FakeRetriever()
     app = backend_module.create_app(
@@ -74,6 +88,40 @@ def test_live_search_requires_key_and_returns_vehicle_scoped_evidence():
     assert response.json()["results"][0]["document_title"] == "Manual section ather-bms"
     assert response.json()["results"][0]["page_number"] == 12
     assert response.json()["results"][0]["relevance_score"] == 0.91
+
+
+def test_backend_search_accepts_real_retriever_with_vehicle_filter(tmp_path):
+    records = [
+        make_record("ather-bms", "Ather 450X"),
+        make_record("ola-bms", "Ola S1"),
+        make_record("generic-bms", "Generic EV"),
+    ]
+    retriever = Retriever(
+        records,
+        FixtureEmbeddingBackend(),
+        tmp_path / "vectors.json",
+    )
+    app = backend_module.create_app(
+        retriever=retriever,
+        backend_api_key="test-secret",
+    )
+
+    with TestClient(app) as client:
+        response = client.post(
+            "/api/v1/retrieval/search",
+            headers={"Authorization": "Bearer test-secret"},
+            json={
+                "query": "battery fault",
+                "vehicle_model": "Ather 450X",
+                "top_k": 2,
+            },
+        )
+
+    assert response.status_code == 200
+    assert [item["source_id"] for item in response.json()["results"]] == [
+        "ather-bms",
+        "generic-bms",
+    ]
 
 
 def test_missing_corpus_reports_degraded_and_search_unavailable():

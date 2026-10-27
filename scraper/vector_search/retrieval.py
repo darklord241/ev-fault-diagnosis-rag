@@ -5,7 +5,7 @@ import math
 from dataclasses import dataclass
 from numbers import Real
 from pathlib import Path
-from typing import Mapping, Protocol, Sequence
+from typing import Callable, Mapping, Protocol, Sequence
 
 
 CHUNKED_DIR = Path(__file__).resolve().parent.parent / "data" / "chunked"
@@ -157,13 +157,19 @@ class CosineIndex:
         self._dimensions = next(iter(dimensions), None)
 
     def search(
-        self, query_vector: Sequence[float], top_k: int = 5
+        self,
+        query_vector: Sequence[float],
+        top_k: int = 5,
+        *,
+        record_filter: Callable[[Mapping[str, object]], bool] | None = None,
     ) -> list[SearchResult]:
-        """Return the top ``top_k`` chunks, with ties kept in input order."""
+        """Return the top matching chunks, with ties kept in input order."""
         if isinstance(top_k, bool) or not isinstance(top_k, int):
             raise TypeError("top_k must be a positive integer")
         if top_k <= 0:
             raise ValueError("top_k must be greater than zero")
+        if record_filter is not None and not callable(record_filter):
+            raise TypeError("record_filter must be callable")
 
         query = _normalized_vector(query_vector, "query vector")
         if self._dimensions is not None and len(query) != self._dimensions:
@@ -174,15 +180,18 @@ class CosineIndex:
 
         scored = []
         for index, vector in enumerate(self._vectors):
+            record = self._records[index]
+            if record_filter is not None and not record_filter(record):
+                continue
             score = math.fsum(
                 query_value * vector_value
                 for query_value, vector_value in zip(query, vector)
             )
             score = max(-1.0, min(1.0, score))
-            scored.append((score, index))
+            scored.append((score, index, record))
 
         scored.sort(key=lambda item: (-item[0], item[1]))
         return [
-            SearchResult(score=score, record=self._records[index])
-            for score, index in scored[:top_k]
+            SearchResult(score=score, record=record)
+            for score, _, record in scored[:top_k]
         ]
