@@ -14,10 +14,11 @@ class CleanedChunk(BaseModel):
     content_type: str = Field("faq", description="Document or content type (faq, warranty, manual, etc.)")
     document_id: Optional[str] = Field(None, description="Original document ID")
     url: Optional[str] = Field(None, description="Source official URL")
-    manufacturer: Optional[str] = Field("Ather Energy", description="Vehicle manufacturer")
+    manufacturer: Optional[str] = Field(None, description="Vehicle manufacturer")
     vehicle_model: Optional[str] = Field(None, description="Target vehicle model if specified")
     category: Optional[str] = Field(None, description="Topic category (e.g. charging-grid, explore-buy)")
     group: Optional[str] = Field(None, description="Topic group (e.g. Ather 450 Series, Battery Warranty)")
+    source_metadata: Dict[str, Any] = Field(default_factory=dict)
     duplicate_sources_merged: int = Field(1, description="Number of duplicate chunks merged into this chunk")
     alternate_urls: List[str] = Field(default_factory=list, description="Other URLs where identical content appeared")
 
@@ -33,8 +34,11 @@ class SourceCitation(BaseModel):
     title: str
     chunk_id: str
     url: Optional[str] = None
+    page_number: Optional[int] = None
+    content: Optional[str] = None
     similarity_score: float
     relevance_rationale: Optional[str] = None
+    metadata: Dict[str, Any] = Field(default_factory=dict)
 
 class WebsiteCardPayload(BaseModel):
     """
@@ -61,7 +65,7 @@ class WebsiteCardPayload(BaseModel):
     grounding_score: float = Field(1.0, description="Calculated grounding confidence score (0.0 to 1.0)")
     raw_chunks_retrieved: int = Field(0, description="Chunks received from retriever before deduplication")
     unique_chunks_used: int = Field(0, description="Unique chunks after cleaning & deduplication")
-    model_used: str = Field("gemini-2.5-flash", description="LLM used for synthesis")
+    model_used: str = Field("gemini-3.5-flash-lite", description="LLM used for synthesis")
     processed_at: datetime = Field(default_factory=utc_now)
 
 class BatchWebsiteDelivery(BaseModel):

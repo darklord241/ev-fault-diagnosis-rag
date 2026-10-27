@@ -1,9 +1,11 @@
+import asyncio
 import uuid
 from typing import List, Dict, Any, Optional
 
 from src.pipeline.models import WebsiteCardPayload, QueryCleanedEvidence
 from src.pipeline.cleaner import RetrievalCleaner
 from src.pipeline.summarizer import EVSummarizer
+from src.pipeline.history import diagnosis_history_store
 from src.mcp_server.backend_adapter import backend_adapter
 from src.common.logging import logger
 
@@ -25,11 +27,17 @@ class LivePipelineService:
         query: str,
         vehicle_model: Optional[str] = None,
         top_k: int = 5,
-        case_id: Optional[str] = None
+        case_id: Optional[str] = None,
+        subsystem: Optional[str] = None,
     ) -> WebsiteCardPayload:
         """
         Full live flow: Query -> Backend API (5 chunks) -> Cleaner -> Gemini Summarizer -> Website Payload.
         """
+        if isinstance(top_k, bool) or not isinstance(top_k, int):
+            raise TypeError("top_k must be an integer.")
+        if not 1 <= top_k <= 10:
+            raise ValueError("top_k must be between 1 and 10.")
+
         cid = case_id or f"live-{uuid.uuid4().hex[:8]}"
         logger.info(f"Processing live query: '{query}' (model: {vehicle_model}, top_k: {top_k})")
 
@@ -37,7 +45,8 @@ class LivePipelineService:
         raw_chunks = await backend_adapter.fetch_raw_chunks_from_backend(
             query=query,
             top_k=top_k,
-            vehicle_model=vehicle_model
+            vehicle_model=vehicle_model,
+            subsystem=subsystem,
         )
         logger.info(f"Received {len(raw_chunks)} chunks from backend retrieval layer")
 
@@ -49,9 +58,17 @@ class LivePipelineService:
         )
 
         # Step 3: Summarize via Gemini LLM with source grounding
-        card_payload = await self.summarizer.summarize(cleaned_evidence)
-        if vehicle_model:
-            card_payload.vehicle_model = vehicle_model
+        card_payload = await self.summarizer.summarize(
+            cleaned_evidence,
+            vehicle_model=vehicle_model,
+        )
+        await asyncio.to_thread(
+            diagnosis_history_store.save,
+            query=query,
+            vehicle_model=vehicle_model,
+            subsystem=subsystem,
+            result=card_payload,
+        )
 
         logger.info(f"Successfully generated grounded website payload for '{query}' (Grounding: {card_payload.grounding_score})")
         return card_payload

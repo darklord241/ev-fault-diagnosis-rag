@@ -1,16 +1,25 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   BookOpen,
   ChevronDown,
   ChevronUp,
   ExternalLink,
+  FileText,
   Search,
   X,
 } from 'lucide-react';
-import { fetchEvalAnswers } from '@/lib/api';
-import type { WebsiteCardPayload, BatchWebsiteDelivery } from '@/lib/types';
+import {
+  fetchDiagnosisHistory,
+  fetchEvalAnswers,
+  searchKnowledge,
+} from '@/lib/api';
+import type {
+  KnowledgeChunk,
+  WebsiteCardPayload,
+  BatchWebsiteDelivery,
+} from '@/lib/types';
 import { PageTitle, ErrorBox, Empty } from '@/components/Shell';
 
 export default function KnowledgePage() {
@@ -19,13 +28,76 @@ export default function KnowledgePage() {
   const [error, setError] = useState('');
   const [search, setSearch] = useState('');
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [chunkQuery, setChunkQuery] = useState('');
+  const [vehicleModel, setVehicleModel] = useState('');
+  const [subsystem, setSubsystem] = useState('');
+  const [chunks, setChunks] = useState<KnowledgeChunk[]>([]);
+  const [chunkSearchLoading, setChunkSearchLoading] = useState(false);
+  const [chunkSearchError, setChunkSearchError] = useState('');
+
+  const runChunkSearch = useCallback(async (
+    query: string,
+    model: string,
+    targetSubsystem: string,
+  ) => {
+    const trimmedQuery = query.trim();
+    if (trimmedQuery.length < 3) return;
+
+    setChunkQuery(trimmedQuery);
+    setVehicleModel(model);
+    setSubsystem(targetSubsystem);
+    setChunkSearchLoading(true);
+    setChunkSearchError('');
+    setChunks([]);
+    try {
+      const response = await searchKnowledge({
+        query: trimmedQuery,
+        vehicle_model: model || undefined,
+        subsystem: targetSubsystem || undefined,
+      });
+      setChunks(response.chunks);
+    } catch (e) {
+      setChunkSearchError((e as Error).message);
+    } finally {
+      setChunkSearchLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     fetchEvalAnswers()
       .then(setData)
-      .catch((e) => setError(e.message))
+      .catch((e) => setError((e as Error).message))
       .finally(() => setLoading(false));
-  }, []);
+
+    const params = new URLSearchParams(window.location.search);
+    const queryFromUrl = params.get('query') || '';
+    const vehicleFromUrl = params.get('vehicle') || '';
+    const subsystemFromUrl = params.get('subsystem') || '';
+    if (queryFromUrl.trim().length >= 3) {
+      void runChunkSearch(queryFromUrl, vehicleFromUrl, subsystemFromUrl);
+      return;
+    }
+
+    fetchDiagnosisHistory()
+      .then(({ items }) => {
+        const latest = items[0];
+        if (latest) {
+          void runChunkSearch(
+            latest.query,
+            latest.vehicle_model || '',
+            latest.subsystem || '',
+          );
+        }
+      })
+      .catch(() => {
+        // History is optional; the user can still search the corpus directly.
+      });
+  }, [runChunkSearch]);
+
+  async function handleChunkSearch(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    await runChunkSearch(chunkQuery, vehicleModel, subsystem);
+  }
 
   const filtered =
     data?.cases.filter(
@@ -39,19 +111,155 @@ export default function KnowledgePage() {
     <>
       <PageTitle
         eyebrow="KNOWLEDGE BASE"
-        title="Pre-processed answers."
-        description="Cleaned, deduplicated, and grounded summaries from the RAG evidence pipeline — ready for display."
+        title="Search the source documents."
+        description="Retrieve the five most relevant document chunks and inspect their page, source, and full text."
       />
 
-      {error && <ErrorBox message={error} />}
+      <section className="card knowledge-search-card">
+        <form onSubmit={handleChunkSearch}>
+          <label htmlFor="knowledge-query">Search question or topic</label>
+          <textarea
+            id="knowledge-query"
+            value={chunkQuery}
+            onChange={(event) => setChunkQuery(event.target.value)}
+            minLength={3}
+            maxLength={4000}
+            required
+            rows={3}
+            placeholder="For example: What should I check if my battery is not charging?"
+          />
+          <div className="knowledge-search-filters">
+            <div>
+              <label htmlFor="knowledge-vehicle">Vehicle model</label>
+              <select
+                id="knowledge-vehicle"
+                value={vehicleModel}
+                onChange={(event) => setVehicleModel(event.target.value)}
+              >
+                <option value="">Any vehicle</option>
+                <option>Ather 450S</option>
+                <option>Ather 450X</option>
+                <option>Ola S1 Pro</option>
+                <option>TVS iQube S</option>
+                <option>Generic BLDC EV</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="knowledge-subsystem">Subsystem</label>
+              <select
+                id="knowledge-subsystem"
+                value={subsystem}
+                onChange={(event) => setSubsystem(event.target.value)}
+              >
+                <option value="">Any subsystem</option>
+                <option>Battery/BMS</option>
+                <option>Motor Controller</option>
+                <option>Throttle</option>
+                <option>Charger/Charging</option>
+                <option>Wiring/Harness</option>
+                <option>Dashboard/ECU</option>
+              </select>
+            </div>
+          </div>
+          <button
+            className="button primary"
+            disabled={chunkSearchLoading || chunkQuery.trim().length < 3}
+          >
+            <Search size={15} />
+            {chunkSearchLoading ? 'Searching chunks…' : 'Find top 5 chunks'}
+          </button>
+        </form>
+      </section>
 
-      {loading ? (
+      {chunkSearchError && <ErrorBox message={chunkSearchError} />}
+      {chunkSearchLoading && (
         <div className="loading">
           <span className="loading-dot" />
-          Loading knowledge base…
+          Searching document chunks…
         </div>
-      ) : (
-        <>
+      )}
+      {!chunkSearchLoading && chunks.length > 0 && (
+        <section className="knowledge-results">
+          <div className="section-heading">
+            <h2>Top {chunks.length} matching chunks</h2>
+            <span className="muted small">Ranked by vector similarity</span>
+          </div>
+          {chunks.map((chunk, index) => (
+            <article className="card knowledge-chunk" key={chunk.chunk_id}>
+              <div className="knowledge-chunk-heading">
+                <div>
+                  <span className="badge">Match {index + 1}</span>
+                  <h3>{chunk.title}</h3>
+                  <div className="knowledge-chunk-meta">
+                    <span>{chunk.source_type} · {chunk.content_type}</span>
+                    {chunk.page_number != null && <span>Page {chunk.page_number}</span>}
+                    {chunk.section && <span>{chunk.section}</span>}
+                    {chunk.vehicle_model && <span>{chunk.vehicle_model}</span>}
+                    {chunk.subsystem && <span>{chunk.subsystem}</span>}
+                    <span>{(chunk.relevance_score * 100).toFixed(1)}% relevance</span>
+                  </div>
+                </div>
+                {chunk.url && (
+                  <a
+                    className="source-link"
+                    href={chunk.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Open source <ExternalLink size={14} />
+                  </a>
+                )}
+              </div>
+              <div className="knowledge-chunk-content">{chunk.content}</div>
+              <details className="knowledge-chunk-reference">
+                <summary><FileText size={13} /> Chunk reference</summary>
+                <code>{chunk.chunk_id}</code>
+              </details>
+            </article>
+          ))}
+          <p className="muted small">
+            Similarity ranks passages for this search; it is not a measure of diagnostic certainty.
+          </p>
+        </section>
+      )}
+      {!chunkSearchLoading && !chunkSearchError && chunkQuery && chunks.length === 0 && (
+        <p className="muted knowledge-no-results">No matching document chunks found.</p>
+      )}
+      {!chunkSearchLoading && !chunkSearchError && !chunkQuery && (
+        <section className="knowledge-start">
+          <h2>Explore the technical documents</h2>
+          <p>Run a diagnosis first, or search for a topic above to see matching manual and FAQ passages here.</p>
+          <div className="knowledge-suggestions">
+            {[
+              'Battery not charging',
+              'Battery loses power under acceleration',
+              'Charger indicator blinking',
+            ].map((suggestion) => (
+              <button
+                className="button secondary"
+                key={suggestion}
+                onClick={() => void runChunkSearch(suggestion, '', '')}
+              >
+                {suggestion}
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {error && <ErrorBox message={error} />}
+      {loading && (
+        <div className="loading">
+          <span className="loading-dot" />
+          Loading saved answers…
+        </div>
+      )}
+      {!loading && data && filtered.length > 0 && (
+        <section className="knowledge-saved-answers">
+          <div className="section-heading knowledge-answer-heading">
+            <h2>Saved evaluation answers</h2>
+            <span className="muted small">{data.total_cases} prepared summaries</span>
+          </div>
           {/* Search Bar */}
           <div className="search-field" style={{ marginBottom: 20 }}>
             <Search size={16} style={{ color: 'var(--muted)', marginRight: 8 }} />
@@ -100,7 +308,7 @@ export default function KnowledgePage() {
               ))}
             </div>
           )}
-        </>
+        </section>
       )}
     </>
   );

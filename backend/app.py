@@ -22,8 +22,11 @@ ALLOWED_AGENT_PATHS = {
     "diagnose",
     "eval-answers",
     "health",
+    "history",
+    "knowledge/search",
     "mcp/tools",
     "pipeline/run-batch",
+    "query",
     "summarize",
 }
 
@@ -95,7 +98,11 @@ def _evidence_from_result(result) -> dict:
     metadata = record.get("metadata", {})
     provenance = provenance if isinstance(provenance, Mapping) else {}
     metadata = metadata if isinstance(metadata, Mapping) else {}
-    page_number = metadata.get("page_number") or provenance.get("page_number")
+    page_number = (
+        metadata.get("page_number")
+        or metadata.get("page")
+        or provenance.get("page_number")
+    )
     if isinstance(page_number, bool) or not isinstance(page_number, int):
         page_number = None
     section = (
@@ -229,7 +236,7 @@ def create_app(
 
     @app.api_route(
         "/api/v1/{path:path}",
-        methods=["GET", "POST"],
+        methods=["GET", "POST", "DELETE"],
         include_in_schema=False,
     )
     async def forward_to_agent(path: str, request: Request):

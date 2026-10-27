@@ -5,7 +5,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     # LLM Settings
     DEFAULT_LLM_PROVIDER: Literal["gemini", "openai", "anthropic", "ollama", "groq"] = "gemini"
-    DEFAULT_LLM_MODEL: str = "gemini-2.5-flash"
+    DEFAULT_LLM_MODEL: str = "gemini-3.5-flash-lite"
     LLM_TEMPERATURE: float = 0.2
 
     # Provider API Keys
@@ -29,6 +29,7 @@ class Settings(BaseSettings):
     # Orchestrator Gateway API (Dashboard connector)
     ORCHESTRATOR_API_HOST: str = "0.0.0.0"
     ORCHESTRATOR_API_PORT: int = 8080
+    DIAGNOSIS_DB_PATH: str = "data/diagnosis_history.sqlite3"
     LOG_LEVEL: str = "INFO"
 
     model_config = SettingsConfigDict(

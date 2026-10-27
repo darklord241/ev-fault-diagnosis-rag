@@ -38,21 +38,97 @@ class EVSummarizer:
         self.provider = provider or settings.DEFAULT_LLM_PROVIDER
         self.model_name = model or settings.DEFAULT_LLM_MODEL
 
-    async def summarize(self, evidence: QueryCleanedEvidence) -> WebsiteCardPayload:
+    @staticmethod
+    def _response_text(content: Any) -> str:
+        if isinstance(content, str):
+            return content
+        if isinstance(content, list):
+            text_blocks = []
+            for block in content:
+                if isinstance(block, str):
+                    text_blocks.append(block)
+                elif isinstance(block, dict) and isinstance(block.get("text"), str):
+                    text_blocks.append(block["text"])
+            if text_blocks:
+                return "\n".join(text_blocks)
+        raise ValueError("LLM response did not contain readable text.")
+
+    @staticmethod
+    def _citation_for_chunk(chunk) -> SourceCitation:
+        chunk_metadata = chunk.source_metadata.get("chunk_metadata", {})
+        page_number = (
+            chunk_metadata.get("page_number") or chunk_metadata.get("page")
+            if isinstance(chunk_metadata, dict)
+            else None
+        )
+        if isinstance(page_number, bool) or not isinstance(page_number, int):
+            page_number = None
+        return SourceCitation(
+            title=chunk.title,
+            chunk_id=chunk.chunk_id,
+            url=chunk.url,
+            page_number=page_number,
+            content=chunk.content,
+            similarity_score=chunk.similarity_score,
+            metadata=chunk.source_metadata,
+        )
+
+    async def summarize(
+        self,
+        evidence: QueryCleanedEvidence,
+        vehicle_model: Optional[str] = None,
+    ) -> WebsiteCardPayload:
         """Generates a structured website payload for a given query and its cleaned chunks."""
+        if not evidence.cleaned_chunks:
+            logger.warning(
+                "No evidence retrieved for query %s; skipping LLM summarization.",
+                evidence.case_id,
+            )
+            return WebsiteCardPayload(
+                case_id=evidence.case_id,
+                query=evidence.query,
+                vehicle_model=vehicle_model,
+                direct_answer=(
+                    "No relevant source evidence was found for this query. "
+                    "Please add more details or consult an authorized service center."
+                ),
+                key_takeaways=[],
+                technical_specs={},
+                conditions_and_safety=[
+                    "Do not use this result as repair guidance because no supporting evidence was retrieved."
+                ],
+                formatted_markdown=(
+                    "## No supporting evidence found\n\n"
+                    "No diagnosis was generated. Add more symptom details or consult "
+                    "an authorized service center."
+                ),
+                sources=[],
+                grounding_score=0.0,
+                raw_chunks_retrieved=evidence.raw_chunk_count,
+                unique_chunks_used=0,
+                model_used="no-evidence",
+            )
+
         has_key = bool(settings.GOOGLE_API_KEY or os.getenv("GOOGLE_API_KEY") or settings.OPENAI_API_KEY)
         
         if has_key:
             try:
-                return await self._call_llm_summarizer(evidence)
+                return await self._call_llm_summarizer(evidence, vehicle_model)
             except Exception as e:
-                logger.warning(f"LLM summarization failed ({e}). Using deterministic domain fallback.")
-                return self._deterministic_fallback(evidence)
+                logger.warning(
+                    "LLM summarization failed (%s). Using deterministic domain fallback.",
+                    type(e).__name__,
+                )
+                return self._deterministic_fallback(evidence, vehicle_model)
         else:
             logger.info("No LLM API key detected in environment. Using deterministic domain summarizer.")
-            return self._deterministic_fallback(evidence)
+            return self._deterministic_fallback(evidence, vehicle_model)
 
-    async def _call_llm_summarizer(self, evidence: QueryCleanedEvidence) -> WebsiteCardPayload:
+    async def _call_llm_summarizer(
+        self,
+        evidence: QueryCleanedEvidence,
+        vehicle_model: Optional[str] = None,
+    ) -> WebsiteCardPayload:
         """Invokes Gemini / LLM to generate structured JSON summary."""
         llm = LLMFactory.get_llm(provider=self.provider, model_name=self.model_name)
 
@@ -83,27 +159,25 @@ Produce the structured JSON summary adhering to the schema. Return ONLY valid JS
         ]
 
         response = await llm.ainvoke(messages)
-        resp_text = response.content if isinstance(response.content, str) else str(response.content)
+        resp_text = self._response_text(response.content)
 
         # Parse JSON from response
         json_clean = re.sub(r"^```(?:json)?\s*", "", resp_text.strip())
         json_clean = re.sub(r"\s*```$", "", json_clean)
         data = json.loads(json_clean)
 
-        citations = [
-            SourceCitation(
-                title=c.title,
-                chunk_id=c.chunk_id,
-                url=c.url,
-                similarity_score=c.similarity_score
-            )
-            for c in evidence.cleaned_chunks
-        ]
+        citations = [self._citation_for_chunk(chunk) for chunk in evidence.cleaned_chunks]
 
         return WebsiteCardPayload(
             case_id=evidence.case_id,
             query=evidence.query,
-            vehicle_model="Ather 450S / 450 Series",
+            vehicle_model=(
+                vehicle_model
+                or next(
+                    (chunk.vehicle_model for chunk in evidence.cleaned_chunks if chunk.vehicle_model),
+                    None,
+                )
+            ),
             direct_answer=data.get("direct_answer", ""),
             key_takeaways=data.get("key_takeaways", []),
             technical_specs=data.get("technical_specs", {}),
@@ -116,7 +190,11 @@ Produce the structured JSON summary adhering to the schema. Return ONLY valid JS
             model_used=self.model_name
         )
 
-    def _deterministic_fallback(self, evidence: QueryCleanedEvidence) -> WebsiteCardPayload:
+    def _deterministic_fallback(
+        self,
+        evidence: QueryCleanedEvidence,
+        vehicle_model: Optional[str] = None,
+    ) -> WebsiteCardPayload:
         """
         High-quality domain-specific fallback for evaluation cases when offline.
         Ensures the pipeline is fully functional and evaluable without an active API key.
@@ -225,20 +303,18 @@ Produce the structured JSON summary adhering to the schema. Return ONLY valid JS
 {conditions_md}
 """
 
-        citations = [
-            SourceCitation(
-                title=c.title,
-                chunk_id=c.chunk_id,
-                url=c.url,
-                similarity_score=c.similarity_score
-            )
-            for c in evidence.cleaned_chunks
-        ]
+        citations = [self._citation_for_chunk(chunk) for chunk in evidence.cleaned_chunks]
 
         return WebsiteCardPayload(
             case_id=evidence.case_id,
             query=evidence.query,
-            vehicle_model="Ather 450S / 450 Series",
+            vehicle_model=(
+                vehicle_model
+                or next(
+                    (chunk.vehicle_model for chunk in evidence.cleaned_chunks if chunk.vehicle_model),
+                    None,
+                )
+            ),
             direct_answer=direct_ans,
             key_takeaways=takeaways,
             technical_specs=specs,
