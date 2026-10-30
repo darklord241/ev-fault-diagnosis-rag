@@ -148,6 +148,25 @@ def test_missing_corpus_reports_degraded_and_search_unavailable():
     assert "Live retrieval is unavailable" in response.json()["detail"]
 
 
+def test_dtc_lookup_returns_legacy_and_generic_codes():
+    app = backend_module.create_app(backend_api_key="test-secret")
+
+    with TestClient(app) as client:
+        legacy = client.get(
+            "/api/v1/retrieval/dtc/P0A80",
+            headers={"Authorization": "Bearer test-secret"},
+        )
+        generic = client.get(
+            "/api/v1/retrieval/dtc/p0300",
+            headers={"Authorization": "Bearer test-secret"},
+        )
+
+    assert legacy.status_code == 200
+    assert legacy.json()["system"] == "BMS"
+    assert generic.status_code == 200
+    assert generic.json()["code"] == "P0300"
+
+
 def test_diagnosis_gateway_forwards_to_agent_and_preserves_response(monkeypatch):
     captured = {}
 

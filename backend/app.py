@@ -1,6 +1,7 @@
 """Backend gateway and HTTP API for the repository's vector-search corpus."""
 
 import hmac
+import json
 import logging
 import os
 from contextlib import asynccontextmanager
@@ -18,6 +19,7 @@ from dotenv import load_dotenv
 logger = logging.getLogger("ev_fault_backend")
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 load_dotenv(REPOSITORY_ROOT / "backend" / ".env")
+GENERIC_DTC_PATH = REPOSITORY_ROOT / "agent-layer" / "data" / "generic_dtc_codes.json"
 ALLOWED_AGENT_PATHS = {
     "diagnose",
     "eval-answers",
@@ -138,6 +140,63 @@ def _evidence_from_result(result) -> dict:
     }
 
 
+LEGACY_DTC_CODES = {
+    "P0A80": {
+        "code": "P0A80",
+        "system": "BMS",
+        "description": "Replace Hybrid / EV Battery Pack - Severe Cell Voltage Deviation",
+        "symptoms": ["Limp home mode", "Sudden SOC drop", "Turtle icon on cluster"],
+        "possible_causes": ["Degraded cell group", "BMS balancing circuit MOSFET failure", "Loose busbar bolt"],
+        "suggested_checks": ["Measure cell voltages at BMS balance harness", "Inspect busbar contact resistance (<0.5mΩ)"],
+        "source_manual": "EV High Voltage Diagnostic Standard ISO-26262 / OEM Workshop Manual p.88",
+    },
+    "E-08": {
+        "code": "E-08",
+        "system": "Motor Controller",
+        "description": "BLDC Motor Hall Sensor Circuit Malfunction",
+        "symptoms": ["Motor hesitation / shuddering", "No drive", "Motor growling sound"],
+        "possible_causes": ["Burnt Hall sensor IC in stator", "Damaged wire harness near swingarm pivot", "Loose 5-pin waterproof connector"],
+        "suggested_checks": ["Check 5V supply at pin 1", "Probe Ha, Hb, Hc while spinning wheel manually"],
+        "source_manual": "PMSM/BLDC Controller Fault Code Reference 2024",
+    },
+    "E-07": {
+        "code": "E-07",
+        "system": "Throttle",
+        "description": "Throttle Signal Voltage Out of Range (High/Low)",
+        "symptoms": ["Throttle unresponsive", "Dashboard warning icon"],
+        "possible_causes": ["Ground wire broken (reads >4.5V)", "Signal wire short to ground (reads 0V)", "Water ingress in throttle housing"],
+        "suggested_checks": ["Measure voltage across Signal and Ground wires (nominal 0.8V - 4.2V)"],
+        "source_manual": "Electric Two-Wheeler Drive-by-Wire Standard Manual p.15",
+    },
+    "U0100": {
+        "code": "U0100",
+        "system": "CAN Communication",
+        "description": "Lost Communication with Motor Control Module (MCU)",
+        "symptoms": ["Cluster shows dashes '--' for speed and motor temp", "Vehicle will not arm"],
+        "possible_causes": ["CAN-H / CAN-L twisted pair cut", "Termination resistor (120Ω) missing", "MCU logic power fuse blown"],
+        "suggested_checks": ["Check 60Ω resistance between CAN-H and CAN-L with key OFF", "Check 12V ignition feed to MCU"],
+        "source_manual": "EV CAN Bus Troubleshooting Guide Vol. 2",
+    },
+}
+
+
+def _load_dtc_codes() -> dict[str, dict]:
+    records = dict(LEGACY_DTC_CODES)
+    try:
+        generic_records = json.loads(GENERIC_DTC_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        logger.warning("Could not load generic DTC database: %s", error)
+        return records
+    records.update(
+        {
+            record["code"].upper(): record
+            for record in generic_records
+            if isinstance(record, dict) and isinstance(record.get("code"), str)
+        }
+    )
+    return records
+
+
 def create_app(
     *,
     retriever=None,
@@ -233,6 +292,16 @@ def create_app(
             ),
         )
         return {"results": [_evidence_from_result(result) for result in results]}
+
+    @app.get(
+        "/api/v1/retrieval/dtc/{code}",
+        dependencies=[Depends(require_backend_key)],
+    )
+    async def retrieval_dtc(code: str):
+        record = _load_dtc_codes().get(code.strip().upper().replace(" ", ""))
+        if record is None:
+            raise HTTPException(status_code=404, detail=f"DTC code '{code}' not found.")
+        return record
 
     @app.api_route(
         "/api/v1/{path:path}",
