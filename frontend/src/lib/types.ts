@@ -1,4 +1,4 @@
-/* ── TypeScript interfaces matching backend schemas ── */
+/* Note */
 
 export interface QueryRequest {
   query: string;

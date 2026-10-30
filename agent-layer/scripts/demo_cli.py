@@ -2,7 +2,7 @@ import asyncio
 import sys
 import os
 
-# Add root directory to python path
+# Note
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from src.orchestrator.agent import AgentOrchestrator
@@ -64,10 +64,10 @@ async def run_demo():
     console.print(f"[bold green]✅ Diagnostic Result Generated in {result.execution_time_seconds}s (Grounding Score: {result.grounding_score})[/bold green]")
     console.print("="*80 + "\n")
 
-    # Display Root Cause / Synthesized Answer
+    # Note
     console.print(Panel(Markdown(result.root_cause_analysis), title="[bold magenta]🛠️ Grounded Diagnostic Analysis[/bold magenta]", border_style="magenta"))
 
-    # Display Diagnostic Steps Table
+    # Note
     if result.diagnostic_procedure:
         table = Table(title="📋 Step-by-Step Diagnostic Verification Procedure", border_style="blue")
         table.add_column("Step", style="bold cyan", width=6)
@@ -84,7 +84,7 @@ async def run_demo():
             )
         console.print(table)
 
-    # Display Supporting Evidence Sources
+    # Note
     if result.evidence_sources:
         src_table = Table(title="📚 Supporting Technical Documentation Evidence", border_style="green")
         src_table.add_column("Source ID", style="bold yellow", width=16)
@@ -101,7 +101,7 @@ async def run_demo():
             )
         console.print(src_table)
 
-    # Safety Warnings
+    # Note
     if result.safety_warnings:
         warn_text = "\n".join([f"• {w}" for w in result.safety_warnings])
         console.print(Panel(warn_text, title="[bold red]⚠️ Critical Safety Precautions[/bold red]", border_style="red"))

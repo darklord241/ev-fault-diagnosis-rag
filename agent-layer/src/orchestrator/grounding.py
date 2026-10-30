@@ -21,23 +21,23 @@ class GroundingEngine:
         3. Average relevance score of retrieved documents
         """
         if not retrieved_sources:
-            return 0.35  # Baseline score when relying solely on parametric knowledge
+            return 0.35  # Note
 
-        # 1. Check explicit citation matching
+        # Note
         cited_sources = 0
         for src in retrieved_sources:
-            # Check for source_id or document_title fragment
+            # Note
             if src.source_id in response_text or (src.section and src.section[:15].lower() in response_text.lower()):
                 cited_sources += 1
 
         citation_ratio = cited_sources / len(retrieved_sources)
 
-        # 2. Key technical terms overlap (voltages, pins, components)
+        # Note
         technical_matches = 0
         all_source_text = " ".join([s.content for s in retrieved_sources]).lower()
         response_lower = response_text.lower()
 
-        # Extract technical numbers/ranges like 5.0v, 150mv, 10k, pin 1, hall
+        # Note
         tokens = set(re.findall(r"\b(?:\d+(?:\.\d+)?[v|mv|k\u03a9|\u03a9|a|%]|pin \d+|mosfet|hall|bms|can-h|dtc|soc)\b", all_source_text))
         if tokens:
             for t in tokens:
@@ -47,10 +47,10 @@ class GroundingEngine:
         else:
             overlap_ratio = 0.5
 
-        # 3. Average relevance score from retrieval
+        # Note
         avg_retrieval_relevance = sum(s.relevance_score for s in retrieved_sources) / len(retrieved_sources)
 
-        # Weighted grounding score formula
+        # Note
         grounding_score = (0.45 * citation_ratio) + (0.35 * overlap_ratio) + (0.20 * avg_retrieval_relevance)
         grounding_score = max(0.1, min(0.99, round(grounding_score, 3)))
 
@@ -68,19 +68,19 @@ class GroundingEngine:
 
         for line in lines:
             line_clean = line.strip()
-            # Match step patterns like: "1. Check multimeter voltage...", "Step 1: ...", "- Step 1: ..."
+            # Note
             match = re.match(r"^(?:(?:Step\s*)?(\d+)[\.:\)]|\* Step \d+:|- Step \d+:)\s*(.+)$", line_clean, re.IGNORECASE)
             if match:
                 action_text = match.group(2) if match.group(2) else line_clean
                 
-                # Extract any cited source IDs in the step
+                # Note
                 step_citations = [sid for sid in source_id_list if sid in action_text]
 
-                # Component detection heuristic
+                # Note
                 comp_match = re.search(r"\b(throttle|bms|motor|controller|mcu|inverter|hall sensor|fuse|battery|charger|wire harness|can bus)\b", action_text, re.IGNORECASE)
                 component = comp_match.group(1).title() if comp_match else "Subsystem / Wiring"
 
-                # Expected reading detection
+                # Note
                 reading_match = re.search(r"(\d+(?:\.\d+)?\s*(?:V|mV|kΩ|Ω|A|°C|%)(?:\s*(?:-|to)\s*\d+(?:\.\d+)?\s*(?:V|mV|kΩ|Ω|A|°C|%))?)", action_text)
                 expected_reading = reading_match.group(1) if reading_match else None
 
@@ -110,7 +110,7 @@ class GroundingEngine:
         grounding_score = cls.calculate_grounding_score(response_text, evidence_sources)
         diagnostic_steps = cls.parse_diagnostic_steps(response_text, evidence_sources)
 
-        # Extract safety warnings
+        # Note
         safety_warnings = []
         for line in response_text.split("\n"):
             if any(w in line.lower() for w in ["warning", "caution", "danger", "high voltage", "disconnect pack", "safety"]):
@@ -118,7 +118,7 @@ class GroundingEngine:
                 if len(clean_line) > 10 and clean_line not in safety_warnings:
                     safety_warnings.append(clean_line)
 
-        # Extract identified faults
+        # Note
         identified_faults = []
         for line in response_text.split("\n"):
             if "fault" in line.lower() or "root cause" in line.lower() or "error" in line.lower():

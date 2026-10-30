@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from bs4 import BeautifulSoup
 
-# Directories
+# Note
 DATA_DIR = Path(__file__).resolve().parent / "data"
 INCOMING_DIR = DATA_DIR / "incoming"
 RAW_DIR = DATA_DIR / "raw"
@@ -13,7 +13,7 @@ METADATA_DIR = DATA_DIR / "metadata"
 RAW_DIR.mkdir(parents=True, exist_ok=True)
 METADATA_DIR.mkdir(parents=True, exist_ok=True)
 
-# Source information
+# Note
 SOURCES = {
     "Ather Electric Scooter FAQs _ Support & Help Center.html": {
         "url": "https://www.atherenergy.com/faq",
@@ -58,11 +58,11 @@ SOURCES = {
     },
 }
 
-# Helper
+# Note
 def make_document_id(filename):
     return Path(filename).stem.lower().replace(" ", "_")
 
-# Process one HTML file
+# Note
 def process_html(filename, source_info):
     incoming_path = INCOMING_DIR / filename
 
@@ -72,13 +72,13 @@ def process_html(filename, source_info):
 
     document_id = make_document_id(filename)
 
-    # Preserve the original HTML in raw/
+    # Note
     raw_filename = f"{document_id}.html"
     raw_path = RAW_DIR / raw_filename
 
     shutil.copy2(incoming_path, raw_path)
 
-    # Read HTML and extract title
+    # Note
     with open(incoming_path, "r", encoding="utf-8", errors="ignore") as file:
         html = file.read()
 

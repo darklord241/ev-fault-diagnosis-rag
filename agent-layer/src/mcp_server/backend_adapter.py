@@ -4,7 +4,7 @@ from src.common.models import EvidenceSource, DTCRecord, ComponentSpec
 from src.common.logging import logger
 from config.settings import settings
 
-# Realistic EV domain knowledge store for testing & fallback
+# Note
 SAMPLE_EV_EVIDENCE_STORE: List[Dict[str, Any]] = [
     {
         "source_id": "SRC-EV-BMS-001",
@@ -276,7 +276,7 @@ class BackendRetrievalAdapter:
             logger.info(f"Retrieved {len(results)} items from live Backend API")
             return results
 
-        # Domain Mock Matching Logic (Keyword + Subsystem semantic relevance)
+        # Note
         q_lower = query.lower()
         scored_results = []
 
@@ -286,11 +286,11 @@ class BackendRetrievalAdapter:
             title_lower = item["document_title"].lower()
             subsystem_lower = item["subsystem"].lower()
 
-            # Subsystem match boost
+            # Note
             if subsystem and subsystem.lower() in subsystem_lower:
                 score += 0.3
 
-            # Query keyword matches
+            # Note
             keywords = [w for w in q_lower.split() if len(w) > 3]
             match_count = sum(1 for kw in keywords if kw in content_lower or kw in title_lower)
             score += min(0.4, match_count * 0.1)
@@ -299,7 +299,7 @@ class BackendRetrievalAdapter:
             scored_item["relevance_score"] = min(0.99, score)
             scored_results.append(scored_item)
 
-        # Sort descending by relevance score
+        # Note
         scored_results.sort(key=lambda x: x["relevance_score"], reverse=True)
         top_items = scored_results[:top_k]
         return [EvidenceSource(**item) for item in top_items]
@@ -402,9 +402,9 @@ class BackendRetrievalAdapter:
                 )
             return chunks
 
-        # ========================================================================
-        # Realistic fallback: 5 separate chunks matching user's exact JSON schema
-        # ========================================================================
+        # Note
+        # Note
+        # Note
         q_lower = query.lower()
         
         fallback_chunks = [

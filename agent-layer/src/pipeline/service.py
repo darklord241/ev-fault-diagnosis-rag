@@ -41,7 +41,7 @@ class LivePipelineService:
         cid = case_id or f"live-{uuid.uuid4().hex[:8]}"
         logger.info(f"Processing live query: '{query}' (model: {vehicle_model}, top_k: {top_k})")
 
-        # Step 1: Call generic backend API to get 5 chunks
+        # Note
         raw_chunks = await backend_adapter.fetch_raw_chunks_from_backend(
             query=query,
             top_k=top_k,
@@ -50,14 +50,14 @@ class LivePipelineService:
         )
         logger.info(f"Received {len(raw_chunks)} chunks from backend retrieval layer")
 
-        # Step 2: Clean and deduplicate chunks
+        # Note
         cleaned_evidence = self.cleaner.clean_api_chunks(
             raw_chunks=raw_chunks,
             query_text=query,
             case_id=cid
         )
 
-        # Step 3: Summarize via Gemini LLM with source grounding
+        # Note
         card_payload = await self.summarizer.summarize(
             cleaned_evidence,
             vehicle_model=vehicle_model,

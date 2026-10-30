@@ -33,7 +33,7 @@ def split_text(text, chunk_size=CHUNK_SIZE, overlap=CHUNK_OVERLAP):
     return chunks
 
 def create_chunks(record):
-    # FAQs are already self-contained
+    # Note
     if record["content_type"] == "faq":
         return [{
             "chunk_id": f"{record['record_id']}_chunk_0",
@@ -47,7 +47,7 @@ def create_chunks(record):
             "metadata": record["metadata"]
         }]
 
-    # PDFs need to be split into smaller chunks
+    # Note
     if record["content_type"] == "pdf":
         text_chunks = split_text(record["text"])
         chunks = []

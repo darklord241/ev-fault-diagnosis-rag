@@ -29,7 +29,7 @@ class BatchPipelineProcessor:
     ):
         self.baseline_file = Path(baseline_file)
         if not self.baseline_file.exists():
-            # Fall back to project root resolution
+            # Note
             proj_root = Path(__file__).resolve().parent.parent.parent
             alt_path = proj_root / baseline_file
             if alt_path.exists():
@@ -57,22 +57,22 @@ class BatchPipelineProcessor:
         with open(self.baseline_file, "r", encoding="utf-8") as f:
             raw_markdown = f.read()
 
-        # Step 1: Clean & Deduplicate
+        # Note
         logger.info("Cleaning and deduplicating candidate chunks...")
         cleaned_queries = self.cleaner.parse_markdown_baseline(raw_markdown)
         logger.info(f"Parsed {len(cleaned_queries)} evaluation queries.")
 
-        # Step 2: Summarize each query with Gemini / LLM
+        # Note
         summarized_cases: List[WebsiteCardPayload] = []
         for q in cleaned_queries:
             logger.info(f"Summarizing case '{q.case_id}' with {len(q.cleaned_chunks)} unique chunks...")
             case_payload = await self.summarizer.summarize(q)
             summarized_cases.append(case_payload)
 
-        # Step 3: Format into batch delivery payload
+        # Note
         delivery_batch = self.formatter.create_batch_delivery(summarized_cases)
 
-        # Step 4: Save JSON and Markdown artifacts
+        # Note
         self.output_json.parent.mkdir(parents=True, exist_ok=True)
         
         with open(self.output_json, "w", encoding="utf-8") as f:

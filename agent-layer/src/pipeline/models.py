@@ -49,19 +49,19 @@ class WebsiteCardPayload(BaseModel):
     query: str = Field(..., description="User query / technical question")
     vehicle_model: Optional[str] = Field(None, description="Vehicle model identified")
     
-    # 1. Broken-down UI fields for dashboard cards and pills
+    # Note
     direct_answer: str = Field(..., description="Direct, concise answer in 1-3 sentences")
     key_takeaways: List[str] = Field(default_factory=list, description="Bullet points for quick skimming")
     technical_specs: Dict[str, str] = Field(default_factory=dict, description="Key metrics (e.g. charge times, warranty, cutoffs)")
     conditions_and_safety: List[str] = Field(default_factory=list, description="Safety precautions, limitations, or warranty terms")
     
-    # 2. Rich structured Markdown format (for direct rendering in UI markdown views)
+    # Note
     formatted_markdown: str = Field(..., description="Complete beautifully formatted Markdown document")
     
-    # 3. Source citations
+    # Note
     sources: List[SourceCitation] = Field(default_factory=list, description="Supporting official sources with URLs")
     
-    # 4. Evaluation and Grounding metadata
+    # Note
     grounding_score: float = Field(1.0, description="Calculated grounding confidence score (0.0 to 1.0)")
     raw_chunks_retrieved: int = Field(0, description="Chunks received from retriever before deduplication")
     unique_chunks_used: int = Field(0, description="Unique chunks after cleaning & deduplication")

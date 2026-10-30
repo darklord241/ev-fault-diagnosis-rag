@@ -21,13 +21,13 @@ class RetrievalCleaner:
         """Unescapes HTML entities, strips tags, and cleans excessive whitespace."""
         if not text:
             return ""
-        # 1. Unescape HTML entities (e.g. &quot; -> ", &#x27; -> ', &amp; -> &)
+        # Note
         cleaned = html.unescape(text)
         
-        # 2. Strip tags like <pre>, </pre>, <details>, etc.
+        # Note
         cleaned = re.sub(r"</?(?:pre|details|summary|p|div|span|b|i)[^>]*>", "", cleaned, flags=re.IGNORECASE)
         
-        # 3. Clean trailing/leading spaces and normalize double spaces
+        # Note
         cleaned = re.sub(r"[ \t]+", " ", cleaned)
         cleaned = re.sub(r"\n{3,}", "\n\n", cleaned)
         return cleaned.strip()
@@ -35,7 +35,7 @@ class RetrievalCleaner:
     @staticmethod
     def compute_content_hash(text: str) -> str:
         """Computes a normalized text hash to identify identical or near-identical content."""
-        # Normalize: lowercase, remove all non-alphanumeric chars
+        # Note
         normalized = re.sub(r"[^a-z0-9]", "", text.lower())
         return hashlib.md5(normalized.encode("utf-8")).hexdigest()
 
@@ -54,13 +54,13 @@ class RetrievalCleaner:
                 existing.duplicate_sources_merged += 1
                 if chunk.url and chunk.url != existing.url and chunk.url not in existing.alternate_urls:
                     existing.alternate_urls.append(chunk.url)
-                # Keep highest similarity score
+                # Note
                 if chunk.similarity_score > existing.similarity_score:
                     existing.similarity_score = chunk.similarity_score
             else:
                 unique_map[h] = chunk
 
-        # Return sorted by similarity score descending
+        # Note
         deduped = list(unique_map.values())
         deduped.sort(key=lambda c: c.similarity_score, reverse=True)
         return deduped
@@ -73,47 +73,47 @@ class RetrievalCleaner:
         """
         results: List[QueryCleanedEvidence] = []
         
-        # Split markdown into Query sections: "## Query: <query_id>"
+        # Note
         query_blocks = re.split(r"\n## Query:\s*", markdown_content)
         
-        for block in query_blocks[1:]:  # skip preamble
+        for block in query_blocks[1:]:  # Note
             lines = block.strip().split("\n")
             if not lines:
                 continue
             
             case_id = lines[0].strip()
             
-            # Find the query text: line starting with "> "
+            # Note
             query_match = re.search(r"^>\s*(.+)$", block, re.MULTILINE)
             query_text = query_match.group(1).strip() if query_match else case_id
 
-            # Find all rank chunks: "### Rank X — `<chunk_id>`"
+            # Note
             rank_blocks = re.split(r"\n### Rank \d+ — `([^`]+)`", block)
             
             raw_chunks: List[CleanedChunk] = []
             
-            # rank_blocks: [before_first_rank, chunk_id_1, body_1, chunk_id_2, body_2, ...]
+            # Note
             for idx in range(1, len(rank_blocks), 2):
                 chunk_id = rank_blocks[idx].strip()
                 body = rank_blocks[idx + 1] if idx + 1 < len(rank_blocks) else ""
                 
-                # Extract Cosine similarity
+                # Note
                 sim_match = re.search(r"Cosine similarity:\s*\*\*([\d\.]+)\*\*", body)
                 similarity = float(sim_match.group(1)) if sim_match else 0.0
                 
-                # Extract Content type
+                # Note
                 ctype_match = re.search(r"Content type:\s*`([^`]+)`", body)
                 content_type = ctype_match.group(1).strip() if ctype_match else "faq"
 
-                # Extract Title
+                # Note
                 title_match = re.search(r"- Title:\s*(.+)$", body, re.MULTILINE)
                 title = cls.clean_text(title_match.group(1)) if title_match else ""
 
-                # Extract Full Chunk Text from <pre> ... </pre> or Text excerpt
+                # Note
                 full_text_match = re.search(r"<pre>(.*?)</pre>", body, re.DOTALL)
                 content = cls.clean_text(full_text_match.group(1)) if full_text_match else ""
                 
-                # Extract Provenance JSON
+                # Note
                 prov_match = re.search(r"<pre>(\{.*?\})</pre>", body, re.DOTALL)
                 url = None
                 doc_id = None
@@ -154,7 +154,7 @@ class RetrievalCleaner:
                     group=group
                 ))
 
-            # Deduplicate chunks for this query
+            # Note
             deduped = cls.deduplicate_chunks(raw_chunks)
             logger.info(f"Query '{case_id}': Cleaned {len(raw_chunks)} raw chunks -> {len(deduped)} unique chunks.")
             
@@ -296,7 +296,7 @@ class RetrievalCleaner:
                 },
             ))
 
-        # Deduplicate identical chunks
+        # Note
         deduped = cls.deduplicate_chunks(parsed_chunks)
         logger.info(f"clean_api_chunks: Cleaned {len(raw_chunks)} API chunks -> {len(deduped)} unique chunks for query: '{query_text}'")
 

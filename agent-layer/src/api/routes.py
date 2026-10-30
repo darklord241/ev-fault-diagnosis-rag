@@ -20,7 +20,7 @@ from config.settings import settings
 
 router = APIRouter(prefix="/api/v1", tags=["EV Fault Diagnosis, Retrieval & Website Delivery"])
 
-# Global orchestrator and pipeline instances
+# Note
 orchestrator = AgentOrchestrator()
 batch_processor = BatchPipelineProcessor()
 summarizer = EVSummarizer()
@@ -91,9 +91,9 @@ async def diagnose_fault(request: QueryRequest) -> GroundedAnswer:
         logger.error(f"Error during fault diagnosis: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Diagnostic orchestrator error: {str(e)}")
 
-# =====================================================================
-# Live Retrieval & Gemini Summarization Endpoints (Website Delivery)
-# =====================================================================
+# Note
+# Note
+# Note
 
 @router.post("/query", response_model=WebsiteCardPayload, summary="Live Query: Calls Backend API (5 chunks) -> Cleans -> Gemini Summarizes -> Returns Website Payload")
 async def process_live_query(req: LiveQueryRequest) -> WebsiteCardPayload:
@@ -211,9 +211,9 @@ async def process_chunks_direct(req: DirectChunksRequest) -> WebsiteCardPayload:
         logger.error(f"Error processing raw chunks: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Direct chunk processing error: {str(e)}")
 
-# =====================================================================
-# Website Delivery & Evaluation Pipeline Endpoints (Your Assigned Part)
-# =====================================================================
+# Note
+# Note
+# Note
 
 @router.get("/eval-answers", response_model=BatchWebsiteDelivery, summary="Get Cleaned & Summarized Eval Answers for Website")
 async def get_eval_answers():
@@ -287,9 +287,9 @@ async def summarize_on_demand(req: OnDemandSummarizeRequest):
         logger.error(f"On-demand summarization failed: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Summarization error: {str(e)}")
 
-# =====================================================================
-# Additional Utility Endpoints
-# =====================================================================
+# Note
+# Note
+# Note
 
 @router.get("/mcp/tools", summary="List MCP Retrieval Tools")
 async def list_mcp_tools() -> Dict[str, Any]:

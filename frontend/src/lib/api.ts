@@ -12,7 +12,7 @@ import type {
   KnowledgeSearchResponse,
 } from "./types";
 
-/* ── Helper ── */
+/* Note */
 
 class ApiError extends Error {
   status: number;
@@ -39,7 +39,7 @@ async function request<T>(
       const body = await res.json();
       msg = body.detail ?? body.message ?? msg;
     } catch {
-      /* ignore parse errors */
+      /* Note */
     }
     throw new ApiError(msg, res.status);
   }
@@ -47,7 +47,7 @@ async function request<T>(
   return res.json() as Promise<T>;
 }
 
-/* ── Public API functions ── */
+/* Note */
 
 export async function fetchHealth(): Promise<HealthResponse> {
   return request<HealthResponse>("/api/v1/health");

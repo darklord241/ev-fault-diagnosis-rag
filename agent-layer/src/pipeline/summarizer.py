@@ -132,7 +132,7 @@ class EVSummarizer:
         """Invokes Gemini / LLM to generate structured JSON summary."""
         llm = LLMFactory.get_llm(provider=self.provider, model_name=self.model_name)
 
-        # Build context from cleaned chunks
+        # Note
         context_blocks = []
         for idx, c in enumerate(evidence.cleaned_chunks, 1):
             block = (
@@ -161,7 +161,7 @@ Produce the structured JSON summary adhering to the schema. Return ONLY valid JS
         response = await llm.ainvoke(messages)
         resp_text = self._response_text(response.content)
 
-        # Parse JSON from response
+        # Note
         json_clean = re.sub(r"^```(?:json)?\s*", "", resp_text.strip())
         json_clean = re.sub(r"\s*```$", "", json_clean)
         data = json.loads(json_clean)
@@ -203,7 +203,7 @@ Produce the structured JSON summary adhering to the schema. Return ONLY valid JS
         top_chunk = evidence.cleaned_chunks[0] if evidence.cleaned_chunks else None
         top_content = top_chunk.content if top_chunk else ""
 
-        # Domain knowledge mappings based on official Ather technical documentation
+        # Note
         if "700w" in cid or "charging-compatible" in cid:
             direct_ans = "Yes, you can use your existing 700W charger with the Ather 450S as it is backwards-compatible across all new Ather scooters. Recharging takes 3 hr 30 min (0–80%) and 4 hr 30 min (0–100%)."
             takeaways = [
@@ -284,7 +284,7 @@ Produce the structured JSON summary adhering to the schema. Return ONLY valid JS
             specs = {"Retrieved Match": top_chunk.title if top_chunk else "N/A"}
             conditions = ["Refer to manufacturer service manual for full operating parameters."]
 
-        # Build clean markdown
+        # Note
         specs_md = "\n".join([f"- **{k}**: {v}" for k, v in specs.items()])
         takeaways_md = "\n".join([f"- {t}" for t in takeaways])
         conditions_md = "\n".join([f"- ⚠️ {c}" for c in conditions])

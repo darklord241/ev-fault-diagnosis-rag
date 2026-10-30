@@ -14,7 +14,7 @@ def create_app() -> FastAPI:
         version="1.0.0"
     )
 
-    # Enable CORS for Frontend / Dashboard integrations (React, Vue, Streamlit, etc.)
+    # Note
     app.add_middleware(
         CORSMiddleware,
         allow_origins=["*"],

@@ -2,7 +2,7 @@ import sys
 import os
 import uvicorn
 
-# Add root directory to python path
+# Note
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from config.settings import settings

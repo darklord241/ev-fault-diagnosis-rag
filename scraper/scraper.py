@@ -5,7 +5,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 import requests
 
-# Configuration
+# Note
 DATA_DIR = Path(__file__).resolve().parent / "data"
 RAW_DIR = DATA_DIR / "raw"
 METADATA_DIR = DATA_DIR / "metadata"
@@ -21,7 +21,7 @@ HEADERS = {
     )
 }
 
-# Official Ather sources
+# Note
 SOURCES = [
     {
         "url": "https://www.atherenergy.com/faq",
@@ -73,9 +73,9 @@ SOURCES = [
     },
 ]
 
-# Utility functions
+# Note
 def make_filename(title, extension):    
-    # Convert a title into a safe filename.
+    # Note
     filename = title.lower()
     allowed = "abcdefghijklmnopqrstuvwxyz0123456789-_"
     filteredChars = []
@@ -85,18 +85,18 @@ def make_filename(title, extension):
 
     filename = "".join(filteredChars)
 
-    # gpt gave very complicated method for the above code 
-    #filename = "".join(
-    #   char if char in allowed or char == " " else ""
-    #   for char in filename
-    #)
+    # Note
+    # Note
+    # Note
+    # Note
+    # Note
 
     filename = filename.replace(" ", "_")
     return f"{filename}{extension}"
 
 
 def get_extension(response):
-    # Decide whether the downloaded resource is HTML, PDF, etc.
+    # Note
     content_type = response.headers.get("Content-Type", "").lower()
     if "application/pdf" in content_type:
         return ".pdf"
@@ -104,7 +104,7 @@ def get_extension(response):
         return ".html"
     return ".bin"
 
-# Download function
+# Note
 def download_source(source):
     url = source["url"]
 
@@ -134,11 +134,11 @@ def download_source(source):
 
     raw_path = RAW_DIR / filename
 
-    # Save the original downloaded content
+    # Note
     with open(raw_path, "wb") as file:
         file.write(response.content)
 
-    # Metadata
+    # Note
     metadata = {
         "document_id": raw_path.stem,
         "title": source["title"],
@@ -174,7 +174,7 @@ def main():
     for source in SOURCES:
         download_source(source)
 
-        # Small delay between requests
+        # Note
         time.sleep(2)
 
     print("\nCollection complete.")

@@ -90,7 +90,7 @@ export default function KnowledgePage() {
         }
       })
       .catch(() => {
-        // History is optional; the user can still search the corpus directly.
+        // Note
       });
   }, [runChunkSearch]);
 
@@ -260,7 +260,7 @@ export default function KnowledgePage() {
             <h2>Saved evaluation answers</h2>
             <span className="muted small">{data.total_cases} prepared summaries</span>
           </div>
-          {/* Search Bar */}
+          {/* Note */}
           <div className="search-field" style={{ marginBottom: 20 }}>
             <Search size={16} style={{ color: 'var(--muted)', marginRight: 8 }} />
             <input
@@ -325,7 +325,7 @@ function CaseCard({
 }) {
   return (
     <div className="card knowledge-card" onClick={onToggle}>
-      {/* Header */}
+      {/* Note */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
         <span className="badge">{caseData.case_id}</span>
         <span className="badge success">
@@ -354,10 +354,10 @@ function CaseCard({
         </span>
       </div>
 
-      {/* Expanded Detail */}
+      {/* Note */}
       {isExpanded && (
         <div className="knowledge-detail" onClick={(e) => e.stopPropagation()}>
-          {/* Key Takeaways */}
+          {/* Note */}
           {caseData.key_takeaways.length > 0 && (
             <div style={{ marginTop: 16 }}>
               <h3 style={{ fontSize: 13, marginBottom: 8 }}>📋 Key Takeaways</h3>
@@ -371,7 +371,7 @@ function CaseCard({
             </div>
           )}
 
-          {/* Technical Specs */}
+          {/* Note */}
           {Object.keys(caseData.technical_specs).length > 0 && (
             <div style={{ marginTop: 16 }}>
               <h3 style={{ fontSize: 13, marginBottom: 8 }}>⚙️ Technical Specifications</h3>
@@ -394,7 +394,7 @@ function CaseCard({
             </div>
           )}
 
-          {/* Conditions & Safety */}
+          {/* Note */}
           {caseData.conditions_and_safety.length > 0 && (
             <div style={{ marginTop: 16 }}>
               <h3 style={{ fontSize: 13, marginBottom: 8 }}>🛡️ Conditions & Safety</h3>
@@ -406,7 +406,7 @@ function CaseCard({
             </div>
           )}
 
-          {/* Grounding Score Bar */}
+          {/* Note */}
           <div style={{ marginTop: 16 }}>
             <div className="score-label">
               <span>Grounding confidence</span>
@@ -420,7 +420,7 @@ function CaseCard({
             </div>
           </div>
 
-          {/* Sources */}
+          {/* Note */}
           {caseData.sources.length > 0 && (
             <div style={{ marginTop: 16 }}>
               <h3 style={{ fontSize: 13, marginBottom: 8 }}>📚 Sources</h3>
