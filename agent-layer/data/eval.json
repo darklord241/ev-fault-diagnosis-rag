@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "status": "candidate questions; gold chunk IDs require human review",
+  "cases": [
+    {
+      "id": "charging-compatible-700w",
+      "query": "Can I use my existing 700W charger with the Ather 450S, and how long will recharging take?",
+      "gold_chunk_ids": null
+    },
+    {
+      "id": "charging-time-450s",
+      "query": "What home charging time is listed for the Ather 450S?",
+      "gold_chunk_ids": null
+    },
+    {
+      "id": "fallsafe-rider-fall",
+      "query": "What does FallSafe do when the rider falls?",
+      "gold_chunk_ids": null
+    },
+    {
+      "id": "rsa-discharged-battery",
+      "query": "What roadside assistance is described when a fully discharged battery leaves the vehicle immovable?",
+      "gold_chunk_ids": null
+    },
+    {
+      "id": "eight70-battery-degradation",
+      "query": "What battery degradation protection is described by Eight70 Warranty?",
+      "gold_chunk_ids": null
+    }
+  ]
+}
