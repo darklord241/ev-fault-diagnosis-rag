@@ -127,11 +127,15 @@ export interface BatchWebsiteDelivery {
 export interface DTCRecord {
   code: string;
   system: string;
+  category?: string | null;
+  code_type?: string | null;
   description: string;
   symptoms: string[];
   possible_causes: string[];
   suggested_checks: string[];
   source_manual: string;
+  source_url?: string | null;
+  safety_note?: string | null;
 }
 
 export interface HealthResponse {

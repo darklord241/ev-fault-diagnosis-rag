@@ -312,3 +312,8 @@ async def lookup_dtc(code: str) -> Dict[str, Any]:
     if not dtc_record:
         raise HTTPException(status_code=404, detail=f"DTC code '{code}' not found.")
     return dtc_record.model_dump()
+
+
+@router.get("/dtc-catalog", response_model=List[DTCRecord], summary="List DTC Catalog")
+async def list_dtc_catalog() -> List[DTCRecord]:
+    return await backend_adapter.list_dtc_codes()

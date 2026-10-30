@@ -165,6 +165,21 @@ def test_dtc_lookup_returns_legacy_and_generic_codes():
     assert legacy.json()["system"] == "BMS"
     assert generic.status_code == 200
     assert generic.json()["code"] == "P0300"
+    assert generic.json()["code_type"] == "Generic OBD-II"
+
+
+def test_dtc_catalog_returns_codes_for_autocomplete():
+    app = backend_module.create_app(backend_api_key="test-secret")
+
+    with TestClient(app) as client:
+        response = client.get(
+            "/api/v1/retrieval/dtc-catalog",
+            headers={"Authorization": "Bearer test-secret"},
+        )
+
+    assert response.status_code == 200
+    codes = {record["code"] for record in response.json()}
+    assert {"P0A80", "P0100", "P0300"}.issubset(codes)
 
 
 def test_diagnosis_gateway_forwards_to_agent_and_preserves_response(monkeypatch):

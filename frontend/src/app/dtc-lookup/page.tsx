@@ -1,40 +1,75 @@
 'use client';
 
-import { useState } from 'react';
-import { Search, AlertTriangle, Wrench, CheckCircle2, BookOpen } from 'lucide-react';
-import { lookupDTC } from '@/lib/api';
+import { useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
+import {
+  AlertTriangle,
+  ArrowRight,
+  BookOpen,
+  CheckCircle2,
+  Search,
+  ShieldAlert,
+  Wrench,
+} from 'lucide-react';
+import { fetchDTCCatalog, lookupDTC } from '@/lib/api';
 import type { DTCRecord } from '@/lib/types';
-import { PageTitle, ErrorBox, Empty } from '@/components/Shell';
+import { Empty, ErrorBox, PageTitle } from '@/components/Shell';
+
+function normalizeCode(value: string) {
+  return value.trim().toUpperCase().replace(/\s+/g, '');
+}
 
 export default function DTCLookupPage() {
   const [code, setCode] = useState('');
+  const [catalog, setCatalog] = useState<DTCRecord[]>([]);
   const [data, setData] = useState<DTCRecord | null>(null);
   const [loading, setLoading] = useState(false);
+  const [catalogLoading, setCatalogLoading] = useState(true);
   const [error, setError] = useState('');
   const [notFound, setNotFound] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!code.trim()) return;
+  useEffect(() => {
+    fetchDTCCatalog()
+      .then(setCatalog)
+      .catch(() => setCatalog([]))
+      .finally(() => setCatalogLoading(false));
+  }, []);
 
+  const suggestions = useMemo(() => {
+    const query = normalizeCode(code);
+    if (!query || data) return [];
+    return catalog
+      .filter((record) => record.code.includes(query))
+      .slice(0, 6);
+  }, [catalog, code, data]);
+
+  async function findCode(value = code) {
+    const normalized = normalizeCode(value);
+    if (!normalized) return;
+
+    setCode(normalized);
     setLoading(true);
     setError('');
     setData(null);
     setNotFound(false);
 
     try {
-      const result = await lookupDTC(code.trim());
-      setData(result);
+      setData(await lookupDTC(normalized));
     } catch (e) {
-      const msg = (e as Error).message;
-      if (msg.includes('404') || msg.includes('not found')) {
+      const message = (e as Error).message;
+      if (message.includes('404') || message.toLowerCase().includes('not found')) {
         setNotFound(true);
       } else {
-        setError(msg);
+        setError(message);
       }
     } finally {
       setLoading(false);
     }
+  }
+
+  function handleSubmit(event: React.FormEvent) {
+    event.preventDefault();
+    void findCode();
   }
 
   return (
@@ -42,21 +77,48 @@ export default function DTCLookupPage() {
       <PageTitle
         eyebrow="DTC CODE LOOKUP"
         title="Understand a fault code."
-        description="Enter a Diagnostic Trouble Code to look up its meaning, symptoms, possible causes, and suggested checks."
+        description="Search EV-specific and generic OBD-II codes for plain-language meaning, symptoms, likely causes, and safe next checks."
       />
 
-      <section className="card">
+      <section className="card dtc-search-card">
         <form onSubmit={handleSubmit} className="lookup-form">
-          <div>
+          <div className="dtc-input-wrap">
             <label htmlFor="dtc-code">DTC / Error Code</label>
-            <input
-              id="dtc-code"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              required
-              maxLength={50}
-              placeholder="e.g., P0A80, E-07, U0100"
-            />
+            <div className="search-field">
+              <Search size={17} aria-hidden="true" />
+              <input
+                id="dtc-code"
+                value={code}
+                onChange={(event) => {
+                  setCode(event.target.value.toUpperCase());
+                  setData(null);
+                  setNotFound(false);
+                }}
+                required
+                maxLength={50}
+                placeholder="Try P0A80, P0100, P0300, E-07, or U0100"
+                autoComplete="off"
+                aria-describedby="dtc-help"
+              />
+            </div>
+            <span id="dtc-help" className="field-hint">
+              {catalogLoading ? 'Loading code catalog…' : `${catalog.length} codes available`}
+            </span>
+            {suggestions.length > 0 && (
+              <div className="dtc-suggestions" role="listbox" aria-label="Matching codes">
+                {suggestions.map((record) => (
+                  <button
+                    type="button"
+                    key={record.code}
+                    className="dtc-suggestion"
+                    onClick={() => void findCode(record.code)}
+                  >
+                    <span className="dtc-suggestion-code">{record.code}</span>
+                    <span>{record.description}</span>
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
           <button className="button primary" disabled={loading || !code.trim()}>
             <Search size={17} />
@@ -67,90 +129,76 @@ export default function DTCLookupPage() {
 
       {error && <ErrorBox message={error} />}
 
-      <section className="card" style={{ marginTop: 20 }}>
+      <section className="card dtc-result-card">
         {data ? (
           <div>
-            {/* Note */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
-              <span className="dtc-code-display">{data.code}</span>
-              <span className="badge success">{data.system}</span>
+            <div className="dtc-result-header">
+              <div>
+                <span className="dtc-code-display">{data.code}</span>
+                <div className="dtc-badges">
+                  <span className="badge success">{data.system}</span>
+                  {data.code_type && <span className="badge">{data.code_type}</span>}
+                  {data.category && <span className="badge">{data.category}</span>}
+                </div>
+              </div>
+              <Link
+                className="button secondary dtc-diagnose-button"
+                href={`/diagnose?query=${encodeURIComponent(`${data.code}: ${data.description}`)}&subsystem=${encodeURIComponent(data.system)}`}
+              >
+                Diagnose this code <ArrowRight size={15} />
+              </Link>
             </div>
 
-            <p style={{ fontSize: 14, color: 'var(--ink)', lineHeight: 1.8, marginBottom: 20 }}>
-              {data.description}
-            </p>
+            <p className="dtc-description">{data.description}</p>
 
-            {/* Note */}
-            {data.symptoms.length > 0 && (
-              <div className="dtc-section">
-                <h3>
-                  <AlertTriangle size={14} style={{ verticalAlign: 'middle', marginRight: 6 }} />
-                  Symptoms
-                </h3>
-                <ul>
-                  {data.symptoms.map((s, i) => (
-                    <li key={i}>{s}</li>
-                  ))}
-                </ul>
+            {data.safety_note && (
+              <div className="dtc-safety">
+                <ShieldAlert size={18} />
+                <div>
+                  <strong>Safety first</strong>
+                  <p>{data.safety_note}</p>
+                </div>
               </div>
             )}
 
-            {/* Note */}
-            {data.possible_causes.length > 0 && (
-              <div className="dtc-section">
-                <h3>
-                  <Wrench size={14} style={{ verticalAlign: 'middle', marginRight: 6 }} />
-                  Possible Causes
-                </h3>
-                <ul>
-                  {data.possible_causes.map((c, i) => (
-                    <li key={i}>{c}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
+            <div className="dtc-detail-grid">
+              {data.symptoms.length > 0 && (
+                <div className="dtc-section">
+                  <h3><AlertTriangle size={14} /> Symptoms</h3>
+                  <ul>{data.symptoms.map((item) => <li key={item}>{item}</li>)}</ul>
+                </div>
+              )}
+              {data.possible_causes.length > 0 && (
+                <div className="dtc-section">
+                  <h3><Wrench size={14} /> Possible causes</h3>
+                  <ul>{data.possible_causes.map((item) => <li key={item}>{item}</li>)}</ul>
+                </div>
+              )}
+              {data.suggested_checks.length > 0 && (
+                <div className="dtc-section">
+                  <h3><CheckCircle2 size={14} /> Suggested checks</h3>
+                  <ul>{data.suggested_checks.map((item) => <li key={item}>{item}</li>)}</ul>
+                </div>
+              )}
+            </div>
 
-            {/* Note */}
-            {data.suggested_checks.length > 0 && (
-              <div className="dtc-section">
-                <h3>
-                  <CheckCircle2 size={14} style={{ verticalAlign: 'middle', marginRight: 6 }} />
-                  Suggested Checks
-                </h3>
-                <ul>
-                  {data.suggested_checks.map((c, i) => (
-                    <li key={i}>{c}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* Note */}
-            <div
-              style={{
-                borderTop: '1px solid var(--line)',
-                paddingTop: 16,
-                marginTop: 20,
-                fontSize: 11,
-                color: 'var(--muted)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6,
-              }}
-            >
+            <div className="dtc-source">
               <BookOpen size={14} />
-              Reference: {data.source_manual}
+              <span>Reference: {data.source_manual}</span>
+              {data.source_url && (
+                <a href={data.source_url} target="_blank" rel="noreferrer">Open source</a>
+              )}
             </div>
           </div>
         ) : notFound ? (
           <Empty
             title="Code not found"
-            description={`DTC code '${code}' was not found in the database. Verify the code and try again.`}
+            description={`DTC code '${code}' is not in the local catalog. Verify the code or use Diagnose to search the technical documents.`}
           />
         ) : (
           <Empty
-            title="Enter a DTC code"
-            description="Diagnostic Trouble Code details, symptoms, causes, and recommended checks will appear here."
+            title="Search a code"
+            description="Choose a suggestion or enter a code to see its meaning, symptoms, causes, checks, and safety guidance."
           />
         )}
       </section>

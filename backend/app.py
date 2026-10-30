@@ -4,6 +4,7 @@ import hmac
 import json
 import logging
 import os
+import re
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Callable, Mapping, Optional
@@ -22,6 +23,7 @@ load_dotenv(REPOSITORY_ROOT / "backend" / ".env")
 GENERIC_DTC_PATH = REPOSITORY_ROOT / "agent-layer" / "data" / "generic_dtc_codes.json"
 ALLOWED_AGENT_PATHS = {
     "diagnose",
+    "dtc-catalog",
     "eval-answers",
     "health",
     "history",
@@ -189,11 +191,37 @@ def _load_dtc_codes() -> dict[str, dict]:
         return records
     records.update(
         {
-            record["code"].upper(): record
+            record["code"].upper(): {
+                **record,
+                "code_type": "Generic OBD-II",
+                "category": (
+                    "Communication"
+                    if record["code"].upper().startswith("U")
+                    else record.get("system")
+                ),
+                "safety_note": (
+                    "Use the manufacturer's service procedure. Do not probe "
+                    "high-voltage components unless qualified."
+                ),
+            }
             for record in generic_records
             if isinstance(record, dict) and isinstance(record.get("code"), str)
         }
     )
+    for code, record in records.items():
+        record.setdefault("code_type", "EV-specific")
+        record.setdefault(
+            "category",
+            "Communication" if code.startswith("U") else record.get("system"),
+        )
+        record.setdefault(
+            "safety_note",
+            "Use the manufacturer's service procedure. Do not probe "
+            "high-voltage components unless qualified.",
+        )
+        source_match = re.search(r"https?://\S+", record.get("source_manual", ""))
+        if source_match:
+            record.setdefault("source_url", source_match.group(0))
     return records
 
 
@@ -302,6 +330,13 @@ def create_app(
         if record is None:
             raise HTTPException(status_code=404, detail=f"DTC code '{code}' not found.")
         return record
+
+    @app.get(
+        "/api/v1/retrieval/dtc-catalog",
+        dependencies=[Depends(require_backend_key)],
+    )
+    async def retrieval_dtc_catalog():
+        return list(_load_dtc_codes().values())
 
     @app.api_route(
         "/api/v1/{path:path}",

@@ -55,11 +55,15 @@ class DTCRecord(BaseModel):
     """Diagnostic Trouble Code entry."""
     code: str = Field(..., description="DTC Code (e.g. P0A80, E-07, U0100)")
     system: str = Field(..., description="Subsystem (BMS, Inverter, Throttle, Dashboard)")
+    category: Optional[str] = Field(default=None, description="Code category")
+    code_type: Optional[str] = Field(default=None, description="EV-specific or generic OBD-II")
     description: str = Field(..., description="Short fault description")
     symptoms: List[str] = Field(default_factory=list)
     possible_causes: List[str] = Field(default_factory=list)
     suggested_checks: List[str] = Field(default_factory=list)
     source_manual: str = Field(..., description="Reference service manual")
+    source_url: Optional[str] = Field(default=None, description="Public reference URL")
+    safety_note: Optional[str] = Field(default=None, description="Safety guidance")
 
 class ComponentSpec(BaseModel):
     """Technical specifications of an EV component."""

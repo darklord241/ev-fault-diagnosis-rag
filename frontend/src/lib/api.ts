@@ -128,3 +128,7 @@ export async function lookupDTC(code: string): Promise<DTCRecord> {
     `/api/v1/dtc/${encodeURIComponent(code)}`
   );
 }
+
+export async function fetchDTCCatalog(): Promise<DTCRecord[]> {
+  return request<DTCRecord[]>("/api/v1/dtc-catalog");
+}

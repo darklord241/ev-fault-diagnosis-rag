@@ -15,6 +15,7 @@ The app can run in demo mode without a corpus or API key. Live retrieval require
 - Added top-five Knowledge Base chunk search with full passage text, document/page/source details, and relevance scores.
 - Made the Knowledge Base search automatically use the current diagnosis context, or the latest saved diagnosis when opened directly. Suggested searches and manual query/vehicle/subsystem filters are also available.
 - Added local SQLite diagnosis history, Gemini response handling, and UI display for evidence and fallback mode.
+- Added an expanded DTC experience with generic OBD-II catalog entries, autocomplete suggestions, category labels, safety guidance, source links, and a direct “Diagnose this code” action.
 - Kept corpus data, embedding caches, and `.env` files local and out of Git.
 
 ## Run the local demo
@@ -124,6 +125,8 @@ flowchart LR
 6. The service stores the resulting `WebsiteCardPayload` locally and returns it through the gateway. The UI renders the answer, technical details, safety notes, and source links.
 
 The Knowledge Base page sends searches to `POST /api/v1/knowledge/search`. It returns up to five matching chunks with full passage text, document title, page number, source URL, and similarity score; the chunk ID is available as a secondary reference rather than the primary display. The diagnosis result links to this page with the query and selected vehicle/subsystem in the URL. If opened without a query, it uses the most recent local diagnosis, and if no history exists it offers suggested searches.
+
+The DTC page uses `GET /api/v1/dtc/{code}` for detail lookup and `GET /api/v1/dtc-catalog` for autocomplete suggestions. It supports EV-specific entries and generic OBD-II reference entries. The **Diagnose this code** action sends the code and subsystem to the main diagnosis flow.
 
 `POST /api/v1/diagnose` remains a separate agent/MCP diagnosis path; the website's main diagnosis form uses the retrieval-first `/api/v1/query` contract and `WebsiteCardPayload`.
 

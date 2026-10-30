@@ -157,6 +157,26 @@ def _load_generic_dtc_database() -> Dict[str, Dict[str, Any]]:
 
 GENERIC_DTC_DATABASE = _load_generic_dtc_database()
 
+
+def _enrich_dtc_record(record: Dict[str, Any], code_type: str) -> Dict[str, Any]:
+    enriched = dict(record)
+    enriched.setdefault("code_type", code_type)
+    enriched.setdefault(
+        "category",
+        "Communication" if enriched["code"].upper().startswith("U") else enriched.get("system"),
+    )
+    enriched.setdefault(
+        "safety_note",
+        "Use the manufacturer's service procedure. Do not probe high-voltage components unless qualified.",
+    )
+    if "http" in enriched.get("source_manual", ""):
+        enriched.setdefault(
+            "source_url",
+            enriched["source_manual"][enriched["source_manual"].find("http") :],
+        )
+    return enriched
+
+
 SAMPLE_COMPONENT_SPECS: Dict[str, Dict[str, Any]] = {
     "throttle": {
         "component_name": "Hall Effect Electronic Throttle",
@@ -355,10 +375,18 @@ class BackendRetrievalAdapter:
                 ) from error
 
         if code_clean in SAMPLE_DTC_DATABASE:
-            return DTCRecord(**SAMPLE_DTC_DATABASE[code_clean])
+            return DTCRecord(**_enrich_dtc_record(SAMPLE_DTC_DATABASE[code_clean], "EV-specific"))
         if code_clean in GENERIC_DTC_DATABASE:
-            return DTCRecord(**GENERIC_DTC_DATABASE[code_clean])
+            return DTCRecord(**_enrich_dtc_record(GENERIC_DTC_DATABASE[code_clean], "Generic OBD-II"))
         return None
+
+    async def list_dtc_codes(self) -> List[DTCRecord]:
+        records = []
+        for record in SAMPLE_DTC_DATABASE.values():
+            records.append(DTCRecord(**_enrich_dtc_record(record, "EV-specific")))
+        for record in GENERIC_DTC_DATABASE.values():
+            records.append(DTCRecord(**_enrich_dtc_record(record, "Generic OBD-II")))
+        return sorted(records, key=lambda record: record.code)
 
     async def get_component_specifications(self, component_name: str) -> Optional[ComponentSpec]:
         """Lookup component pinouts and operating thresholds."""
