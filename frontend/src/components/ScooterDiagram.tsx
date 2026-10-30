@@ -1,36 +1,16 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowUpRight, Battery, CircleDot, Cpu, Gauge, Zap } from 'lucide-react';
+import { ArrowUpRight, Battery, Cpu, Gauge, Radio, Zap } from 'lucide-react';
 
-const parts = [
-  { id: 'battery', label: 'Battery pack', note: 'BMS / cell health', x: 25, y: 58, icon: Battery, href: '/diagnose?query=Battery%20not%20charging&subsystem=Battery%2FBMS' },
-  { id: 'controller', label: 'Controller', note: 'Power delivery', x: 50, y: 68, icon: Cpu, href: '/diagnose?query=Motor%20controller%20fault&subsystem=Motor%20Controller' },
-  { id: 'motor', label: 'Hub motor', note: 'Torque / Hall sensors', x: 79, y: 66, icon: Gauge, href: '/diagnose?query=Motor%20cuts%20out%20under%20load&subsystem=Motor%20Controller' },
-  { id: 'dash', label: 'Dashboard', note: 'Codes / telemetry', x: 54, y: 25, icon: CircleDot, href: '/dtc-lookup' },
+const nodes = [
+  { title: 'HV BATTERY', sub: 'BMS / CELL GROUPS', value: '58.4 V', state: 'NOMINAL', cls: 'node-green', icon: Battery, href: '/diagnose?query=Battery%20not%20charging&subsystem=Battery%2FBMS' },
+  { title: 'VCU / ECU', sub: 'CONTROL LOGIC', value: 'LINKED', state: 'NOMINAL', cls: 'node-green', icon: Cpu, href: '/diagnose?query=Vehicle%20control%20unit%20fault&subsystem=Dashboard%2FECU' },
+  { title: 'INVERTER', sub: 'MOTOR CONTROL', value: '42.1 °C', state: 'NOMINAL', cls: 'node-amber', icon: Zap, href: '/diagnose?query=Motor%20controller%20fault&subsystem=Motor%20Controller' },
+  { title: 'HUB MOTOR', sub: 'HALL / PHASE', value: '0 RPM', state: 'STANDBY', cls: 'node-blue', icon: Gauge, href: '/diagnose?query=Motor%20cuts%20out%20under%20load&subsystem=Motor%20Controller' },
+  { title: 'DASH / CAN', sub: 'FAULT TELEMETRY', value: 'READY', state: 'NOMINAL', cls: 'node-green', icon: Radio, href: '/dtc-lookup' },
 ];
 
 export function ScooterDiagram() {
-  return (
-    <section className="diagram-card">
-      <div className="diagram-heading"><div><div className="eyebrow light">SYSTEM MAP / 01</div><h2>Trace the machine.</h2><p>Select a zone to start with the right language.</p></div><Zap size={22} className="diagram-bolt" /></div>
-      <div className="scooter-map">
-        <svg viewBox="0 0 920 360" role="img" aria-label="Electric scooter system diagram">
-          <defs><linearGradient id="frame" x1="0" x2="1"><stop stopColor="#d7ff63" /><stop offset="1" stopColor="#79a2ff" /></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="7" result="blur" /><feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge></filter></defs>
-          <path className="map-wire faint" d="M170 275 C255 215 302 151 448 122 C565 98 654 126 774 258" />
-          <path className="map-wire" d="M170 275 C255 215 302 151 448 122 C565 98 654 126 774 258" />
-          <path className="map-frame" d="M240 266 L365 139 L547 139 L680 266 M365 139 L430 266 L547 139 M430 266 L615 266" />
-          <path className="map-frame thin" d="M547 139 L585 89 L624 89 L650 142 M585 89 L558 54" />
-          <circle className="map-wheel" cx="170" cy="275" r="52" /><circle className="map-wheel" cx="774" cy="275" r="52" />
-          <circle className="map-hub" cx="774" cy="275" r="19" /><circle className="map-hub" cx="170" cy="275" r="10" />
-          <rect className="map-battery" x="295" y="188" width="100" height="51" rx="8" /><path className="map-seat" d="M340 132 Q385 112 435 132" />
-          <path className="map-wire accent" d="M346 188 L346 151 L497 151 L497 139" />
-          <path className="map-wire accent-two" d="M395 213 L485 213 L485 159 L680 159" />
-          <circle className="map-signal" cx="346" cy="188" r="5" filter="url(#glow)" /><circle className="map-signal blue" cx="497" cy="139" r="5" filter="url(#glow)" />
-        </svg>
-        {parts.map(({ id, label, note, x, y, icon: Icon, href }) => <Link key={id} href={href} className={`part-pin pin-${id}`} style={{ left: `${x}%`, top: `${y}%` }}><span className="part-icon"><Icon size={15} /></span><span><strong>{label}</strong><small>{note}</small></span><ArrowUpRight size={13} /></Link>)}
-      </div>
-      <div className="diagram-legend"><span><i className="legend-lime" /> power path</span><span><i className="legend-blue" /> signal path</span><span>4 clickable zones</span></div>
-    </section>
-  );
+  return <section className="topology-panel"><div className="panel-title"><div><span className="eyebrow">TOPOLOGY / POWERTRAIN</span><h2>Vehicle systems map</h2></div><span className="panel-tag">LIVE VIEW / 01</span></div><div className="topology-canvas"><svg viewBox="0 0 900 260" aria-hidden="true"><defs><filter id="line-glow"><feGaussianBlur stdDeviation="3" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter></defs><path className="topology-line dim" d="M92 130 H795" /><path className="topology-line power" d="M140 130 H350 M490 130 H700" filter="url(#line-glow)" /><path className="topology-line signal" d="M350 130 V68 H700 V130 M350 130 V202 H700 V130" /><circle className="line-node" cx="350" cy="130" r="5" /><circle className="line-node blue-node" cx="700" cy="130" r="5" /><path className="flow-arrow" d="M266 123 l12 7 -12 7 M613 123 l12 7 -12 7" /></svg>{nodes.map(({ title, sub, value, state, cls, icon: Icon, href }) => <Link href={href} key={title} className={`topology-node ${cls}`}><div className="node-top"><Icon size={15} /><span>{state}</span></div><strong>{title}</strong><small>{sub}</small><b>{value}</b><ArrowUpRight size={13} className="node-arrow" /></Link>)}</div><div className="topology-footer"><span><i className="legend-power" /> HIGH-VOLTAGE POWER PATH</span><span><i className="legend-signal" /> LOW-VOLTAGE DATA BUS</span><span className="topology-note">Click a node to open a guided case</span></div></section>;
 }
