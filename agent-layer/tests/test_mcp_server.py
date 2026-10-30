@@ -31,6 +31,13 @@ async def test_lookup_dtc_fault_code():
     assert "BMS" in data.get("system", "")
 
 @pytest.mark.asyncio
+async def test_lookup_generic_dtc_fault_code():
+    res_str = await tool_lookup_dtc_fault_code(" p0300 ")
+    data = json.loads(res_str)
+    assert data.get("code") == "P0300"
+    assert "misfire" in data.get("description", "").lower()
+
+@pytest.mark.asyncio
 async def test_lookup_component_specs():
     res_str = await tool_lookup_component_specs("throttle")
     data = json.loads(res_str)

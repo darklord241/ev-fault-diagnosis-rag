@@ -1,4 +1,6 @@
 import httpx
+import json
+from pathlib import Path
 from typing import List, Optional, Dict, Any
 from src.common.models import EvidenceSource, DTCRecord, ComponentSpec
 from src.common.logging import logger
@@ -134,6 +136,26 @@ SAMPLE_DTC_DATABASE: Dict[str, Dict[str, Any]] = {
         "source_manual": "EV CAN Bus Troubleshooting Guide Vol. 2"
     }
 }
+
+GENERIC_DTC_DATABASE_PATH = (
+    Path(__file__).resolve().parents[2] / "data" / "generic_dtc_codes.json"
+)
+
+
+def _load_generic_dtc_database() -> Dict[str, Dict[str, Any]]:
+    try:
+        records = json.loads(GENERIC_DTC_DATABASE_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        logger.warning("Could not load generic DTC database: %s", error)
+        return {}
+    return {
+        record["code"].upper(): record
+        for record in records
+        if isinstance(record, dict) and isinstance(record.get("code"), str)
+    }
+
+
+GENERIC_DTC_DATABASE = _load_generic_dtc_database()
 
 SAMPLE_COMPONENT_SPECS: Dict[str, Dict[str, Any]] = {
     "throttle": {
@@ -306,7 +328,7 @@ class BackendRetrievalAdapter:
 
     async def get_dtc_details(self, dtc_code: str) -> Optional[DTCRecord]:
         """Lookup diagnostic trouble code details."""
-        code_clean = dtc_code.strip().upper()
+        code_clean = dtc_code.strip().upper().replace(" ", "")
         if not self.use_mock:
             if not self.api_key:
                 raise RuntimeError(
@@ -334,6 +356,8 @@ class BackendRetrievalAdapter:
 
         if code_clean in SAMPLE_DTC_DATABASE:
             return DTCRecord(**SAMPLE_DTC_DATABASE[code_clean])
+        if code_clean in GENERIC_DTC_DATABASE:
+            return DTCRecord(**GENERIC_DTC_DATABASE[code_clean])
         return None
 
     async def get_component_specifications(self, component_name: str) -> Optional[ComponentSpec]:
