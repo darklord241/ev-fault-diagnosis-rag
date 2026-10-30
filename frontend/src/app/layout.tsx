@@ -3,9 +3,9 @@ import './globals.css';
 import { Shell } from '@/components/Shell';
 
 export const metadata: Metadata = {
-  title: 'EV Fault Diagnosis — AI-Powered Technical Intelligence',
+  title: 'Voltroom — Electric two-wheeler diagnostics',
   description:
-    'Evidence-grounded electric two-wheeler fault diagnosis using RAG and MCP-based retrieval.',
+    'A grounded diagnostic workbench for electric scooters, batteries, controllers, and DTCs.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
