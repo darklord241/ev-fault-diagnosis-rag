@@ -3,7 +3,7 @@ import sys
 import os
 from pathlib import Path
 
-# Configure utf-8 standard output for Windows console
+# Note
 if sys.platform.startswith("win"):
     try:
         sys.stdout.reconfigure(encoding="utf-8")
@@ -11,7 +11,7 @@ if sys.platform.startswith("win"):
     except Exception:
         pass
 
-# Add root directory to python path
+# Note
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from src.pipeline.batch_processor import BatchPipelineProcessor

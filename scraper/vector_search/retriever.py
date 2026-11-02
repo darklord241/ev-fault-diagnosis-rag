@@ -1,7 +1,7 @@
 """Small model-independent retrieval flow over the chunked JSONL corpus."""
 
 from pathlib import Path
-from typing import Mapping, Sequence
+from typing import Callable, Mapping, Sequence
 
 from .embedding import EmbeddingBackend, embed_query
 from .index_embeddings import DEFAULT_CACHE_PATH, load_or_build_embeddings
@@ -38,7 +38,13 @@ class Retriever:
         """Load validated JSONL chunks and initialize their embeddings."""
         return cls(load_chunks(chunk_directory), backend, cache_path)
 
-    def search(self, query: str, top_k: int = 5) -> list[SearchResult]:
+    def search(
+        self,
+        query: str,
+        top_k: int = 5,
+        *,
+        record_filter: Callable[[Mapping[str, object]], bool] | None = None,
+    ) -> list[SearchResult]:
         """Return ranked original chunk records and cosine similarity scores."""
         if isinstance(top_k, bool) or not isinstance(top_k, int):
             raise TypeError("top_k must be a positive integer")
@@ -52,4 +58,8 @@ class Retriever:
             return []
 
         query_vector = embed_query(self._backend, query)
-        return self._index.search(query_vector, top_k=top_k)
+        return self._index.search(
+            query_vector,
+            top_k=top_k,
+            record_filter=record_filter,
+        )

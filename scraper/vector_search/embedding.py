@@ -1,4 +1,4 @@
-# Model-neutral contracts and validation for text embedding backends.
+# Note
 
 import math
 from dataclasses import dataclass

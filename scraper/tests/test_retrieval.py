@@ -116,6 +116,18 @@ class CosineIndexTests(unittest.TestCase):
         self.assertEqual(2, len(self.index.search([1, 0], top_k=2)))
         self.assertEqual(3, len(self.index.search([1, 0], top_k=20)))
 
+    def test_record_filter_applies_before_top_k(self):
+        results = self.index.search(
+            [1, 0],
+            top_k=2,
+            record_filter=lambda record: record["chunk_id"] != "aligned",
+        )
+
+        self.assertEqual(
+            ["diagonal", "perpendicular"],
+            [result.record["chunk_id"] for result in results],
+        )
+
     def test_empty_index_returns_no_results(self):
         index = CosineIndex([], [])
 

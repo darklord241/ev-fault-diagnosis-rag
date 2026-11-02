@@ -59,7 +59,7 @@ export default function Home() {
       <StatusStrip />
 
       <div className="home-grid">
-        {/* ── Left: Start Diagnosis ── */}
+        {/* Note */}
         <section className="card">
           <div className="card-heading">
             <div className="icon-tile">
@@ -139,7 +139,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── Right: How It Works + Quick Links ── */}
+        {/* Note */}
         <aside className="home-aside">
           <section className="card approach">
             <div className="eyebrow">HOW IT WORKS</div>
@@ -207,7 +207,7 @@ export default function Home() {
         </aside>
       </div>
 
-      {/* ── Quick Links ── */}
+      {/* Note */}
       <div className="quick-links" style={{ marginTop: 28 }}>
         <Link href="/dtc-lookup">
           <Search size={19} />

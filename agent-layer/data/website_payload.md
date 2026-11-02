@@ -7,24 +7,25 @@
 
 ## 1. Case: `charging-compatible-700w`
 **Query:** *"Can I use my existing 700W charger with the Ather 450S, and how long will recharging take?"*  
-**Identified Model:** `Ather 450S / 450 Series` | **Grounding Score:** `0.96` | **Chunks:** `2` unique (deduped from `5`)
+**Identified Model:** `Ather 450 Series` | **Grounding Score:** `1.00` | **Chunks:** `2` unique (deduped from `5`)
 
-> **Direct Summary:** Yes, you can use your existing 700W charger with the Ather 450S as it is backwards-compatible across all new Ather scooters. Recharging takes 3 hr 30 min (0–80%) and 4 hr 30 min (0–100%).
+> **Direct Summary:** Yes, you can use your existing 700W charger with the Ather 450S as it is fully compatible with all new Ather scooters.
 
 ### 📋 Key Takeaways
-- Full compatibility: The existing 700W home charger works with the Ather 450S.
-- 0% to 80% recharge duration: 3 hours 30 minutes.
-- 0% to 100% full recharge duration: 4 hours 30 minutes.
+- The 700W charger is fully compatible with the Ather 450S.
+- Recharging from 0% to 100% using the 700W charger takes 4 hours and 30 minutes.
+- Recharging from 0% to 80% using the 700W charger takes 3 hours and 30 minutes.
 
 ### ⚙️ Technical Specifications & Limits
 | Specification | Value |
 | :--- | :--- |
-| **Charger Compatibility** | 700W Home Charger (Fully Compatible) |
-| **0% to 80% Charge Time** | 3 hr 30 min |
-| **0% to 100% Charge Time** | 4 hr 30 min |
+| **Charger Compatibility** | Existing Ather 700W Charger |
+| **Charging Time (0-80%)** | 3 hours 30 minutes (with 700W charger) |
+| **Charging Time (0-100%)** | 4 hours 30 minutes (with 700W charger) |
+| **Standard Home Charging (Default)** | 0-80% in 6 hr 36 min | 0-100% in 8 hr 36 min |
 
 ### ⚠️ Conditions & Roadside Safety
-- Ensure charging occurs on a properly earthed 15A socket with surge protection.
+- Ensure compatibility of the charger model before connecting.
 
 ### 📚 Official Document Sources
 - **Can I use my existing Ather’s 700W charger to charge the Ather 450S? If yes, how long will it take to recharge?** (Sim: `0.8900`) ([Official Link](https://www.atherenergy.com/faq/explore-buy/ather-450-series)) — `ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7257_chunk_0`
@@ -34,23 +35,26 @@
 
 ## 2. Case: `charging-time-450s`
 **Query:** *"What home charging time is listed for the Ather 450S?"*  
-**Identified Model:** `Ather 450S / 450 Series` | **Grounding Score:** `0.96` | **Chunks:** `2` unique (deduped from `5`)
+**Identified Model:** `Ather 450 Series` | **Grounding Score:** `1.00` | **Chunks:** `2` unique (deduped from `5`)
 
-> **Direct Summary:** The standard home charging time for the Ather 450S is 6 hr 36 min to reach 0–80%, and 8 hr 36 min for a full 0–100% charge.
+> **Direct Summary:** The Ather 450S takes 6 hours 36 minutes to charge from 0-80% and 8 hours 36 minutes to charge from 0-100% using its standard home charging setup.
 
 ### 📋 Key Takeaways
-- Home charging takes 6 hr 36 min (0–80%) and 8 hr 36 min (0–100%).
-- Ather Grid™ fast charging speed remains identical to the Ather 450X.
+- Standard home charging takes 6 hr 36 min for 0-80% and 8 hr 36 min for 0-100%.
+- An existing Ather 700W charger is fully compatible with the Ather 450S.
+- Using the 700W charger reduces charging times to 3 hr 30 min (0-80%) and 4 hr 30 min (0-100%).
+- Fast charging speed at Ather Grid™ is identical to the Ather 450X.
 
 ### ⚙️ Technical Specifications & Limits
 | Specification | Value |
 | :--- | :--- |
-| **Home Charging (0–80%)** | 6 hr 36 min |
-| **Home Charging (0–100%)** | 8 hr 36 min |
-| **Public Fast Charging** | Ather Grid™ (Same speed as Ather 450X) |
+| **Standard Home Charging (0-80%)** | 6 hr 36 min |
+| **Standard Home Charging (0-100%)** | 8 hr 36 min |
+| **700W Charger Home Charging (0-80%)** | 3 hr 30 min |
+| **700W Charger Home Charging (0-100%)** | 4 hr 30 min |
 
 ### ⚠️ Conditions & Roadside Safety
-- Charging durations may vary slightly depending on ambient battery temperature.
+- The legacy Ather 700W charger is fully compatible with the Ather 450S.
 
 ### 📚 Official Document Sources
 - **How long does it take to charge the Ather 450S?** (Sim: `0.7569`) ([Official Link](https://www.atherenergy.com/faq/explore-buy/ather-450-series)) — `ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7262_chunk_0`
@@ -60,24 +64,25 @@
 
 ## 3. Case: `fallsafe-rider-fall`
 **Query:** *"What does FallSafe do when the rider falls?"*  
-**Identified Model:** `Ather 450S / 450 Series` | **Grounding Score:** `0.96` | **Chunks:** `4` unique (deduped from `5`)
+**Identified Model:** `Ather 450 Series` | **Grounding Score:** `1.00` | **Chunks:** `4` unique (deduped from `5`)
 
-> **Direct Summary:** FallSafe™ automatically cuts off power supply to the motor if the rider falls off, immediately stopping the scooter from moving. Additionally, hazard indicators flash to alert fellow road users.
+> **Direct Summary:** FallSafe™ cuts off power to the motor when a rider falls to stop the scooter from moving further, while simultaneously blinking both indicators to alert nearby road users.
 
 ### 📋 Key Takeaways
-- Motor Cutoff: Cuts off power to the drive motor immediately upon detecting a fall.
-- Hazard Alert: Both turn indicators blink automatically to warn surrounding traffic.
-- Dashboard Control: Can be toggled on/off via the dashboard, but keeping it enabled is recommended.
+- Cuts off power supply to the motor in the event of a rider fall
+- Stops the scooter from moving further
+- Triggers both indicators to blink to alert fellow riders
+- Can be enabled or disabled via the scooter dashboard
 
 ### ⚙️ Technical Specifications & Limits
 | Specification | Value |
 | :--- | :--- |
-| **Motor Response** | Instant power cut-off |
-| **Visual Alert** | Dual indicator flashing (hazard warning) |
-| **User Control** | Toggleable via Dashboard UI |
+| **Feature Name** | FallSafe™ |
+| **Function** | Motor power cutoff and hazard alert |
+| **Control** | Dashboard toggle (Enable/Disable) |
 
 ### ⚠️ Conditions & Roadside Safety
-- Always keep FallSafe enabled for maximum road safety.
+- For your safety, the manufacturer recommends keeping the FallSafe™ feature always on.
 
 ### 📚 Official Document Sources
 - **What is FallSafe™ and how does it work?** (Sim: `0.6253`) ([Official Link](https://www.atherenergy.com/faq/explore-buy/ather-450-series)) — `ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7252_chunk_0`
@@ -89,24 +94,23 @@
 
 ## 4. Case: `rsa-discharged-battery`
 **Query:** *"What roadside assistance is described when a fully discharged battery leaves the vehicle immovable?"*  
-**Identified Model:** `Ather 450S / 450 Series` | **Grounding Score:** `0.96` | **Chunks:** `3` unique (deduped from `5`)
+**Identified Model:** `Ather 450 Series` | **Grounding Score:** `1.00` | **Chunks:** `3` unique (deduped from `5`)
 
-> **Direct Summary:** If a fully discharged battery leaves your vehicle immobilized on the road, Ather Roadside Assistance (RSA) will tow your scooter to the nearest Ather touchpoint with no questions asked.
+> **Direct Summary:** If you run out of charge in the middle of the road, you can request Roadside Assistance (RSA) to have your scooter towed to the nearest Ather touchpoint, no questions asked.
 
 ### 📋 Key Takeaways
-- Towing Service: Scooter is towed directly to the nearest official Ather touchpoint / charging station.
-- No Questions Asked: Coverage applies even when fully discharged mid-journey.
-- Warranty Note: Deep discharge caused while in an idle state is also protected under battery terms.
+- RSA is available if you run out of charge while on the road.
+- Your scooter will be towed directly to the nearest Ather touchpoint.
+- Towing assistance is provided with no questions asked.
 
 ### ⚙️ Technical Specifications & Limits
 | Specification | Value |
 | :--- | :--- |
-| **Assistance Type** | Emergency Flatbed / Towing Service |
-| **Destination** | Nearest Ather Touchpoint / Grid Point |
-| **Cost / Policy** | Covered under Roadside Assistance subscription |
+| **Service Type** | Roadside Assistance (RSA) |
+| **Action** | Towing to the nearest Ather touchpoint |
 
 ### ⚠️ Conditions & Roadside Safety
-- Customer negligence exclusions do not penalize deep discharge from idle states.
+- Applicable when the vehicle runs out of charge in the middle of the road.
 
 ### 📚 Official Document Sources
 - **Can I request RSA if I run out of charge in the middle of the road?** (Sim: `0.3537`) ([Official Link](https://www.atherenergy.com/faq)) — `ather_electric_scooter_faqs___support_&_help_center_7333_chunk_0`
@@ -117,28 +121,25 @@
 
 ## 5. Case: `eight70-battery-degradation`
 **Query:** *"What battery degradation protection is described by Eight70 Warranty?"*  
-**Identified Model:** `Ather 450S / 450 Series` | **Grounding Score:** `0.96` | **Chunks:** `2` unique (deduped from `5`)
+**Identified Model:** `Ather 450 Series` | **Grounding Score:** `1.00` | **Chunks:** `2` unique (deduped from `5`)
 
-> **Direct Summary:** The Eight70 Warranty guarantees the battery for 8 years or 80,000 km, protecting against battery degradation by assuring the battery health stays above 70%—otherwise it is replaced for free.
+> **Direct Summary:** The Eight70 Warranty is a comprehensive 8-year or 80,000 km plan that covers battery failures and guarantees the battery health will not drop below 70% by the end of the 8th year.
 
 ### 📋 Key Takeaways
-- 8 Years / 80,000 km warranty coverage.
-- Guaranteed minimum 70% battery health (State of Health / SOH).
-- Free battery replacement if health drops below 70% during the warranty period.
-- Covers all battery defects (cells, electrical, electronic, BMS) with no upper limit on claims.
-- Idle state assurance protects against claim rejection due to deep discharge.
+- Covers battery for a total of 8 years or 80,000 km, whichever comes first.
+- Guarantees battery health stays above 70% by the end of the 8th year; otherwise, it will be replaced for free.
+- Includes idle state assurance with no claim rejection for deep discharge due to the scooter being left uncharged or idle over extended periods.
 
 ### ⚙️ Technical Specifications & Limits
 | Specification | Value |
 | :--- | :--- |
-| **Warranty Period** | 8 Years or 80,000 km (whichever occurs first) |
-| **Minimum Guaranteed Health** | 70% State of Health (SOH) |
-| **Remedy for Degradation** | Free Battery Pack Replacement |
-| **Coverage Scope** | Cells, BMS, Electronics, Electrical |
+| **Warranty Duration** | 8 years / 80,000 km |
+| **Minimum Battery Health Guarantee** | 70% |
+| **Coverage Scope** | Battery failures, degradation, and all defects (cell, electrical, electronic, BMS, etc.) |
 
 ### ⚠️ Conditions & Roadside Safety
-- Available as an add-on with AtherStack Pro.
-- Excludes unauthorized modifications, VIN/BIN tampering, and physical/water immersion damages.
+- Extends the manufacturer warranty of 3 years by an additional 5 years.
+- Available as an add-on plan that can be purchased with AtherStack Pro.
 
 ### 📚 Official Document Sources
 - **What are the features of Eight70 Warranty?** (Sim: `0.7551`) ([Official Link](https://www.atherenergy.com/faq)) — `ather_electric_scooter_faqs___support_&_help_center_7383_chunk_0`

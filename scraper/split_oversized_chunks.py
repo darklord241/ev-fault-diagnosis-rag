@@ -37,7 +37,7 @@ def split_text_by_tokens(text):
     while start_token < len(offsets):
         end_token = min(start_token + TARGET_TOKENS, len(offsets))
 
-        # Leave room for the model's special tokens.
+        # Note
         while end_token > start_token:
             char_start = offsets[start_token][0]
             char_end = offsets[end_token - 1][1]

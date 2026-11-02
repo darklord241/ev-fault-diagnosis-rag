@@ -1,0 +1,155 @@
+[
+  {
+    "code": "P0100",
+    "system": "Powertrain",
+    "description": "Mass or Volume Air Flow Circuit Malfunction",
+    "symptoms": ["Engine hesitation", "Rough idle", "Reduced fuel economy"],
+    "possible_causes": ["Failed mass air flow sensor", "Open or shorted wiring", "Air leak after the sensor"],
+    "suggested_checks": ["Inspect the sensor connector and harness", "Check for intake leaks", "Verify sensor output with a scan tool"],
+    "source_manual": "Generic OBD-II reference: https://www.obd-codes.com/p0100"
+  },
+  {
+    "code": "P0113",
+    "system": "Powertrain",
+    "description": "Intake Air Temperature Sensor 1 Circuit High Input",
+    "symptoms": ["Hard starting", "Poor acceleration", "Unstable idle"],
+    "possible_causes": ["Disconnected intake air temperature sensor", "Open signal wire", "Failed sensor"],
+    "suggested_checks": ["Inspect the sensor plug", "Check signal and ground continuity", "Compare sensor temperature with ambient temperature"],
+    "source_manual": "Generic OBD-II reference: https://www.obd-codes.com/p0113"
+  },
+  {
+    "code": "P0128",
+    "system": "Powertrain",
+    "description": "Coolant Thermostat Temperature Below Regulating Temperature",
+    "symptoms": ["Engine runs too cool", "Reduced heater output", "Poor fuel economy"],
+    "possible_causes": ["Stuck-open thermostat", "Faulty coolant temperature sensor", "Low coolant level"],
+    "suggested_checks": ["Check coolant level", "Monitor coolant temperature", "Inspect thermostat operation"],
+    "source_manual": "Generic OBD-II reference: https://www.obd-codes.com/p0128"
+  },
+  {
+    "code": "P0171",
+    "system": "Powertrain",
+    "description": "System Too Lean Bank 1",
+    "symptoms": ["Rough idle", "Hesitation", "Misfire under load"],
+    "possible_causes": ["Vacuum leak", "Dirty mass air flow sensor", "Low fuel pressure"],
+    "suggested_checks": ["Inspect intake hoses", "Check fuel pressure", "Review short- and long-term fuel trims"],
+    "source_manual": "Generic OBD-II reference: https://www.obd-codes.com/p0171"
+  },
+  {
+    "code": "P0201",
+    "system": "Powertrain",
+    "description": "Injector Circuit Open Cylinder 1",
+    "symptoms": ["Engine misfire", "Rough running", "Loss of power"],
+    "possible_causes": ["Open injector wiring", "Failed injector", "Loose connector"],
+    "suggested_checks": ["Inspect injector wiring", "Measure injector resistance", "Check injector driver operation"],
+    "source_manual": "Generic OBD-II reference: https://www.obd-codes.com/p0201"
+  },
+  {
+    "code": "P0300",
+    "system": "Powertrain",
+    "description": "Random or Multiple Cylinder Misfire Detected",
+    "symptoms": ["Engine shaking", "Flashing malfunction indicator", "Reduced power"],
+    "possible_causes": ["Ignition fault", "Fuel delivery problem", "Low compression", "Vacuum leak"],
+    "suggested_checks": ["Inspect plugs and coils", "Check fuel pressure", "Review misfire counters", "Test compression if needed"],
+    "source_manual": "Generic OBD-II reference: https://www.obd-codes.com/p0300"
+  },
+  {
+    "code": "P0420",
+    "system": "Emissions",
+    "description": "Catalyst System Efficiency Below Threshold Bank 1",
+    "symptoms": ["Check-engine light", "Reduced fuel economy", "Exhaust odor"],
+    "possible_causes": ["Worn catalytic converter", "Oxygen sensor fault", "Engine running rich or lean"],
+    "suggested_checks": ["Check for other engine faults", "Compare upstream and downstream oxygen sensor activity", "Inspect for exhaust leaks"],
+    "source_manual": "Generic OBD-II reference: https://www.obd-codes.com/p0420"
+  },
+  {
+    "code": "P0442",
+    "system": "Emissions",
+    "description": "Evaporative Emission System Small Leak Detected",
+    "symptoms": ["Check-engine light", "Fuel odor", "No obvious drivability change"],
+    "possible_causes": ["Loose fuel cap", "Cracked vapor hose", "Leaking purge or vent valve"],
+    "suggested_checks": ["Inspect and tighten the fuel cap", "Check vapor lines", "Perform a smoke test"],
+    "source_manual": "Generic OBD-II reference: https://www.obd-codes.com/p0442"
+  },
+  {
+    "code": "P0500",
+    "system": "Vehicle Speed",
+    "description": "Vehicle Speed Sensor Malfunction",
+    "symptoms": ["Inoperative speedometer", "Harsh shifting", "Cruise control disabled"],
+    "possible_causes": ["Failed speed sensor", "Damaged tone ring", "Open or shorted wiring"],
+    "suggested_checks": ["Inspect the sensor and connector", "Check speed signal while driving", "Inspect the tone ring"],
+    "source_manual": "Generic OBD-II reference: https://www.obd-codes.com/p0500"
+  },
+  {
+    "code": "P0562",
+    "system": "Electrical",
+    "description": "System Voltage Low",
+    "symptoms": ["Slow cranking", "Warning lights", "Intermittent module faults"],
+    "possible_causes": ["Weak battery", "Charging-system fault", "High-resistance power or ground connection"],
+    "suggested_checks": ["Measure battery voltage at rest and under load", "Check charging voltage", "Inspect main grounds and terminals"],
+    "source_manual": "Generic OBD-II reference: https://www.obd-codes.com/p0562"
+  },
+  {
+    "code": "P0606",
+    "system": "Powertrain Control Module",
+    "description": "ECM or PCM Processor Fault",
+    "symptoms": ["No-start condition", "Stalling", "Multiple unrelated warning lights"],
+    "possible_causes": ["Control-module internal fault", "Low system voltage", "Software or communication failure"],
+    "suggested_checks": ["Verify battery and ground voltage", "Check for related communication codes", "Follow manufacturer module test procedure"],
+    "source_manual": "Generic OBD-II reference: https://www.obd-codes.com/p0606"
+  },
+  {
+    "code": "P0700",
+    "system": "Transmission",
+    "description": "Transmission Control System Malfunction Request",
+    "symptoms": ["Transmission warning light", "Harsh shifting", "Fail-safe operation"],
+    "possible_causes": ["Transmission control fault", "Low transmission fluid", "Stored transmission-specific code"],
+    "suggested_checks": ["Scan the transmission controller directly", "Check fluid level if applicable", "Repair the related transmission code first"],
+    "source_manual": "Generic OBD-II reference: https://www.obd-codes.com/p0700"
+  },
+  {
+    "code": "P0A0F",
+    "system": "Hybrid or EV Powertrain",
+    "description": "Engine Failed to Start",
+    "symptoms": ["Hybrid system warning", "No READY state", "Powertrain will not enable"],
+    "possible_causes": ["12-volt supply problem", "Fuel or ignition problem", "Hybrid control or interlock fault"],
+    "suggested_checks": ["Check 12-volt battery voltage", "Read companion powertrain codes", "Verify service-plug and safety-interlock status"],
+    "source_manual": "Generic OBD-II reference: https://www.obd-codes.com/p0a0f"
+  },
+  {
+    "code": "P0A1A",
+    "system": "Hybrid or EV Powertrain",
+    "description": "Generator Control Module",
+    "symptoms": ["Hybrid warning light", "Reduced propulsion power", "Charging or regeneration unavailable"],
+    "possible_causes": ["Generator control-module fault", "Power or ground issue", "CAN communication fault"],
+    "suggested_checks": ["Check module power and ground", "Inspect CAN wiring", "Retrieve manufacturer-specific companion codes"],
+    "source_manual": "Generic OBD-II reference: https://www.obd-codes.com/p0a1a"
+  },
+  {
+    "code": "P0A93",
+    "system": "Hybrid or EV Powertrain",
+    "description": "Inverter Performance",
+    "symptoms": ["Reduced drive power", "Regenerative braking disabled", "Hybrid system warning"],
+    "possible_causes": ["Inverter cooling problem", "High-voltage connection fault", "Inverter internal failure"],
+    "suggested_checks": ["Do not open the high-voltage system without approved procedures", "Check cooling flow and temperatures", "Inspect logged companion codes"],
+    "source_manual": "Generic OBD-II reference: https://www.obd-codes.com/p0a93"
+  },
+  {
+    "code": "U0121",
+    "system": "CAN Communication",
+    "description": "Lost Communication With Anti-Lock Brake System Control Module",
+    "symptoms": ["ABS warning", "Traction-control warning", "Limited regenerative braking"],
+    "possible_causes": ["CAN wiring fault", "Module power or ground loss", "Failed ABS controller"],
+    "suggested_checks": ["Check module fuses and grounds", "Measure CAN bus resistance with power off", "Inspect CAN-H and CAN-L wiring"],
+    "source_manual": "Generic OBD-II reference: https://www.obd-codes.com/u0121"
+  },
+  {
+    "code": "U0140",
+    "system": "CAN Communication",
+    "description": "Lost Communication With Body Control Module",
+    "symptoms": ["Multiple body-system warnings", "Inoperative accessories", "Intermittent no-start"],
+    "possible_causes": ["CAN bus interruption", "Low module voltage", "Body control module fault"],
+    "suggested_checks": ["Check battery voltage", "Inspect CAN connectors", "Scan all modules for communication codes"],
+    "source_manual": "Generic OBD-II reference: https://www.obd-codes.com/u0140"
+  }
+]

@@ -42,7 +42,7 @@ class LLMFactory:
                 from langchain_openai import ChatOpenAI
                 api_key = settings.OPENAI_API_KEY or os.getenv("OPENAI_API_KEY")
                 return ChatOpenAI(
-                    model=model if model != "gemini-2.5-flash" else "gpt-4o-mini",
+                    model=model if not model.startswith("gemini-") else "gpt-4o-mini",
                     temperature=temp,
                     api_key=api_key
                 )
@@ -54,7 +54,7 @@ class LLMFactory:
                 from langchain_anthropic import ChatAnthropic
                 api_key = settings.ANTHROPIC_API_KEY or os.getenv("ANTHROPIC_API_KEY")
                 return ChatAnthropic(
-                    model=model if model != "gemini-2.5-flash" else "claude-3-5-sonnet-20241022",
+                    model=model if not model.startswith("gemini-") else "claude-3-5-sonnet-20241022",
                     temperature=temp,
                     api_key=api_key
                 )
@@ -65,7 +65,7 @@ class LLMFactory:
             try:
                 from langchain_community.chat_models import ChatOllama
                 return ChatOllama(
-                    model=model if model != "gemini-2.5-flash" else "llama3.2",
+                    model=model if not model.startswith("gemini-") else "llama3.2",
                     base_url=settings.OLLAMA_BASE_URL,
                     temperature=temp
                 )
@@ -77,7 +77,7 @@ class LLMFactory:
                 from langchain_openai import ChatOpenAI
                 api_key = settings.GROQ_API_KEY or os.getenv("GROQ_API_KEY")
                 return ChatOpenAI(
-                    model=model if model != "gemini-2.5-flash" else "llama-3.1-70b-versatile",
+                    model=model if not model.startswith("gemini-") else "llama-3.1-70b-versatile",
                     temperature=temp,
                     base_url="https://api.groq.com/openai/v1",
                     api_key=api_key

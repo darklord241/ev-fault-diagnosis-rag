@@ -12,7 +12,7 @@ from src.mcp_server.tools import (
 from src.common.logging import logger
 from config.settings import settings
 
-# Tool input schemas for LangChain StructuredTool integration
+# Note
 class RetrieveEvidenceInput(BaseModel):
     query: str = Field(..., description="Fault symptom, error symptom, or technical question to search in manuals")
     vehicle_model: Optional[str] = Field(None, description="Electric two-wheeler model (e.g. Ather 450X, Ola S1, TVS iQube, Generic)")

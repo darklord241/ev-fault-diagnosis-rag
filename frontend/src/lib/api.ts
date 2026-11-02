@@ -6,9 +6,13 @@ import type {
   DTCRecord,
   HealthResponse,
   MCPTool,
+  LiveQueryRequest,
+  DiagnosisHistoryEntry,
+  KnowledgeSearchRequest,
+  KnowledgeSearchResponse,
 } from "./types";
 
-/* ── Helper ── */
+/* Note */
 
 class ApiError extends Error {
   status: number;
@@ -35,7 +39,7 @@ async function request<T>(
       const body = await res.json();
       msg = body.detail ?? body.message ?? msg;
     } catch {
-      /* ignore parse errors */
+      /* Note */
     }
     throw new ApiError(msg, res.status);
   }
@@ -43,7 +47,7 @@ async function request<T>(
   return res.json() as Promise<T>;
 }
 
-/* ── Public API functions ── */
+/* Note */
 
 export async function fetchHealth(): Promise<HealthResponse> {
   return request<HealthResponse>("/api/v1/health");
@@ -53,6 +57,36 @@ export async function diagnose(
   payload: QueryRequest
 ): Promise<GroundedAnswer> {
   return request<GroundedAnswer>("/api/v1/diagnose", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function queryLive(
+  payload: LiveQueryRequest
+): Promise<WebsiteCardPayload> {
+  return request<WebsiteCardPayload>("/api/v1/query", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function fetchDiagnosisHistory(): Promise<{
+  items: DiagnosisHistoryEntry[];
+}> {
+  return request<{ items: DiagnosisHistoryEntry[] }>("/api/v1/history");
+}
+
+export async function clearDiagnosisHistory(): Promise<{ deleted: number }> {
+  return request<{ deleted: number }>("/api/v1/history", {
+    method: "DELETE",
+  });
+}
+
+export async function searchKnowledge(
+  payload: KnowledgeSearchRequest
+): Promise<KnowledgeSearchResponse> {
+  return request<KnowledgeSearchResponse>("/api/v1/knowledge/search", {
     method: "POST",
     body: JSON.stringify(payload),
   });

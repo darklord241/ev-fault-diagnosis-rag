@@ -70,7 +70,7 @@ export default function DTCLookupPage() {
       <section className="card" style={{ marginTop: 20 }}>
         {data ? (
           <div>
-            {/* Code Header */}
+            {/* Note */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
               <span className="dtc-code-display">{data.code}</span>
               <span className="badge success">{data.system}</span>
@@ -80,7 +80,7 @@ export default function DTCLookupPage() {
               {data.description}
             </p>
 
-            {/* Symptoms */}
+            {/* Note */}
             {data.symptoms.length > 0 && (
               <div className="dtc-section">
                 <h3>
@@ -95,7 +95,7 @@ export default function DTCLookupPage() {
               </div>
             )}
 
-            {/* Possible Causes */}
+            {/* Note */}
             {data.possible_causes.length > 0 && (
               <div className="dtc-section">
                 <h3>
@@ -110,7 +110,7 @@ export default function DTCLookupPage() {
               </div>
             )}
 
-            {/* Suggested Checks */}
+            {/* Note */}
             {data.suggested_checks.length > 0 && (
               <div className="dtc-section">
                 <h3>
@@ -125,7 +125,7 @@ export default function DTCLookupPage() {
               </div>
             )}
 
-            {/* Source Reference */}
+            {/* Note */}
             <div
               style={{
                 borderTop: '1px solid var(--line)',

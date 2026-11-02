@@ -2,6 +2,7 @@ import re
 import html
 import json
 import hashlib
+import math
 from typing import List, Dict, Any, Optional
 from src.pipeline.models import CleanedChunk, QueryCleanedEvidence
 from src.common.logging import logger
@@ -20,13 +21,13 @@ class RetrievalCleaner:
         """Unescapes HTML entities, strips tags, and cleans excessive whitespace."""
         if not text:
             return ""
-        # 1. Unescape HTML entities (e.g. &quot; -> ", &#x27; -> ', &amp; -> &)
+        # Note
         cleaned = html.unescape(text)
         
-        # 2. Strip tags like <pre>, </pre>, <details>, etc.
+        # Note
         cleaned = re.sub(r"</?(?:pre|details|summary|p|div|span|b|i)[^>]*>", "", cleaned, flags=re.IGNORECASE)
         
-        # 3. Clean trailing/leading spaces and normalize double spaces
+        # Note
         cleaned = re.sub(r"[ \t]+", " ", cleaned)
         cleaned = re.sub(r"\n{3,}", "\n\n", cleaned)
         return cleaned.strip()
@@ -34,7 +35,7 @@ class RetrievalCleaner:
     @staticmethod
     def compute_content_hash(text: str) -> str:
         """Computes a normalized text hash to identify identical or near-identical content."""
-        # Normalize: lowercase, remove all non-alphanumeric chars
+        # Note
         normalized = re.sub(r"[^a-z0-9]", "", text.lower())
         return hashlib.md5(normalized.encode("utf-8")).hexdigest()
 
@@ -53,13 +54,13 @@ class RetrievalCleaner:
                 existing.duplicate_sources_merged += 1
                 if chunk.url and chunk.url != existing.url and chunk.url not in existing.alternate_urls:
                     existing.alternate_urls.append(chunk.url)
-                # Keep highest similarity score
+                # Note
                 if chunk.similarity_score > existing.similarity_score:
                     existing.similarity_score = chunk.similarity_score
             else:
                 unique_map[h] = chunk
 
-        # Return sorted by similarity score descending
+        # Note
         deduped = list(unique_map.values())
         deduped.sort(key=lambda c: c.similarity_score, reverse=True)
         return deduped
@@ -72,51 +73,51 @@ class RetrievalCleaner:
         """
         results: List[QueryCleanedEvidence] = []
         
-        # Split markdown into Query sections: "## Query: <query_id>"
+        # Note
         query_blocks = re.split(r"\n## Query:\s*", markdown_content)
         
-        for block in query_blocks[1:]:  # skip preamble
+        for block in query_blocks[1:]:  # Note
             lines = block.strip().split("\n")
             if not lines:
                 continue
             
             case_id = lines[0].strip()
             
-            # Find the query text: line starting with "> "
+            # Note
             query_match = re.search(r"^>\s*(.+)$", block, re.MULTILINE)
             query_text = query_match.group(1).strip() if query_match else case_id
 
-            # Find all rank chunks: "### Rank X — `<chunk_id>`"
+            # Note
             rank_blocks = re.split(r"\n### Rank \d+ — `([^`]+)`", block)
             
             raw_chunks: List[CleanedChunk] = []
             
-            # rank_blocks: [before_first_rank, chunk_id_1, body_1, chunk_id_2, body_2, ...]
+            # Note
             for idx in range(1, len(rank_blocks), 2):
                 chunk_id = rank_blocks[idx].strip()
                 body = rank_blocks[idx + 1] if idx + 1 < len(rank_blocks) else ""
                 
-                # Extract Cosine similarity
+                # Note
                 sim_match = re.search(r"Cosine similarity:\s*\*\*([\d\.]+)\*\*", body)
                 similarity = float(sim_match.group(1)) if sim_match else 0.0
                 
-                # Extract Content type
+                # Note
                 ctype_match = re.search(r"Content type:\s*`([^`]+)`", body)
                 content_type = ctype_match.group(1).strip() if ctype_match else "faq"
 
-                # Extract Title
+                # Note
                 title_match = re.search(r"- Title:\s*(.+)$", body, re.MULTILINE)
                 title = cls.clean_text(title_match.group(1)) if title_match else ""
 
-                # Extract Full Chunk Text from <pre> ... </pre> or Text excerpt
+                # Note
                 full_text_match = re.search(r"<pre>(.*?)</pre>", body, re.DOTALL)
                 content = cls.clean_text(full_text_match.group(1)) if full_text_match else ""
                 
-                # Extract Provenance JSON
+                # Note
                 prov_match = re.search(r"<pre>(\{.*?\})</pre>", body, re.DOTALL)
                 url = None
                 doc_id = None
-                mfg = "Ather Energy"
+                mfg = None
                 v_model = None
                 category = None
                 group = None
@@ -153,7 +154,7 @@ class RetrievalCleaner:
                     group=group
                 ))
 
-            # Deduplicate chunks for this query
+            # Note
             deduped = cls.deduplicate_chunks(raw_chunks)
             logger.info(f"Query '{case_id}': Cleaned {len(raw_chunks)} raw chunks -> {len(deduped)} unique chunks.")
             
@@ -192,34 +193,89 @@ class RetrievalCleaner:
         parsed_chunks: List[CleanedChunk] = []
 
         for idx, item in enumerate(raw_chunks):
-            # Extract text/content
-            raw_text = item.get("text") or item.get("content") or ""
+            if not isinstance(item, dict):
+                raise ValueError(f"Backend chunk {idx} must be an object.")
+
+            raw_text = item.get("text") or item.get("content")
+            if not isinstance(raw_text, str) or not raw_text.strip():
+                raise ValueError(f"Backend chunk {idx} has no usable text.")
             clean_content = cls.clean_text(raw_text)
 
-            # Extract title / document identifier
-            raw_title = item.get("title") or item.get("source_document") or item.get("source_id") or f"Document {idx+1}"
+            raw_title = (
+                item.get("title")
+                or item.get("document_title")
+                or item.get("source_document")
+                or ""
+            )
+            if not isinstance(raw_title, str):
+                raise ValueError(f"Backend chunk {idx} title must be a string.")
             clean_title = cls.clean_text(raw_title)
 
-            # Extract similarity score (supports score, similarity_score, cosine_similarity)
-            sim_score = item.get("score") or item.get("similarity_score") or item.get("cosine_similarity") or 0.85
+            sim_score = next(
+                (
+                    item[key]
+                    for key in (
+                        "score",
+                        "similarity_score",
+                        "cosine_similarity",
+                        "relevance_score",
+                    )
+                    if item.get(key) is not None
+                ),
+                0.0,
+            )
             try:
                 sim_score = float(sim_score)
-            except (ValueError, TypeError):
-                sim_score = 0.85
+            except (ValueError, TypeError, OverflowError) as error:
+                raise ValueError(f"Backend chunk {idx} has an invalid score.") from error
+            if not math.isfinite(sim_score):
+                raise ValueError(f"Backend chunk {idx} has a non-finite score.")
 
-            chunk_id = item.get("chunk_id") or f"chunk_{case_id}_{idx}"
-            content_type = item.get("content_type", "pdf")
+            chunk_id = item.get("chunk_id") or item.get("source_id")
+            if not isinstance(chunk_id, str) or not chunk_id.strip():
+                raise ValueError(f"Backend chunk {idx} has no source/chunk ID.")
+            content_type = (
+                item.get("content_type")
+                or item.get("document_type")
+                or "unknown"
+            )
+            if not isinstance(content_type, str):
+                raise ValueError(f"Backend chunk {idx} content type must be a string.")
 
-            # Extract provenance metadata
-            prov = item.get("provenance") or {}
-            meta = item.get("metadata") or {}
+            raw_metadata = item.get("metadata") or {}
+            if not isinstance(raw_metadata, dict):
+                raise ValueError(f"Backend chunk {idx} metadata must be an object.")
+            prov = item.get("provenance") or raw_metadata.get("provenance") or {}
+            if not isinstance(prov, dict):
+                raise ValueError(f"Backend chunk {idx} provenance must be an object.")
+            meta = raw_metadata.get("chunk_metadata") or raw_metadata
+            if not isinstance(meta, dict):
+                raise ValueError(f"Backend chunk {idx} chunk metadata must be an object.")
 
             url = prov.get("url") or item.get("url")
-            doc_id = prov.get("document_id") or item.get("record_id") or item.get("source_document")
-            mfg = prov.get("manufacturer", "Ather Energy")
+            doc_id = (
+                prov.get("document_id")
+                or item.get("record_id")
+                or raw_metadata.get("record_id")
+                or item.get("source_document")
+                or raw_metadata.get("source_document")
+            )
+            mfg = prov.get("manufacturer")
             vehicle_model = prov.get("vehicle_model") or item.get("vehicle_model")
             category = meta.get("category")
-            group = meta.get("group")
+            group = meta.get("group") or item.get("section")
+            if not isinstance(url, str):
+                url = None
+            if not isinstance(doc_id, str):
+                doc_id = None
+            if not isinstance(mfg, str):
+                mfg = None
+            if not isinstance(vehicle_model, str):
+                vehicle_model = None
+            if not isinstance(category, str):
+                category = None
+            if not isinstance(group, str):
+                group = None
 
             parsed_chunks.append(CleanedChunk(
                 chunk_id=chunk_id,
@@ -232,10 +288,15 @@ class RetrievalCleaner:
                 manufacturer=mfg,
                 vehicle_model=vehicle_model,
                 category=category,
-                group=group
+                group=group,
+                source_metadata={
+                    **raw_metadata,
+                    "provenance": dict(prov),
+                    "chunk_metadata": dict(meta),
+                },
             ))
 
-        # Deduplicate identical chunks
+        # Note
         deduped = cls.deduplicate_chunks(parsed_chunks)
         logger.info(f"clean_api_chunks: Cleaned {len(raw_chunks)} API chunks -> {len(deduped)} unique chunks for query: '{query_text}'")
 

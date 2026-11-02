@@ -50,7 +50,7 @@ class AgentOrchestrator:
                 model_name=model_name,
                 temperature=self.temperature
             )
-            # Bind MCP tools to LLM
+            # Note
             llm_with_tools = llm.bind_tools(self.tools)
 
             user_content = USER_QUERY_TEMPLATE.format(
@@ -64,7 +64,7 @@ class AgentOrchestrator:
                 HumanMessage(content=user_content)
             ]
 
-            # ReAct Execution Loop (max 5 iterations)
+            # Note
             max_iterations = 5
             final_response_text = ""
 
@@ -73,7 +73,7 @@ class AgentOrchestrator:
                 ai_msg = await llm_with_tools.ainvoke(messages)
                 messages.append(ai_msg)
 
-                # Check if the model made tool calls
+                # Note
                 if hasattr(ai_msg, "tool_calls") and ai_msg.tool_calls:
                     for tool_call in ai_msg.tool_calls:
                         tool_name = tool_call["name"]
@@ -99,7 +99,7 @@ class AgentOrchestrator:
                             name=tool_name
                         ))
                 else:
-                    # Model produced final synthesis
+                    # Note
                     final_response_text = ai_msg.content if isinstance(ai_msg.content, str) else str(ai_msg.content)
                     break
 
@@ -131,7 +131,7 @@ class AgentOrchestrator:
         Direct deterministic fallback that directly triggers MCP retrieval tools,
         synthesizes grounded results, and allows testing even without an external LLM API key.
         """
-        # Step 1: Query MCP retrieval tool
+        # Note
         reasoning_trace.append("Fallback: Invoking MCP retrieval tool `retrieve_technical_evidence`")
         raw_evidence = await self.mcp_client._wrapped_retrieve_evidence(
             query=request.query,
@@ -141,13 +141,13 @@ class AgentOrchestrator:
         )
         sources = json.loads(raw_evidence)
 
-        # Step 2: Check for DTC codes in query
+        # Note
         for dtc in ["P0A80", "E-08", "E-07", "U0100"]:
             if dtc.lower() in request.query.lower():
                 reasoning_trace.append(f"Fallback: Invoking MCP tool `lookup_dtc_fault_code` for {dtc}")
                 await self.mcp_client._wrapped_lookup_dtc(dtc)
 
-        # Step 3: Synthesize structured output
+        # Note
         primary_source = sources[0] if sources else None
         source_id = primary_source.get("source_id", "SRC-EV-GEN-001") if primary_source else "SRC-EV-GEN-001"
         source_title = primary_source.get("document_title", "Service Manual") if primary_source else "Service Manual"

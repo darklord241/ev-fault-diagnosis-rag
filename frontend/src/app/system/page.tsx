@@ -57,7 +57,7 @@ export default function SystemPage() {
         description="Monitor the Agent Orchestrator, MCP server, retrieval backend, and connected tools."
       />
 
-      {/* Metrics Grid */}
+      {/* Note */}
       <div className="metric-grid">
         <div className="card metric">
           <p>Service Status</p>
@@ -92,7 +92,7 @@ export default function SystemPage() {
       </div>
 
       <div className="admin-grid">
-        {/* Health Details */}
+        {/* Note */}
         <section className="card">
           <div className="card-heading">
             <div className="icon-tile">
@@ -126,7 +126,7 @@ export default function SystemPage() {
           )}
         </section>
 
-        {/* MCP Tools */}
+        {/* Note */}
         <section className="card">
           <div className="card-heading">
             <div className="icon-tile">
@@ -153,7 +153,7 @@ export default function SystemPage() {
         </section>
       </div>
 
-      {/* Pipeline Runner */}
+      {/* Note */}
       <section className="card" style={{ marginTop: 22 }}>
         <div className="card-heading">
           <div className="icon-tile">
@@ -194,7 +194,7 @@ export default function SystemPage() {
         )}
       </section>
 
-      {/* spin animation is in globals.css via loading-dot */}
+      {/* Note */}
     </>
   );
 }
