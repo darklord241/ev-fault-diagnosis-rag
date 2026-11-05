@@ -1,0 +1,75 @@
+{
+  "experiment_date": "2026-11-05",
+  "base_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "saved_model_path": "agent-layer/data/pilot_minilm_ev",
+  "training_hyperparameters": {
+    "loss": "InfoNCE / MultipleNegativesRankingLoss",
+    "optimizer": "AdamW",
+    "learning_rate": 0.00002,
+    "epochs": 8,
+    "scale": 20.0,
+    "device": "cpu",
+    "duration_seconds": 2.51
+  },
+  "loss_progression": {
+    "epoch_2": 0.1710,
+    "epoch_4": 0.0040,
+    "epoch_6": 0.0068,
+    "epoch_8": 0.0027
+  },
+  "results": [
+    {
+      "id": "charging-compatible-700w",
+      "pre_similarity": 0.6954,
+      "post_similarity": 0.8774,
+      "gain": 0.1820,
+      "pre_margin": 0.7321,
+      "post_margin": 0.9230,
+      "margin_gain": 0.1909
+    },
+    {
+      "id": "charging-time-450s",
+      "pre_similarity": 0.8009,
+      "post_similarity": 0.7479,
+      "gain": -0.0530,
+      "pre_margin": 0.7368,
+      "post_margin": 0.6848,
+      "margin_gain": -0.0520
+    },
+    {
+      "id": "fallsafe-rider-fall",
+      "pre_similarity": 0.5737,
+      "post_similarity": 0.5662,
+      "gain": -0.0075,
+      "pre_margin": 0.4525,
+      "post_margin": 0.4433,
+      "margin_gain": -0.0092
+    },
+    {
+      "id": "rsa-discharged-battery",
+      "pre_similarity": 0.6818,
+      "post_similarity": 0.6937,
+      "gain": 0.0120,
+      "pre_margin": 0.3842,
+      "post_margin": 0.4012,
+      "margin_gain": 0.0170
+    },
+    {
+      "id": "eight70-battery-degradation",
+      "pre_similarity": 0.7815,
+      "post_similarity": 0.7739,
+      "gain": -0.0076,
+      "pre_margin": 0.7489,
+      "post_margin": 0.7414,
+      "margin_gain": -0.0074
+    }
+  ],
+  "summary": {
+    "average_pre_similarity": 0.7067,
+    "average_post_similarity": 0.7318,
+    "average_similarity_gain": 0.0252,
+    "average_pre_margin": 0.6109,
+    "average_post_margin": 0.6387,
+    "average_margin_gain": 0.0279
+  }
+}
