@@ -1,0 +1,275 @@
+{
+  "version": 1,
+  "query_type_policy": "The original 20 cases are exact-term and their 20 reworded variants are paraphrased.",
+  "relevance_policy": "A re-chunked result is relevant when its text contains at least one annotated key-fact phrase.",
+  "cases": {
+    "charging-compatible-700w": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "compatible with all new Ather scooters",
+        "4 hr 30 min to charge from 0 to 100%",
+        "3 hr 30 min to charge from 0%-80%"
+      ]
+    },
+    "charging-time-450s": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "0-80% in 6 hr 36 min",
+        "0-100% in 8 hr 36 min"
+      ]
+    },
+    "fallsafe-rider-fall": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "cuts off the power supply to the motor",
+        "both the indicators also start blinking"
+      ]
+    },
+    "rsa-discharged-battery": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "reach the nearest public charging station",
+        "customer's residence in case the public charging station is not in working condition"
+      ]
+    },
+    "eight70-battery-degradation": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "guaranteed to stay above 70% health till the end of the 8th year",
+        "8 years/80 000 km"
+      ]
+    },
+    "charger-amber-light": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "solid amber light charger software is being updated over the air"
+      ]
+    },
+    "charger-blinking-green": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "blinking green light charging in progress"
+      ]
+    },
+    "charger-solid-red": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "solid red light fault in the charger please contact customer support"
+      ]
+    },
+    "charger-no-light-prcd": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "press the Reset button on the PRCD",
+        "please contact customer support"
+      ]
+    },
+    "ather-dot-charging": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "turn the key to the ON position",
+        "gently pull down the connector from the holder",
+        "key should be in the OFF position for the scooter to start charging automatically"
+      ]
+    },
+    "ather-dot-unplugging": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "turn the key to the ON position to unlock the connector",
+        "wait for 5 seconds",
+        "remove the charging connector"
+      ]
+    },
+    "450x-solo-tyre-pressure": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "solo rider 30 PSI front & 28 PSI back"
+      ]
+    },
+    "450x-pillion-tyre-pressure": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "with a pillion 30 PSI front & 32 PSI back"
+      ]
+    },
+    "450x-underseat-storage": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "carry up to 15 kg and a volume of 22L"
+      ]
+    },
+    "450x-vin-location": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "remove the rubber grommet in the under-seat storage to access it"
+      ]
+    },
+    "dashboard-software-version": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "swipe down on the dashboard for the quick access screen",
+        "tap on the profile section to find software version"
+      ]
+    },
+    "motor-kill-switch": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "if the kill switch is engaged the motor will not switch on",
+        "use the motor kill switch at any traffic stop"
+      ]
+    },
+    "regenerative-braking-accelerator": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "throttle in the opposite direction anti-clockwise",
+        "activates regenerative braking when twisted in the reverse anti-clockwise direction"
+      ]
+    },
+    "combined-braking-system": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "the lever on the left-hand side activates the Combined Braking System that applies brakes to both the wheels"
+      ]
+    },
+    "high-voltage-service": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "they should be serviced only by Ather technicians"
+      ]
+    },
+    "charger-amber-confusion": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "solid amber light charger software is being updated over the air"
+      ]
+    },
+    "charger-green-flashing-confusion": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "blinking green light charging in progress",
+        "when connected to the scooter charging is complete"
+      ]
+    },
+    "charger-red-problem": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "solid red light fault in the charger please contact customer support"
+      ]
+    },
+    "charger-unresponsive": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "press the Reset button on the PRCD",
+        "if it still doesn't respond please contact customer support"
+      ]
+    },
+    "dot-connector-wont-release": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "turn the key OFF and back ON again",
+        "gently PUSH the connector in and then try to PULL it out again",
+        "do not try to forcefully pull the connector out"
+      ]
+    },
+    "solo-rider-inflation": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "solo rider 30 PSI front & 28 PSI back"
+      ]
+    },
+    "pillion-inflation": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "with a pillion 30 PSI front & 32 PSI back"
+      ]
+    },
+    "storage-luggage-limit": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "carry up to 15 kg"
+      ]
+    },
+    "locate-chassis-number": {
+      "query_type": "paraphrased",
+      "key_facts": []
+    },
+    "check-firmware-version": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "tap on the profile section to find software version",
+        "navigate to the software version"
+      ]
+    },
+    "motor-off-control": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "use the kill switch to turn the motor OFF",
+        "use the motor kill switch at any traffic stop"
+      ]
+    },
+    "throttle-slowdown": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "twist the throttle in the opposite direction anti-clockwise",
+        "activates regenerative braking when twisted in the reverse anti-clockwise direction"
+      ]
+    },
+    "left-lever-both-wheels": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "the lever on the left-hand side activates the Combined Braking System that applies brakes to both the wheels"
+      ]
+    },
+    "app-sync-network": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "the app syncs with the scooter only when both your phone and the scooter have good network coverage"
+      ]
+    },
+    "find-grid-charger": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "to locate an Ather Grid public fast charging point go to the app or navigation screen"
+      ]
+    },
+    "warning-caution-labels": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "WARNING indicates something that could hurt you or others",
+        "CAUTION it indicates something that could harm your scooter"
+      ]
+    },
+    "battery-capacity-warranty": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "shall not degrade beyond 30% of the published nominal capacity during the Warranty Period"
+      ]
+    },
+    "roadside-assistance-breakdown": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "reach the nearest public charging station",
+        "customer's residence in case the public charging station is not in working condition"
+      ]
+    },
+    "battery-warranty-plain-language": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "shall not degrade beyond 30% of the published nominal capacity during the Warranty Period",
+        "State-of-Health falls below 70%",
+        "battery is guaranteed to stay above 70% health till the end of the 8th year"
+      ]
+    },
+    "charging-time-plain-language": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "0-80% in 6 hr 36 min",
+        "0-100% in 8 hr 36 min"
+      ]
+    }
+  },
+  "review_notes": {
+    "battery-warranty-plain-language": "The query does not identify a warranty product. Both the general 2024 policy threshold and separate 70% State-of-Health FAQ/Eight70 statements are retained as evidence alternatives; interpret this result cautiously.",
+    "locate-chassis-number": "No gold chunks were assigned because the query does not specify a scooter model and the required access location varies by model."
+  }
+}

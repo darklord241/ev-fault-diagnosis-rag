@@ -1,0 +1,25 @@
+{
+  "models": [
+    {
+      "key": "current",
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "main",
+      "query_prefix": "",
+      "document_prefix": ""
+    },
+    {
+      "key": "bge-base",
+      "model_id": "BAAI/bge-base-en-v1.5",
+      "revision": "main",
+      "query_prefix": "",
+      "document_prefix": ""
+    },
+    {
+      "key": "e5-base",
+      "model_id": "intfloat/e5-base-v2",
+      "revision": "main",
+      "query_prefix": "query: ",
+      "document_prefix": "passage: "
+    }
+  ]
+}

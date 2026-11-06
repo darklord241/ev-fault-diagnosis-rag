@@ -39,6 +39,18 @@ class EmbeddingIdentity:
             raise ValueError("dimension must be a positive integer")
 
 
+def _resolved_model_revision(model, configured_revision: str) -> str:
+    modules = getattr(model, "_modules", {})
+    if isinstance(modules, dict) or hasattr(modules, "values"):
+        for module in modules.values():
+            auto_model = getattr(module, "auto_model", None)
+            config = getattr(auto_model, "config", None)
+            commit_hash = getattr(config, "_commit_hash", None)
+            if isinstance(commit_hash, str) and commit_hash.strip():
+                return commit_hash
+    return configured_revision
+
+
 class EmbeddingBackend(Embedder, Protocol):
     """Stage 1 embedder plus stable identity needed by the embedding cache."""
 
@@ -129,7 +141,7 @@ class MiniLMEmbedder:
 
         self.identity = EmbeddingIdentity(
             model_id=self.MODEL_ID,
-            revision=revision,
+            revision=_resolved_model_revision(model, revision),
             preprocessing=(
                 "sentence-transformers encode; no task prefix; "
                 f"reject over {self.max_seq_length} tokens"
@@ -201,6 +213,161 @@ class MiniLMEmbedder:
             for index, text in enumerate(texts)
         ]
         return self._encode(validated_texts)
+
+
+class SentenceTransformerTaskEmbedder:
+    """Sentence Transformers backend with optional query/document prefixes."""
+
+    def __init__(
+        self,
+        model_id: str,
+        *,
+        revision: str = "main",
+        query_prefix: str = "",
+        document_prefix: str = "",
+        device: str = "cpu",
+        batch_size: int = 32,
+        local_files_only: bool = False,
+        model=None,
+    ) -> None:
+        for field_name, value in (
+            ("model_id", model_id),
+            ("revision", revision),
+            ("device", device),
+        ):
+            if not isinstance(value, str) or not value.strip():
+                raise ValueError(f"{field_name} must be a non-empty string")
+        for field_name, value in (
+            ("query_prefix", query_prefix),
+            ("document_prefix", document_prefix),
+        ):
+            if not isinstance(value, str):
+                raise TypeError(f"{field_name} must be a string")
+        if isinstance(batch_size, bool) or not isinstance(batch_size, int):
+            raise TypeError("batch_size must be a positive integer")
+        if batch_size <= 0:
+            raise ValueError("batch_size must be a positive integer")
+
+        if model is None:
+            try:
+                from sentence_transformers import SentenceTransformer
+            except ImportError as error:
+                raise RuntimeError(
+                    "SentenceTransformerTaskEmbedder requires the "
+                    "sentence-transformers package"
+                ) from error
+            model = SentenceTransformer(
+                model_id,
+                revision=revision,
+                device=device,
+                local_files_only=local_files_only,
+            )
+
+        self._model = model
+        self.batch_size = batch_size
+        self.query_prefix = query_prefix
+        self.document_prefix = document_prefix
+        self.max_seq_length = getattr(model, "max_seq_length", None)
+        if (
+            isinstance(self.max_seq_length, bool)
+            or not isinstance(self.max_seq_length, int)
+            or self.max_seq_length <= 0
+        ):
+            raise ValueError("model must expose a positive max_seq_length")
+
+        tokenizer = getattr(model, "tokenizer", None)
+        if tokenizer is None:
+            raise ValueError("model must expose its tokenizer")
+        self._tokenizer = tokenizer
+
+        dimension_getter = getattr(model, "get_embedding_dimension", None)
+        if not callable(dimension_getter):
+            dimension_getter = getattr(
+                model, "get_sentence_embedding_dimension", None
+            )
+        if not callable(dimension_getter):
+            raise ValueError("model must expose its sentence embedding dimension")
+        dimension = dimension_getter()
+        if (
+            isinstance(dimension, bool)
+            or not isinstance(dimension, int)
+            or dimension <= 0
+        ):
+            raise ValueError("model must expose a positive embedding dimension")
+
+        self.identity = EmbeddingIdentity(
+            model_id=model_id,
+            revision=_resolved_model_revision(model, revision),
+            preprocessing=(
+                f"query_prefix={query_prefix!r}; "
+                f"document_prefix={document_prefix!r}; "
+                f"max_seq_length={self.max_seq_length}; reject overlong inputs"
+            ),
+            dimension=dimension,
+        )
+
+    def _encode(
+        self, texts: Sequence[str], prefix: str, context: str
+    ) -> list[tuple[float, ...]]:
+        formatted_texts = []
+        for index, text in enumerate(texts):
+            text = _validate_text(text, f"{context} {index}")
+            formatted = f"{prefix}{text}"
+            token_count = len(
+                self._tokenizer.encode(
+                    formatted,
+                    add_special_tokens=True,
+                    truncation=False,
+                )
+            )
+            if token_count > self.max_seq_length:
+                raise InputTooLongError(
+                    f"{context} {index} has {token_count} tokens; "
+                    f"{self.identity.model_id} supports at most "
+                    f"{self.max_seq_length}. The input was not truncated."
+                )
+            formatted_texts.append(formatted)
+        if not formatted_texts:
+            return []
+
+        encoded = self._model.encode(
+            formatted_texts,
+            batch_size=self.batch_size,
+            show_progress_bar=False,
+            convert_to_numpy=True,
+            normalize_embeddings=False,
+        )
+        if hasattr(encoded, "tolist"):
+            encoded = encoded.tolist()
+        try:
+            vectors = [
+                tuple(float(value) for value in vector)
+                for vector in encoded
+            ]
+        except (TypeError, ValueError, OverflowError) as error:
+            raise EmbeddingError(
+                "Sentence Transformer returned invalid vectors"
+            ) from error
+        if len(vectors) != len(formatted_texts):
+            raise EmbeddingError(
+                f"Sentence Transformer returned {len(vectors)} vectors "
+                f"for {len(formatted_texts)} inputs"
+            )
+        return vectors
+
+    def embed(self, text: str) -> Vector:
+        """Embed a single query using the query-specific prefix."""
+        return self.embed_query(text)
+
+    def embed_query(self, text: str) -> Vector:
+        """Embed one query with its configured prefix."""
+        return self._encode([text], self.query_prefix, "query")[0]
+
+    def embed_documents(self, texts: Sequence[str]) -> Sequence[Vector]:
+        """Embed documents with their configured prefix in one batch."""
+        if isinstance(texts, (str, bytes, bytearray)):
+            raise TypeError("texts must be a sequence of strings, not a string")
+        return self._encode(list(texts), self.document_prefix, "document")
 
 
 def _validate_text(text: str, context: str) -> str:

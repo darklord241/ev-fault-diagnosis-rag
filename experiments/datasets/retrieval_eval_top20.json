@@ -1,0 +1,231 @@
+{
+  "version": 1,
+  "status": "gold evidence labels synchronized from retrieval_eval_40.json",
+  "cases": [
+    {
+      "id": "charging-compatible-700w",
+      "query": "Can I use my existing 700W charger with the Ather 450S, and how long will recharging take?",
+      "gold_chunk_ids": [
+        "ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7257_chunk_0",
+        "ather_charging_faqs_8133_chunk_0",
+        "ather_electric_scooter_faqs___support_&_help_center_7257_chunk_0",
+        "ather_electric_scooter_faqs___support_&_help_center_8133_chunk_0"
+      ]
+    },
+    {
+      "id": "fallsafe-rider-fall",
+      "query": "What does FallSafe do when the rider falls?",
+      "gold_chunk_ids": [
+        "ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7252_chunk_0",
+        "ather_electric_scooter_faqs___support_&_help_center_7252_chunk_0"
+      ]
+    },
+    {
+      "id": "eight70-battery-degradation",
+      "query": "What battery degradation protection is described by Eight70 Warranty?",
+      "gold_chunk_ids": [
+        "ather_electric_scooter_faqs___support_&_help_center_7383_chunk_0",
+        "ather_electric_scooter_faqs___support_&_help_center_7406_chunk_0",
+        "battery_warranty_details_for_ather_scooters___faqs_7406_chunk_0"
+      ]
+    },
+    {
+      "id": "charger-amber-light",
+      "query": "What does a solid amber light on the portable charger indicate?",
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_43_chunk_0",
+        "2025-450S-QSG_page_42_chunk_0",
+        "2025-450X-QSG_page_43_chunk_0",
+        "450S_User_Manual_Jan_24_page_41_chunk_0",
+        "450X_Gen_4_2023_QSG_page_41_chunk_0",
+        "Rizta S Quick Start Guide_page_36_chunk_0",
+        "Rizta Z Quick Start Guide_page_39_chunk_0"
+      ]
+    },
+    {
+      "id": "charger-blinking-green",
+      "query": "What does a blinking green charger indicator mean?",
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_43_chunk_0",
+        "2025-450S-QSG_page_42_chunk_0",
+        "2025-450X-QSG_page_43_chunk_0",
+        "450S_User_Manual_Jan_24_page_41_chunk_0",
+        "450X_Gen_4_2023_QSG_page_41_chunk_0",
+        "Rizta S Quick Start Guide_page_36_chunk_0",
+        "Rizta Z Quick Start Guide_page_39_chunk_0",
+        "duomanualvfin_page_3_chunk_0"
+      ]
+    },
+    {
+      "id": "charger-solid-red",
+      "query": "What action is recommended when the portable charger displays a solid red light?",
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_43_chunk_0",
+        "2025-450S-QSG_page_42_chunk_0",
+        "2025-450X-QSG_page_43_chunk_0",
+        "450S_User_Manual_Jan_24_page_41_chunk_0",
+        "450X_Gen_4_2023_QSG_page_41_chunk_0",
+        "Rizta S Quick Start Guide_page_36_chunk_0",
+        "Rizta Z Quick Start Guide_page_39_chunk_0",
+        "duomanualvfin_page_3_chunk_0"
+      ]
+    },
+    {
+      "id": "450x-solo-tyre-pressure",
+      "query": "What tyre pressures are recommended for a solo rider on the Ather 450X?",
+      "gold_chunk_ids": [
+        "2025-450X-QSG_page_20_chunk_0",
+        "450X_Gen_4_2023_QSG_page_20_chunk_0"
+      ]
+    },
+    {
+      "id": "450x-underseat-storage",
+      "query": "What are the under-seat storage volume and maximum load capacity of the Ather 450X?",
+      "gold_chunk_ids": [
+        "2025-450X-QSG_page_15_chunk_0",
+        "450X_Gen_4_2023_QSG_page_15_chunk_0"
+      ]
+    },
+    {
+      "id": "dashboard-software-version",
+      "query": "How can the user find the scooter's software version through the dashboard settings?",
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_17_chunk_0",
+        "2025-450X-QSG_page_17_chunk_0",
+        "450X_Gen_4_2023_QSG_page_17_chunk_0",
+        "Rizta Z Quick Start Guide_page_17_chunk_0"
+      ]
+    },
+    {
+      "id": "combined-braking-system",
+      "query": "How does the Combined Braking System operate when the left-hand lever is used?",
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_11_chunk_0",
+        "2025-450S-QSG_page_11_chunk_0",
+        "2025-450X-QSG_page_11_chunk_0",
+        "450S_User_Manual_Jan_24_page_11_chunk_0",
+        "450X_Gen_4_2023_QSG_page_11_chunk_0",
+        "Rizta S Quick Start Guide_page_11_chunk_0",
+        "Rizta Z Quick Start Guide_page_11_chunk_0"
+      ]
+    },
+    {
+      "id": "charger-amber-confusion",
+      "query": "My charger's indicator has turned amber. Does that mean the charger has developed a fault?",
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_43_chunk_0",
+        "2025-450S-QSG_page_42_chunk_0",
+        "2025-450X-QSG_page_43_chunk_0",
+        "450S_User_Manual_Jan_24_page_41_chunk_0",
+        "450X_Gen_4_2023_QSG_page_41_chunk_0",
+        "Rizta S Quick Start Guide_page_36_chunk_0",
+        "Rizta Z Quick Start Guide_page_39_chunk_0",
+        "duomanualvfin_page_3_chunk_0"
+      ]
+    },
+    {
+      "id": "charger-green-flashing-confusion",
+      "query": "The charger is flashing green. Does this mean charging has finished?",
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_43_chunk_0",
+        "2025-450S-QSG_page_42_chunk_0",
+        "2025-450X-QSG_page_43_chunk_0",
+        "450S_User_Manual_Jan_24_page_41_chunk_0",
+        "450X_Gen_4_2023_QSG_page_41_chunk_0",
+        "Rizta S Quick Start Guide_page_36_chunk_0",
+        "Rizta Z Quick Start Guide_page_39_chunk_0",
+        "duomanualvfin_page_3_chunk_0"
+      ]
+    },
+    {
+      "id": "charger-red-problem",
+      "query": "My portable charger is showing a red light. What should I do next?",
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_43_chunk_0",
+        "2025-450S-QSG_page_42_chunk_0",
+        "2025-450X-QSG_page_43_chunk_0",
+        "450S_User_Manual_Jan_24_page_41_chunk_0",
+        "450X_Gen_4_2023_QSG_page_41_chunk_0",
+        "Rizta S Quick Start Guide_page_36_chunk_0",
+        "Rizta Z Quick Start Guide_page_39_chunk_0",
+        "duomanualvfin_page_3_chunk_0"
+      ]
+    },
+    {
+      "id": "charger-unresponsive",
+      "query": "There is electricity at home, but my charger shows no indicator. How can I troubleshoot this?",
+      "gold_chunk_ids": [
+        "450S_User_Manual_Jan_24_page_41_chunk_0",
+        "450X_Gen_4_2023_QSG_page_41_chunk_0"
+      ]
+    },
+    {
+      "id": "dot-connector-wont-release",
+      "query": "I cannot remove the charging connector from my scooter. How should I release it without forcing it?",
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_42_chunk_0",
+        "2025-450S-QSG_page_41_chunk_0",
+        "2025-450X-QSG_page_42_chunk_0",
+        "450S_User_Manual_Jan_24_page_40_chunk_0",
+        "450X_Gen_4_2023_QSG_page_40_chunk_0",
+        "Rizta S Quick Start Guide_page_35_chunk_0",
+        "Rizta Z Quick Start Guide_page_38_chunk_0"
+      ]
+    },
+    {
+      "id": "solo-rider-inflation",
+      "query": "I'm riding alone on my 450X. What air pressure should I maintain in each tyre?",
+      "gold_chunk_ids": [
+        "2025-450X-QSG_page_20_chunk_0",
+        "450X_Gen_4_2023_QSG_page_20_chunk_0"
+      ]
+    },
+    {
+      "id": "storage-luggage-limit",
+      "query": "How much weight can I put in the storage compartment below the seat?",
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_15_chunk_0",
+        "2025-450S-QSG_page_15_chunk_0",
+        "2025-450X-QSG_page_15_chunk_0",
+        "450S_User_Manual_Jan_24_page_15_chunk_0",
+        "450X_Gen_4_2023_QSG_page_15_chunk_0"
+      ]
+    },
+    {
+      "id": "check-firmware-version",
+      "query": "Where can I check which software version my scooter is currently running?",
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_17_chunk_0",
+        "2025-450X-QSG_page_17_chunk_0",
+        "450X_Gen_4_2023_QSG_page_17_chunk_0",
+        "Rizta Z Quick Start Guide_page_17_chunk_0"
+      ]
+    },
+    {
+      "id": "throttle-slowdown",
+      "query": "Can turning the accelerator grip backwards activate regenerative braking?",
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_33_chunk_0",
+        "2025-450S-QSG_page_14_chunk_0",
+        "2025-450S-QSG_page_33_chunk_0",
+        "450S_User_Manual_Jan_24_page_14_chunk_0",
+        "450S_User_Manual_Jan_24_page_33_chunk_0",
+        "450X_Gen_4_2023_QSG_page_14_chunk_0",
+        "450X_Gen_4_2023_QSG_page_33_chunk_0"
+      ]
+    },
+    {
+      "id": "app-sync-network",
+      "query": "My scooter information is not updating in the Ather app. What connectivity conditions should I check?",
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_18_chunk_0",
+        "2025-450S-QSG_page_18_chunk_0",
+        "2025-450X-QSG_page_18_chunk_0",
+        "450S_User_Manual_Jan_24_page_18_chunk_0",
+        "450X_Gen_4_2023_QSG_page_18_chunk_0",
+        "Rizta S Quick Start Guide_page_16_chunk_0",
+        "Rizta Z Quick Start Guide_page_17_chunk_0"
+      ]
+    }
+  ]
+}
