@@ -2,5 +2,7 @@ fastapi>=0.115.0
 httpx>=0.27.0
 pydantic>=2.9.0
 python-dotenv>=1.0.1
-sentence-transformers>=3.0.0
 uvicorn>=0.30.0
+# Required by current local vector retrieval.
+# May move to ingestion/query-embedding service when DB-backed retrieval is introduced.
+sentence-transformers>=3.0.0
