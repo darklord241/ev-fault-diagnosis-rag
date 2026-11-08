@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from provenance import get_provenance, load_sidecar_metadata
 
 
-DATA_DIR = Path(__file__).resolve().parent / "data"
+DATA_DIR = Path(__file__).resolve().parents[1] / "data"
 RAW_DIR = DATA_DIR / "raw"
 METADATA_DIR = DATA_DIR / "metadata"
 PROCESSED_DIR = DATA_DIR / "processed"

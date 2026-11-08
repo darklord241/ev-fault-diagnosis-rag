@@ -14,7 +14,10 @@ from .retrieval import _validate_chunk
 
 CACHE_VERSION = 1
 DEFAULT_CACHE_PATH = (
-    Path(__file__).resolve().parent.parent / "data" / "embeddings" / "chunk_vectors.json"
+    Path(__file__).resolve().parents[2]
+    / "data"
+    / "embeddings"
+    / "chunk_vectors.json"
 )
 
 

@@ -58,10 +58,9 @@ from scraper.vector_search.retrieval import (
 
 
 SCRIPT_DIR = Path(__file__).resolve().parents[1]
-SCRAPER_DIR = REPOSITORY_ROOT / "scraper"
 DEFAULT_CASES_PATH = SCRIPT_DIR / "datasets" / "retrieval_eval_40.json"
 DEFAULT_ANNOTATIONS_PATH = SCRIPT_DIR / "datasets" / "evaluation_annotations.json"
-DEFAULT_PROCESSED_DIR = SCRAPER_DIR / "data" / "processed"
+DEFAULT_PROCESSED_DIR = REPOSITORY_ROOT / "data" / "processed"
 DEFAULT_OUTPUT_DIR = DEFAULT_RESULTS_DIR / "retrieval_comparison"
 CHUNK_SIZES = (128, 256)
 HYBRID_ALPHAS = (0.3, 0.5, 0.7, 0.9)

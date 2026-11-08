@@ -221,7 +221,7 @@ class EvaluationInputTests(unittest.TestCase):
         cases, annotations = load_evaluation_inputs(
             ROOT / "experiments/datasets/retrieval_eval_40.json",
             ROOT / "experiments/datasets/evaluation_annotations.json",
-            load_chunks(ROOT / "scraper/data/chunked"),
+            load_chunks(ROOT / "data/chunked"),
         )
 
         self.assertEqual(40, len(cases))

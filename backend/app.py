@@ -55,7 +55,7 @@ def _create_retriever():
     from scraper.vector_search.retriever import Retriever
     from scraper.vector_search.retrieval import load_chunks
 
-    chunk_directory = _repo_path("EV_CHUNKED_DIR", "scraper/data/chunked")
+    chunk_directory = _repo_path("EV_CHUNKED_DIR", "data/chunked")
     records = load_chunks(chunk_directory)
     if not records:
         raise RuntimeError(f"No JSONL chunks found in {chunk_directory}")
@@ -65,7 +65,7 @@ def _create_retriever():
         MiniLMEmbedder(local_files_only=True),
         _repo_path(
             "EV_EMBEDDING_CACHE_PATH",
-            "scraper/data/embeddings/chunk_vectors.json",
+            "data/embeddings/chunk_vectors.json",
         ),
     )
 

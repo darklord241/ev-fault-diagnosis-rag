@@ -12,9 +12,17 @@ __pycache__/
 /data/website_payload.json
 /data/website_payload.md
 
-scraper/data/raw/
-scraper/data/incoming/
-scraper/data/processed/
-scraper/data/chunked/
-scraper/data/embeddings/
-scraper/data/metadata/
+/data/raw/
+/data/incoming/
+/data/processed/
+/data/chunked/
+/data/embeddings/
+/data/metadata/*
+!/data/metadata/ather_450_series_faqs___450x_vs_450s,_charging,_warranty.json
+!/data/metadata/ather_charging_faqs.json
+!/data/metadata/ather_ecw_warranty_faqs.json
+!/data/metadata/ather_electric_scooter_faqs___support_&_help_center.json
+!/data/metadata/ather_roadside_assistance_faqs.json
+!/data/metadata/ather_subscription_terms_and_conditions.json
+!/data/metadata/ather_warranty_policy_2024.json
+!/data/metadata/battery_warranty_details_for_ather_scooters___faqs.json

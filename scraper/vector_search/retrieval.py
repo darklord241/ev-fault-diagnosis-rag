@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Callable, Mapping, Protocol, Sequence
 
 
-CHUNKED_DIR = Path(__file__).resolve().parent.parent / "data" / "chunked"
+CHUNKED_DIR = Path(__file__).resolve().parents[2] / "data" / "chunked"
 REQUIRED_CHUNK_FIELDS = {
     "chunk_id",
     "record_id",

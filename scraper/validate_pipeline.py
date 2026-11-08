@@ -9,7 +9,7 @@ from provenance import (
 )
 
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parents[1]
 METADATA_DIR = BASE_DIR / "data" / "metadata"
 PROCESSED_DIR = BASE_DIR / "data" / "processed"
 CHUNKED_DIR = BASE_DIR / "data" / "chunked"

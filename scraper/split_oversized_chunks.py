@@ -4,7 +4,7 @@ import tempfile
 from pathlib import Path
 from transformers import AutoTokenizer
 
-CHUNKED_DIR = Path(__file__).resolve().parent / "data" / "chunked"
+CHUNKED_DIR = Path(__file__).resolve().parents[1] / "data" / "chunked"
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 
 TARGET_TOKENS = 200

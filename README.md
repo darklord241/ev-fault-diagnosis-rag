@@ -83,7 +83,7 @@ The response contains up to five chunks. With live retrieval enabled, each resul
 
 ## Enable live corpus retrieval
 
-The existing retrieval code expects validated JSONL chunks in `scraper/data/chunked/` and the local `sentence-transformers/all-MiniLM-L6-v2` model. The repository intentionally does not track corpus files, embedding caches, or model weights. Obtain authorized corpus files separately and keep them local; if you have a matching embedding cache, place it at `scraper/data/embeddings/chunk_vectors.json`. If no cache is supplied, the retriever builds one from the chunk files and the model.
+The existing retrieval code expects validated JSONL chunks in `data/chunked/` and the local `sentence-transformers/all-MiniLM-L6-v2` model. The repository intentionally does not track corpus files, embedding caches, or model weights. Obtain authorized corpus files separately and keep them local; if you have a matching embedding cache, place it at `data/embeddings/chunk_vectors.json`. If no cache is supplied, the retriever builds one from the chunk files and the model.
 
 1. Prepare authorized chunk JSONL files using the schema in `scraper/vector_search/retrieval.py`.
 2. Install/download the model once into the local Hugging Face model cache:
@@ -107,7 +107,7 @@ flowchart LR
   Pipeline --> Adapter["BackendRetrievalAdapter"]
   Adapter -->|Bearer-authenticated POST /search| Retrieval["Backend retrieval API"]
   Retrieval --> Search["MiniLM + cosine search"]
-  Search --> Chunks["scraper/data/chunked JSONL"]
+  Search --> Chunks["data/chunked JSONL"]
   Pipeline --> Cleaner["RetrievalCleaner"]
   Cleaner --> Summarizer["EVSummarizer"]
   Summarizer --> Result["WebsiteCardPayload + citations"]

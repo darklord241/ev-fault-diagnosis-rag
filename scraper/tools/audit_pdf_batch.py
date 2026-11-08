@@ -7,9 +7,9 @@ import sys
 from pathlib import Path
 
 
-SCRAPER_DIR = Path(__file__).resolve().parent.parent
+REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_INPUT_DIR = (
-    SCRAPER_DIR / "data" / "incoming" / "ather-batch" / "extracted"
+    REPOSITORY_ROOT / "data" / "incoming" / "ather-batch" / "extracted"
 )
 SPECIFICATION_REVIEW_TARGETS = {
     "Ather-450-Spec-Sheet-Oct-2024.pdf",

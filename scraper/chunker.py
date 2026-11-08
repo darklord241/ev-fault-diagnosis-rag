@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-DATA_DIR = Path(__file__).resolve().parent / "data"
+DATA_DIR = Path(__file__).resolve().parents[1] / "data"
 PROCESSED_DIR = DATA_DIR / "processed"
 CHUNKED_DIR = DATA_DIR / "chunked"
 CHUNKED_DIR.mkdir(parents=True, exist_ok=True)

@@ -49,7 +49,7 @@ Is that redundant?
 - This file manages the generation, validation, storage, and reuse of embedding vectors for corpus chunks.
 - It sits between the embedding backend (`embedding.py`) and the retrieval pipeline (`retriever.py`).
 - It prevents unnecessary embedding generation by reusing a valid cache when possible.
-- The default cache is stored at `scraper/data/embeddings/chunk_vectors.json`.
+- The default cache is stored at `data/embeddings/chunk_vectors.json`.
 
 ### important notices
 
