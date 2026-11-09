@@ -1,0 +1,92 @@
+{
+  "run_id": "01",
+  "timestamp_utc": "2026-11-09T09:55:08.244611+00:00",
+  "git_commit": "4ed5fd9087e33c247ff15c39f22dcf69758b7f6c",
+  "runtime": {
+    "python": "3.12.3",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "packages": {
+      "sentence-transformers": "6.2.0",
+      "torch": "2.15.0"
+    }
+  },
+  "config_sha256": "17ac548bf4d395928c9a71603395e470ed94cd905f817e35076450277ebd9976",
+  "input_files": {
+    "evaluation_dataset": {
+      "path": "/home/darklord/el/ev-fault-diagnosis-rag/experiments/datasets/retrieval_eval_40.json",
+      "sha256": "9151ee4e4755fe6ec940b434196f24e63966f195e62d9832e01d40af0a7419ea"
+    },
+    "annotations": {
+      "path": "/home/darklord/el/ev-fault-diagnosis-rag/experiments/datasets/evaluation_annotations.json",
+      "sha256": "8597580bdbe2d7a8375410822d28c9722c31fdeb9dc271fcdaafaee1756041a7"
+    },
+    "model_config": {
+      "path": "/home/darklord/el/ev-fault-diagnosis-rag/experiments/configs/embedding_models.json",
+      "sha256": "735987843d3385b3b07499ba4f467e7ed699e5c57077781b7ee9dfcc4f2a19ef"
+    }
+  },
+  "corpus": {
+    "chunk_directory": "/home/darklord/el/ev-fault-diagnosis-rag/data/chunked",
+    "chunk_count": 891
+  },
+  "benchmark": {
+    "case_count": 40,
+    "scored_query_count": 39,
+    "unscored_null_gold_count": 1,
+    "top_k": 5,
+    "metrics": [
+      "hit_at_1",
+      "hit_at_3",
+      "hit_at_5",
+      "mrr",
+      "ndcg_at_5"
+    ],
+    "bootstrap_samples": 5000,
+    "bootstrap_seed": 20261028,
+    "latency_repeats": 5
+  },
+  "experiment_details": {
+    "model_runtime": {
+      "current": {
+        "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+        "revision": "main",
+        "preprocessing": "sentence-transformers encode; no task prefix; reject over 256 tokens",
+        "dimension": 384,
+        "max_seq_length": 256,
+        "cache_hit": false,
+        "cache_rebuild_reason": "cache does not exist",
+        "cache_path": "/home/darklord/el/ev-fault-diagnosis-rag/data/embeddings/experiments/current.json",
+        "copied_candidate_cache": null
+      },
+      "bge-base": {
+        "model_id": "BAAI/bge-base-en-v1.5",
+        "revision": "main",
+        "preprocessing": "query_prefix=''; document_prefix=''; max_seq_length=512; reject overlong inputs",
+        "dimension": 768,
+        "max_seq_length": 512,
+        "cache_hit": false,
+        "cache_rebuild_reason": "cache does not exist",
+        "cache_path": "/home/darklord/el/ev-fault-diagnosis-rag/data/embeddings/experiments/bge-base.json",
+        "copied_candidate_cache": null
+      },
+      "e5-base": {
+        "model_id": "intfloat/e5-base-v2",
+        "revision": "main",
+        "preprocessing": "query_prefix='query: '; document_prefix='passage: '; max_seq_length=512; reject overlong inputs",
+        "dimension": 768,
+        "max_seq_length": 512,
+        "cache_hit": false,
+        "cache_rebuild_reason": "cache does not exist",
+        "cache_path": "/home/darklord/el/ev-fault-diagnosis-rag/data/embeddings/experiments/e5-base.json",
+        "copied_candidate_cache": null
+      }
+    },
+    "model_order": [
+      "current",
+      "bge-base",
+      "e5-base"
+    ],
+    "reused_cache_candidates": [],
+    "historical_mpnet_results": null
+  }
+}

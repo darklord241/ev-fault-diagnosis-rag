@@ -4,14 +4,11 @@ from __future__ import annotations
 
 import argparse
 import csv
-import importlib.metadata
 import json
 import math
-import platform
 import shutil
 import time
-from dataclasses import dataclass
-from datetime import datetime, timezone
+from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Mapping, Sequence
 
@@ -26,12 +23,12 @@ from experiments.evaluation import (
 )
 from experiments.run_utils import (
     DEFAULT_RESULTS_DIR,
-    REPOSITORY_ROOT,
     create_run_directory,
     file_sha256,
-    git_commit,
-    write_csv,
     write_json,
+    write_metric_plot,
+    write_result_tables,
+    write_run_metadata,
 )
 from scraper.vector_search.embedding import (
     EmbeddingBackend,
@@ -106,13 +103,6 @@ def load_model_specs(path: Path) -> dict[str, ModelSpec]:
     return specs
 
 
-def _package_version(package: str) -> str | None:
-    try:
-        return importlib.metadata.version(package)
-    except importlib.metadata.PackageNotFoundError:
-        return None
-
-
 def create_backend(
     spec: ModelSpec,
     *,
@@ -144,6 +134,75 @@ def _seed_cache(
             shutil.copy2(source, destination)
             return source
     return None
+
+
+def evaluate_embedding_model(
+    model: ModelSpec,
+    chunks: Sequence[Mapping[str, object]],
+    cases: Sequence[Mapping[str, object]],
+    annotations: Mapping[str, Mapping[str, object]],
+    *,
+    cache_path: Path,
+    reuse_caches: Sequence[Path] = (),
+    local_files_only: bool = False,
+    repeats: int = 5,
+) -> tuple[list[dict[str, object]], dict[str, object]]:
+    print(f"Loading embedding model {model.key}: {model.model_id}")
+    backend = create_backend(model, local_files_only=local_files_only)
+    reused_cache = _seed_cache(reuse_caches, cache_path)
+    cache = load_or_build_embeddings(chunks, backend, cache_path)
+    index = CosineIndex(
+        chunks,
+        [cache.vectors_by_chunk_id[str(chunk["chunk_id"])] for chunk in chunks],
+    )
+    model_metadata: dict[str, object] = {
+        "model_id": backend.identity.model_id,
+        "revision": backend.identity.revision,
+        "preprocessing": backend.identity.preprocessing,
+        "dimension": backend.identity.dimension,
+        "max_seq_length": getattr(backend, "max_seq_length", None),
+        "cache_hit": cache.cache_hit,
+        "cache_rebuild_reason": cache.rebuild_reason,
+        "cache_path": str(cache_path),
+        "copied_candidate_cache": str(reused_cache) if reused_cache else None,
+    }
+
+    query_types = {
+        case["id"]: annotations[case["id"]]["query_type"] for case in cases
+    }
+    per_query_rows = []
+    for case in cases:
+        latency_samples = []
+        results: Sequence[SearchResult] = []
+        for _ in range(repeats):
+            started = time.perf_counter()
+            query_vector = embed_query(backend, str(case["query"]))
+            results = index.search(query_vector, top_k=TOP_K)
+            latency_samples.append(time.perf_counter() - started)
+        metrics = (
+            ranking_metrics(
+                [str(result.record["chunk_id"]) for result in results],
+                gold_ids=set(case["gold_chunk_ids"]),
+            )
+            if case["gold_chunk_ids"] is not None
+            else None
+        )
+        per_query_rows.append(
+            _per_query_result(
+                case,
+                str(query_types[case["id"]]),
+                model,
+                backend,
+                results,
+                metrics,
+                math.fsum(latency_samples) / len(latency_samples),
+            )
+        )
+    print(
+        f"Completed {model.key}; cache_hit={cache.cache_hit}; "
+        f"dimension={backend.identity.dimension}"
+    )
+    return per_query_rows, model_metadata
 
 
 def _per_query_result(
@@ -256,48 +315,6 @@ def _aggregate_results(
             row["mean_query_latency_ci_high"] = high if latencies else None
             rows.append(row)
     return rows
-
-
-def _write_plot(
-    path: Path,
-    aggregate_rows: Sequence[Mapping[str, object]],
-    models: Sequence[ModelSpec],
-) -> None:
-    import matplotlib
-
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-
-    overall = {
-        str(row["model_key"]): row
-        for row in aggregate_rows
-        if row["query_type"] == "overall"
-    }
-    figure, axis = plt.subplots(figsize=(11, 6))
-    metrics = ("hit_at_1", "hit_at_3", "hit_at_5", "mrr", "ndcg_at_5")
-    width = 0.8 / len(metrics)
-    positions = list(range(len(models)))
-    for metric_index, metric in enumerate(metrics):
-        offset = (metric_index - (len(metrics) - 1) / 2) * width
-        axis.bar(
-            [position + offset for position in positions],
-            [float(overall[model.key][metric]) for model in models],
-            width,
-            label=metric.replace("_", " "),
-        )
-    axis.set_xticks(
-        positions,
-        [model.key for model in models],
-        rotation=20,
-        ha="right",
-    )
-    axis.set(ylabel="Score", ylim=(0, 1))
-    axis.set_title("Embedding-model retrieval comparison (top 5)")
-    axis.legend(ncols=3)
-    axis.grid(axis="y", alpha=0.25)
-    figure.tight_layout()
-    figure.savefig(path, dpi=160)
-    plt.close(figure)
 
 
 def _write_report(
@@ -586,65 +603,21 @@ def main(argv: Sequence[str] | None = None) -> int:
     EMBEDDING_CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
     metadata: dict[str, dict[str, object]] = {}
-    per_query_rows = []
+    per_query_rows: list[dict[str, object]] = []
     for model in models:
-        print(f"Loading embedding model {model.key}: {model.model_id}")
-        backend = create_backend(
-            model,
-            local_files_only=args.local_files_only,
-        )
         cache_path = EMBEDDING_CACHE_DIR / f"{model.key}.json"
-        reused_cache = _seed_cache(reuse_caches, cache_path)
-        cache = load_or_build_embeddings(chunks, backend, cache_path)
-        index = CosineIndex(
+        model_rows, model_metadata = evaluate_embedding_model(
+            model,
             chunks,
-            [cache.vectors_by_chunk_id[str(chunk["chunk_id"])] for chunk in chunks],
+            cases,
+            annotations,
+            cache_path=cache_path,
+            reuse_caches=reuse_caches,
+            local_files_only=args.local_files_only,
+            repeats=args.repeats,
         )
-        metadata[model.key] = {
-            "model_id": backend.identity.model_id,
-            "revision": backend.identity.revision,
-            "preprocessing": backend.identity.preprocessing,
-            "dimension": backend.identity.dimension,
-            "max_seq_length": getattr(backend, "max_seq_length", None),
-            "cache_hit": cache.cache_hit,
-            "cache_rebuild_reason": cache.rebuild_reason,
-            "cache_path": str(cache_path),
-            "copied_candidate_cache": str(reused_cache) if reused_cache else None,
-        }
-        query_types = {
-            case["id"]: annotations[case["id"]]["query_type"] for case in cases
-        }
-        for case in cases:
-            latency_samples = []
-            results: Sequence[SearchResult] = []
-            for _ in range(args.repeats):
-                started = time.perf_counter()
-                query_vector = embed_query(backend, case["query"])
-                results = index.search(query_vector, top_k=TOP_K)
-                latency_samples.append(time.perf_counter() - started)
-            metrics = (
-                ranking_metrics(
-                    [str(result.record["chunk_id"]) for result in results],
-                    gold_ids=set(case["gold_chunk_ids"]),
-                )
-                if case["gold_chunk_ids"] is not None
-                else None
-            )
-            per_query_rows.append(
-                _per_query_result(
-                    case,
-                    str(query_types[case["id"]]),
-                    model,
-                    backend,
-                    results,
-                    metrics,
-                    math.fsum(latency_samples) / len(latency_samples),
-                )
-            )
-        print(
-            f"Completed {model.key}; cache_hit={cache.cache_hit}; "
-            f"dimension={backend.identity.dimension}"
-        )
+        metadata[model.key] = model_metadata
+        per_query_rows.extend(model_rows)
 
     exact_count = sum(
         annotations[case["id"]]["query_type"] == "exact_term" for case in cases
@@ -662,28 +635,19 @@ def main(argv: Sequence[str] | None = None) -> int:
         bootstrap_samples=args.bootstrap_samples,
         seed=args.seed,
     )
-    write_csv(output_dir / "per_query_results.csv", per_query_rows, require_nonempty=True)
-    write_csv(output_dir / "aggregate_results.csv", aggregate_rows, require_nonempty=True)
-    _write_plot(output_dir / "aggregate_metrics.png", aggregate_rows, models)
-
     config = {
-        "run_id": run_id,
-        "run_date_utc": datetime.now(timezone.utc).isoformat(),
-        "commit_hash": git_commit(REPOSITORY_ROOT),
+        "experiment": "embedding_comparison",
+        "varied_parameter": "embedding_model",
         "objective": "compare encoder embedding models only",
-        "models": metadata,
+        "models": [asdict(model) for model in models],
         "model_order": [model.key for model in models],
-        "chunk_directory": str(args.chunks.resolve()),
-        "chunk_count": len(chunks),
-        "evaluation_dataset": str(cases_path),
-        "evaluation_dataset_sha256": file_sha256(cases_path),
-        "annotations_file": str(annotations_path),
-        "annotations_sha256": file_sha256(annotations_path),
-        "model_config": str(config_path),
-        "model_config_sha256": file_sha256(config_path),
-        "scored_query_count": scored_count,
-        "unscored_null_gold_count": len(cases) - scored_count,
-        "top_k": TOP_K,
+        "retrieval": {"method": "dense_cosine", "top_k": TOP_K},
+        "benchmark": {
+            "dataset": "retrieval_eval_40.json",
+            "case_count": len(cases),
+            "scored_query_count": scored_count,
+            "unscored_null_gold_count": len(cases) - scored_count,
+        },
         "metrics": list(METRICS),
         "latency_repeats": args.repeats,
         "bootstrap_samples": args.bootstrap_samples,
@@ -699,12 +663,35 @@ def main(argv: Sequence[str] | None = None) -> int:
             "pdf_chunk_words": 600,
             "pdf_overlap_words": 100,
         },
-        "runtime": {
-            "python": platform.python_version(),
-            "platform": platform.platform(),
-            "sentence_transformers": _package_version("sentence-transformers"),
-            "torch": _package_version("torch"),
-        },
+    }
+    write_json(output_dir / "config.json", config)
+    write_result_tables(output_dir, aggregate_rows, per_query_rows)
+    write_metric_plot(
+        output_dir / "aggregate_metrics.png",
+        aggregate_rows,
+        [model.key for model in models],
+        title="Embedding-model retrieval comparison (top 5)",
+    )
+    _write_report(
+        output_dir / "report.md",
+        models=models,
+        model_metadata=metadata,
+        aggregate_rows=aggregate_rows,
+        per_query_rows=per_query_rows,
+        historical_mpnet_rows=historical_mpnet_rows,
+        run_id=run_id,
+    )
+
+    input_files = {
+        "evaluation_dataset": cases_path,
+        "annotations": annotations_path,
+        "model_config": config_path,
+    }
+    if historical_mpnet_path is not None:
+        input_files["historical_mpnet_results"] = historical_mpnet_path
+    experiment_details = {
+        "model_runtime": metadata,
+        "model_order": [model.key for model in models],
         "reused_cache_candidates": [str(path) for path in reuse_caches],
         "historical_mpnet_results": (
             {
@@ -719,23 +706,28 @@ def main(argv: Sequence[str] | None = None) -> int:
             if historical_mpnet_path is not None
             else None
         ),
-        "outputs": {
-            "per_query": "per_query_results.csv",
-            "aggregate": "aggregate_results.csv",
-            "report": "report.md",
-            "plot": "aggregate_metrics.png",
-            "raw_per_query": "per_query_results.csv",
-        },
     }
-    write_json(output_dir / "config.json", config)
-    _write_report(
-        output_dir / "report.md",
-        models=models,
-        model_metadata=metadata,
-        aggregate_rows=aggregate_rows,
-        per_query_rows=per_query_rows,
-        historical_mpnet_rows=historical_mpnet_rows,
+    write_run_metadata(
+        output_dir,
         run_id=run_id,
+        config_path=output_dir / "config.json",
+        input_files=input_files,
+        corpus={
+            "chunk_directory": str(args.chunks.resolve()),
+            "chunk_count": len(chunks),
+        },
+        benchmark={
+            "case_count": len(cases),
+            "scored_query_count": scored_count,
+            "unscored_null_gold_count": len(cases) - scored_count,
+            "top_k": TOP_K,
+            "metrics": list(METRICS),
+            "bootstrap_samples": args.bootstrap_samples,
+            "bootstrap_seed": args.seed,
+            "latency_repeats": args.repeats,
+        },
+        packages=("sentence-transformers", "torch"),
+        experiment_details=experiment_details,
     )
     print(f"Aggregate results: {output_dir / 'aggregate_results.csv'}")
     print(f"Per-query results: {output_dir / 'per_query_results.csv'}")

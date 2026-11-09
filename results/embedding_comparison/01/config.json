@@ -1,0 +1,64 @@
+{
+  "experiment": "embedding_comparison",
+  "varied_parameter": "embedding_model",
+  "objective": "compare encoder embedding models only",
+  "models": [
+    {
+      "key": "current",
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "query_prefix": "",
+      "document_prefix": "",
+      "revision": "main"
+    },
+    {
+      "key": "bge-base",
+      "model_id": "BAAI/bge-base-en-v1.5",
+      "query_prefix": "",
+      "document_prefix": "",
+      "revision": "main"
+    },
+    {
+      "key": "e5-base",
+      "model_id": "intfloat/e5-base-v2",
+      "query_prefix": "query: ",
+      "document_prefix": "passage: ",
+      "revision": "main"
+    }
+  ],
+  "model_order": [
+    "current",
+    "bge-base",
+    "e5-base"
+  ],
+  "retrieval": {
+    "method": "dense_cosine",
+    "top_k": 5
+  },
+  "benchmark": {
+    "dataset": "retrieval_eval_40.json",
+    "case_count": 40,
+    "scored_query_count": 39,
+    "unscored_null_gold_count": 1
+  },
+  "metrics": [
+    "hit_at_1",
+    "hit_at_3",
+    "hit_at_5",
+    "mrr",
+    "ndcg_at_5"
+  ],
+  "latency_repeats": 5,
+  "bootstrap_samples": 5000,
+  "bootstrap_seed": 20261028,
+  "controlled_variables": [
+    "same corpus and chunk IDs",
+    "same query texts and gold labels",
+    "same exact cosine index and top-k",
+    "same CPU and batch settings"
+  ],
+  "chunking": {
+    "faq": "one self-contained chunk per record",
+    "pdf_chunk_words": 600,
+    "pdf_overlap_words": 100
+  }
+}

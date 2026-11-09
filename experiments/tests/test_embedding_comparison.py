@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 from experiments.evaluation import ranking_metrics
-from experiments.runners.compare_embeddings import (
+from experiments.runners.embedding_comparison import (
     _aggregate_results,
     _per_query_result,
     load_model_specs,

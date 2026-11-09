@@ -1,0 +1,31 @@
+{
+  "experiment": "baseline",
+  "varied_parameter": null,
+  "embedding_model": {
+    "key": "current",
+    "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "query_prefix": "",
+    "document_prefix": "",
+    "revision": "main"
+  },
+  "retrieval": {
+    "method": "dense_cosine",
+    "top_k": 5
+  },
+  "benchmark": {
+    "dataset": "retrieval_eval_40.json",
+    "case_count": 40,
+    "scored_query_count": 39,
+    "unscored_null_gold_count": 1
+  },
+  "metrics": [
+    "hit_at_1",
+    "hit_at_3",
+    "hit_at_5",
+    "mrr",
+    "ndcg_at_5"
+  ],
+  "latency_repeats": 5,
+  "bootstrap_samples": 5000,
+  "bootstrap_seed": 20261028
+}
