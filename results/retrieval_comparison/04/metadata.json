@@ -1,0 +1,70 @@
+{
+  "run_id": "04",
+  "timestamp_utc": "2026-11-11T19:20:01.690245+00:00",
+  "git_commit": "a6cd4631ebc07c26e491ecd3309a452a26edc605",
+  "runtime": {
+    "python": "3.12.3",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "packages": {
+      "rank-bm25": "0.2.2",
+      "sentence-transformers": "6.2.0",
+      "transformers": "5.22.2"
+    }
+  },
+  "config_sha256": "9474ec63d4ac4d3049b55d5fa086a64db4674b623c21a6a59ad20d1386349798",
+  "input_files": {
+    "benchmark": {
+      "path": "/home/darklord/el/ev-fault-diagnosis-rag/experiments/datasets/retrieval_eval_40.json",
+      "sha256": "9151ee4e4755fe6ec940b434196f24e63966f195e62d9832e01d40af0a7419ea"
+    },
+    "annotations": {
+      "path": "/home/darklord/el/ev-fault-diagnosis-rag/experiments/datasets/evaluation_annotations.json",
+      "sha256": "8597580bdbe2d7a8375410822d28c9722c31fdeb9dc271fcdaafaee1756041a7"
+    }
+  },
+  "corpus": {
+    "chunk_directory": "/home/darklord/el/ev-fault-diagnosis-rag/data/chunked",
+    "chunk_count": 891,
+    "sha256": "a4bd74635bce4a1ba56ab6b5b496b4e29d4ed8243b13a4d9538fe84197822810"
+  },
+  "benchmark": {
+    "query_count": 40,
+    "scored_query_count": 39,
+    "metrics": [
+      "hit_at_1",
+      "hit_at_3",
+      "hit_at_5",
+      "recall_at_5",
+      "recall_at_10",
+      "recall_at_20",
+      "mrr_at_5",
+      "ndcg_at_10"
+    ]
+  },
+  "experiment_details": {
+    "embedding_model": {
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "main",
+      "preprocessing": "sentence-transformers encode; no task prefix; reject over 256 tokens"
+    },
+    "reranker": {
+      "model_id": "BAAI/bge-reranker-base",
+      "revision": "main",
+      "candidate_pool_size": 20,
+      "final_top_k": 5,
+      "loaded": true,
+      "load_error": null,
+      "download_allowed": false
+    },
+    "bm25": {
+      "implementation": "rank_bm25.BM25Okapi",
+      "k1": 1.2,
+      "b": 0.75
+    },
+    "rrf": {
+      "formula": "sum(1 / (k + one_based_rank))",
+      "k": 60
+    },
+    "cache_hit": true
+  }
+}

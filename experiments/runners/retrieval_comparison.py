@@ -207,6 +207,7 @@ def rerank_candidates(
         (query, str(result.record["text"]))
         for result in selected
     ]
+    print(f"  Cross-encoder: scoring {len(pairs)} candidates")
     scores = reranker.predict(
         pairs,
         batch_size=RERANKER_BATCH_SIZE,
@@ -309,6 +310,7 @@ def _query_rankings(
     bm25_index: BM25Okapi,
     reranker: CrossEncoderLike | None,
     repeats: int,
+    query_progress: tuple[int, int] | None = None,
 ) -> tuple[dict[str, list[SearchResult]], dict[str, float | None]]:
     dense_r1, latency_r1 = _timed_retrieval(
         lambda: _dense_rank(retriever, query),
@@ -351,6 +353,13 @@ def _query_rankings(
         "R6": None,
     }
     if reranker is not None:
+        if query_progress is not None:
+            print(
+                f"[query {query_progress[0]}/{query_progress[1]}] "
+                f"R5 dense -> cross-encoder: scoring "
+                f"{CANDIDATE_POOL_SIZE} candidates"
+            )
+        r5_started = time.perf_counter()
         r5_top20, latency_r5 = _timed_retrieval(
             lambda: rerank_candidates(
                 query,
@@ -359,6 +368,17 @@ def _query_rankings(
             ),
             repeats=repeats,
         )
+        if query_progress is not None:
+            print(
+                f"[query {query_progress[0]}/{query_progress[1]}] "
+                f"R5 completed in {time.perf_counter() - r5_started:.2f}s"
+            )
+            print(
+                f"[query {query_progress[0]}/{query_progress[1]}] "
+                f"R6 RRF -> cross-encoder: scoring "
+                f"{CANDIDATE_POOL_SIZE} candidates"
+            )
+        r6_started = time.perf_counter()
         r6_top20, latency_r6 = _timed_retrieval(
             lambda: rerank_candidates(
                 query,
@@ -381,6 +401,11 @@ def _query_rankings(
             ),
             repeats=repeats,
         )
+        if query_progress is not None:
+            print(
+                f"[query {query_progress[0]}/{query_progress[1]}] "
+                f"R6 completed in {time.perf_counter() - r6_started:.2f}s"
+            )
         rankings["R5"] = r5_top20
         rankings["R6"] = r6_top20
         latencies["R5"] = latency_r5
@@ -716,7 +741,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     query_types = {
         case["id"]: annotations[case["id"]]["query_type"] for case in cases
     }
-    for case in cases:
+    for query_index, case in enumerate(cases, start=1):
+        print(
+            f"[query {query_index}/{len(cases)}] "
+            f"query_id={case['id']}"
+        )
         rankings, latencies = _query_rankings(
             str(case["query"]),
             retriever=retriever,
@@ -724,6 +753,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             bm25_index=bm25_index,
             reranker=reranker,
             repeats=args.repeats,
+            query_progress=(query_index, len(cases)),
         )
         r1_results = [
             (result.record["chunk_id"], result.score)
