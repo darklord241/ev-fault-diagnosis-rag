@@ -1,0 +1,103 @@
+{
+  "experiment": "retrieval_comparison",
+  "run_id": "04",
+  "embedding": {
+    "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "main",
+    "preprocessing": "sentence-transformers encode; no task prefix; reject over 256 tokens",
+    "dimension": 384,
+    "cache_path": "/home/darklord/el/ev-fault-diagnosis-rag/data/embeddings/chunk_vectors.json"
+  },
+  "corpus": {
+    "chunk_directory": "/home/darklord/el/ev-fault-diagnosis-rag/data/chunked",
+    "chunk_count": 891,
+    "sha256": "a4bd74635bce4a1ba56ab6b5b496b4e29d4ed8243b13a4d9538fe84197822810"
+  },
+  "benchmark": {
+    "dataset": "/home/darklord/el/ev-fault-diagnosis-rag/experiments/datasets/retrieval_eval_40.json",
+    "dataset_sha256": "9151ee4e4755fe6ec940b434196f24e63966f195e62d9832e01d40af0a7419ea",
+    "annotation_file": "/home/darklord/el/ev-fault-diagnosis-rag/experiments/datasets/evaluation_annotations.json",
+    "annotation_sha256": "8597580bdbe2d7a8375410822d28c9722c31fdeb9dc271fcdaafaee1756041a7",
+    "query_count": 40,
+    "scored_query_count": 39,
+    "null_gold_query_count": 1
+  },
+  "methods": [
+    {
+      "method": "R1",
+      "name": "current_baseline",
+      "retrieval": "production_dense_cosine"
+    },
+    {
+      "method": "R2",
+      "name": "dense_cosine",
+      "retrieval": "dense_cosine"
+    },
+    {
+      "method": "R3",
+      "name": "bm25",
+      "retrieval": "bm25",
+      "k1": 1.2,
+      "b": 0.75
+    },
+    {
+      "method": "R4",
+      "name": "dense_bm25_rrf",
+      "retrieval": "reciprocal_rank_fusion",
+      "rrf_k": 60
+    },
+    {
+      "method": "R5",
+      "name": "dense_cross_encoder",
+      "retrieval": "dense_then_cross_encoder",
+      "candidate_pool_size": 20,
+      "final_top_k": 5,
+      "reranker_model_id": "BAAI/bge-reranker-base",
+      "reranker_revision": "main"
+    },
+    {
+      "method": "R6",
+      "name": "dense_bm25_rrf_cross_encoder",
+      "retrieval": "rrf_then_cross_encoder",
+      "rrf_k": 60,
+      "candidate_pool_size": 20,
+      "final_top_k": 5,
+      "reranker_model_id": "BAAI/bge-reranker-base",
+      "reranker_revision": "main"
+    }
+  ],
+  "bm25": {
+    "implementation": "rank_bm25.BM25Okapi",
+    "k1": 1.2,
+    "b": 0.75
+  },
+  "rrf": {
+    "formula": "sum(1 / (k + one_based_rank))",
+    "k": 60
+  },
+  "reranker": {
+    "model_id": "BAAI/bge-reranker-base",
+    "revision": "main",
+    "candidate_pool_size": 20,
+    "final_top_k": 5,
+    "loaded": true,
+    "load_error": null,
+    "download_allowed": false
+  },
+  "evaluation": {
+    "metrics": [
+      "hit_at_1",
+      "hit_at_3",
+      "hit_at_5",
+      "recall_at_5",
+      "recall_at_10",
+      "recall_at_20",
+      "mrr_at_5",
+      "ndcg_at_10"
+    ],
+    "final_top_k": 5,
+    "latency_repeats": 1,
+    "bootstrap_samples": 5000,
+    "bootstrap_seed": 20261028
+  }
+}

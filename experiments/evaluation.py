@@ -16,6 +16,16 @@ BOOTSTRAP_SAMPLES = 5000
 BOOTSTRAP_SEED = 20261028
 TOKEN_PATTERN = re.compile(r"(?u)\b[\w]+(?:[.-][\w]+)*\b")
 METRICS = ("hit_at_1", "hit_at_3", "hit_at_5", "mrr", "ndcg_at_5")
+RETRIEVAL_METHOD_METRICS = (
+    "hit_at_1",
+    "hit_at_3",
+    "hit_at_5",
+    "recall_at_5",
+    "recall_at_10",
+    "recall_at_20",
+    "mrr_at_5",
+    "ndcg_at_10",
+)
 
 
 class EvaluationInputError(ValueError):
@@ -146,6 +156,42 @@ def ranking_metrics(
         "mrr": 1.0 / first_rank if first_rank is not None else 0.0,
         "ndcg_at_5": dcg / ideal_dcg if ideal_dcg else 0.0,
         "first_relevant_rank": first_rank,
+    }
+
+
+def retrieval_method_metrics(
+    ranked_ids: Sequence[str],
+    *,
+    gold_ids: set[str],
+) -> dict[str, float | int | None]:
+    """Return existing top-five metrics and extended recall/nDCG cutoffs."""
+    existing = ranking_metrics(ranked_ids[:TOP_K], gold_ids=gold_ids)
+    if not gold_ids:
+        raise ValueError("gold_ids must not be empty")
+
+    retrieved_relevant = [
+        chunk_id in gold_ids for chunk_id in ranked_ids[:20]
+    ]
+    ndcg_relevant = retrieved_relevant[:10]
+    dcg = math.fsum(
+        1.0 / math.log2(rank + 1)
+        for rank, is_relevant in enumerate(ndcg_relevant, start=1)
+        if is_relevant
+    )
+    ideal_relevant = min(10, len(gold_ids))
+    ideal_dcg = math.fsum(
+        1.0 / math.log2(rank + 1)
+        for rank in range(1, ideal_relevant + 1)
+    )
+    return {
+        "hit_at_1": existing["hit_at_1"],
+        "hit_at_3": existing["hit_at_3"],
+        "hit_at_5": existing["hit_at_5"],
+        "recall_at_5": sum(retrieved_relevant[:5]) / len(gold_ids),
+        "recall_at_10": sum(retrieved_relevant[:10]) / len(gold_ids),
+        "recall_at_20": sum(retrieved_relevant[:20]) / len(gold_ids),
+        "mrr_at_5": existing["mrr"],
+        "ndcg_at_10": dcg / ideal_dcg if ideal_dcg else 0.0,
     }
 
 
