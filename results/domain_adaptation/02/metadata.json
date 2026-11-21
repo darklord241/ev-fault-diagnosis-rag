@@ -1,0 +1,35 @@
+{
+  "run_id": "02",
+  "timestamp_utc": "2026-11-21T06:30:39.574739+00:00",
+  "git_commit": "f248c3249fb82921f2d66403c300436cf07519d3",
+  "runtime": {
+    "python": "3.13.5",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "sentence_transformers": "6.2.0",
+      "torch": "2.15.0",
+      "transformers": "5.21.0"
+    }
+  },
+  "config_sha256": "cf8bfbdbd5fb00c491fdd2b0d7f65652504a680b080a494557802dc05c7a2a05",
+  "input_files": {
+    "cases": {
+      "path": "C:\\Users\\Abhay\\Desktop\\Projects\\ev-fault-diagnosis-rag\\experiments\\datasets\\retrieval_eval_40.json",
+      "sha256": "e1225c29aedc99341d66a46085f8e7c73cf53c07557637c71cab93e5e170249b"
+    },
+    "annotations": {
+      "path": "C:\\Users\\Abhay\\Desktop\\Projects\\ev-fault-diagnosis-rag\\experiments\\datasets\\evaluation_annotations.json",
+      "sha256": "cee030cdef53e8a3d35eab68812b2c29b09a1ebfd146a69f31c6a6c0cbe8187b"
+    }
+  },
+  "corpus": {
+    "chunk_count": 891,
+    "chunk_dir": "C:\\Users\\Abhay\\Desktop\\Projects\\ev-fault-diagnosis-rag\\data\\chunked"
+  },
+  "benchmark": {
+    "case_count": 40
+  },
+  "experiment_details": {
+    "type": "domain_adaptation"
+  }
+}

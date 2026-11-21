@@ -354,8 +354,13 @@ def write_report(
         "",
         "| Model | Model identifier | Revision | Dimension | Parameter Count |",
         "|---|---|---|---:|---:|",
-        "| pretrained | sentence-transformers/all-MiniLM-L6-v2 | main | 384 | 22.7M |",
-        "| domain_adapted | experiments/models/minilm_ev_domain_adapted | local | 384 | 22.7M |",
+    ])
+    for model in models:
+        meta = model_metadata[model.key]
+        lines.append(
+            f"| {model.key} | {meta['model_id']} | {meta['revision']} | {meta['dimension']} | 22.7M |"
+        )
+    lines.extend([
         "",
         "## Hit@3 changes versus pretrained baseline",
         "",
@@ -366,24 +371,29 @@ def write_report(
         for row in per_query_rows
         if row["model_key"] == "pretrained" and row["status"] == "scored"
     }
-    ft_rows = [
-        row for row in per_query_rows
-        if row["model_key"] == "domain_adapted" and row["status"] == "scored"
-    ]
-    base_only = []
-    ft_only = []
-    for row in ft_rows:
-        qid = str(row["query_id"])
-        base = base_by_id[qid]
-        base_hit = int(float(base["hit_at_3"]))
-        ft_hit = int(float(row["hit_at_3"]))
-        if base_hit and not ft_hit:
-            base_only.append(qid)
-        elif ft_hit and not base_hit:
-            ft_only.append(qid)
-
-    lines.append(f"- **Pretrained-only Hit@3 cases:** {', '.join(base_only) if base_only else 'none'}")
-    lines.append(f"- **Domain-adapted-only Hit@3 cases:** {', '.join(ft_only) if ft_only else 'none'}")
+    for model in models:
+        if model.key == "pretrained":
+            continue
+        ft_rows = [
+            row for row in per_query_rows
+            if row["model_key"] == model.key and row["status"] == "scored"
+        ]
+        base_only = []
+        ft_only = []
+        for row in ft_rows:
+            qid = str(row["query_id"])
+            if qid not in base_by_id:
+                continue
+            base = base_by_id[qid]
+            base_hit = int(float(base["hit_at_3"]))
+            ft_hit = int(float(row["hit_at_3"]))
+            if base_hit and not ft_hit:
+                base_only.append(qid)
+            elif ft_hit and not base_hit:
+                ft_only.append(qid)
+        lines.append(f"- **{model.key} vs pretrained:**")
+        lines.append(f"  - Pretrained-only Hit@3: {', '.join(base_only) if base_only else 'none'}")
+        lines.append(f"  - {model.key}-only Hit@3: {', '.join(ft_only) if ft_only else 'none'}")
     lines.append("")
     lines.append("## Statistical Summary & Reproducibility")
     lines.append("- Both models were evaluated on identical hardware, indexing the same 891 corpus chunks.")

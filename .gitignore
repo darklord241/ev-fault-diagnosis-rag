@@ -26,3 +26,9 @@ __pycache__/
 !/data/metadata/ather_subscription_terms_and_conditions.json
 !/data/metadata/ather_warranty_policy_2024.json
 !/data/metadata/battery_warranty_details_for_ather_scooters___faqs.json
+
+# Model checkpoints and weights
+experiments/models/
+*.safetensors
+*.bin
+*.pt
