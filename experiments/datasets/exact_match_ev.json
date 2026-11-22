@@ -1,0 +1,220 @@
+[
+  {
+    "id": "charging-compatible-700w",
+    "split": "pilot",
+    "fact_id": "700w-full",
+    "query": "How long does an Ather 450S take to charge from 0% to 100% using the older Ather 700W charger?",
+    "accepted": [
+      "270 min"
+    ],
+    "source_id": "ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7257_chunk_0",
+    "source_marker": "4 hr 30 min"
+  },
+  {
+    "id": "eight70-battery-degradation",
+    "split": "pilot",
+    "fact_id": "eight70-distance",
+    "query": "What is the mileage limit of the Ather Eight70 battery warranty?",
+    "accepted": [
+      "80000 km"
+    ],
+    "source_id": "ather_electric_scooter_faqs___support_&_help_center_7383_chunk_0",
+    "source_marker": "80 000 km"
+  },
+  {
+    "id": "battery-capacity-warranty",
+    "split": "pilot",
+    "fact_id": "2024-degradation",
+    "query": "What is the maximum battery-capacity degradation percentage specified in the 2024 Ather warranty policy?",
+    "accepted": [
+      "30%"
+    ],
+    "source_id": "ather_warranty_policy_2024_page_2_chunk_0_split_1",
+    "source_marker": "30%"
+  },
+  {
+    "id": "left-lever-both-wheels",
+    "split": "pilot",
+    "fact_id": "combined-brakes",
+    "query": "Does pulling the left-hand brake lever apply braking to both wheels?",
+    "accepted": [
+      "yes"
+    ],
+    "source_id": "2025-450-Apex-QSG_page_11_chunk_0",
+    "source_marker": "both the wheels"
+  },
+  {
+    "id": "charger-no-light-prcd",
+    "split": "pilot",
+    "fact_id": "prcd-label",
+    "query": "Which device has the reset button to press when the Ather 450S portable charger is unlit despite household power?",
+    "accepted": [
+      "PRCD",
+      "portable residual current device"
+    ],
+    "source_id": "450S_User_Manual_Jan_24_page_41_chunk_0",
+    "source_marker": "Reset button on the PRCD"
+  },
+  {
+    "id": "charging-time-450s",
+    "split": "main",
+    "fact_id": "450s-home-80",
+    "query": "According to the Ather 450S FAQ, how long does standard home charging take from 0% to 80%?",
+    "accepted": [
+      "396 min"
+    ],
+    "source_id": "ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7262_chunk_0",
+    "source_marker": "6 hr 36 min"
+  },
+  {
+    "id": "charging-time-plain-language",
+    "split": "main",
+    "fact_id": "450s-home-80",
+    "query": "How long should I expect to wait for my Ather 450S to go from empty to 80% using standard home charging, according to the FAQ?",
+    "accepted": [
+      "396 min"
+    ],
+    "source_id": "ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7262_chunk_0",
+    "source_marker": "6 hr 36 min"
+  },
+  {
+    "id": "charger-amber-light",
+    "split": "main",
+    "fact_id": "amber",
+    "query": "What does a solid amber light on the portable charger indicate?",
+    "accepted": [
+      "software update",
+      "charger software update",
+      "over-the-air software update",
+      "firmware update",
+      "charger firmware update",
+      "software is being updated over the air",
+      "charger software is being updated over the air",
+      "software update in progress",
+      "firmware update in progress",
+      "ota update"
+    ],
+    "source_id": "2025-450-Apex-QSG_page_43_chunk_0",
+    "source_marker": "Solid amber light"
+  },
+  {
+    "id": "charger-amber-confusion",
+    "split": "main",
+    "fact_id": "amber",
+    "query": "My Ather portable charger shows a steady amber light. What process is happening?",
+    "accepted": [
+      "software update",
+      "charger software update",
+      "over-the-air software update",
+      "firmware update",
+      "charger firmware update",
+      "software is being updated over the air",
+      "charger software is being updated over the air",
+      "software update in progress",
+      "firmware update in progress",
+      "ota update"
+    ],
+    "source_id": "2025-450-Apex-QSG_page_43_chunk_0",
+    "source_marker": "Solid amber light"
+  },
+  {
+    "id": "charger-blinking-green",
+    "split": "main",
+    "fact_id": "blinking-green",
+    "query": "What does a blinking green charger indicator mean?",
+    "accepted": [
+      "charging",
+      "charging in progress",
+      "charger is charging",
+      "scooter is charging",
+      "charging is in progress"
+    ],
+    "source_id": "2025-450-Apex-QSG_page_43_chunk_0",
+    "source_marker": "Charging in progress"
+  },
+  {
+    "id": "charger-green-flashing-confusion",
+    "split": "main",
+    "fact_id": "blinking-green",
+    "query": "The LED on my Ather portable charger is flashing green. What charging state does that mean?",
+    "accepted": [
+      "charging",
+      "charging in progress",
+      "charger is charging",
+      "scooter is charging",
+      "charging is in progress"
+    ],
+    "source_id": "2025-450-Apex-QSG_page_43_chunk_0",
+    "source_marker": "Charging in progress"
+  },
+  {
+    "id": "450x-solo-tyre-pressure",
+    "split": "main",
+    "fact_id": "solo-rear",
+    "query": "What rear tyre pressure is recommended for a solo rider in the 2025 Ather 450X quick-start guide?",
+    "accepted": [
+      "28 psi"
+    ],
+    "source_id": "2025-450X-QSG_page_20_chunk_0",
+    "source_marker": "28 PSI back"
+  },
+  {
+    "id": "450x-pillion-tyre-pressure",
+    "split": "main",
+    "fact_id": "pillion-rear",
+    "query": "What rear tyre pressure is recommended with a pillion in the 2025 Ather 450X quick-start guide?",
+    "accepted": [
+      "32 psi"
+    ],
+    "source_id": "2025-450X-QSG_page_20_chunk_0",
+    "source_marker": "32 PSI back"
+  },
+  {
+    "id": "storage-luggage-limit",
+    "split": "main",
+    "fact_id": "storage-mass",
+    "query": "What is the maximum under-seat storage load in the 2025 Ather 450 Apex quick-start guide?",
+    "accepted": [
+      "15 kg"
+    ],
+    "source_id": "2025-450-Apex-QSG_page_15_chunk_0",
+    "source_marker": "15 kg"
+  },
+  {
+    "id": "450x-underseat-storage",
+    "split": "main",
+    "fact_id": "storage-volume",
+    "query": "What is the under-seat storage volume in the 2025 Ather 450X quick-start guide?",
+    "accepted": [
+      "22 L"
+    ],
+    "source_id": "2025-450X-QSG_page_15_chunk_0",
+    "source_marker": "22L"
+  },
+  {
+    "id": "throttle-slowdown",
+    "split": "main",
+    "fact_id": "reverse-throttle",
+    "query": "Can turning the accelerator grip backwards activate regenerative braking?",
+    "accepted": [
+      "yes"
+    ],
+    "source_id": "2025-450-Apex-QSG_page_33_chunk_0",
+    "source_marker": "regenerative braking"
+  },
+  {
+    "id": "high-voltage-service",
+    "split": "main",
+    "fact_id": "authorized-service",
+    "query": "Who is authorised to service high-voltage components such as the battery pack and motor?",
+    "accepted": [
+      "ather technicians",
+      "an ather technician",
+      "ather technician",
+      "authorized ather technicians",
+      "authorised ather technicians"
+    ],
+    "source_id": "2025-450-Apex-QSG_page_5_chunk_0",
+    "source_marker": "Ather technicians"
+  }
+]

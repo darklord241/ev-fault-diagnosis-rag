@@ -1,0 +1,447 @@
+{
+  "corpus_sha256": "85574aa3fc4ce776f080ef687ccf99dfd1978b55d116bdb69473d871d0cf578a",
+  "cases": {
+    "charging-compatible-700w": {
+      "query": "How long does an Ather 450S take to charge from 0% to 100% using the older Ather 700W charger?",
+      "retrieval_seconds": 1.02157289999991,
+      "passages": [
+        {
+          "id": "ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7257_chunk_0",
+          "text": "Can I use my existing Ather\u2019s 700W charger to charge the Ather 450S? If yes, how long will it take to recharge?\n\nOf course you can use the old 700W charger as it is compatible with all new Ather scooters. It will take 4 hr 30 min to charge from 0 to 100% and 3 hr 30 min to charge from 0%-80%."
+        },
+        {
+          "id": "ather_charging_faqs_8133_chunk_0",
+          "text": "Can I use my existing Ather\u2019s 700W charger to charge the Ather 450S? If yes, how long will it take to recharge?\n\nOf course you can use the old 700W charger as it is compatible with all new Ather scooters. It will take 4 hr 30 min to charge from 0 to 100% and 3 hr 30 min to charge from 0%-80%."
+        },
+        {
+          "id": "ather_electric_scooter_faqs___support_&_help_center_7257_chunk_0",
+          "text": "Can I use my existing Ather\u2019s 700W charger to charge the Ather 450S? If yes, how long will it take to recharge?\n\nOf course you can use the old 700W charger as it is compatible with all new Ather scooters. It will take 4 hr 30 min to charge from 0 to 100% and 3 hr 30 min to charge from 0%-80%."
+        },
+        {
+          "id": "ather_electric_scooter_faqs___support_&_help_center_8133_chunk_0",
+          "text": "Can I use my existing Ather\u2019s 700W charger to charge the Ather 450S? If yes, how long will it take to recharge?\n\nOf course you can use the old 700W charger as it is compatible with all new Ather scooters. It will take 4 hr 30 min to charge from 0 to 100% and 3 hr 30 min to charge from 0%-80%."
+        },
+        {
+          "id": "ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7262_chunk_0",
+          "text": "How long does it take to charge the Ather 450S?\n\nHome charging: 0-80% in 6 hr 36 min | 0-100% in 8 hr 36 min Fast charging speed at Ather Grid\u2122 is the same as the Ather 450X."
+        }
+      ]
+    },
+    "eight70-battery-degradation": {
+      "query": "What is the mileage limit of the Ather Eight70 battery warranty?",
+      "retrieval_seconds": 1.5593454999998357,
+      "passages": [
+        {
+          "id": "ather_electric_scooter_faqs___support_&_help_center_7382_chunk_0",
+          "text": "What is Eight70 Warranty?\n\nEight70 Warranty is a one-of-a-kind comprehensive 8-year warranty plan that extends the battery\u2019s manufacturer warranty of 3 years by an additional 5 years. In total, you get 8 years or 80 000 km (whichever comes first) of warranty coverage and complete peace of mind. During these 8 years, if your battery health goes below 70% at any point, we\u2019ll replace your battery for free. No questions asked. This warranty plan is an add-on that can be purchased with AtherStack Pro."
+        },
+        {
+          "id": "ather_electric_scooter_faqs___support_&_help_center_7405_chunk_0",
+          "text": "What is Eight70 Warranty?\n\nEight70 Warranty is a one-of-a-kind comprehensive 8-year warranty plan that extends the battery\u2019s manufacturer warranty of 3 years by an additional 5 years. In total, you get 8 years or 80 000 km (whichever comes first) of warranty coverage and complete peace of mind. During these 8 years, if your battery health goes below 70% at any point, we\u2019ll replace your battery for free. No questions asked. This warranty plan is an add-on that can be purchased with AtherStack Pro."
+        },
+        {
+          "id": "battery_warranty_details_for_ather_scooters___faqs_7405_chunk_0",
+          "text": "What is Eight70 Warranty?\n\nEight70 Warranty is a one-of-a-kind comprehensive 8-year warranty plan that extends the battery\u2019s manufacturer warranty of 3 years by an additional 5 years. In total, you get 8 years or 80 000 km (whichever comes first) of warranty coverage and complete peace of mind. During these 8 years, if your battery health goes below 70% at any point, we\u2019ll replace your battery for free. No questions asked. This warranty plan is an add-on that can be purchased with AtherStack Pro."
+        },
+        {
+          "id": "ather_electric_scooter_faqs___support_&_help_center_7383_chunk_0",
+          "text": "What are the features of Eight70 Warranty?\n\nEight70 Warranty covers the battery for a total of 8 years/80 000 km. This is the first and only warranty in the industry to cover not just battery failures, but degradation too. The battery is guaranteed to stay above 70% health till the end of the 8th year, else, it will be replaced. Any and all battery defects (cell, electrical, electronic, BMS etc.) are covered under these plans. Idle state assurance: no claim rejection due to deep discharge of battery cells when the scooter is left uncharged or in an idle state over an extended period of time. No upper limit on the claim amount."
+        },
+        {
+          "id": "ather_electric_scooter_faqs___support_&_help_center_7406_chunk_0",
+          "text": "What are the features of Eight70 Warranty?\n\nEight70 Warranty covers the battery for a total of 8 years/80 000 km. This is the first and only warranty in the industry to cover not just battery failures, but degradation too. The battery is guaranteed to stay above 70% health till the end of the 8th year, else, it will be replaced. Any and all battery defects (cell, electrical, electronic, BMS etc.) are covered under these plans. Idle state assurance: no claim rejection due to deep discharge of battery cells when the scooter is left uncharged or in an idle state over an extended period of time. No upper limit on the claim amount."
+        }
+      ]
+    },
+    "battery-capacity-warranty": {
+      "query": "What is the maximum battery-capacity degradation percentage specified in the 2024 Ather warranty policy?",
+      "retrieval_seconds": 2.6090337999999065,
+      "passages": [
+        {
+          "id": "ather_warranty_policy_2024_page_2_chunk_0_split_1",
+          "text": "Part(s), manufactured and sold by Ather under its brand shall be free from any manufacturing defect in material or workmanship during the Warranty Period; and (b) the nominal storage capacity of the Battery, as measured by Ather\u2019s standard testing procedure, shall not degrade beyond 30% of the published nominal capacity during the Warranty Period. 2.2 Ather\u2019s sole obligation under this Warranty Policy shall be limited to either repairing or at its discretion replacing by itself or through its Retail Partner, those Warranted Part(s) which upon examination by Ather, prove to Ather\u2019s satisfaction to have a Defect which is not caused as a result of an excluded event set out under Clause 3 of this Warranty Policy or by any other act of commission or omission of the Customer. Ather may perform such repairs as Ather deems fit, in order to restore the original functionality of the Vehicle. 2.3 In the event of part replacement"
+        },
+        {
+          "id": "ather_warranty_policy_2024_page_1_chunk_0_split_0",
+          "text": "ATHER WARRANTY POLICY Ather Energy Limited, (formerly known as Ather Energy Private Limited), a company incorporated under the Companies Act, 1956 and having its registered office at 3rd Floor, Tower D, IBC Knowledge Park, 4/1 Bannerghatta Main Road, Bengaluru, Karnataka - 560029 (hereinafter referred to as \u201cAther\u201d), issues this warranty policy (\u201cWarranty Policy\u201d) to its customers or users (\u201cCustomer\u201d), setting out the manufacturer warranties that Ather provides in respect of the Vehicles and associated components manufactured by Ather and purchased by the Customer. Any statement, condition, representation, description or warranty otherwise contained in any catalogue, advertisement or other publication shall not be construed as enlarging, varying or overriding anything contained under this Warranty Policy. All capitalized terms used under this Warranty Policy, but not defined, shall have the same meaning as under the Purchase Terms."
+        },
+        {
+          "id": "ather_warranty_policy_2024_page_5_chunk_0_split_2",
+          "text": "to be provided by Ather or through its Retail Partner shall be chargeable at such rates as may be specified by Ather from time to time subject to any subscription to Ather Subscription Services. 4.5 Ather or its Retail Partner reserves the right to use the data logged against the Vehicle to determine the validity of the claims made by the Customer. 4.6 This Warranty Policy has been provided by Ather and no other entity including the authorized Retail Partners, service centers, its employees or agents have the authority to amend, add to, extend or in any manner modify the warranty provided under this Warranty Policy. 4.7 Ather shall have the right to make changes to the design or functioning of its Vehicle from time to time and shall not be under any obligation to provide these changes for Vehicles that have been previously sold by it. 4.8 Any statement, condition, representation, description or warranty otherwise contained in any catalogue, advertisement or other publication shall not be const"
+        },
+        {
+          "id": "ather_electric_scooter_faqs___support_&_help_center_7379_chunk_0",
+          "text": "What is covered under battery warranty?\n\nAther Battery Warranty will provide replacement or repair of the batteries that are damaged due to manufacturing defects, workmanship errors and if the battery\u2019s State-of-Health falls below 70% (with respect to ather algorithm) within the coverage period. This is free of cost inclusive of labor charges."
+        },
+        {
+          "id": "ather_warranty_policy_2024_page_5_chunk_0_split_1",
+          "text": "safety warnings, instructions, and this Warranty Policy in the event the Vehicle is sold, loaned, or otherwise transferred to another person. 4.2 Ather shall only bear the costs of material and labour for replacement of any Warranted Part(s) under this Warranty Policy. Any additional costs including, without limitation, transportation costs etc will not be covered under this Warranty Policy and shall be the sole responsibility and risk of the Customer. 4.3 THIS LIMITED WARRANTY IS THE ONLY EXPRESS WARRANTY MADE IN CONNECTION WITH THE SALE OF THE VEHICLE AND BATTERY BY ATHER. ANY IMPLIED WARRANTY, INCLUDING ANY WARRANTY OF MERCHANTABILITY OR WARRANTY OF FITNESS FOR A PARTICULAR PURPOSE IS LIMITED IN DURATION TO THE STATED PERIOD OF THIS WRITTEN WARRANTY. 4.4 On expiry of the Warranty Period, all repairing or replacement services to be provided by Ather or through its Retail Partner shall be chargeable at such rates as may be specified by Ather from time to time subject"
+        }
+      ]
+    },
+    "left-lever-both-wheels": {
+      "query": "Does pulling the left-hand brake lever apply braking to both wheels?",
+      "retrieval_seconds": 1.7834399000000758,
+      "passages": [
+        {
+          "id": "Rizta S Quick Start Guide_page_11_chunk_0",
+          "text": "SWITCHGEAR: LEFT-HAND SIDE HORN Press this switch when you need to sound the horn. TURNING INDICATOR Toggle this switch left/right to turn ON the indicator lights. They turn OFF automatically once the turn is complete. Press the center to turn OFF the indicator manually. HIGH BEAM SWITCH This switch turns on the high beam headlight. Avoid using this as the default mode to avoid inconveniencing fellow riders on the road. COMBINED BRAKING SYSTEM The lever on the left-hand side activates the Combined Braking System that applies brakes to both the wheels. JOYSTICK Use the joystick to navigate through Bluetooth controls, ride and feature settings. KNOW YOUR SCOOTER 05"
+        },
+        {
+          "id": "Rizta Z Quick Start Guide_page_11_chunk_0",
+          "text": "SWITCHGEAR: LEFT-HAND SIDE HORN Press this switch when you need to sound the horn. TURNING INDICATOR Toggle this switch left/right to turn ON the indicator lights. They turn OFF automatically once the turn is complete. Press the center to turn OFF the indicator manually. HIGH BEAM SWITCH This switch turns on the high beam headlight. Avoid using this as the default mode to avoid inconveniencing fellow riders on the road. COMBINED BRAKING SYSTEM The lever on the left-hand side activates the Combined Braking System that applies brakes to both the wheels. JOYSTICK Use the joystick to navigate through Bluetooth controls, ride and feature settings. KNOW YOUR SCOOTER 05"
+        },
+        {
+          "id": "450S_User_Manual_Jan_24_page_11_chunk_0",
+          "text": "SWITCHGEAR: LEFT-HAND SIDE HORN Press this switch when you need to sound the horn. TURNING INDICATOR Toggle this switch left/right to turn ON the indicator lights. They turn OFF automatically once the turn is complete. Press the center to turn OFF the indicator manually. HIGH BEAM SWITCH This switch turns on the high beam headlight. Avoid using this by default for the convenience of others on the road. COMBINED BRAKING SYSTEM The lever on the left-hand side activates the Combined Braking System that applies brakes to both the wheels. Disclaimer: Auto turn indicator is only available with the Pro. Know your scooter 5"
+        },
+        {
+          "id": "450X_Gen_4_2023_QSG_page_11_chunk_0",
+          "text": "SWITCHGEAR: LEFT-HAND SIDE HORN Press this switch when you need to sound the horn. TURNING INDICATOR Toggle this switch left/right to turn ON the indicator lights. They turn OFF automatically once the turn is complete. Press the center to turn OFF the indicator manually. HIGH BEAM SWITCH This switch turns on the high beam headlight. Avoid using this by default for the convenience of others on the road. COMBINED BRAKING SYSTEM The lever on the left-hand side activates the Combined Braking System that applies brakes to both the wheels. Disclaimer: Auto turn indicator is only available with the Pro. Know your scooter 5"
+        },
+        {
+          "id": "2025-450S-QSG_page_11_chunk_0",
+          "text": "SWITCHGEAR: LEFT-HAND SIDE HORN Press this switch when you need to sound the horn. TURNING INDICATOR Toggle this switch left/right to turn ON the indicator lights. They turn OFF automatically once the turn is complete. Press the center to turn OFF the indicator manually. HIGH BEAM SWITCH This switch turns on the high beam headlight. Avoid using this by default for the convenience of others on the road. COMBINED BRAKING SYSTEM The lever on the left-hand side activates the Combined Braking System that applies brakes to both the wheels. Disclaimer: Auto turn indicator is only available with Pro. Know your scooter 5"
+        }
+      ]
+    },
+    "charger-no-light-prcd": {
+      "query": "Which device has the reset button to press when the Ather 450S portable charger is unlit despite household power?",
+      "retrieval_seconds": 2.0055020999998305,
+      "passages": [
+        {
+          "id": "450S_User_Manual_Jan_24_page_41_chunk_0",
+          "text": "WHAT DOES THE LED SAY? The charger tells you what it\u2019s up to, with an LED light that changes colours. Solid amber light: Charger software is being updated over the air. Solid green light: When not connected to the scooter, the charger is functional. When connected to the scooter, charging is complete. Blinking green light: Charging in progress. Solid red light: Fault in the charger. Please contact customer support. No light: No power. NOTE If you don\u2019t see any light (when there is power in your premises), press the Reset button on the PRCD (Portable Residual Current Device). If it still doesn\u2019t respond, please contact customer support. Using the Portable Charger plug in the 3-pin connector of the charging cable into the 5A socket. Charge it up 35"
+        },
+        {
+          "id": "450X_Gen_4_2023_QSG_page_41_chunk_0",
+          "text": "WHAT DOES THE LED SAY? The charger tells you what it\u2019s up to, with an LED light that changes colours. Solid amber light: Charger software is being updated over the air. Solid green light: When not connected to the scooter, the charger is functional. When connected to the scooter, charging is complete. Blinking green light: Charging in progress. Solid red light: Fault in the charger. Please contact customer support. No light: No power. NOTE If you don\u2019t see any light (when there is power in your premises), press the Reset button on the PRCD (Portable Residual Current Device). If it still doesn\u2019t respond, please contact customer support. Using the Portable Charger plug in the 3-pin connector of the charging cable into the 5A socket. Charge it up 35"
+        },
+        {
+          "id": "450X_Gen_4_2023_QSG_page_40_chunk_0",
+          "text": "UNPLUGGING IT Before you pull out the cable, turn the key to the ON position to unlock the connector. Keep the key in the ON position, wait for 5 seconds, remove the charging connector, and put it back in the Ather Dot holder. Remember to close the charging port \ufb02ap on the scooter. You can check the charge status on the dashboard while it\u2019s charging. You can also check it on your phone, by using Ather app. CAUTION Do not leave the connector on the ground to avoid damage through dust and water ingress. Do not try to forcefully pull the connector out. Try turning the key to OFF, back to ON and try again. It should come out e\ufb00ortlessly. Disclaimer: Remote charge status on the Ather app is available only with the Pro. Charge it up 34"
+        },
+        {
+          "id": "Rizta Z Quick Start Guide_page_15_chunk_0",
+          "text": "CAUTION The main boot space is built to be rain-proof but joeypocket is not. However, water can seep through if a pressure jet wash is used to clean the scooter. Remember to empty the under-seat storage before washing. Always store the portable charger in its cover to protect it from water leaks. MULTI-PURPOSE CHARGER The MPC is a slide-on device with LED power indicator and it comes with a single USB-C port with 18W maximum power output. MPC can fast charge your phone and other devices like tyre inflators, earphones, smartwatches, speakers etc. Since it\u2019s a slide-once device, you can remove it and replace it with a wireless charger to charge HALO. KNOW YOUR SCOOTER 09"
+        },
+        {
+          "id": "Rizta Z Quick Start Guide_page_17_chunk_0",
+          "text": "KEY CODE NUMBER Mentioned on the key. SOFTWARE VERSION NUMBER Use the joystick to press the gear icon, then go to \u2018Settings\u2019. On the profile section, navigate to the \u2018Software Version\u2019. ATHER APP\u2122 APP INSTALLATION \u2022 Download the Ather App\u2122 from the Google Play Store or Apple App Store. \u2022 Use the login credentials of your Ather portal account to login to the app. \u2022 The app syncs with the scooter only when both your phone and the scooter have good network coverage. The app displays the time when they were last synced. FAST CHARGING AT ATHER GRIDTM To locate an Ather Grid\u2122 public fast charging point, go to the app or navigation screen. KNOW YOUR SCOOTER 11"
+        }
+      ]
+    },
+    "charging-time-450s": {
+      "query": "According to the Ather 450S FAQ, how long does standard home charging take from 0% to 80%?",
+      "retrieval_seconds": 0.9973754999998619,
+      "passages": [
+        {
+          "id": "ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7262_chunk_0",
+          "text": "How long does it take to charge the Ather 450S?\n\nHome charging: 0-80% in 6 hr 36 min | 0-100% in 8 hr 36 min Fast charging speed at Ather Grid\u2122 is the same as the Ather 450X."
+        },
+        {
+          "id": "ather_charging_faqs_8134_chunk_0",
+          "text": "How long does it take to charge the Ather 450S?\n\nHome charging: 0-80% in 6 hr 36 min | 0-100% in 8 hr 36 min Fast charging speed at Ather Grid\u2122 is the same as the Ather 450X."
+        },
+        {
+          "id": "ather_electric_scooter_faqs___support_&_help_center_7262_chunk_0",
+          "text": "How long does it take to charge the Ather 450S?\n\nHome charging: 0-80% in 6 hr 36 min | 0-100% in 8 hr 36 min Fast charging speed at Ather Grid\u2122 is the same as the Ather 450X."
+        },
+        {
+          "id": "ather_electric_scooter_faqs___support_&_help_center_8134_chunk_0",
+          "text": "How long does it take to charge the Ather 450S?\n\nHome charging: 0-80% in 6 hr 36 min | 0-100% in 8 hr 36 min Fast charging speed at Ather Grid\u2122 is the same as the Ather 450X."
+        },
+        {
+          "id": "ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7257_chunk_0",
+          "text": "Can I use my existing Ather\u2019s 700W charger to charge the Ather 450S? If yes, how long will it take to recharge?\n\nOf course you can use the old 700W charger as it is compatible with all new Ather scooters. It will take 4 hr 30 min to charge from 0 to 100% and 3 hr 30 min to charge from 0%-80%."
+        }
+      ]
+    },
+    "charging-time-plain-language": {
+      "query": "How long should I expect to wait for my Ather 450S to go from empty to 80% using standard home charging, according to the FAQ?",
+      "retrieval_seconds": 1.8541348000001108,
+      "passages": [
+        {
+          "id": "ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7262_chunk_0",
+          "text": "How long does it take to charge the Ather 450S?\n\nHome charging: 0-80% in 6 hr 36 min | 0-100% in 8 hr 36 min Fast charging speed at Ather Grid\u2122 is the same as the Ather 450X."
+        },
+        {
+          "id": "ather_charging_faqs_8134_chunk_0",
+          "text": "How long does it take to charge the Ather 450S?\n\nHome charging: 0-80% in 6 hr 36 min | 0-100% in 8 hr 36 min Fast charging speed at Ather Grid\u2122 is the same as the Ather 450X."
+        },
+        {
+          "id": "ather_electric_scooter_faqs___support_&_help_center_7262_chunk_0",
+          "text": "How long does it take to charge the Ather 450S?\n\nHome charging: 0-80% in 6 hr 36 min | 0-100% in 8 hr 36 min Fast charging speed at Ather Grid\u2122 is the same as the Ather 450X."
+        },
+        {
+          "id": "ather_electric_scooter_faqs___support_&_help_center_8134_chunk_0",
+          "text": "How long does it take to charge the Ather 450S?\n\nHome charging: 0-80% in 6 hr 36 min | 0-100% in 8 hr 36 min Fast charging speed at Ather Grid\u2122 is the same as the Ather 450X."
+        },
+        {
+          "id": "ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7257_chunk_0",
+          "text": "Can I use my existing Ather\u2019s 700W charger to charge the Ather 450S? If yes, how long will it take to recharge?\n\nOf course you can use the old 700W charger as it is compatible with all new Ather scooters. It will take 4 hr 30 min to charge from 0 to 100% and 3 hr 30 min to charge from 0%-80%."
+        }
+      ]
+    },
+    "charger-amber-light": {
+      "query": "What does a solid amber light on the portable charger indicate?",
+      "retrieval_seconds": 1.9294875999999022,
+      "passages": [
+        {
+          "id": "450S_User_Manual_Jan_24_page_41_chunk_0",
+          "text": "WHAT DOES THE LED SAY? The charger tells you what it\u2019s up to, with an LED light that changes colours. Solid amber light: Charger software is being updated over the air. Solid green light: When not connected to the scooter, the charger is functional. When connected to the scooter, charging is complete. Blinking green light: Charging in progress. Solid red light: Fault in the charger. Please contact customer support. No light: No power. NOTE If you don\u2019t see any light (when there is power in your premises), press the Reset button on the PRCD (Portable Residual Current Device). If it still doesn\u2019t respond, please contact customer support. Using the Portable Charger plug in the 3-pin connector of the charging cable into the 5A socket. Charge it up 35"
+        },
+        {
+          "id": "450X_Gen_4_2023_QSG_page_41_chunk_0",
+          "text": "WHAT DOES THE LED SAY? The charger tells you what it\u2019s up to, with an LED light that changes colours. Solid amber light: Charger software is being updated over the air. Solid green light: When not connected to the scooter, the charger is functional. When connected to the scooter, charging is complete. Blinking green light: Charging in progress. Solid red light: Fault in the charger. Please contact customer support. No light: No power. NOTE If you don\u2019t see any light (when there is power in your premises), press the Reset button on the PRCD (Portable Residual Current Device). If it still doesn\u2019t respond, please contact customer support. Using the Portable Charger plug in the 3-pin connector of the charging cable into the 5A socket. Charge it up 35"
+        },
+        {
+          "id": "2025-450-Apex-QSG_page_43_chunk_0",
+          "text": "WHAT DOES THE LED SAY? The charger tells you what it\u2019s up to, with an LED light that changes colours. Solid amber light: Charger software is being updated over the air. Solid green light: When not connected to the scooter, the charger is functional. When connected to the scooter, charging is complete. Blinking green light: Charging in progress. Solid red light: Fault in the charger. Please contact customer support. No light: No power. Charge it up 37"
+        },
+        {
+          "id": "2025-450X-QSG_page_43_chunk_0",
+          "text": "WHAT DOES THE LED SAY? The charger tells you what it\u2019s up to, with an LED light that changes colours. Solid amber light: Charger software is being updated over the air. Solid green light: When not connected to the scooter, the charger is functional. When connected to the scooter, charging is complete. Blinking green light: Charging in progress. Solid red light: Fault in the charger. Please contact customer support. No light: No power. Charge it up 37"
+        },
+        {
+          "id": "2025-450S-QSG_page_42_chunk_0",
+          "text": "WHAT DOES THE LED SAY? The charger tells you what it\u2019s up to, with an LED light that changes colours. Solid amber light: Charger software is being updated over the air. Solid green light: When not connected to the scooter, the charger is functional. When connected to the scooter, charging is complete. Blinking green light: Charging in progress. Solid red light: Fault in the charger. Please contact customer support. No light: No power. Charge it up 36"
+        }
+      ]
+    },
+    "charger-amber-confusion": {
+      "query": "My Ather portable charger shows a steady amber light. What process is happening?",
+      "retrieval_seconds": 1.8930503999999928,
+      "passages": [
+        {
+          "id": "450S_User_Manual_Jan_24_page_41_chunk_0",
+          "text": "WHAT DOES THE LED SAY? The charger tells you what it\u2019s up to, with an LED light that changes colours. Solid amber light: Charger software is being updated over the air. Solid green light: When not connected to the scooter, the charger is functional. When connected to the scooter, charging is complete. Blinking green light: Charging in progress. Solid red light: Fault in the charger. Please contact customer support. No light: No power. NOTE If you don\u2019t see any light (when there is power in your premises), press the Reset button on the PRCD (Portable Residual Current Device). If it still doesn\u2019t respond, please contact customer support. Using the Portable Charger plug in the 3-pin connector of the charging cable into the 5A socket. Charge it up 35"
+        },
+        {
+          "id": "450X_Gen_4_2023_QSG_page_41_chunk_0",
+          "text": "WHAT DOES THE LED SAY? The charger tells you what it\u2019s up to, with an LED light that changes colours. Solid amber light: Charger software is being updated over the air. Solid green light: When not connected to the scooter, the charger is functional. When connected to the scooter, charging is complete. Blinking green light: Charging in progress. Solid red light: Fault in the charger. Please contact customer support. No light: No power. NOTE If you don\u2019t see any light (when there is power in your premises), press the Reset button on the PRCD (Portable Residual Current Device). If it still doesn\u2019t respond, please contact customer support. Using the Portable Charger plug in the 3-pin connector of the charging cable into the 5A socket. Charge it up 35"
+        },
+        {
+          "id": "Rizta S Quick Start Guide_page_36_chunk_0",
+          "text": "WHAT DOES THE LED SAY? The charger tells you what it\u2019s up to, with an LED light that changes colours Solid amber light: Charger software is being updated over the air. Solid green light: When not connected to the scooter, the charger is functional. When connected to the scooter, charging is complete. Blinking green light: Charging in progress. Solid red light: Fault in the charger. Please contact customer support. No light: No power. CHARGE IT UP 28"
+        },
+        {
+          "id": "Rizta Z Quick Start Guide_page_39_chunk_0",
+          "text": "WHAT DOES THE LED SAY? The charger tells you what it\u2019s up to, with an LED light that changes colours Solid amber light: Charger software is being updated over the air. Solid green light: When not connected to the scooter, the charger is functional. When connected to the scooter, charging is complete. Blinking green light: Charging in progress. Solid red light: Fault in the charger. Please contact customer support. No light: No power. CHARGE IT UP 31"
+        },
+        {
+          "id": "2025-450-Apex-QSG_page_43_chunk_0",
+          "text": "WHAT DOES THE LED SAY? The charger tells you what it\u2019s up to, with an LED light that changes colours. Solid amber light: Charger software is being updated over the air. Solid green light: When not connected to the scooter, the charger is functional. When connected to the scooter, charging is complete. Blinking green light: Charging in progress. Solid red light: Fault in the charger. Please contact customer support. No light: No power. Charge it up 37"
+        }
+      ]
+    },
+    "charger-blinking-green": {
+      "query": "What does a blinking green charger indicator mean?",
+      "retrieval_seconds": 1.9947961999998824,
+      "passages": [
+        {
+          "id": "2025-450S-QSG_page_42_chunk_0",
+          "text": "WHAT DOES THE LED SAY? The charger tells you what it\u2019s up to, with an LED light that changes colours. Solid amber light: Charger software is being updated over the air. Solid green light: When not connected to the scooter, the charger is functional. When connected to the scooter, charging is complete. Blinking green light: Charging in progress. Solid red light: Fault in the charger. Please contact customer support. No light: No power. Charge it up 36"
+        },
+        {
+          "id": "2025-450-Apex-QSG_page_43_chunk_0",
+          "text": "WHAT DOES THE LED SAY? The charger tells you what it\u2019s up to, with an LED light that changes colours. Solid amber light: Charger software is being updated over the air. Solid green light: When not connected to the scooter, the charger is functional. When connected to the scooter, charging is complete. Blinking green light: Charging in progress. Solid red light: Fault in the charger. Please contact customer support. No light: No power. Charge it up 37"
+        },
+        {
+          "id": "2025-450X-QSG_page_43_chunk_0",
+          "text": "WHAT DOES THE LED SAY? The charger tells you what it\u2019s up to, with an LED light that changes colours. Solid amber light: Charger software is being updated over the air. Solid green light: When not connected to the scooter, the charger is functional. When connected to the scooter, charging is complete. Blinking green light: Charging in progress. Solid red light: Fault in the charger. Please contact customer support. No light: No power. Charge it up 37"
+        },
+        {
+          "id": "Rizta Z Quick Start Guide_page_39_chunk_0",
+          "text": "WHAT DOES THE LED SAY? The charger tells you what it\u2019s up to, with an LED light that changes colours Solid amber light: Charger software is being updated over the air. Solid green light: When not connected to the scooter, the charger is functional. When connected to the scooter, charging is complete. Blinking green light: Charging in progress. Solid red light: Fault in the charger. Please contact customer support. No light: No power. CHARGE IT UP 31"
+        },
+        {
+          "id": "Rizta S Quick Start Guide_page_36_chunk_0",
+          "text": "WHAT DOES THE LED SAY? The charger tells you what it\u2019s up to, with an LED light that changes colours Solid amber light: Charger software is being updated over the air. Solid green light: When not connected to the scooter, the charger is functional. When connected to the scooter, charging is complete. Blinking green light: Charging in progress. Solid red light: Fault in the charger. Please contact customer support. No light: No power. CHARGE IT UP 28"
+        }
+      ]
+    },
+    "charger-green-flashing-confusion": {
+      "query": "The LED on my Ather portable charger is flashing green. What charging state does that mean?",
+      "retrieval_seconds": 1.9541305999998713,
+      "passages": [
+        {
+          "id": "duomanualvfin_page_3_chunk_0",
+          "text": "Charging 2 What do the different colours of LED communicate? Solid Green Light When connected to the vehicle - charging is done. When not connected to the vehicle - charger is ready for use. Blinking Green Light Charging in progress. Blinking Amber Light Charger software is being updated over-the-air (OTA). Leave it connected to the vehicle until it turns green. Static Red Light Fault in the charger. Switch OFF the power for 10 seconds and switch it ON again. If it fails to restart after 3 attempts, get in touch with customer support. No Light No power flow. Switch OFF and then switch ON the power. If the charger fails to restart after 3 attempts, contact customer support. LED"
+        },
+        {
+          "id": "Ather-HALO-Bit-Half-Face-Manual_page_26_chunk_0",
+          "text": "Charging Peel the rubber cover on the front of the Bit to access the USB C port Plug in a USB C cable to start charging The LED should start blinking green to indicate charging has begun. Once it stops blinking and glows green, your device is 100% charged"
+        },
+        {
+          "id": "450S_User_Manual_Jan_24_page_41_chunk_0",
+          "text": "WHAT DOES THE LED SAY? The charger tells you what it\u2019s up to, with an LED light that changes colours. Solid amber light: Charger software is being updated over the air. Solid green light: When not connected to the scooter, the charger is functional. When connected to the scooter, charging is complete. Blinking green light: Charging in progress. Solid red light: Fault in the charger. Please contact customer support. No light: No power. NOTE If you don\u2019t see any light (when there is power in your premises), press the Reset button on the PRCD (Portable Residual Current Device). If it still doesn\u2019t respond, please contact customer support. Using the Portable Charger plug in the 3-pin connector of the charging cable into the 5A socket. Charge it up 35"
+        },
+        {
+          "id": "450X_Gen_4_2023_QSG_page_41_chunk_0",
+          "text": "WHAT DOES THE LED SAY? The charger tells you what it\u2019s up to, with an LED light that changes colours. Solid amber light: Charger software is being updated over the air. Solid green light: When not connected to the scooter, the charger is functional. When connected to the scooter, charging is complete. Blinking green light: Charging in progress. Solid red light: Fault in the charger. Please contact customer support. No light: No power. NOTE If you don\u2019t see any light (when there is power in your premises), press the Reset button on the PRCD (Portable Residual Current Device). If it still doesn\u2019t respond, please contact customer support. Using the Portable Charger plug in the 3-pin connector of the charging cable into the 5A socket. Charge it up 35"
+        },
+        {
+          "id": "2025-450-Apex-QSG_page_43_chunk_0",
+          "text": "WHAT DOES THE LED SAY? The charger tells you what it\u2019s up to, with an LED light that changes colours. Solid amber light: Charger software is being updated over the air. Solid green light: When not connected to the scooter, the charger is functional. When connected to the scooter, charging is complete. Blinking green light: Charging in progress. Solid red light: Fault in the charger. Please contact customer support. No light: No power. Charge it up 37"
+        }
+      ]
+    },
+    "450x-solo-tyre-pressure": {
+      "query": "What rear tyre pressure is recommended for a solo rider in the 2025 Ather 450X quick-start guide?",
+      "retrieval_seconds": 2.4455669999999827,
+      "passages": [
+        {
+          "id": "Rizta Z Quick Start Guide_page_19_chunk_0",
+          "text": "JUST BEFORE YOU GET ON THE SCOOTER THE CHECKLIST \u2022 Tyre pressure & condition \u2022 Charge status \u2022 Peripherals: Horn, headlights, pilot lamps, indicators and tail lights \u2022 Rear view mirror position \u2022 Smooth functioning of the handlebar (twist & turn to check if it is normal) \u2022 Perfectly working brake RECOMMENDED TYRE PRESSURE \u2022 Solo rider: 30 PSI front & 28 PSI back \u2022 With a pillion: 30 PSI front & 32 PSI back TIME TO GET ON THE ROAD 12"
+        },
+        {
+          "id": "2025-450S-QSG_page_20_chunk_0",
+          "text": "JUST BEFORE YOU GET ON THE SCOOTER THE CHECKLIST \u2022 Tyre pressure & condition \u2022 Drive belt (No slacking) \u2022 Charge status \u2022 Peripherals: Horn, headlights, pilot lamps, indicators and tail lights \u2022 Screen intactness \u2022 Rear view mirror position \u2022 Smooth functioning of the handlebar (twist & turn to check if it is normal) \u2022 Perfectly working brakes RECOMMENDED TYRE PRESSURE \u2022Solo rider: 30 PSI front & 28 PSI back \u2022With a pillion: 30 PSI front & 32 PSI back On the road 14"
+        },
+        {
+          "id": "2025-450X-QSG_page_20_chunk_0",
+          "text": "JUST BEFORE YOU GET ON THE SCOOTER THE CHECKLIST \u2022 Tyre pressure & condition \u2022 Drive belt (No slacking) \u2022 Charge status \u2022 Peripherals: Horn, headlights, pilot lamps, indicators and tail lights \u2022 Screen intactness \u2022 Rear view mirror position \u2022 Smooth functioning of the handlebar (twist & turn to check if it is normal) \u2022 Perfectly working brakes RECOMMENDED TYRE PRESSURE \u2022Solo rider: 30 PSI front & 28 PSI back \u2022With a pillion: 30 PSI front & 32 PSI back On the road 14"
+        },
+        {
+          "id": "450S_User_Manual_Jan_24_page_20_chunk_0",
+          "text": "JUST BEFORE YOU GET ON THE SCOOTER THE CHECKLIST \u2022 Tyre pressure & condition \u2022 Drive belt (No slacking) \u2022 Charge status \u2022 Peripherals: Horn, headlights, pilot lamps, indicators and tail lights \u2022 Screen intactness \u2022 Rear view mirror position \u2022 Smooth functioning of the handlebar (twist & turn to check if it is normal) \u2022 Perfectly working brakes RECOMMENDED TYRE PRESSURE \u2022Solo rider: 30 PSI front & 28 PSI back \u2022With a pillion: 30 PSI front & 32 PSI back On the road 14"
+        },
+        {
+          "id": "450X_Gen_4_2023_QSG_page_20_chunk_0",
+          "text": "JUST BEFORE YOU GET ON THE SCOOTER THE CHECKLIST \u2022 Tyre pressure & condition \u2022 Drive belt (No slacking) \u2022 Charge status \u2022 Peripherals: Horn, headlights, pilot lamps, indicators and tail lights \u2022 Screen intactness \u2022 Rear view mirror position \u2022 Smooth functioning of the handlebar (twist & turn to check if it is normal) \u2022 Perfectly working brakes RECOMMENDED TYRE PRESSURE \u2022Solo rider: 30 PSI front & 28 PSI back \u2022With a pillion: 30 PSI front & 32 PSI back On the road 14"
+        }
+      ]
+    },
+    "450x-pillion-tyre-pressure": {
+      "query": "What rear tyre pressure is recommended with a pillion in the 2025 Ather 450X quick-start guide?",
+      "retrieval_seconds": 2.393421999999873,
+      "passages": [
+        {
+          "id": "2025-450-Apex-QSG_page_20_chunk_0",
+          "text": "JUST BEFORE YOU GET ON THE SCOOTER THE CHECKLIST \u2022 Tyre pressure & condition \u2022 Drive belt (No slacking) \u2022 Charge status \u2022 Peripherals: Horn, headlights, pilot lamps, indicators and tail lights \u2022 Screen intactness \u2022 Rear view mirror position \u2022 Smooth functioning of the handlebar (twist & turn to check if it is normal) \u2022 Perfectly working brakes RECOMMENDED TYRE PRESSURE \u2022 Solo rider: 30 PSI front & 28 PSI back \u2022 With a pillion: 30 PSI front & 32 PSI back On the road 14"
+        },
+        {
+          "id": "2025-450S-QSG_page_20_chunk_0",
+          "text": "JUST BEFORE YOU GET ON THE SCOOTER THE CHECKLIST \u2022 Tyre pressure & condition \u2022 Drive belt (No slacking) \u2022 Charge status \u2022 Peripherals: Horn, headlights, pilot lamps, indicators and tail lights \u2022 Screen intactness \u2022 Rear view mirror position \u2022 Smooth functioning of the handlebar (twist & turn to check if it is normal) \u2022 Perfectly working brakes RECOMMENDED TYRE PRESSURE \u2022Solo rider: 30 PSI front & 28 PSI back \u2022With a pillion: 30 PSI front & 32 PSI back On the road 14"
+        },
+        {
+          "id": "2025-450X-QSG_page_20_chunk_0",
+          "text": "JUST BEFORE YOU GET ON THE SCOOTER THE CHECKLIST \u2022 Tyre pressure & condition \u2022 Drive belt (No slacking) \u2022 Charge status \u2022 Peripherals: Horn, headlights, pilot lamps, indicators and tail lights \u2022 Screen intactness \u2022 Rear view mirror position \u2022 Smooth functioning of the handlebar (twist & turn to check if it is normal) \u2022 Perfectly working brakes RECOMMENDED TYRE PRESSURE \u2022Solo rider: 30 PSI front & 28 PSI back \u2022With a pillion: 30 PSI front & 32 PSI back On the road 14"
+        },
+        {
+          "id": "450S_User_Manual_Jan_24_page_20_chunk_0",
+          "text": "JUST BEFORE YOU GET ON THE SCOOTER THE CHECKLIST \u2022 Tyre pressure & condition \u2022 Drive belt (No slacking) \u2022 Charge status \u2022 Peripherals: Horn, headlights, pilot lamps, indicators and tail lights \u2022 Screen intactness \u2022 Rear view mirror position \u2022 Smooth functioning of the handlebar (twist & turn to check if it is normal) \u2022 Perfectly working brakes RECOMMENDED TYRE PRESSURE \u2022Solo rider: 30 PSI front & 28 PSI back \u2022With a pillion: 30 PSI front & 32 PSI back On the road 14"
+        },
+        {
+          "id": "450X_Gen_4_2023_QSG_page_20_chunk_0",
+          "text": "JUST BEFORE YOU GET ON THE SCOOTER THE CHECKLIST \u2022 Tyre pressure & condition \u2022 Drive belt (No slacking) \u2022 Charge status \u2022 Peripherals: Horn, headlights, pilot lamps, indicators and tail lights \u2022 Screen intactness \u2022 Rear view mirror position \u2022 Smooth functioning of the handlebar (twist & turn to check if it is normal) \u2022 Perfectly working brakes RECOMMENDED TYRE PRESSURE \u2022Solo rider: 30 PSI front & 28 PSI back \u2022With a pillion: 30 PSI front & 32 PSI back On the road 14"
+        }
+      ]
+    },
+    "storage-luggage-limit": {
+      "query": "What is the maximum under-seat storage load in the 2025 Ather 450 Apex quick-start guide?",
+      "retrieval_seconds": 2.1431583999999475,
+      "passages": [
+        {
+          "id": "2025-450X-QSG_page_3_chunk_0",
+          "text": "Ather 450X\u00ae was crafted with obsessive attention to detail. It was designed from the ground up to make urban stop-and-go tra\ufb03c more bearable. But before you get on the easy, comfy ride, here\u2019s everything you need to know. This quick start guide will tell you all about the features and components of the Ather 450X, the Ather AppTM, the battery pack and the Ather DuoTM. This guide helps you get going, the moment you receive your Ather 450X keys. Disclaimer: All the Ather ConnectTM features on the app are available only with the Pro."
+        },
+        {
+          "id": "450X_Gen_4_2023_QSG_page_3_chunk_0",
+          "text": "Ather 450X\u00ae was crafted with obsessive attention to detail. It was designed from the ground up to make urban stop-and-go tra\ufb03c more bearable. But before you get on the easy, comfy ride, here\u2019s everything you need to know. This quick start guide will tell you all about the features and components of the Ather 450X, the Ather AppTM, the battery pack and the Ather DotTM. This guide helps you get going, the moment you receive your Ather 450X keys. Disclaimer: All the Ather ConnectTM features on the app are available only with the Pro."
+        },
+        {
+          "id": "2025-450S-QSG_page_3_chunk_0",
+          "text": "Ather 450STM was crafted with obsessive attention to detail. It was designed from the ground up to make urban stop-and-go traffic more bearable. But before you get on the easy, comfy ride, here\u2019s everything you need to know. This quick start guide will tell you all about the features and components of the Ather 450S, the Ather AppTM, the battery pack and the Ather DuoTM. This guide helps you get going, the moment you receive your Ather 450S keys."
+        },
+        {
+          "id": "450S_User_Manual_Jan_24_page_3_chunk_0",
+          "text": "Ather 450STM was crafted with obsessive attention to detail. It was designed from the ground up to make urban stop-and-go traffic more bearable. But before you get on the easy, comfy ride, here\u2019s everything you need to know. This quick start guide will tell you all about the features and components of the Ather 450S, the Ather AppTM, the battery pack and the Ather DotTM. This guide helps you get going, the moment you receive your Ather 450S keys."
+        },
+        {
+          "id": "2025-450-Apex-QSG_page_16_chunk_0",
+          "text": "CAUTION The storage box is built to be rain-proof. But water can seep through if a pressure jet wash is used to clean the scooter. Remember to empty the under-seat storage before washing. Always store the portable charger in its cover to protect it from water leaks. SCOOTER IDENTIFICATION NUMBER (VIN) / CHASSIS NUMBER Each scooter has a unique VIN. On the Ather 450 Apex\u2122, it is engraved on the chassis. Remove the rubber grommet in the under-seat storage to access it. It\u2019s a 17 digit number in this format: MYH XXXXXXXXXXXXXX Know your scooter 10"
+        }
+      ]
+    },
+    "450x-underseat-storage": {
+      "query": "What is the under-seat storage volume in the 2025 Ather 450X quick-start guide?",
+      "retrieval_seconds": 2.1909376999999495,
+      "passages": [
+        {
+          "id": "2025-450X-QSG_page_3_chunk_0",
+          "text": "Ather 450X\u00ae was crafted with obsessive attention to detail. It was designed from the ground up to make urban stop-and-go tra\ufb03c more bearable. But before you get on the easy, comfy ride, here\u2019s everything you need to know. This quick start guide will tell you all about the features and components of the Ather 450X, the Ather AppTM, the battery pack and the Ather DuoTM. This guide helps you get going, the moment you receive your Ather 450X keys. Disclaimer: All the Ather ConnectTM features on the app are available only with the Pro."
+        },
+        {
+          "id": "450X_Gen_4_2023_QSG_page_3_chunk_0",
+          "text": "Ather 450X\u00ae was crafted with obsessive attention to detail. It was designed from the ground up to make urban stop-and-go tra\ufb03c more bearable. But before you get on the easy, comfy ride, here\u2019s everything you need to know. This quick start guide will tell you all about the features and components of the Ather 450X, the Ather AppTM, the battery pack and the Ather DotTM. This guide helps you get going, the moment you receive your Ather 450X keys. Disclaimer: All the Ather ConnectTM features on the app are available only with the Pro."
+        },
+        {
+          "id": "2025-450X-QSG_page_16_chunk_0",
+          "text": "CAUTION The storage box is built to be rain-proof. But water can seep through if a pressure jet wash is used to clean the scooter. Remember to empty the under-seat storage before washing. Always store the portable charger in its cover to protect it from water leaks. SCOOTER IDENTIFICATION NUMBER (VIN) / CHASSIS NUMBER Each scooter has a unique VIN. On the Ather 450X, it is engraved on the chassis. Remove the rubber grommet in the under-seat storage to access it. It\u2019s a 17 digit number in this format: MYH XXXXXXXXXXXXXX Know your scooter 10"
+        },
+        {
+          "id": "450X_Gen_4_2023_QSG_page_16_chunk_0",
+          "text": "CAUTION The storage box is built to be rain-proof. But water can seep through if a pressure jet wash is used to clean the scooter. Remember to empty the under-seat storage before washing. Always store the portable charger in its cover to protect it from water leaks. SCOOTER IDENTIFICATION NUMBER (VIN) / CHASSIS NUMBER Each scooter has a unique VIN. On the Ather 450X, it is engraved on the chassis. Remove the rubber grommet in the under-seat storage to access it. It\u2019s a 17 digit number in this format: MYH XXXXXXXXXXXXXX Know your scooter 10"
+        },
+        {
+          "id": "2025-450X-QSG_page_15_chunk_0",
+          "text": "UNDER-SEAT STORAGE Smartly designed to accommodate a full-sized helmet, it also has an LED strip lamp so that \ufb01nding things in poorly lit parking spaces is easier. Carry up to 15 kg and a volume of 22L. LED CAUTION Do not over\ufb01ll the under-seat storage. A simple check: the seat should close e\ufb00ortlessly when you drop it down. If you need to press it down, it\u2019s over-packed and there is a high possibility that it gets damaged. Know your scooter 9"
+        }
+      ]
+    },
+    "throttle-slowdown": {
+      "query": "Can turning the accelerator grip backwards activate regenerative braking?",
+      "retrieval_seconds": 1.7883730999999443,
+      "passages": [
+        {
+          "id": "2025-450S-QSG_page_14_chunk_0",
+          "text": "ACCELERATOR GRIP Controls the acceleration and speed of the scooter. It also activates regenerative braking when twisted in the reverse (anti-clockwise) direction. FRONT BRAKE LEVER Actuates the front brake to control the speed of the scooter. PARK ASSISTTM Engages Park AssistTM mode when stationary. Disclaimer: Bluetooth controls are available only with Pro. Know your scooter 8"
+        },
+        {
+          "id": "450S_User_Manual_Jan_24_page_14_chunk_0",
+          "text": "ACCELERATOR GRIP Controls the acceleration and speed of the scooter. It also activates regenerative braking when twisted in the reverse (anti-clockwise) direction. FRONT BRAKE LEVER Actuates the front brake to control the speed of the scooter. PARK ASSISTTM Engages Park AssistTM mode when stationary. Disclaimer: Bluetooth controls are available only with the Pro. Know your scooter 8"
+        },
+        {
+          "id": "450X_Gen_4_2023_QSG_page_14_chunk_0",
+          "text": "ACCELERATOR GRIP Controls the acceleration and speed of the scooter. It also activates regenerative braking when twisted in the reverse (anti-clockwise) direction. FRONT BRAKE LEVER Actuates the front brake to control the speed of the scooter. PARK ASSISTTM SWITCH Engages Park AssistTM mode when stationary. Disclaimer: Bluetooth controls are available only with the Pro. Know your scooter 8"
+        },
+        {
+          "id": "450X_Gen_4_2023_QSG_page_33_chunk_0",
+          "text": "REGENERATIVE BRAKING Recover the scooter\u2019s kinetic energy and convert it to be stored in the battery. To activate Regenerative Braking, the battery should be below 80% and speeds above 20 km/h. HOW TO ACTIVATE IT? Press the brake levers or rev the throttle in the opposite direction (anti-clockwise). Algorithms dictate the amount of regen, depending on the battery state and speed of the scooter. REGEN DISABLED Regen is disabled when the charge status is high (higher the remaining range, lesser the regen) or when the battery temperature is high. CAUTION The scooter can\u2019t be brought to a halt using regenerative braking as it gets activated only when you\u2019re going over 20 km/h. On the road 27"
+        },
+        {
+          "id": "2025-450S-QSG_page_33_chunk_0",
+          "text": "REGENERATIVE BREAKING Recover the scooter\u2019s kinetic energy and convert it to be stored in the battery. To activate Regenerative Braking, the battery should be below 80% and speed, above 20 km/h. HOW TO ACTIVATE IT? Press the brake levers or twist the throttle in the opposite direction (anti-clockwise). Algorithms dictate the amount of regen, depending on the battery state and speed of the scooter. REGEN DISABLED Regen is disabled when the charge status is high (higher the remaining range, lesser the regen) or when the battery temperature is high. CAUTION The scooter can\u2019t be brought to a halt using regenerative braking as it gets activated only when you\u2019re going over 20 km/h. On the road 27"
+        }
+      ]
+    },
+    "high-voltage-service": {
+      "query": "Who is authorised to service high-voltage components such as the battery pack and motor?",
+      "retrieval_seconds": 2.2098814000000857,
+      "passages": [
+        {
+          "id": "2025-450-Apex-QSG_page_5_chunk_0",
+          "text": "WARNING \u2022 FIRST AND FOREMOST Read this thoroughly before your \ufb01rst ride. So many things are new. Once you understand all the controls and features, you\u2019ll be ready to hit the road. \u2022 MAINTENANCE IS A MUST Along with good ride handling skills, regular inspection and maintenance are essential for a great experience. Following these simple rules will make sure that your warranty stays intact. \u2022 NO TINKERING We know you wouldn\u2019t mess around with the high voltage components like the battery pack, motor etc. Still we need to put on paper that they should be serviced only by Ather technicians."
+        },
+        {
+          "id": "2025-450X-QSG_page_5_chunk_0",
+          "text": "WARNING \u2022 FIRST AND FOREMOST Read this thoroughly before your \ufb01rst ride. So many things are new. Once you understand all the controls and features, you\u2019ll be ready to hit the road. \u2022 MAINTENANCE IS A MUST Along with good ride handling skills, regular inspection and maintenance are essential for a great experience. Following these simple rules will make sure that your warranty stays intact. \u2022 NO TINKERING We know you wouldn\u2019t mess around with the high voltage components like the battery pack, motor etc. Still we need to put on paper that they should be serviced only by Ather technicians."
+        },
+        {
+          "id": "2025-450S-QSG_page_5_chunk_0",
+          "text": "WARNING \u2022 FIRST AND FOREMOST Read this thoroughly before your first ride. So many things are new. Once you understand all the controls and features, you\u2019ll be ready to hit the road. \u2022 MAINTENANCE IS A MUST Along with good ride handling skills, regular inspection and maintenance are essential for a great experience. Following these simple rules will make sure that your warranty stays intact. \u2022 NO TINKERING We know you wouldn\u2019t mess around with the high voltage components like the battery pack, motor etc. Still we need to put on paper that they should be serviced only by Ather technicians."
+        },
+        {
+          "id": "450X_Gen_4_2023_QSG_page_5_chunk_0",
+          "text": "WARNING \u2022 FIRST AND FOREMOST Read this thoroughly before your \ufb01rst ride. So many things are new. Once you understand all the controls and features, you\u2019ll be ready to hit the road. \u2022 MAINTENANCE IS A MUST Along with good ride handling skills, regular inspection and maintenance are essential for a great experience. Following these simple rules will make sure that your warranty stays intact. \u2022 NO TINKERING We know you wouldn\u2019t mess around with the high voltage components like the battery pack, motor etc. Still we need to put on paper that they should be serviced only by Ather technicians."
+        },
+        {
+          "id": "450S_User_Manual_Jan_24_page_5_chunk_0",
+          "text": "WARNING \u2022 FIRST AND FOREMOST Read this thoroughly before your first ride. So many things are new. Once you understand all the controls and features, you\u2019ll be ready to hit the road. \u2022 MAINTENANCE IS A MUST Along with good ride handling skills, regular inspection and maintenance are essential for a great experience. Following these simple rules will make sure that your warranty stays intact. \u2022 NO TINKERING We know you wouldn\u2019t mess around with the high voltage components like the battery pack, motor etc. Still we need to put on paper that they should be serviced only by Ather technicians."
+        }
+      ]
+    }
+  }
+}

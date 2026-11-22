@@ -36,4 +36,5 @@ async def test_diagnose_endpoint():
         data = resp.json()
         assert "root_cause_analysis" in data
         assert "evidence_sources" in data
-        assert data["grounding_score"] > 0
+        assert "grounding_score" not in data
+        assert not data["diagnostic_procedure"]

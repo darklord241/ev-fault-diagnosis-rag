@@ -91,7 +91,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
 
         <footer>
           EV Fault Diagnosis · AI-Powered Technical Intelligence
-          <span>Grounding scores are retrieval confidence, not diagnostic certainty.</span>
+          <span>Source excerpts are provided for review.</span>
         </footer>
       </main>
     </div>

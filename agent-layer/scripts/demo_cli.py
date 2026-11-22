@@ -10,7 +10,7 @@ from src.common.models import QueryRequest
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
-from rich.markdown import Markdown
+from rich.text import Text
 
 console = Console()
 
@@ -61,28 +61,22 @@ async def run_demo():
         result = await orchestrator.diagnose_fault(req)
 
     console.print("\n" + "="*80)
-    console.print(f"[bold green]✅ Diagnostic Result Generated in {result.execution_time_seconds}s (Grounding Score: {result.grounding_score})[/bold green]")
+    console.print(f"[bold green]✅ Evidence Result Generated in {result.execution_time_seconds}s[/bold green]")
     console.print("="*80 + "\n")
 
-    # Display Root Cause / Synthesized Answer
-    console.print(Panel(Markdown(result.root_cause_analysis), title="[bold magenta]🛠️ Grounded Diagnostic Analysis[/bold magenta]", border_style="magenta"))
-
-    # Display Diagnostic Steps Table
-    if result.diagnostic_procedure:
-        table = Table(title="📋 Step-by-Step Diagnostic Verification Procedure", border_style="blue")
-        table.add_column("Step", style="bold cyan", width=6)
-        table.add_column("Action", style="white")
-        table.add_column("Component", style="yellow")
-        table.add_column("Expected Reading", style="green")
-
-        for step in result.diagnostic_procedure:
-            table.add_row(
-                str(step.step_number),
-                step.action,
-                step.component_checked,
-                step.expected_reading or "N/A"
-            )
-        console.print(table)
+    console.print(f"Retrieval mode: {result.retrieval_mode}")
+    selected = next(
+        (source for source in result.evidence_sources if source.source_id == result.selected_source_id),
+        None,
+    )
+    if selected:
+        console.print(Panel(
+            Text(selected.content),
+            title=Text(f"Source passage [{selected.source_id}]"),
+            border_style="magenta",
+        ))
+    else:
+        console.print(result.root_cause_analysis, markup=False)
 
     # Display Supporting Evidence Sources
     if result.evidence_sources:

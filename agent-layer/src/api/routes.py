@@ -68,13 +68,16 @@ class OnDemandSummarizeRequest(BaseModel):
 @router.get("/health", summary="Health and Status Check")
 async def health_check() -> Dict[str, Any]:
     """Returns the operational status of the Orchestrator, LLM Provider, and MCP layer."""
+    demo = backend_adapter.use_mock
+    retrieval_ready = None if demo else await backend_adapter.check_retrieval_ready()
     return {
-        "status": "healthy",
+        "status": "degraded" if retrieval_ready is False else "healthy",
+        "retrieval_backend_ready": retrieval_ready,
         "service": "EV Fault Diagnosis Agent Orchestrator & Evidence Pipeline",
         "default_llm_provider": settings.DEFAULT_LLM_PROVIDER,
         "default_llm_model": settings.DEFAULT_LLM_MODEL,
         "mcp_transport": settings.MCP_TRANSPORT,
-        "backend_retrieval_mode": "mock_domain_db" if settings.HYBRID_RETRIEVAL_USE_MOCK else "live_hybrid_api",
+        "backend_retrieval_mode": "mock_domain_db" if demo else "live_hybrid_api",
         "active_mcp_tools": [t.name for t in orchestrator.tools]
     }
 
@@ -308,7 +311,10 @@ async def list_mcp_tools() -> Dict[str, Any]:
 @router.get("/dtc/{code}", summary="Direct DTC Code Lookup")
 async def lookup_dtc(code: str) -> Dict[str, Any]:
     """Direct lookup for electric two-wheeler Diagnostic Trouble Codes."""
-    dtc_record = await backend_adapter.get_dtc_details(code)
+    try:
+        dtc_record = await backend_adapter.get_dtc_details(code)
+    except RuntimeError as error:
+        raise HTTPException(status_code=503, detail=str(error)) from error
     if not dtc_record:
         raise HTTPException(status_code=404, detail=f"DTC code '{code}' not found.")
-    return dtc_record.model_dump()
+    return {**dtc_record.model_dump(), "retrieval_mode": "demo" if backend_adapter.use_mock else "live"}

@@ -25,9 +25,9 @@ class WebsiteFormatter:
         """Generates a complete, beautiful Markdown document summarizing all cases."""
         lines = [
             "# ⚡ Electric Two-Wheeler Technical Evidence & Diagnosis Report",
-            "### AI-Assisted Retrieval, Cleaning & Grounded Summaries for Website Display",
+            "### Retrieved Technical Evidence",
             "",
-            "> Processed by Agent Orchestrator & Evidence Pipeline (Cleaned, Deduplicated, Grounded via Gemini)",
+            "> Processed by Agent Orchestrator & Evidence Pipeline (Cleaned, Deduplicated, source excerpts selected)",
             "",
             "---",
             ""
@@ -36,7 +36,7 @@ class WebsiteFormatter:
         for idx, case in enumerate(cases, 1):
             lines.append(f"## {idx}. Case: `{case.case_id}`")
             lines.append(f"**Query:** *\"{case.query}\"*  ")
-            lines.append(f"**Identified Model:** `{case.vehicle_model or 'Ather 450 Series'}` | **Grounding Score:** `{case.grounding_score:.2f}` | **Chunks:** `{case.unique_chunks_used}` unique (deduped from `{case.raw_chunks_retrieved}`)")
+            lines.append(f"**Identified Model:** `{case.vehicle_model or 'Not specified'}` | **Chunks:** `{case.unique_chunks_used}` selected (from `{case.raw_chunks_retrieved}`)")
             lines.append("")
             lines.append(f"> **Direct Summary:** {case.direct_answer}")
             lines.append("")
@@ -61,9 +61,11 @@ class WebsiteFormatter:
                 lines.append("")
 
             if case.sources:
-                lines.append("### 📚 Official Document Sources")
+                lines.append("### 📚 Source Passages")
                 for s in case.sources:
                     url_part = f" ([Official Link]({s.url}))" if s.url else ""
+                    if s.excerpt:
+                        lines.append(f"> {s.excerpt.replace(chr(10), chr(10) + '> ')}")
                     lines.append(f"- **{s.title}** (Sim: `{s.similarity_score:.4f}`){url_part} — `{s.chunk_id}`")
                 lines.append("")
 

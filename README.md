@@ -1,12 +1,12 @@
 # EV Fault Diagnosis RAG
 
-The repository connects a Next.js website, a FastAPI backend/retrieval service, and a FastAPI agent pipeline. The website query path retrieves evidence, cleans it, creates a structured answer, and saves the result in local SQLite history.
+The repository connects a Next.js website, a FastAPI backend/retrieval service, and a FastAPI agent pipeline. The website query path retrieves evidence, cleans it, selects source excerpts, and saves the result in local SQLite history.
 
 ## Project status
 
 The retrieval-first website flow, local diagnosis history, Gemini synthesis support, and query-driven Knowledge Base are implemented on `feature/retrieval-first-website-integration`. The changes are pushed to [PR #3](https://github.com/darklord241/ev-fault-diagnosis-rag/pull/3), which targets `full-integration`; they are not yet merged into that branch.
 
-The app can run in demo mode without a corpus or API key. Live retrieval requires the locally supplied chunk corpus and matching embedding cache (or the ability to build the cache with the local embedding model). Gemini is optional and is used only for answer synthesis; without a working provider, the pipeline uses its labeled deterministic fallback. Query history is stored on the local machine in SQLite. Hosting and a shared/production database are not configured.
+The app can run in demo mode without a corpus or API key. Live retrieval requires the locally supplied chunk corpus and matching embedding cache (or the ability to build the cache with the local embedding model). Gemini optionally selects verbatim excerpts. The pipeline checks each excerpt against its cited passage and shows the highest-ranked passage when the model is unavailable. Query history is stored on the local machine in SQLite. Hosting and a shared/production database are not configured.
 
 ### Changes covered by this integration
 
@@ -71,7 +71,7 @@ With the three services running, check backend health:
 curl -sS http://127.0.0.1:8000/health
 ```
 
-For live retrieval, the response should include `"retrieval_ready": true`. In demo mode it may be `false`; that means real corpus retrieval is unavailable, not that the frontend or demo diagnosis path is stopped. Submit a diagnosis in the website to verify the demo UI flow. To verify Knowledge Base chunk search, enable live retrieval first, then call:
+For live retrieval, the response should include `"retrieval_ready": true`, which means the index and backend key are configured. The website checks whether the agent key can authenticate. In demo mode it may be `false`; that means real corpus retrieval is unavailable, not that the frontend or demo diagnosis path is stopped. Submit a diagnosis in the website to verify the demo UI flow. To verify Knowledge Base chunk search, enable live retrieval first, then call:
 
 ```sh
 curl -sS -X POST http://127.0.0.1:8000/api/v1/knowledge/search \
@@ -95,7 +95,9 @@ The existing retrieval code expects validated JSONL chunks in `data/chunked/` an
 4. Set `HYBRID_RETRIEVAL_USE_MOCK=false` in `agent-layer/.env`. Set `HYBRID_RETRIEVAL_API_KEY` there to the same secret as `BACKEND_API_KEY` in `backend/.env`.
 5. Restart the backend and agent. Confirm <http://127.0.0.1:8000/health> reports `retrieval_ready: true`; then submit a query in the website.
 
-When the backend is live, an unavailable service, invalid response, missing key, or empty evidence does not become a sample-based or confident live answer. A Google API key is optional for retrieval and for the demo. To test Gemini synthesis, create `agent-layer/.env` from `.env.example`, keep `DEFAULT_LLM_PROVIDER=gemini` and `DEFAULT_LLM_MODEL=gemini-3.5-flash-lite`, and enter your key as `GOOGLE_API_KEY` locally. Restart the agent and submit one query; `model_used` should be `gemini-3.5-flash-lite` if Gemini succeeds. If the key is missing or Gemini errors, the UI labels the deterministic fallback instead. Never put keys in frontend code or `NEXT_PUBLIC_*` variables, paste them into chat/GitHub, or include local `.env` files in a commit.
+Live search uses a configurable minimum cosine similarity (`EV_RETRIEVAL_MIN_SIMILARITY`, default `0.30`). The System API checks live retrieval using the agent's configured API key. The built-in corpus backend does not provide live DTC lookup; sample DTC results are labeled in demo mode.
+
+When the backend is live, an unavailable service, invalid response, missing key, or empty evidence does not become a sample-based or confident live answer. A Google API key is optional for retrieval and for the demo. To test Gemini excerpt selection, create `agent-layer/.env` from `.env.example`, keep `DEFAULT_LLM_PROVIDER=gemini` and `DEFAULT_LLM_MODEL=gemini-3.5-flash-lite`, and enter your key as `GOOGLE_API_KEY` locally. Restart the agent and submit one query; `model_used` should be `gemini-3.5-flash-lite` if Gemini succeeds. If the key is missing or Gemini errors, the UI labels the deterministic fallback instead. Never put keys in frontend code or `NEXT_PUBLIC_*` variables, paste them into chat/GitHub, or include local `.env` files in a commit.
 
 ## How one website query flows
 
@@ -125,7 +127,7 @@ flowchart LR
 
 The Knowledge Base page sends searches to `POST /api/v1/knowledge/search`. It returns up to five matching chunks with full passage text, document title, page number, source URL, and similarity score; the chunk ID is available as a secondary reference rather than the primary display. The diagnosis result links to this page with the query and selected vehicle/subsystem in the URL. If opened without a query, it uses the most recent local diagnosis, and if no history exists it offers suggested searches.
 
-`POST /api/v1/diagnose` remains a separate agent/MCP diagnosis path; the website's main diagnosis form uses the retrieval-first `/api/v1/query` contract and `WebsiteCardPayload`.
+`POST /api/v1/diagnose` remains a separate agent/MCP evidence selection path; the website's main diagnosis form uses the retrieval-first `/api/v1/query` contract and `WebsiteCardPayload`.
 
 ## Local database
 

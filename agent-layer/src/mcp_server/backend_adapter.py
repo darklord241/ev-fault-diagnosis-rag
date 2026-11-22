@@ -214,6 +214,20 @@ class BackendRetrievalAdapter:
         self.api_key = settings.HYBRID_RETRIEVAL_API_KEY
         logger.info(f"Initialized BackendRetrievalAdapter (Mock Mode: {self.use_mock}, URL: {self.base_url})")
 
+    async def check_retrieval_ready(self) -> bool:
+        if not self.api_key:
+            return False
+        try:
+            async with httpx.AsyncClient(timeout=2.0) as client:
+                response = await client.request(
+                    "GET",
+                    f"{self.base_url.rstrip('/')}/status",
+                    headers={"Authorization": f"Bearer {self.api_key}"},
+                )
+            return response.status_code == 200 and response.json().get("ready") is True
+        except (httpx.RequestError, ValueError, AttributeError):
+            return False
+
     async def _fetch_live_evidence(
         self,
         query: str,
@@ -320,6 +334,8 @@ class BackendRetrievalAdapter:
                     )
                 if response.status_code == 404:
                     return None
+                if response.status_code == 501:
+                    raise RuntimeError("The configured backend does not provide live DTC lookup.")
                 if response.status_code != 200:
                     raise RuntimeError(
                         f"Live DTC lookup returned HTTP {response.status_code}."

@@ -40,7 +40,7 @@ async def main():
     summary_table.add_column("User Question", style="white", width=35)
     summary_table.add_column("Raw Chunks", style="dim", justify="center", width=12)
     summary_table.add_column("Unique Chunks", style="bold green", justify="center", width=14)
-    summary_table.add_column("Grounding", style="cyan", justify="center", width=10)
+    summary_table.add_column("Sources", style="cyan", justify="center", width=10)
 
     for case in batch.cases:
         summary_table.add_row(
@@ -48,7 +48,7 @@ async def main():
             case.query[:35] + ("..." if len(case.query) > 35 else ""),
             str(case.raw_chunks_retrieved),
             f"{case.unique_chunks_used} (deduped)",
-            f"{case.grounding_score:.2f}"
+            str(len(case.sources))
         )
     console.print(summary_table)
 

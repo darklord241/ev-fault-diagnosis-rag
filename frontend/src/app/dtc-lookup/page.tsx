@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Search, AlertTriangle, Wrench, CheckCircle2, BookOpen } from 'lucide-react';
-import { lookupDTC } from '@/lib/api';
+import { ApiError, lookupDTC } from '@/lib/api';
 import type { DTCRecord } from '@/lib/types';
 import { PageTitle, ErrorBox, Empty } from '@/components/Shell';
 
@@ -27,7 +27,7 @@ export default function DTCLookupPage() {
       setData(result);
     } catch (e) {
       const msg = (e as Error).message;
-      if (msg.includes('404') || msg.includes('not found')) {
+      if (e instanceof ApiError && e.status === 404) {
         setNotFound(true);
       } else {
         setError(msg);
@@ -70,6 +70,9 @@ export default function DTCLookupPage() {
       <section className="card" style={{ marginTop: 20 }}>
         {data ? (
           <div>
+            {data.retrieval_mode === 'demo' && (
+              <div className="notice" role="status">This code comes from the sample database.</div>
+            )}
             {/* Code Header */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
               <span className="dtc-code-display">{data.code}</span>

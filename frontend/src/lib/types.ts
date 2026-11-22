@@ -72,7 +72,8 @@ export interface GroundedAnswer {
   diagnostic_procedure: DiagnosticStep[];
   recommended_remedy: string;
   safety_warnings: string[];
-  grounding_score: number;
+  selected_source_id?: string | null;
+  retrieval_mode: 'demo' | 'live';
   evidence_sources: EvidenceSource[];
   generated_at: string;
   execution_time_seconds?: number;
@@ -85,6 +86,7 @@ export interface SourceCitation {
   url?: string;
   page_number?: number;
   content?: string;
+  excerpt?: string | null;
   similarity_score: number;
   relevance_rationale?: string;
   metadata?: Record<string, unknown>;
@@ -100,7 +102,7 @@ export interface WebsiteCardPayload {
   conditions_and_safety: string[];
   formatted_markdown: string;
   sources: SourceCitation[];
-  grounding_score: number;
+  retrieval_mode: 'demo' | 'live' | 'unknown';
   raw_chunks_retrieved: number;
   unique_chunks_used: number;
   model_used: string;
@@ -132,6 +134,7 @@ export interface DTCRecord {
   possible_causes: string[];
   suggested_checks: string[];
   source_manual: string;
+  retrieval_mode: 'demo' | 'live';
 }
 
 export interface HealthResponse {

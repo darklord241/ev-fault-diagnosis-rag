@@ -1,5 +1,5 @@
 import json
-import asyncio
+from contextvars import ContextVar
 from typing import List, Dict, Any, Optional, Callable
 from langchain_core.tools import StructuredTool, Tool
 from pydantic import BaseModel, Field
@@ -35,15 +35,17 @@ class MCPClientManager:
         self.transport = transport or settings.MCP_TRANSPORT
         self.server_url = server_url or settings.MCP_SSE_ENDPOINT
         self.connected_tools: List[StructuredTool] = []
-        self._retrieved_sources_accumulator: List[Dict[str, Any]] = []
+        self._retrieved_sources_accumulator: ContextVar[Optional[List[Dict[str, Any]]]] = ContextVar(
+            "retrieved_sources", default=None
+        )
 
     def get_retrieved_evidence_cache(self) -> List[Dict[str, Any]]:
         """Return all evidence chunks retrieved during the current agent session."""
-        return self._retrieved_sources_accumulator
+        return list(self._retrieved_sources_accumulator.get() or [])
 
     def clear_session_cache(self):
         """Clear cached evidence between queries."""
-        self._retrieved_sources_accumulator = []
+        self._retrieved_sources_accumulator.set([])
 
     async def _wrapped_retrieve_evidence(self, query: str, vehicle_model: Optional[str] = None, subsystem: Optional[str] = None, top_k: int = 4) -> str:
         """Invokes MCP retrieval tool and records evidence for downstream grounding calculation."""
@@ -51,9 +53,11 @@ class MCPClientManager:
         try:
             items = json.loads(res_json)
             if isinstance(items, list):
-                for item in items:
-                    if item not in self._retrieved_sources_accumulator:
-                        self._retrieved_sources_accumulator.append(item)
+                sources = self._retrieved_sources_accumulator.get()
+                if sources is not None:
+                    for item in items:
+                        if item not in sources:
+                            sources.append(item)
         except Exception as e:
             logger.debug(f"Could not parse evidence items into cache: {e}")
         return res_json
