@@ -1,0 +1,1048 @@
+{
+  "started_at_utc": "2026-10-28T17:31:00.752546+00:00",
+  "base_url": "http://127.0.0.1:8000",
+  "dataset": "agent-layer\\data\\queries_gold.json",
+  "top_k": 5,
+  "provider": "ollama",
+  "configured_model": "qwen3.5:9b",
+  "backend_retrieval_mode": "mock_domain_db",
+  "case_count": 20,
+  "successful_count": 20,
+  "failed_count": 0,
+  "latency_seconds": {
+    "mean": 56.709,
+    "median": 54.805,
+    "min": 42.784,
+    "max": 76.201
+  },
+  "mean_grounding_score_self_reported": 0.939,
+  "mean_unique_chunks_used": 5,
+  "hit_at_k_ratio": 0.0,
+  "results": [
+    {
+      "case_id": "charging-compatible-700w",
+      "query": "Can I use my existing 700W charger with the Ather 450S, and how long will recharging take?",
+      "latency_seconds": 42.784,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.95,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "gold_chunk_ids": [
+        "ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7257_chunk_0",
+        "ather_charging_faqs_8133_chunk_0",
+        "ather_electric_scooter_faqs___support_&_help_center_7257_chunk_0",
+        "ather_electric_scooter_faqs___support_&_help_center_8133_chunk_0"
+      ],
+      "hit_at_k": false,
+      "answer": "Yes, you can use your existing 700W charger with the Ather 450S due to its backwards compatibility feature. Recharging from 0-80% takes approximately 3 hours and 30 minutes, while a full charge (0-100%) takes about 4 hours and 30 minutes using this standard home unit.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "fallsafe-rider-fall",
+      "query": "What does FallSafe do when the rider falls?",
+      "latency_seconds": 76.201,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.96,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "gold_chunk_ids": [
+        "ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7252_chunk_0",
+        "ather_electric_scooter_faqs___support_&_help_center_7252_chunk_0"
+      ],
+      "hit_at_k": false,
+      "answer": "FallSafe cuts off power to the motor immediately when a vehicle fall is detected, stopping the scooter and automatically flashing hazard turn indicators.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "eight70-battery-degradation",
+      "query": "What battery degradation protection is described by Eight70 Warranty?",
+      "latency_seconds": 44.068,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.95,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "gold_chunk_ids": [
+        "ather_electric_scooter_faqs___support_&_help_center_7383_chunk_0",
+        "ather_electric_scooter_faqs___support_&_help_center_7406_chunk_0",
+        "battery_warranty_details_for_ather_scooters___faqs_7406_chunk_0"
+      ],
+      "hit_at_k": false,
+      "answer": "The Eight70 Warranty guarantees that your battery will maintain a State-of-Health (SOH) of at least 70% for either 8 years or 80,000 km. If the health drops below this threshold, Ather provides free replacement services to restore full capacity.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "charger-amber-light",
+      "query": "What does a solid amber light on the portable charger indicate?",
+      "latency_seconds": 54.159,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.92,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_43_chunk_0",
+        "2025-450S-QSG_page_42_chunk_0",
+        "2025-450X-QSG_page_43_chunk_0",
+        "450S_User_Manual_Jan_24_page_41_chunk_0",
+        "450X_Gen_4_2023_QSG_page_41_chunk_0",
+        "Rizta S Quick Start Guide_page_36_chunk_0",
+        "Rizta Z Quick Start Guide_page_39_chunk_0"
+      ],
+      "hit_at_k": false,
+      "answer": "Based on the provided technical documentation for the Ather 450S, specific LED indicator meanings such as a solid amber light are not explicitly detailed in these excerpts; however, portable charger charging durations and safety protocols are documented.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "charger-blinking-green",
+      "query": "What does a blinking green charger indicator mean?",
+      "latency_seconds": 44.761,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.92,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_43_chunk_0",
+        "2025-450S-QSG_page_42_chunk_0",
+        "2025-450X-QSG_page_43_chunk_0",
+        "450S_User_Manual_Jan_24_page_41_chunk_0",
+        "450X_Gen_4_2023_QSG_page_41_chunk_0",
+        "Rizta S Quick Start Guide_page_36_chunk_0",
+        "Rizta Z Quick Start Guide_page_39_chunk_0",
+        "duomanualvfin_page_3_chunk_0"
+      ],
+      "hit_at_k": false,
+      "answer": "The provided technical documentation outlines standard home and portable charger durations but does not explicitly define specific meanings for blinking green indicator lights.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "charger-solid-red",
+      "query": "What action is recommended when the portable charger displays a solid red light?",
+      "latency_seconds": 55.451,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.95,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_43_chunk_0",
+        "2025-450S-QSG_page_42_chunk_0",
+        "2025-450X-QSG_page_43_chunk_0",
+        "450S_User_Manual_Jan_24_page_41_chunk_0",
+        "450X_Gen_4_2023_QSG_page_41_chunk_0",
+        "Rizta S Quick Start Guide_page_36_chunk_0",
+        "Rizta Z Quick Start Guide_page_39_chunk_0",
+        "duomanualvfin_page_3_chunk_0"
+      ],
+      "hit_at_k": false,
+      "answer": "The provided technical documentation does not explicitly define an action for a solid red light indicator; however, general safety protocols require using properly earthed sockets and avoiding damaged cables.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "450x-solo-tyre-pressure",
+      "query": "What tyre pressures are recommended for a solo rider on the Ather 450X?",
+      "latency_seconds": 43.899,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.95,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "gold_chunk_ids": [
+        "2025-450X-QSG_page_20_chunk_0",
+        "450X_Gen_4_2023_QSG_page_20_chunk_0"
+      ],
+      "hit_at_k": false,
+      "answer": "The provided technical documentation does not contain specific tyre pressure recommendations for a solo rider on the Ather 450X.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "450x-underseat-storage",
+      "query": "What are the under-seat storage volume and maximum load capacity of the Ather 450X?",
+      "latency_seconds": 65.834,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.95,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "gold_chunk_ids": [
+        "2025-450X-QSG_page_15_chunk_0",
+        "450X_Gen_4_2023_QSG_page_15_chunk_0"
+      ],
+      "hit_at_k": false,
+      "answer": "The provided technical documentation does not contain specific figures for under-seat storage volume or maximum load capacity; however, it details charging times and battery warranty terms primarily referencing the Ather 450S.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "dashboard-software-version",
+      "query": "How can the user find the scooter's software version through the dashboard settings?",
+      "latency_seconds": 63.993,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.95,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_17_chunk_0",
+        "2025-450X-QSG_page_17_chunk_0",
+        "450X_Gen_4_2023_QSG_page_17_chunk_0",
+        "Rizta Z Quick Start Guide_page_17_chunk_0"
+      ],
+      "hit_at_k": false,
+      "answer": "Based on the provided technical documentation, there are no instructions available for locating or viewing the scooter's software version through dashboard settings.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "combined-braking-system",
+      "query": "How does the Combined Braking System operate when the left-hand lever is used?",
+      "latency_seconds": 47.991,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.95,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_11_chunk_0",
+        "2025-450S-QSG_page_11_chunk_0",
+        "2025-450X-QSG_page_11_chunk_0",
+        "450S_User_Manual_Jan_24_page_11_chunk_0",
+        "450X_Gen_4_2023_QSG_page_11_chunk_0",
+        "Rizta S Quick Start Guide_page_11_chunk_0",
+        "Rizta Z Quick Start Guide_page_11_chunk_0"
+      ],
+      "hit_at_k": false,
+      "answer": "The provided technical evidence does not specify the operational mechanics of the Combined Braking System for the left-hand lever; however, it documents safety features like FallSafe and battery warranty terms.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "charger-amber-confusion",
+      "query": "My charger's indicator has turned amber. Does that mean the charger has developed a fault?",
+      "latency_seconds": 68.158,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.85,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_43_chunk_0",
+        "2025-450S-QSG_page_42_chunk_0",
+        "2025-450X-QSG_page_43_chunk_0",
+        "450S_User_Manual_Jan_24_page_41_chunk_0",
+        "450X_Gen_4_2023_QSG_page_41_chunk_0",
+        "Rizta S Quick Start Guide_page_36_chunk_0",
+        "Rizta Z Quick Start Guide_page_39_chunk_0",
+        "duomanualvfin_page_3_chunk_0"
+      ],
+      "hit_at_k": false,
+      "answer": "The provided technical documentation does not specify charger indicator light meanings or fault definitions; however, standard home charging times and safety precautions for undamaged cables are detailed.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "charger-green-flashing-confusion",
+      "query": "The charger is flashing green. Does this mean charging has finished?",
+      "latency_seconds": 49.841,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.95,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_43_chunk_0",
+        "2025-450S-QSG_page_42_chunk_0",
+        "2025-450X-QSG_page_43_chunk_0",
+        "450S_User_Manual_Jan_24_page_41_chunk_0",
+        "450X_Gen_4_2023_QSG_page_41_chunk_0",
+        "Rizta S Quick Start Guide_page_36_chunk_0",
+        "Rizta Z Quick Start Guide_page_39_chunk_0",
+        "duomanualvfin_page_3_chunk_0"
+      ],
+      "hit_at_k": false,
+      "answer": "The provided documentation specifies that full charging (0-100%) takes approximately 4 hours and 30 minutes using a standard home unit, but does not explicitly define charger indicator light patterns such as flashing green in these excerpts.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "charger-red-problem",
+      "query": "My portable charger is showing a red light. What should I do next?",
+      "latency_seconds": 62.877,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.92,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_43_chunk_0",
+        "2025-450S-QSG_page_42_chunk_0",
+        "2025-450X-QSG_page_43_chunk_0",
+        "450S_User_Manual_Jan_24_page_41_chunk_0",
+        "450X_Gen_4_2023_QSG_page_41_chunk_0",
+        "Rizta S Quick Start Guide_page_36_chunk_0",
+        "Rizta Z Quick Start Guide_page_39_chunk_0",
+        "duomanualvfin_page_3_chunk_0"
+      ],
+      "hit_at_k": false,
+      "answer": "Ensure your charger is plugged into a properly earthed 15A socket equipped with surge protection, and inspect for damaged cables before continuing.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "charger-unresponsive",
+      "query": "There is electricity at home, but my charger shows no indicator. How can I troubleshoot this?",
+      "latency_seconds": 64.834,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.95,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "gold_chunk_ids": [
+        "450S_User_Manual_Jan_24_page_41_chunk_0",
+        "450X_Gen_4_2023_QSG_page_41_chunk_0"
+      ],
+      "hit_at_k": false,
+      "answer": "Ensure your charger is connected to a properly earthed 15A socket with surge protection and inspect cables for damage or standing water.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "dot-connector-wont-release",
+      "query": "I cannot remove the charging connector from my scooter. How should I release it without forcing it?",
+      "latency_seconds": 71.805,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.85,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_42_chunk_0",
+        "2025-450S-QSG_page_41_chunk_0",
+        "2025-450X-QSG_page_42_chunk_0",
+        "450S_User_Manual_Jan_24_page_40_chunk_0",
+        "450X_Gen_4_2023_QSG_page_40_chunk_0",
+        "Rizta S Quick Start Guide_page_35_chunk_0",
+        "Rizta Z Quick Start Guide_page_38_chunk_0"
+      ],
+      "hit_at_k": false,
+      "answer": "Ensure main circuit breaker is off during any electrical inspection before handling charging connectors, and never operate chargers with damaged cables or in standing water.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "solo-rider-inflation",
+      "query": "I'm riding alone on my 450X. What air pressure should I maintain in each tyre?",
+      "latency_seconds": 46.321,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 1.0,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "gold_chunk_ids": [
+        "2025-450X-QSG_page_20_chunk_0",
+        "450X_Gen_4_2023_QSG_page_20_chunk_0"
+      ],
+      "hit_at_k": false,
+      "answer": "The retrieved technical documentation does not specify recommended tyre air pressure values for the Ather 450X; however, available specifications cover charging times and battery warranty terms.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "storage-luggage-limit",
+      "query": "How much weight can I put in the storage compartment below the seat?",
+      "latency_seconds": 64.483,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.95,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_15_chunk_0",
+        "2025-450S-QSG_page_15_chunk_0",
+        "2025-450X-QSG_page_15_chunk_0",
+        "450S_User_Manual_Jan_24_page_15_chunk_0",
+        "450X_Gen_4_2023_QSG_page_15_chunk_0"
+      ],
+      "hit_at_k": false,
+      "answer": "The current technical documentation does not specify a maximum weight limit for the storage compartment below the seat.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "check-firmware-version",
+      "query": "Where can I check which software version my scooter is currently running?",
+      "latency_seconds": 48.542,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.95,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_17_chunk_0",
+        "2025-450X-QSG_page_17_chunk_0",
+        "450X_Gen_4_2023_QSG_page_17_chunk_0",
+        "Rizta Z Quick Start Guide_page_17_chunk_0"
+      ],
+      "hit_at_k": false,
+      "answer": "Based on the provided technical documentation and FAQs regarding charging specifications, safety systems (FallSafe), roadside assistance, battery warranty, and electrical precautions, specific instructions for checking software versions are not included in these excerpts.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "throttle-slowdown",
+      "query": "Can turning the accelerator grip backwards activate regenerative braking?",
+      "latency_seconds": 45.562,
+      "model_used": "deterministic-domain-engine",
+      "grounding_score_self_reported": 0.96,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_33_chunk_0",
+        "2025-450S-QSG_page_14_chunk_0",
+        "2025-450S-QSG_page_33_chunk_0",
+        "450S_User_Manual_Jan_24_page_14_chunk_0",
+        "450S_User_Manual_Jan_24_page_33_chunk_0",
+        "450X_Gen_4_2023_QSG_page_14_chunk_0",
+        "450X_Gen_4_2023_QSG_page_33_chunk_0"
+      ],
+      "hit_at_k": false,
+      "answer": "The Ather 450S comes with backwards compatibility for existing 700W chargers. Recharging from 0-80% takes 3 hr 30 min, and 0-100% takes 4 hr 30 min using the standard home 700W unit. Standard home cha...",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "app-sync-network",
+      "query": "My scooter information is not updating in the Ather app. What connectivity conditions should I check?",
+      "latency_seconds": 72.615,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.95,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_18_chunk_0",
+        "2025-450S-QSG_page_18_chunk_0",
+        "2025-450X-QSG_page_18_chunk_0",
+        "450S_User_Manual_Jan_24_page_18_chunk_0",
+        "450X_Gen_4_2023_QSG_page_18_chunk_0",
+        "Rizta S Quick Start Guide_page_16_chunk_0",
+        "Rizta Z Quick Start Guide_page_17_chunk_0"
+      ],
+      "hit_at_k": false,
+      "answer": "The provided technical documentation does not specify connectivity troubleshooting steps for Ather App synchronization issues; it focuses instead on charging specifications, battery warranty terms, and high-voltage safety precautions.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "models": [
+    {
+      "key": "pretrained",
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "main",
+      "query_prefix": "",
+      "document_prefix": ""
+    },
+    {
+      "key": "domain_adapted",
+      "model_id": "experiments/models/minilm_ev_domain_adapted",
+      "revision": "local",
+      "query_prefix": "",
+      "document_prefix": ""
+    }
+  ]
+}

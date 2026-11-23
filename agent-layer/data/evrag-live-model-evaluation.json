@@ -1,0 +1,237 @@
+{
+  "started_at_utc": "2026-10-28T17:07:54.549827+00:00",
+  "base_url": "http://127.0.0.1:8000",
+  "dataset": "C:\\Users\\Abhay\\Desktop\\Projects\\ev-fault-diagnosis-rag\\scraper\\vector_search\\retrieval_eval.json",
+  "top_k": 5,
+  "provider": "ollama",
+  "configured_model": "qwen3.5:9b",
+  "backend_retrieval_mode": "mock_domain_db",
+  "case_count": 5,
+  "successful_count": 5,
+  "failed_count": 0,
+  "latency_seconds": {
+    "mean": 52.541,
+    "median": 45.761,
+    "min": 38.108,
+    "max": 74.033
+  },
+  "mean_grounding_score_self_reported": 0.95,
+  "mean_unique_chunks_used": 5,
+  "results": [
+    {
+      "case_id": "charging-compatible-700w",
+      "query": "Can I use my existing 700W charger with the Ather 450S, and how long will recharging take?",
+      "latency_seconds": 38.108,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.95,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "answer": "Yes, you can use your existing 700W charger with the Ather 450S as it offers backwards compatibility for standard home units. Recharging from an empty battery to 80% takes approximately 3 hours and 30 minutes, while a full charge (100%) requires about 4 hours and 30 minutes.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "charging-time-450s",
+      "query": "What home charging time is listed for the Ather 450S?",
+      "latency_seconds": 45.761,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.95,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "answer": "The standard home 700W unit charges the Ather 450S from 0-80% in approximately 3 hours and 30 minutes, reaching full capacity (100%) in about 4 hours and 30 minutes. Using a portable charger extends this time to roughly 6 hours and 36 minutes for 80% or 8 hours and 36 minutes for a complete charge.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "fallsafe-rider-fall",
+      "query": "What does FallSafe do when the rider falls?",
+      "latency_seconds": 74.033,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.95,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "answer": "FallSafe is an intelligent safety feature that cuts off power to the motor whenever a vehicle fall is detected, stopping the scooter immediately and automatically flashing hazard turn indicators to alert traffic.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "rsa-discharged-battery",
+      "query": "What roadside assistance is described when a fully discharged battery leaves the vehicle immovable?",
+      "latency_seconds": 65.64,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.95,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "answer": "Roadside Assistance provides towing services to the nearest Ather touchpoint or grid station when a fully discharged battery leaves your vehicle immovable on the road.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    },
+    {
+      "case_id": "eight70-battery-degradation",
+      "query": "What battery degradation protection is described by Eight70 Warranty?",
+      "latency_seconds": 39.162,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.95,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "answer": "The Ather Eight70 Battery Warranty guarantees that your battery will maintain a state-of-health above 70% for either 8 years or 80,000 kilometers; if health drops below this threshold, you receive a free replacement.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,625 @@
+{
+  "version": 1,
+  "split": "val",
+  "description": "Domain-specific EV technical validation dev set (leak-free from 40-case benchmark)",
+  "total_pairs": 75,
+  "unique_passages": 75,
+  "source_documents": [
+    "2025-450-Apex-QSG",
+    "2025-450S-QSG",
+    "450S_User_Manual_Jan_24",
+    "450X_Gen_4_2023_QSG",
+    "Ather-450-Spec-Sheet-Oct-2024",
+    "Ather-450-specsheet",
+    "Ather-HALO-Bit-Half-Face-Manual",
+    "Halo-Digital-User-Manual",
+    "Rizta S Quick Start Guide",
+    "ather_450_series_faqs___450x_vs_450s,_charging,_warranty",
+    "ather_charging_faqs",
+    "ather_electric_scooter_faqs___support_&_help_center",
+    "ather_subscription_terms_and_conditions",
+    "duomanualvfin"
+  ],
+  "pairs": [
+    {
+      "pair_id": "pair_pdf_Ather-450-Spec-Sheet-Oct-2024_page_1_chunk_1_split_3",
+      "query": "What does the manual state regarding released as an ota update?",
+      "chunk_id": "Ather-450-Spec-Sheet-Oct-2024_page_1_chunk_1_split_3",
+      "passage": "released as an OTA update. \u00b6Ather Battery Protect is available as an optional purchase along with Pro pack only for 450S & 450X (2.9kWh). All third party trademarks (including words, logos and icons) referenced by Ather Energy Limited (Formerly known as Ather Energy Private Limited) remain the property of their respective owners. \u00a92023 Ather Energy. All rights reserved.",
+      "source_document": "Ather-450-Spec-Sheet-Oct-2024",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7459_chunk_0",
+      "query": "What is not covered under vehicle warranty?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7459_chunk_0",
+      "passage": "What is not covered under vehicle warranty? All wear and tear parts such as primary belt, secondary belt, brake pads, etc; electrical components like bulbs; rubber & plastic parts; consumables like oil, grease etc.; tyres & painted parts are not covered under standard vehicle warranty. They may or may not have warranty.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_pdf_450X_Gen_4_2023_QSG_page_31_chunk_0",
+      "query": "What does the manual state regarding turning the scooter on and riding maintaining speed rev the accelerator throttle and use the brakes to maintain speed?",
+      "chunk_id": "450X_Gen_4_2023_QSG_page_31_chunk_0",
+      "passage": "TURNING THE SCOOTER ON AND RIDING MAINTAINING SPEED Rev the accelerator throttle and use the brakes to maintain speed. Avoid using both the accelerator and the brake at the same time. SLOWING DOWN AND BRAKING Bring the throttle back to zero. Either use the On the road 25",
+      "source_document": "450X_Gen_4_2023_QSG",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_pdf_Rizta S Quick Start Guide_page_41_chunk_0",
+      "query": "What does the manual state regarding pulling and pushing turn the motor off when pulling the scooter back or pushing the scooter on a decline?",
+      "chunk_id": "Rizta S Quick Start Guide_page_41_chunk_0",
+      "passage": "PULLING AND PUSHING Turn the motor OFF when pulling the scooter back or pushing the scooter on a decline. CAUTION Do not try to hold the scooter at a place using partial acceleration, while on a slope. In all likelihood, it will damage the motor. CARING FOR YUR SCOOTER 31",
+      "source_document": "Rizta S Quick Start Guide",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_pdf_2025-450-Apex-QSG_page_13_chunk_0",
+      "query": "What are the operational guidelines and speed limits for Park Assist?",
+      "chunk_id": "2025-450-Apex-QSG_page_13_chunk_0",
+      "passage": "SWITCHGEAR: RIGHT-HAND SIDE MOTOR STARTER Turns the motor on, and kickstarts the scooter. Other function: \u2022 Changes directions when in Park Assist\u2122 mode. TOGGLE SWITCH Switches between riding modes displayed on the screen with a left/right toggle, when the key is on. Changes the mode while riding as well. To do so, the throttle has to be at 0. KILL SWITCH Disables the motor controller to help you be extra sure that the motor is OFF when you need to halt. Know your scooter 7",
+      "source_document": "2025-450-Apex-QSG",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_8140_chunk_0",
+      "query": "Why do I have to pay for fast charging at Ather Grid\u2122?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_8140_chunk_0",
+      "passage": "Why do I have to pay for fast charging at Ather Grid\u2122? We\u2019ve always believed that public charging is a key component for EV adoption and have kept our network free to access since 2018. The flip side of free charging has been that it leads to crowding when riders plug in for long hours. Ather Grid\u2122 is designed to give quick top-ups on the go. Now with an extensive community of owners in each city, one of the biggest feedback has been that Ather Grid\u2122 should be accessible when required. And to solve for that, charging at Ather Grid\u2122 will now be available at a nominal fee of \u20b91.2/min. Charge when you need, at India\u2019s largest two-wheeler fast charging network.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7245_chunk_0",
+      "query": "Why is the 450 Apex not eligible for PM E-DRIVE subsidy?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7245_chunk_0",
+      "passage": "Why is the 450 Apex not eligible for PM E-DRIVE subsidy? As per PM E-DRIVE guidelines, the ex-factory price of the 450 Apex does not qualify for subsidy.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7212_chunk_0",
+      "query": "What are the key features of the Frunk?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7212_chunk_0",
+      "passage": "What are the key features of the Frunk? **Quick access:** - 14L storage capacity with added compartments for water bottle and sunglass - Exclusive water resistant compartment for mobile phone **Zero compromise on leg room:** - Designed to seamlessly integrate with the vehicle, with zero ergonomic hindrance - Modular capacity for adaptive storage (or) Expandable storage with two side zippers **Premium quality:** - Made of 100% polyester Ripstop material for Abrasion & tear resistance - Water Resistant under heavy rainfall* (*Tested under rainfall conditions of 100 mm for 1 hour) - Reinforced panel backing constructed for extra strength - Padded layers for added protection - Designed to withstand 5kgs under all terrain rides",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7179_chunk_0",
+      "query": "How much does the Ather TPMS cost?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7179_chunk_0",
+      "passage": "How much does the Ather TPMS cost? The price of Ather TPMS is \u20b9 4 999 inclusive of GST. The cost of installation is on us.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7306_chunk_0",
+      "query": "Is Ather Connect\u2122 mandatory?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7306_chunk_0",
+      "passage": "Is Ather Connect\u2122 mandatory? No, it's up to you. But if you want to unlock your Ather's full potential, you'll need Ather Connect. You don't want to miss out on Find My Scooter, OTA updates that add new features and keep improving your scooter, Call and Music Controls and so much more.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7314_chunk_0",
+      "query": "I initially opted for the 3-year plan, but would like to downgrade. Can I do that?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7314_chunk_0",
+      "passage": "I initially opted for the 3-year plan, but would like to downgrade. Can I do that? We don't have the option to downgrade a plan. But we're sure you will continue to find great value with the plan you have chosen.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7748_chunk_0",
+      "query": "What is AirWalk\u2122?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7748_chunk_0",
+      "passage": "What is AirWalk\u2122? AirWalk\u2122 is a feature designed to help you maneuver the scooter manually. As soon as the scooter detects a manual push or pull, it engages the motor to provide assistive torque in the same direction.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7311_chunk_0",
+      "query": "I only want to use Google Maps navigation. Can I subscribe just for a few individual features?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7311_chunk_0",
+      "passage": "I only want to use Google Maps navigation. Can I subscribe just for a few individual features? Ather Connect\u2122 is a connected platform that unlocks a whole lot of smart features. It is designed to give you a riding experience that's smarter than ever. Just a couple of features can't match up to the world of intelligence it opens you up to.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7430_chunk_0",
+      "query": "What if I don't know the previous owner or can't contact them?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7430_chunk_0",
+      "passage": "What if I don't know the previous owner or can't contact them? If you bought the scooter through a dealership or simply cannot reach the previous owner, you can write to our customer support team customercare@atherenergy.com with a copy of your updated RC (Registration Certificate) or valid proof of purchase, and we will securely process the digital ownership transfer.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_pdf_duomanualvfin_page_5_chunk_0",
+      "query": "What does the manual state regarding installation 4 in your parking space, choose a spot on the wall close to the socket?",
+      "chunk_id": "duomanualvfin_page_5_chunk_0",
+      "passage": "Installation 4 In your parking space, choose a spot on the wall close to the socket. Get your electrician to check the following: \u2192 Ensure the socket you will be using to plug your charger is indoors, not exposed to water and rated for 6A. \u2192 Make sure the voltage difference between Neutral and Earth is below 25V. Step 1: Install the wall mount at a height of 1.2m from the ground. Ensure that there's a socket close to the wall mount. Step 2: Mark 2 holes vertically on the wall, using holes given on Wall mount for mounting under the snap cover. Step 3: Drill holes with an M6 drill and install the wall anchors. Step 4: Align the wall mount to the holes and fasten with the 2 mounting screws. Once done, close the screw cover. Step 5: Attach the Duo to the wall mount, plug it in and switch it ON. Step 6: Now you can charge your vehicle where you park. And when not charging, you can hang the charging handle in the dock. Step 7: Use the key given in the pack to unlock the Duo from the wall mount.",
+      "source_document": "duomanualvfin",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_pdf_ather_subscription_terms_and_conditions_page_5_chunk_0_split_2",
+      "query": "What does the manual state regarding for refund of the proportionate ather subscription plans fees to the customer?",
+      "chunk_id": "ather_subscription_terms_and_conditions_page_5_chunk_0_split_2",
+      "passage": "for refund of the proportionate Ather Subscription Plans Fees to the Customer. Notwithstanding anything to the contrary contained in these Ather Subscription Terms, Customer shall indemnify Ather for all damages, costs, losses, liabilities and expenses suffered or incurred by Ather as a consequence of such breach. This shall be in addition to all remedies Ather may have against such Customer in law and in equity. 3.7 In any case of resale of the Vehicle by the Customer, Ather reserves the right to transfer the benefits arising out of or in connection with these Ather Subscription terms to the new customer subject to fulfillment of conditions under the Purchase Terms and as communicated by Ather in writing. 3.8 Ather reserves the right to collect personal information of the Customer including",
+      "source_document": "ather_subscription_terms_and_conditions",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7417_chunk_0",
+      "query": "What is the EMI for Ather electric scooter?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7417_chunk_0",
+      "passage": "What is the EMI for Ather electric scooter? The EMI for an Ather electric scooter depends on your city, loan tenure, down payment and bank partner. Use the Ather electric scooter EMI calculator to get accurate monthly payments, including electric scooter EMI interest rate and total loan cost. Plan your two-wheeler loan EMI easily with this tool.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_pdf_Halo-Digital-User-Manual_page_26_chunk_0_split_3",
+      "query": "What does the manual state regarding comply with bis standards?",
+      "chunk_id": "Halo-Digital-User-Manual_page_26_chunk_0_split_3",
+      "passage": "comply with BIS standards. 3.2. Normal wear and tear due to usage, and other physical damages; 3.3. Slow charging due to voltage of Power Adapter; 3.4. In the event the Product has been assembled, disassembled, altered, serviced, repaired or modified by any unauthorized third part, in any manner, or using tools not authorized by Ather; 3.5. Any other damage or defect in the Products which is caused by the misuse, fault or improper maintenance; 3.6. Any repair or replacement required as a direct result of unauthorized modifications of Products. 3.7. Glues, rubber and other materials on the Product may fade under UV exposure (Sunlight) over time. Such changes to the Product shall not be considered as a manufacturing defect. 3.8. Inadequate adjustments of Product as per Customer fitting 3.9. Any liability of whatsoever nature, death or injury that a Customer or third party may incur as a result",
+      "source_document": "Halo-Digital-User-Manual",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_pdf_Ather-HALO-Bit-Half-Face-Manual_page_25_chunk_0",
+      "query": "What is the procedure for pairing a smartphone via Bluetooth?",
+      "chunk_id": "Ather-HALO-Bit-Half-Face-Manual_page_25_chunk_0",
+      "passage": "LED Indicator Power on Solid white Battery Low Solid orange Out of charge Blinks orange 3 times Bluetooth Pairing Blinks blue continuously Charging(0-40%) Blinks orange continuously Charging(Above 40%) Blinks green continuously Fully Charged Solid green Error. reach out to Blinks red rapidly customer support Firmware update in Glows in blue progress and purple",
+      "source_document": "Ather-HALO-Bit-Half-Face-Manual",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7226_chunk_0",
+      "query": "What is covered in the warranty?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7226_chunk_0",
+      "passage": "What is covered in the warranty? Manufacturing defects - like stitching/velcro defects/etc. No wear and tear is covered under warranty.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7188_chunk_0",
+      "query": "My scooter is eligible for the buyback policy, will TPMS be considered as well?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7188_chunk_0",
+      "passage": "My scooter is eligible for the buyback policy, will TPMS be considered as well? The buyback policy is only applicable for the scooter and does not cover any other additional accessories like TPMS.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_charging_faqs_8124_chunk_0",
+      "query": "Will it work with my scooter?",
+      "chunk_id": "ather_charging_faqs_8124_chunk_0",
+      "passage": "Will it work with my scooter? Ather Duo charger is compatible with all generations of Ather Scooters regardless of range and battery size. It will charge them at 900W.",
+      "source_document": "ather_charging_faqs",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7244_chunk_0",
+      "query": "Is the 100 km/h top speed only in Warp+ mode?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7244_chunk_0",
+      "passage": "Is the 100 km/h top speed only in Warp+ mode? Yes, you'll reach the top speed of 100 km/h in Warp+ mode only.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_8151_chunk_0",
+      "query": "Are there any top-up limits for the Ather Wallet?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_8151_chunk_0",
+      "passage": "Are there any top-up limits for the Ather Wallet? Yes, according to RBI guidelines, your wallet balance cannot be more than \u20b910,000 per user.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_pdf_2025-450S-QSG_page_24_chunk_0",
+      "query": "What does the manual state regarding precautions for a safe electric ride \u2022 in case of an accident, do not touch wiring connectors or the wired components?",
+      "chunk_id": "2025-450S-QSG_page_24_chunk_0",
+      "passage": "PRECAUTIONS FOR A SAFE ELECTRIC RIDE \u2022 In case of an accident, do not touch wiring connectors or the wired components. \u2022 In the highly unlikely event of a battery fire, extinguish the flame by flooding it with a lot of water. A water hose should be used, and the person doing this must be at least a couple of metres away from the scooter. Make sure the scooter is unplugged from the charging point. If it isn\u2019t, switch OFF the main power supply immediately to cut off the electricity flow. \u2022 Once the fire is extinguished, keep flooding the battery with water every 30 minutes, for up to 2 hours. Check on it at regular intervals for a few hours to be extra sure that the fire doesn\u2019t re-ignite. On the road 18",
+      "source_document": "2025-450S-QSG",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7310_chunk_0",
+      "query": "I was given Ather Connect\u2122 for free as part of my scooter purchase. Do I need to subscribe?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7310_chunk_0",
+      "passage": "I was given Ather Connect\u2122 for free as part of my scooter purchase. Do I need to subscribe? If you've bought a new Ather Scooter with AtherStack Pro, you'll receive 3 year of complimentary Ather Connect. If you wish to continue using Ather Connect features post that, you will need to subscribe.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_pdf_Ather-450-specsheet_page_1_chunk_0_split_0",
+      "query": "How does regenerative braking help recover battery charge?",
+      "chunk_id": "Ather-450-specsheet_page_1_chunk_0_split_0",
+      "passage": "SPECIFICATIONS & FEATURES 122 km / 161 Km 126 / 161 Km 157 Km Performance Power (peak) 5.4 kW 6.4 kW 7.0 kW Max torque 22 Nm 26 Nm 26 Nm Top speed 90 km/h 90 km/h 100 km/h Acceleration (0-40 km/h) 3.9 s 3.3 s 2.9 s Ingress protection (motor) IP66 IP66 IP66 Coasting Regen Yes Yes Yes Range & Battery Certified Range 122 km / 161 km 126 km / 161 km 157 km Installed capacity 2.9 kWh / 3.7kWh 2.9 kWh / 3.7kWh 3.7 kWh Water & dust resistance IPX7 IPX7 IPX7 Charging Home Charging 0-80% 5 hr 30 min / 4 hr 30 min 3 hr / 4 hr 30 min 4 hr 30 min 0-100% 7 hr 45 min / 5 hr 45 min 4 hr 30 min / 5",
+      "source_document": "Ather-450-specsheet",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_pdf_Ather-HALO-Bit-Half-Face-Manual_page_9_chunk_0",
+      "query": "What does the manual state regarding install halo bit module 1 use the allen key to install the halo bit using the two fasteners found in the box?",
+      "chunk_id": "Ather-HALO-Bit-Half-Face-Manual_page_9_chunk_0",
+      "passage": "Install Halo Bit Module 1 Use the allen key to install the Halo Bit using the two fasteners found in the box. 2 Use the longer end of the allen key to securely install, but avoid over-tightening as this can damage the component.",
+      "source_document": "Ather-HALO-Bit-Half-Face-Manual",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7229_chunk_0",
+      "query": "Why are they not extended to the pillion footrest?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7229_chunk_0",
+      "passage": "Why are they not extended to the pillion footrest? The thin side sections flap or move around while riding. Hence they do not extend until the pillion footrest.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_pdf_2025-450-Apex-QSG_page_35_chunk_0",
+      "query": "What does the manual state regarding not a replacement for braking, in emergency situations only use manual brakes?",
+      "chunk_id": "2025-450-Apex-QSG_page_35_chunk_0",
+      "passage": "not a replacement for braking, in emergency situations only use manual brakes. On the road 29",
+      "source_document": "2025-450-Apex-QSG",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7249_chunk_0",
+      "query": "When should I take the 450 Apex for the first service?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7249_chunk_0",
+      "passage": "When should I take the 450 Apex for the first service? Like any other Ather, we recommend the first service at 5000 km.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7318_chunk_0",
+      "query": "After a year, will the discounted price be applicable when it's time to renew?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7318_chunk_0",
+      "passage": "After a year, will the discounted price be applicable when it's time to renew? Pricing is subject to change. We strongly suggest you subscribe now to make the most of the discounted offers.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7454_chunk_0",
+      "query": "I've heard that electric scooters don't require me to have a license to ride them. Why do I need a license to ride Ather 450X?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7454_chunk_0",
+      "passage": "I've heard that electric scooters don't require me to have a license to ride them. Why do I need a license to ride Ather 450X? The electric scooters that run on a 250 W motor and the ones that have a top speed of 25 km/h do not require a driver's license or number plate registration. However, the Ather 450X is significantly more powerful with a top speed of 90 km/h. Therefore, driver's license and number plate registration are mandatory to ride it. So, if you're thinking of gifting this to your 16-year-old daughter or son, you would have to wait for another couple of years :)",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_pdf_2025-450-Apex-QSG_page_16_chunk_0",
+      "query": "Can a pressure jet wash be used on the under-seat storage box?",
+      "chunk_id": "2025-450-Apex-QSG_page_16_chunk_0",
+      "passage": "CAUTION The storage box is built to be rain-proof. But water can seep through if a pressure jet wash is used to clean the scooter. Remember to empty the under-seat storage before washing. Always store the portable charger in its cover to protect it from water leaks. SCOOTER IDENTIFICATION NUMBER (VIN) / CHASSIS NUMBER Each scooter has a unique VIN. On the Ather 450 Apex\u2122, it is engraved on the chassis. Remove the rubber grommet in the under-seat storage to access it. It\u2019s a 17 digit number in this format: MYH XXXXXXXXXXXXXX Know your scooter 10",
+      "source_document": "2025-450-Apex-QSG",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7458_chunk_0",
+      "query": "What is covered under vehicle warranty?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7458_chunk_0",
+      "passage": "What is covered under vehicle warranty? All vehicle parts (excluding wear and tear parts) are covered under standard warranty. The detailed list of parts and their warranty period is available in this document .",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_charging_faqs_8123_chunk_0",
+      "query": "What is Ather Duo?",
+      "chunk_id": "ather_charging_faqs_8123_chunk_0",
+      "passage": "What is Ather Duo? It is a 900W home charger that is a 2-in-1 wall mounted and portable charger. You can carry it as a portable charger or dock it on a wall and lock it so you can simply plug and charge.",
+      "source_document": "ather_charging_faqs",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7209_chunk_0",
+      "query": "How much do Ather helmets cost?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7209_chunk_0",
+      "passage": "How much do Ather helmets cost? Ather helmets are available in two styles and are priced at: Half-face helmet - \u20b9 2 299 Full-face helmet - \u20b9 2 999",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_pdf_450S_User_Manual_Jan_24_page_28_chunk_0",
+      "query": "What instructions are provided for 2 3 4 1?",
+      "chunk_id": "450S_User_Manual_Jan_24_page_28_chunk_0",
+      "passage": "2 3 4 1 3 WARNING The scooter makes no signi\ufb01cant sound when the motor is ON. 1 SWITCH ON THE DISPLAY Once the key is turned ON, it will activate the dashboard, showing the current time, available range and riding modes. Disclaimer: Range display and riding modes on the dashboard are only available with the Pro. On the road 22",
+      "source_document": "450S_User_Manual_Jan_24",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7287_chunk_0",
+      "query": "I have some Ather Credits in my account? Will they expire?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7287_chunk_0",
+      "passage": "I have some Ather Credits in my account? Will they expire? If you have Ather Credits, they will continue to remain valid and expire as per their original deadline. You will be able to enjoy your Ather Credits on the Ather App when you reactivate your app account. However, for deleted accounts the credits will elapse. Note: Ather Credits expire after 180 days of account deactivation",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7308_chunk_0",
+      "query": "Can I pay with Ather Credits?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7308_chunk_0",
+      "passage": "Can I pay with Ather Credits? Yes, you can. We'll take the credit(s) too.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7404_chunk_0",
+      "query": "What are \u201clocked\u201d and \u201credeemed\u201d credits?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7404_chunk_0",
+      "passage": "What are \u201clocked\u201d and \u201credeemed\u201d credits? Credits you have received from the referral program are \u201cunlocked\u201d when the vehicle purchase is completed by the referred customer. When you use credits to purchase subscriptions or other accessories (only TPMS for now), those are redeemed credits.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7319_chunk_0",
+      "query": "How long will it take for the Ather Connect\u2122 subscription to get activated?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7319_chunk_0",
+      "passage": "How long will it take for the Ather Connect\u2122 subscription to get activated? Once paid for, it should be activated in a couple of minutes. If it doesn't, reach out to our customer service helpline.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_pdf_Halo-Digital-User-Manual_page_28_chunk_0_split_1",
+      "query": "What does the manual state regarding be rejected in case the request is not accompanied with the proof of purchase i.e?",
+      "chunk_id": "Halo-Digital-User-Manual_page_28_chunk_0_split_1",
+      "passage": "be rejected in case the request is not accompanied with the proof of purchase i.e. tax invoice. 5.3 After the Customer submits their request for exchange of the Product, Ather shall conduct an initial evaluation of the submitted request within 7 working days. After completion of the initial evaluation, Ather may seek additional details (such as pictures, videos and/ or other relevant information) from the Customer. In case Ather does not receive additional information for a period of more than 7 working days, Ather may reject the exchange request of the Customer. 5.4 Once the initial evaluation is completed, Ather at its own discretion may either request for the Product for further evaluation or cancel the request there itself. Ather shall at its own cost, arrange pickup of the Product for physical evaluation or otherwise. Customer shall ensure that the Product must be returned either in its original packaging or in equally protective packaging to the address specified by Customer Care alongwith all other manual, receipts received",
+      "source_document": "Halo-Digital-User-Manual",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_pdf_Rizta S Quick Start Guide_page_24_chunk_0",
+      "query": "What does the manual state regarding 3 toggle to change riding mode switch between smarteco (pro pack) and zip?",
+      "chunk_id": "Rizta S Quick Start Guide_page_24_chunk_0",
+      "passage": "3 TOGGLE TO CHANGE RIDING MODE Switch between SmartEco (Pro Pack) and Zip. CAUTION The scooter may be throttled down to SmartEco Mode when the battery charge is too low. WARNING In case of errors or glitches, performance may be restricted to ensure the rider\u2019s safety. If this happens, please contact customer support immediately. TIME TO GET ON THE ROAD 17",
+      "source_document": "Rizta S Quick Start Guide",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7283_chunk_0",
+      "query": "What happens to my existing data?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7283_chunk_0",
+      "passage": "What happens to my existing data? For deactivation, any data previously collected will remain, but no new data will be collected while your account is deactivated. For deletion, all previously collected data is erased.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7182_chunk_0",
+      "query": "How long will the battery on the TPMS ideally last for?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7182_chunk_0",
+      "passage": "How long will the battery on the TPMS ideally last for? TPMS has a non-replaceable battery, and is expected to last for 3-5 years. It\u2019s covered under a 1 year warranty from the date of installation.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7744_chunk_0",
+      "query": "What is Combined Charging?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7744_chunk_0",
+      "passage": "What is Combined Charging? Combined Charging is an exclusive feature on the Ather Konarc. In addition to the onboard charger, you can plug in an external offboard charger to charge your scooter, cutting home charging times by up to half.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_pdf_Halo-Digital-User-Manual_page_5_chunk_0",
+      "query": "What does the manual state regarding power on your halo 1 locate the button on the back of the helmet and press and hold to power it on?",
+      "chunk_id": "Halo-Digital-User-Manual_page_5_chunk_0",
+      "passage": "Power on your Halo 1 Locate the button on the back of the helmet and press and hold to power it on. The light indicator should glow white Hold down the button Light indicator glows white 2 Continue holding down the button to put it into pairing mode. The light indicator will blink blue Continue holding down the button until light indicator blinks blue",
+      "source_document": "Halo-Digital-User-Manual",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7285_chunk_0",
+      "query": "What happens if I opt for account deactivation?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7285_chunk_0",
+      "passage": "What happens if I opt for account deactivation? - On deactivation and deletion of your account, we will stop collecting the aforementioned data, except data required for your identification. The app will revoke all permissions you granted it to access your device\u2019s Bluetooth, Camera, Microphone, Contacts, Phone Storage, and SMS, which are required for you to use integral features of your smart scooter, such as sending location received on WhatsApp to the scooter, receiving calls and controlling media through your scooter dashboard, and uploading documents and saving locations which can be accessed on your scooter. - Some smart features on your scooter may be impacted, but you will be able to ride your Ather scooter as you did.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_pdf_Rizta S Quick Start Guide_page_7_chunk_0",
+      "query": "What instructions are provided for left side view 1 2 11 3 10 9 4 8 5 6 7?",
+      "chunk_id": "Rizta S Quick Start Guide_page_7_chunk_0",
+      "passage": "LEFT SIDE VIEW 1 2 11 3 10 9 4 8 5 6 7 1 Rear-view mirror 7 Pillion footrest 2 Integrated indicator lamps 8 Belt cover 3 Headlamp 9 Rear fender number plate mount 4 Alloy wheels 10 Rear side panel 5 Front disc brake 11 Tail lamp 6 Side stand with sensor KNOW YOUR SCOOTER 01",
+      "source_document": "Rizta S Quick Start Guide",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7746_chunk_0",
+      "query": "Do I need to buy anything extra to use the Combined Charging feature?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7746_chunk_0",
+      "passage": "Do I need to buy anything extra to use the Combined Charging feature? Yes. To use Combined Charging, you will need to purchase an additional 450W charger to use as your offboard charger.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7256_chunk_0",
+      "query": "In what colours can I buy an Ather?",
+      "chunk_id": "ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7256_chunk_0",
+      "passage": "In what colours can I buy an Ather? You can view them here - Ather 450X colours | Ather 450S colours",
+      "source_document": "ather_450_series_faqs___450x_vs_450s,_charging,_warranty",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7219_chunk_0",
+      "query": "Can I install it myself or from a local garage?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7219_chunk_0",
+      "passage": "Can I install it myself or from a local garage? Your scooter is best in our hands, so we would never recommend that. Moreover, the product installation is complementary. But if you absolutely wish it is possible.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_pdf_2025-450S-QSG_page_36_chunk_0",
+      "query": "How does the side stand sensor prevent accidental movement?",
+      "chunk_id": "2025-450S-QSG_page_36_chunk_0",
+      "passage": "CAUTION The key should be removed anytime the scooter is left unattended. You don\u2019t want somebody stealing it. PARKING Use your left foot to disengage the side stand. Always engage the side stand when you\u2019ve to park. Also, always try to park on level and firm ground. CAUTION Park under shade wherever possible. Continuous, long-term exposure to sunlight could cause discolouration of the screen. Lesser exposure to heat is good for battery life and display health. WARNING \u2022 Do not sit on the scooter when parked on the side stand. \u2022 Do not move the scooter with the side stand engaged. \u2022 Always ensure the side stand is completely opened up while parking. On the road 30",
+      "source_document": "2025-450S-QSG",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7427_chunk_0",
+      "query": "What if the buyer/ seller hasn't accepted my request yet?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7427_chunk_0",
+      "passage": "What if the buyer/ seller hasn't accepted my request yet? The transfer remains pending until the buyer/ seller accepts it. You can nudge the buyer/ seller to accept a request once every 24 hours until the request expires in 14 days.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7184_chunk_0",
+      "query": "How long will it take to install TPMS on my scooter?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7184_chunk_0",
+      "passage": "How long will it take to install TPMS on my scooter? It usually takes around 4-6 hours for the installation. There could be slight delays based on resource availability. Kindly check with your service center for an accurate timeline.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7384_chunk_0",
+      "query": "What is the coverage period of Eight70 Warranty?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7384_chunk_0",
+      "passage": "What is the coverage period of Eight70 Warranty? Eight70 Warranty coverage lasts up to a total of 8 years or 80 000 km, whichever comes first (Enabled as an add-on for AtherStack Pro).",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_pdf_Rizta S Quick Start Guide_page_10_chunk_0",
+      "query": "What instructions are provided for dashboard and switchgear 7 1 2 6 5 3 4?",
+      "chunk_id": "Rizta S Quick Start Guide_page_10_chunk_0",
+      "passage": "DASHBOARD AND SWITCHGEAR 7 1 2 6 5 3 4 1 Headlight high/low beam switch 5 Motor starter 2 Combined braking system 6 Mode change switch 3 Turning indicator 7 Park Assist\u2122 4 Horn KNOW YOUR SCOOTER 04",
+      "source_document": "Rizta S Quick Start Guide",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_pdf_Ather-HALO-Bit-Half-Face-Manual_page_31_chunk_0",
+      "query": "What does the manual state regarding faqs q why is my halo bit not switching on?",
+      "chunk_id": "Ather-HALO-Bit-Half-Face-Manual_page_31_chunk_0",
+      "passage": "FAQs Q Why is my Halo Bit not switching on? A Long press the center button to switch on the helmet. If it doesn\u2019t, try charging it with a USB C charger. If the notification light is not switching on, contact customer support Q My speaker volume is not high enough A Ensure that the speaker is sitting right above your ears. If it isn\u2019t, move the speaker around to align it to your ears better",
+      "source_document": "Ather-HALO-Bit-Half-Face-Manual",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_8154_chunk_0",
+      "query": "I was overcharged for a session. How do I get a refund?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_8154_chunk_0",
+      "passage": "I was overcharged for a session. How do I get a refund? Share your charging session details with us and we will help you out. Talk to us at +91-7676600900 or report an issue through your Ather App\u2122.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_pdf_2025-450-Apex-QSG_page_49_chunk_0",
+      "query": "What does the manual state regarding troubleshooting if you\u2019re facing a technical issue, have any doubts or queries, please call us up?",
+      "chunk_id": "2025-450-Apex-QSG_page_49_chunk_0",
+      "passage": "TROUBLESHOOTING If you\u2019re facing a technical issue, have any doubts or queries, please call us up. +91 7676 811 777 In case this number is unreachable, please check for the updated number on atherenergy.com or the Ather App\u2122. CAUTION Do not attempt to service the scooter on your own or at an unauthorised service centre. Sure, the scooter belongs to you and you may do as you please. But we know it inside out, and it\u2019s not as easy as it may seem. Let us take the lead and service the scooter for you. DISCLAIMER Ather Energy Private Limited (\"Ather\") takes reasonable care to ensure the accuracy of the information contained herein, but it shall not be responsible for any inadvertent errors or omissions that may appear in this document. All trademarks Caring for your scooter 43",
+      "source_document": "2025-450-Apex-QSG",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_faq_ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7269_chunk_0",
+      "query": "What are the two new variants of the Ather 450X?",
+      "chunk_id": "ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7269_chunk_0",
+      "passage": "What are the two new variants of the Ather 450X? Ather 450X now comes in 2 power variants - 126 km IDC range 161 km IDC range",
+      "source_document": "ather_450_series_faqs___450x_vs_450s,_charging,_warranty",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_pdf_450S_User_Manual_Jan_24_page_10_chunk_0",
+      "query": "What instructions are provided for dashboard and switchgear - ii 7 1 8 2 6 3 5 4?",
+      "chunk_id": "450S_User_Manual_Jan_24_page_10_chunk_0",
+      "passage": "DASHBOARD AND SWITCHGEAR - II 7 1 8 2 6 3 5 4 1 Headlight high/low beam switch 6 Mode change switch 2 Combined braking system 7 Motor kill switch 3 Turning indicator 8 Park AssistTM 4 Horn 5 Motor starter Disclaimer: Riding modes available only with the Pro. Know your scooter 4",
+      "source_document": "450S_User_Manual_Jan_24",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_8255_chunk_0",
+      "query": "In my Ather Care plan, I\u2019m eligible for wear & tear part replacement discount and labour discount only once. What happens after that?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_8255_chunk_0",
+      "passage": "In my Ather Care plan, I\u2019m eligible for wear & tear part replacement discount and labour discount only once. What happens after that? Once the plan\u2019s discount limits are exhausted (once a year/twice a year as per the plan), there will be no further discounts on part replacements or labour charges.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7191_chunk_0",
+      "query": "When riding with a flat tyre, will the TPMS be damaged?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7191_chunk_0",
+      "passage": "When riding with a flat tyre, will the TPMS be damaged? It is generally not advisable to ride a scooter with flat tyres due to safety reasons. It can also damage the rim of the wheels and the TPMS.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7183_chunk_0",
+      "query": "What happens to the TPMS during wheel rotation?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7183_chunk_0",
+      "passage": "What happens to the TPMS during wheel rotation? The TPMS sensors will be paired again at the service center after the wheel rotation.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7402_chunk_0",
+      "query": "Can I use my credits at all the Ather experience and service centers?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7402_chunk_0",
+      "passage": "Can I use my credits at all the Ather experience and service centers? Currently, you can use credits at all Ather touch points except for: Ather Space Indiranagar, Bengaluru We will update here when credits can be used at the above location.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7271_chunk_0",
+      "query": "Can I buy a fast charger for the 450S/2.9kWh 450X?",
+      "chunk_id": "ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7271_chunk_0",
+      "passage": "Can I buy a fast charger for the 450S/2.9kWh 450X? Yes, you can purchase a 700W charger with any Ather scooter .",
+      "source_document": "ather_450_series_faqs___450x_vs_450s,_charging,_warranty",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7272_chunk_0",
+      "query": "If I buy the 450X with 2.9 kWh battery, can I later upgrade to the higher battery?",
+      "chunk_id": "ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7272_chunk_0",
+      "passage": "If I buy the 450X with 2.9 kWh battery, can I later upgrade to the higher battery? No, you won\u2019t have that option.",
+      "source_document": "ather_450_series_faqs___450x_vs_450s,_charging,_warranty",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7387_chunk_0",
+      "query": "Is Eight70 Warranty transferable?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7387_chunk_0",
+      "passage": "Is Eight70 Warranty transferable? Yes. In case of sale of the scooter to another person, the warranty policy will be transferred to the new owner.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_pdf_2025-450S-QSG_page_39_chunk_0",
+      "query": "What does the manual state regarding 3 make sure the charger vents should are never blocked, for proper air\ufb02ow?",
+      "chunk_id": "2025-450S-QSG_page_39_chunk_0",
+      "passage": "3 Make sure the charger vents should are never blocked, for proper air\ufb02ow. 4 Turn the key OFF to start charging. The LED on the charger will start blinking, the moment charging starts. Charge it up 33",
+      "source_document": "2025-450S-QSG",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7399_chunk_0",
+      "query": "Are there any exceptions to redeeming my credits?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7399_chunk_0",
+      "passage": "Are there any exceptions to redeeming my credits? Read the terms and conditions for usage of credits.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    },
+    {
+      "pair_id": "pair_pdf_2025-450-Apex-QSG_page_27_chunk_0",
+      "query": "What does the manual state regarding 2 open the under-seat storage once the handlebar is unlocked, turn the key anti-clockwise to open the underseat storage?",
+      "chunk_id": "2025-450-Apex-QSG_page_27_chunk_0",
+      "passage": "2 OPEN THE UNDER-SEAT STORAGE Once the handlebar is unlocked, turn the key anti-clockwise to open the underseat storage. Take your helmet out, wear it, simply drop the seat to lock it. Check the seat lock once, just to be doubly sure. Now you are all set for the ride! On the road 21",
+      "source_document": "2025-450-Apex-QSG",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_pdf_duomanualvfin_page_4_chunk_0",
+      "query": "What does the manual state regarding wall mount 3 this is the accessory that turns your duo into a fixed charger?",
+      "chunk_id": "duomanualvfin_page_4_chunk_0",
+      "passage": "Wall Mount 3 This is the accessory that turns your Duo into a fixed charger. It\u2019s got your charger\u2019s back. Literally. WHAT\u2019S IN THE BOX : Wall mount x1 Mounting screws x2 Wall inserts x2",
+      "source_document": "duomanualvfin",
+      "source_type": "pdf"
+    },
+    {
+      "pair_id": "pair_faq_ather_electric_scooter_faqs___support_&_help_center_7418_chunk_0",
+      "query": "Can I buy an Ather electric two wheeler with zero down payment?",
+      "chunk_id": "ather_electric_scooter_faqs___support_&_help_center_7418_chunk_0",
+      "passage": "Can I buy an Ather electric two wheeler with zero down payment? Yes, you can buy an Ather electric scooter with zero down payment through Flexipay . Choose affordable electric scooter EMI plans with flexible tenure and low two wheeler loan EMI. Use the Ather EMI calculator to check EMI for scooter, compare electric scooter EMI interest rates and easily buy Ather electric scooter on EMI.",
+      "source_document": "ather_electric_scooter_faqs___support_&_help_center",
+      "source_type": "faq"
+    }
+  ]
+}

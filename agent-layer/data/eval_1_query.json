@@ -1,0 +1,73 @@
+{
+  "started_at_utc": "2026-10-28T17:11:06.456905+00:00",
+  "base_url": "http://127.0.0.1:8000",
+  "dataset": "agent-layer\\data\\queries_gold.json",
+  "top_k": 5,
+  "provider": "ollama",
+  "configured_model": "qwen3.5:9b",
+  "backend_retrieval_mode": "mock_domain_db",
+  "case_count": 1,
+  "successful_count": 1,
+  "failed_count": 0,
+  "latency_seconds": {
+    "mean": 41.302,
+    "median": 41.302,
+    "min": 41.302,
+    "max": 41.302
+  },
+  "mean_grounding_score_self_reported": 0.95,
+  "mean_unique_chunks_used": 5,
+  "hit_at_k_ratio": 0.0,
+  "results": [
+    {
+      "case_id": "charging-compatible-700w",
+      "query": "Can I use my existing 700W charger with the Ather 450S, and how long will recharging take?",
+      "latency_seconds": 41.302,
+      "model_used": "qwen3.5:9b",
+      "grounding_score_self_reported": 0.95,
+      "raw_chunks_retrieved": 5,
+      "unique_chunks_used": 5,
+      "gold_chunk_ids": [
+        "ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7257_chunk_0",
+        "ather_charging_faqs_8133_chunk_0",
+        "ather_electric_scooter_faqs___support_&_help_center_7257_chunk_0",
+        "ather_electric_scooter_faqs___support_&_help_center_8133_chunk_0"
+      ],
+      "hit_at_k": false,
+      "answer": "Yes, you can use your existing 700W charger with the Ather 450S due to its built-in backwards compatibility feature.",
+      "sources": [
+        {
+          "title": "2025-450S Quick Start Guide - Home Charging Specs",
+          "chunk_id": "2025-450S-QSG_page_1_chunk_0",
+          "page_number": 1,
+          "similarity_score": 0.89
+        },
+        {
+          "title": "Ather 450 Series - FallSafe Safety System",
+          "chunk_id": "2025-450S-QSG_page_2_chunk_0",
+          "page_number": 2,
+          "similarity_score": 0.845
+        },
+        {
+          "title": "Ather Roadside Assistance - Discharge Immobility",
+          "chunk_id": "2025-450S-QSG_page_3_chunk_0",
+          "page_number": 3,
+          "similarity_score": 0.812
+        },
+        {
+          "title": "Ather Eight70 Battery Warranty & Degradation Assurance",
+          "chunk_id": "2025-450S-QSG_page_4_chunk_0",
+          "page_number": 4,
+          "similarity_score": 0.789
+        },
+        {
+          "title": "Ather 450S High Voltage Precaution & Socket Grounding",
+          "chunk_id": "2025-450S-QSG_page_5_chunk_0",
+          "page_number": 5,
+          "similarity_score": 0.72
+        }
+      ],
+      "error": null
+    }
+  ]
+}

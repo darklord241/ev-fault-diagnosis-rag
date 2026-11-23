@@ -1,0 +1,39 @@
+{
+  "models": [
+    {
+      "key": "pretrained",
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "main",
+      "query_prefix": "",
+      "document_prefix": ""
+    },
+    {
+      "key": "ft_inbatch",
+      "model_id": "experiments/models/minilm_ev_domain_adapted",
+      "revision": "local",
+      "query_prefix": "",
+      "document_prefix": ""
+    },
+    {
+      "key": "ft_hard_neg",
+      "model_id": "experiments/models/minilm_ft_hard_neg",
+      "revision": "local",
+      "query_prefix": "",
+      "document_prefix": ""
+    },
+    {
+      "key": "ft_margin",
+      "model_id": "experiments/models/minilm_ft_margin",
+      "revision": "local",
+      "query_prefix": "",
+      "document_prefix": ""
+    },
+    {
+      "key": "ft_augmented",
+      "model_id": "experiments/models/minilm_ft_augmented",
+      "revision": "local",
+      "query_prefix": "",
+      "document_prefix": ""
+    }
+  ]
+}
