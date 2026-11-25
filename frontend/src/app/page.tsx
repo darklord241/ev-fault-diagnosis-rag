@@ -53,7 +53,7 @@ export default function Home() {
       <PageTitle
         eyebrow="AI-POWERED EV DIAGNOSIS"
         title="A clearer path to the problem."
-        description="Describe what you observe. AI retrieves grounded technical evidence and walks you through diagnosis, step by step."
+        description="Describe what you observe. Find and review technical excerpts related to your symptoms."
       />
 
       <StatusStrip />
@@ -146,7 +146,7 @@ export default function Home() {
             <h2>
               Less guessing.
               <br />
-              More grounding.
+              Source passages.
             </h2>
             <ol>
               {[
@@ -159,8 +159,8 @@ export default function Home() {
                   'RAG pipeline searches service manuals, DTC tables, and technical docs via MCP tools.',
                 ],
                 [
-                  'Verified diagnosis',
-                  'Grounded answer with step-by-step procedure, safety warnings, and cited sources.',
+                  'Review source evidence',
+                  'Read selected excerpts with links to their original sources.',
                 ],
               ].map(([title, text], i) => (
                 <li key={title}>
@@ -189,7 +189,7 @@ export default function Home() {
               ))}
             </div>
             <p style={{ fontSize: 9, margin: '13px 0' }}>
-              Cleaned, summarized, and grounded answers ready for display.
+              Browse evidence from evaluation cases.
             </p>
             <Link
               href="/knowledge"

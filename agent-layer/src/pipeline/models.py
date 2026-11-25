@@ -1,4 +1,4 @@
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict, Any, Literal
 from pydantic import BaseModel, Field
 from datetime import datetime, timezone
 
@@ -36,6 +36,7 @@ class SourceCitation(BaseModel):
     url: Optional[str] = None
     page_number: Optional[int] = None
     content: Optional[str] = None
+    excerpt: Optional[str] = None
     similarity_score: float
     relevance_rationale: Optional[str] = None
     metadata: Dict[str, Any] = Field(default_factory=dict)
@@ -59,12 +60,12 @@ class WebsiteCardPayload(BaseModel):
     formatted_markdown: str = Field(..., description="Complete beautifully formatted Markdown document")
     
     # 3. Source citations
-    sources: List[SourceCitation] = Field(default_factory=list, description="Supporting official sources with URLs")
+    sources: List[SourceCitation] = Field(default_factory=list, description="Selected source passages with provenance")
     
-    # 4. Evaluation and Grounding metadata
-    grounding_score: float = Field(1.0, description="Calculated grounding confidence score (0.0 to 1.0)")
+    # 4. Retrieval and excerpt selection metadata
+    retrieval_mode: Literal["demo", "live", "unknown"] = "unknown"
     raw_chunks_retrieved: int = Field(0, description="Chunks received from retriever before deduplication")
-    unique_chunks_used: int = Field(0, description="Unique chunks after cleaning & deduplication")
+    unique_chunks_used: int = Field(0, description="Unique passages selected for display")
     model_used: str = Field("gemini-3.5-flash-lite", description="LLM used for synthesis")
     processed_at: datetime = Field(default_factory=utc_now)
 

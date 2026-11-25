@@ -328,8 +328,8 @@ function CaseCard({
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
         <span className="badge">{caseData.case_id}</span>
-        <span className="badge success">
-          {(caseData.grounding_score * 100).toFixed(0)}% grounded
+        <span className="muted small">
+          {caseData.sources.some((source) => source.excerpt) ? 'Selected excerpts' : 'Archived evaluation'}
         </span>
       </div>
 
@@ -406,20 +406,6 @@ function CaseCard({
             </div>
           )}
 
-          {/* Grounding Score Bar */}
-          <div style={{ marginTop: 16 }}>
-            <div className="score-label">
-              <span>Grounding confidence</span>
-              <strong>{(caseData.grounding_score * 100).toFixed(0)}%</strong>
-            </div>
-            <div className="score-bar-container">
-              <div
-                className="score-bar-fill"
-                style={{ width: `${caseData.grounding_score * 100}%` }}
-              />
-            </div>
-          </div>
-
           {/* Sources */}
           {caseData.sources.length > 0 && (
             <div style={{ marginTop: 16 }}>
@@ -436,6 +422,7 @@ function CaseCard({
                   <strong>{s.title}</strong>
                   <div style={{ display: 'flex', gap: 8, marginTop: 4, fontSize: 10, color: 'var(--muted)' }}>
                     <span>Similarity: {(s.similarity_score * 100).toFixed(1)}%</span>
+                    {s.excerpt && <blockquote className="evidence-quote">{s.excerpt}</blockquote>}
                     <span>·</span>
                     <span style={{ fontFamily: 'monospace', fontSize: 9 }}>{s.chunk_id}</span>
                   </div>

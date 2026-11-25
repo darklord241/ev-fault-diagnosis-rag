@@ -36,7 +36,10 @@ async def test_cleaner_text_and_deduplication():
     assert "https://ather.com/url2" in deduped[0].alternate_urls
 
 @pytest.mark.asyncio
-async def test_summarizer_fallback_and_schema():
+async def test_summarizer_fallback_and_schema(monkeypatch):
+    monkeypatch.setattr("src.pipeline.summarizer.settings.GOOGLE_API_KEY", None)
+    monkeypatch.setattr("src.pipeline.summarizer.settings.OPENAI_API_KEY", None)
+    monkeypatch.delenv("GOOGLE_API_KEY", raising=False)
     summarizer = EVSummarizer()
     chunk = CleanedChunk(
         chunk_id="c1",
@@ -51,14 +54,18 @@ async def test_summarizer_fallback_and_schema():
         cleaned_chunks=[chunk]
     )
     res = await summarizer.summarize(evidence)
-    assert "700W" in res.direct_answer
-    assert len(res.key_takeaways) > 0
-    assert "0% to 100% Charge Time" in res.technical_specs
-    assert res.grounding_score >= 0.9
+    assert res.model_used == "deterministic-excerpt"
+    assert res.sources[0].excerpt == chunk.content
+    assert res.sources[0].chunk_id == chunk.chunk_id
+    assert not res.technical_specs
+    assert "grounding_score" not in res.model_dump()
 
 @pytest.mark.asyncio
-async def test_batch_processor_run():
-    processor = BatchPipelineProcessor()
+async def test_batch_processor_run(tmp_path):
+    processor = BatchPipelineProcessor(
+        output_json=tmp_path / "website_payload.json",
+        output_md=tmp_path / "website_payload.md",
+    )
     delivery = await processor.run_pipeline()
     assert delivery.total_cases == 5
     assert len(delivery.cases) == 5

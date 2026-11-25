@@ -57,6 +57,9 @@ def _write_report(
     run_id: str,
     model: ModelSpec,
     aggregate_rows: Sequence[Mapping[str, object]],
+    corpus_count: int = 891,
+    case_count: int = 40,
+    scored_count: int = 39,
 ) -> None:
     overall = next(
         row for row in aggregate_rows if row["query_type"] == "overall"
@@ -67,8 +70,8 @@ def _write_report(
         f"- Run: `{run_id}`",
         f"- Embedding model: `{model.model_id}`",
         "- Retrieval: dense cosine similarity, top-5",
-        "- Corpus: the current 891 chunks",
-        "- Benchmark: 40 evaluation cases; 39 have gold labels and are scored.",
+        f"- Corpus: {corpus_count} passages.",
+        f"- Benchmark: {case_count} evaluation cases, {scored_count} scored.",
         "- Metrics: Hit@1, Hit@3, Hit@5, MRR@5, and nDCG@5.",
         "- This run establishes the reference point for subsequent experiments.",
         "",
@@ -106,6 +109,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Run the production retrieval baseline on the fixed benchmark."
     )
+    parser.add_argument("--checkpoint", type=Path)
+    parser.add_argument("--cache-path", type=Path, default=DEFAULT_CACHE_PATH)
     parser.add_argument("--cases", type=Path, default=DEFAULT_CASES_PATH)
     parser.add_argument("--annotations", type=Path, default=DEFAULT_ANNOTATIONS_PATH)
     parser.add_argument("--chunks", type=Path, default=CHUNKED_DIR)
@@ -130,7 +135,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.repeats <= 0 or args.bootstrap_samples <= 0:
         parser.error("--repeats and --bootstrap-samples must be positive")
 
-    model = _baseline_model()
+    model = (ModelSpec("fine_tuned", str(args.checkpoint.resolve(strict=True)), revision="local")
+             if args.checkpoint else _baseline_model())
     cases_path = args.cases.resolve()
     annotations_path = args.annotations.resolve()
     config_path = DEFAULT_CONFIG_PATH.resolve()
@@ -138,12 +144,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     cases, annotations = load_evaluation_inputs(
         cases_path, annotations_path, chunks
     )
-    if len(chunks) != 891:
+    if not args.checkpoint and len(chunks) != 891:
         raise ValueError(
             f"baseline expects the existing 891 chunks; found {len(chunks)}"
         )
     scored_count = sum(case["gold_chunk_ids"] is not None for case in cases)
-    if len(cases) != 40 or scored_count != 39:
+    if not args.checkpoint and (len(cases) != 40 or scored_count != 39):
         raise ValueError(
             "baseline expects 40 cases with 39 scored cases; found "
             f"{len(cases)} cases and {scored_count} scored"
@@ -155,7 +161,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         chunks,
         cases,
         annotations,
-        cache_path=DEFAULT_CACHE_PATH,
+        cache_path=args.cache_path,
         local_files_only=args.local_files_only,
         repeats=args.repeats,
     )
@@ -183,7 +189,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "embedding_model": asdict(model),
         "retrieval": {"method": "dense_cosine", "top_k": TOP_K},
         "benchmark": {
-            "dataset": "retrieval_eval_40.json",
+            "dataset": cases_path.name,
             "case_count": len(cases),
             "scored_query_count": scored_count,
             "unscored_null_gold_count": len(cases) - scored_count,
@@ -206,6 +212,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         run_id=run_id,
         model=model,
         aggregate_rows=aggregate_rows,
+        corpus_count=len(chunks), case_count=len(cases), scored_count=scored_count,
     )
     write_run_metadata(
         output_dir,

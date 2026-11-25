@@ -1,0 +1,24 @@
+{
+  "paired_n": 12,
+  "distinct_facts": 9,
+  "unresolved_responses": 0,
+  "rag_minus_llm_percentage_points": 91.66666666666667,
+  "paired_fact_bootstrap_95_ci": [
+    72.72727272727273,
+    100
+  ],
+  "wrong_to_right": 11,
+  "right_to_wrong": 0,
+  "llm_only": {
+    "correct": 0,
+    "em_percent": 0.0,
+    "median_seconds": 0.995681549999972,
+    "p95_seconds": 9.025554800000009
+  },
+  "rag": {
+    "correct": 11,
+    "em_percent": 91.66666666666667,
+    "median_seconds": 3.0744433499999104,
+    "p95_seconds": 5.703997700000173
+  }
+}

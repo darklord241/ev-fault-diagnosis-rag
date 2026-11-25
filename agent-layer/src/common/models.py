@@ -28,15 +28,16 @@ class DiagnosticStep(BaseModel):
     citation_source_ids: List[str] = Field(default_factory=list, description="IDs of EvidenceSource supporting this step")
 
 class GroundedAnswer(BaseModel):
-    """Grounded diagnostic response delivered to the Dashboard/User."""
+    """Evidence selection response with legacy diagnostic fields."""
     query: str = Field(..., description="Original user diagnostic query")
     vehicle_model: Optional[str] = Field(None, description="Identified vehicle model")
     identified_faults: List[str] = Field(default_factory=list, description="Likely faults identified")
-    root_cause_analysis: str = Field(..., description="Detailed explanation of the failure mechanism")
+    root_cause_analysis: str = Field(..., description="Evidence availability message")
     diagnostic_procedure: List[DiagnosticStep] = Field(default_factory=list, description="Ordered verification steps")
     recommended_remedy: str = Field(..., description="Repair, replacement, or recalibration action")
     safety_warnings: List[str] = Field(default_factory=list, description="Critical safety warnings (HV isolation, etc.)")
-    grounding_score: float = Field(..., description="Calculated grounding confidence score (0.0 to 1.0)")
+    selected_source_id: Optional[str] = None
+    retrieval_mode: Literal["demo", "live"]
     evidence_sources: List[EvidenceSource] = Field(default_factory=list, description="List of technical documents cited")
     generated_at: datetime = Field(default_factory=utc_now)
     execution_time_seconds: Optional[float] = Field(None, description="Latency in seconds")

@@ -144,6 +144,7 @@ def create_app(
     retriever_factory: Optional[Callable] = None,
     backend_api_key: Optional[str] = None,
     agent_base_url: Optional[str] = None,
+    min_similarity: Optional[float] = None,
 ) -> FastAPI:
     """Build an app with optional dependencies for deterministic tests."""
     configured_key = (
@@ -157,6 +158,11 @@ def create_app(
             "AGENT_ORCHESTRATOR_BASE_URL", "http://127.0.0.1:8080"
         )
     ).rstrip("/")
+    if min_similarity is None:
+        min_similarity = float(os.getenv("EV_RETRIEVAL_MIN_SIMILARITY", "0.30"))
+    if not 0.0 < min_similarity <= 1.0:
+        raise ValueError("EV_RETRIEVAL_MIN_SIMILARITY must be greater than 0 and at most 1.")
+
     factory = retriever_factory or _create_retriever
 
     @asynccontextmanager
@@ -195,14 +201,25 @@ def create_app(
 
     @app.get("/health")
     async def health():
-        available = app.state.retriever is not None
+        available = app.state.retriever is not None and bool(configured_key)
+        retrieval_error = app.state.retrieval_error
+        if not configured_key and retrieval_error is None:
+            retrieval_error = "Backend retrieval authentication is not configured."
         return {
             "status": "healthy" if available else "degraded",
             "service": "EV Fault Diagnosis Backend",
             "retrieval_ready": available,
-            "retrieval_error": app.state.retrieval_error,
+            "retrieval_error": retrieval_error,
             "agent_orchestrator_url": configured_agent_url,
         }
+
+    @app.get("/api/v1/retrieval/status", dependencies=[Depends(require_backend_key)])
+    async def retrieval_status():
+        return {"ready": app.state.retriever is not None}
+
+    @app.get("/api/v1/retrieval/dtc/{code}", dependencies=[Depends(require_backend_key)])
+    async def retrieval_dtc(code: str):
+        raise HTTPException(status_code=501, detail="The local corpus has no live DTC lookup.")
 
     @app.post(
         "/api/v1/retrieval/search",
@@ -232,7 +249,12 @@ def create_app(
                 record, request.vehicle_model
             ),
         )
-        return {"results": [_evidence_from_result(result) for result in results]}
+        return {
+            "results": [
+                _evidence_from_result(result) for result in results
+                if result.score >= min_similarity
+            ]
+        }
 
     @app.api_route(
         "/api/v1/{path:path}",
@@ -270,14 +292,15 @@ def create_app(
             ) from error
 
         if path == "health" and upstream.status_code == 200:
-            health_data = upstream.json()
+            try:
+                health_data = upstream.json()
+            except ValueError:
+                health_data = None
             if not isinstance(health_data, dict):
                 raise HTTPException(
                     status_code=502,
                     detail="Agent health endpoint returned an invalid response.",
                 )
-            health_data["retrieval_backend_ready"] = app.state.retriever is not None
-            health_data["retrieval_backend_error"] = app.state.retrieval_error
             return JSONResponse(
                 content=health_data,
                 status_code=upstream.status_code,

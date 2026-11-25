@@ -1,0 +1,1429 @@
+{
+  "version": 2,
+  "query_type_policy": "100 exact-term and 100 paraphrased queries.",
+  "relevance_policy": "A retrieved chunk is relevant when its text contains at least one annotated key-fact phrase.",
+  "cases": {
+    "charging-compatible-700w": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "compatible with all new Ather scooters",
+        "4 hr 30 min to charge from 0 to 100%",
+        "3 hr 30 min to charge from 0%-80%"
+      ]
+    },
+    "charging-time-450s": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "0-80% in 6 hr 36 min",
+        "0-100% in 8 hr 36 min"
+      ]
+    },
+    "fallsafe-rider-fall": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "cuts off the power supply to the motor",
+        "both the indicators also start blinking"
+      ]
+    },
+    "rsa-discharged-battery": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "reach the nearest public charging station",
+        "customer's residence in case the public charging station is not in working condition"
+      ]
+    },
+    "eight70-battery-degradation": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "guaranteed to stay above 70% health till the end of the 8th year",
+        "8 years/80 000 km"
+      ]
+    },
+    "charger-amber-light": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "solid amber light charger software is being updated over the air"
+      ]
+    },
+    "charger-blinking-green": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "blinking green light charging in progress"
+      ]
+    },
+    "charger-solid-red": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "solid red light fault in the charger please contact customer support"
+      ]
+    },
+    "charger-no-light-prcd": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "press the Reset button on the PRCD",
+        "please contact customer support"
+      ]
+    },
+    "ather-dot-charging": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "turn the key to the ON position",
+        "gently pull down the connector from the holder",
+        "key should be in the OFF position for the scooter to start charging automatically"
+      ]
+    },
+    "ather-dot-unplugging": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "turn the key to the ON position to unlock the connector",
+        "wait for 5 seconds",
+        "remove the charging connector"
+      ]
+    },
+    "450x-solo-tyre-pressure": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "solo rider 30 PSI front & 28 PSI back"
+      ]
+    },
+    "450x-pillion-tyre-pressure": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "with a pillion 30 PSI front & 32 PSI back"
+      ]
+    },
+    "450x-underseat-storage": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "carry up to 15 kg and a volume of 22L"
+      ]
+    },
+    "dashboard-software-version": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "swipe down on the dashboard for the quick access screen",
+        "tap on the profile section to find software version"
+      ]
+    },
+    "regenerative-braking-accelerator": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "throttle in the opposite direction anti-clockwise",
+        "activates regenerative braking when twisted in the reverse anti-clockwise direction"
+      ]
+    },
+    "charger-amber-confusion": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "solid amber light charger software is being updated over the air"
+      ]
+    },
+    "charger-green-flashing-confusion": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "blinking green light charging in progress",
+        "when connected to the scooter charging is complete"
+      ]
+    },
+    "charger-red-problem": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "solid red light fault in the charger please contact customer support"
+      ]
+    },
+    "charger-unresponsive": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "press the Reset button on the PRCD",
+        "if it still doesn't respond please contact customer support"
+      ]
+    },
+    "dot-connector-wont-release": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "turn the key OFF and back ON again",
+        "gently PUSH the connector in and then try to PULL it out again",
+        "do not try to forcefully pull the connector out"
+      ]
+    },
+    "solo-rider-inflation": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "solo rider 30 PSI front & 28 PSI back"
+      ]
+    },
+    "pillion-inflation": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "with a pillion 30 PSI front & 32 PSI back"
+      ]
+    },
+    "storage-luggage-limit": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "carry up to 15 kg"
+      ]
+    },
+    "check-firmware-version": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "tap on the profile section to find software version",
+        "navigate to the software version"
+      ]
+    },
+    "motor-off-control": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "use the kill switch to turn the motor OFF",
+        "use the motor kill switch at any traffic stop"
+      ]
+    },
+    "throttle-slowdown": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "twist the throttle in the opposite direction anti-clockwise",
+        "activates regenerative braking when twisted in the reverse anti-clockwise direction"
+      ]
+    },
+    "left-lever-both-wheels": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "the lever on the left-hand side activates the Combined Braking System that applies brakes to both the wheels"
+      ]
+    },
+    "battery-capacity-warranty": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "shall not degrade beyond 30% of the published nominal capacity during the Warranty Period"
+      ]
+    },
+    "roadside-assistance-breakdown": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "reach the nearest public charging station",
+        "customer's residence in case the public charging station is not in working condition"
+      ]
+    },
+    "battery-warranty-plain-language": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "shall not degrade beyond 30% of the published nominal capacity during the Warranty Period",
+        "State-of-Health falls below 70%",
+        "battery is guaranteed to stay above 70% health till the end of the 8th year"
+      ]
+    },
+    "charging-time-plain-language": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "0-80% in 6 hr 36 min",
+        "0-100% in 8 hr 36 min"
+      ]
+    },
+    "river-riding-modes-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "three riding modes",
+        "Eco : This mode offers the best range",
+        "speed is limited to 80 kmph",
+        "Rush : This mode offers the best responsiveness"
+      ]
+    },
+    "river-riding-modes-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "Eco : This mode offers the best range",
+        "speed is limited to 80 kmph",
+        "Rush : This mode offers the best responsiveness"
+      ]
+    },
+    "river-pre-ride-tyres-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Front Tire : 28 psi (Solo & Pillion)",
+        "Rear Tire : 33 psi (Solo & Pillion)"
+      ]
+    },
+    "river-pre-ride-tyres-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "Front Tire : 28 psi",
+        "Rear Tire : 33 psi"
+      ]
+    },
+    "river-side-stand-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "motor remains in OFF condition",
+        "side stand is deployed"
+      ]
+    },
+    "river-side-stand-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "side stand is not fully retracted up",
+        "motor remains in OFF condition"
+      ]
+    },
+    "river-charger-port-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "charger port is located under the charger lid on the left side of the glovebox",
+        "Park the vehicle and turn-OFF the key"
+      ]
+    },
+    "river-charger-port-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "turn-OFF the key",
+        "Open the lid of the glove box",
+        "Pull the knob"
+      ]
+    },
+    "river-charger-installation-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "dry place away from rain and plumbing",
+        "16A socket (BS 546 Type-M)",
+        "double pole circuit breaker rated for 5A"
+      ]
+    },
+    "river-charger-installation-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "dry place away from rain",
+        "16A socket",
+        "double pole circuit breaker rated for 5A"
+      ]
+    },
+    "river-discharged-recovery-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "wait for the display to turn on",
+        "wait for 5 seconds",
+        "charges to at least 80%"
+      ]
+    },
+    "river-discharged-recovery-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "Plug in the charger",
+        "wait for 5 seconds",
+        "at least 80%"
+      ]
+    },
+    "river-storage-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "12 litre glovebox",
+        "carry up to 3kg",
+        "43 litre storage under the seat",
+        "carry up to 5kg"
+      ]
+    },
+    "river-storage-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "12 litre glovebox",
+        "43 litre storage under the seat",
+        "up to 5kg"
+      ]
+    },
+    "tvsx-passcode-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "standard six-digit passcode",
+        "change your passcode after delivery"
+      ]
+    },
+    "tvsx-passcode-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "six-digit passcode",
+        "change your passcode after delivery"
+      ]
+    },
+    "tvsx-first-charge-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "charge your TVS X’s battery fully",
+        "proper balancing of your batteries",
+        "maximizes range"
+      ]
+    },
+    "tvsx-first-charge-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "charge your TVS X’s battery fully",
+        "proper balancing of your batteries",
+        "maximizes range"
+      ]
+    },
+    "tvsx-high-temp-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "performance of some systems are deliberately reduced",
+        "MIL on your dashboard glowing",
+        "high temperature conditions"
+      ]
+    },
+    "tvsx-high-temp-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "safety measure",
+        "performance of some systems are deliberately reduced"
+      ]
+    },
+    "tvsx-xonic-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "SOC falls below 10%",
+        "Xonic mode will be disabled",
+        "SOC exceeds 10%"
+      ]
+    },
+    "tvsx-xonic-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "below 10%",
+        "disabled to conserve battery energy",
+        "exceeds 10%"
+      ]
+    },
+    "tvs-regen-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "recuperates energy lost during braking / deceleration",
+        "charges the battery",
+        "battery temperature is high"
+      ]
+    },
+    "tvs-regen-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "regeneration of power is happening",
+        "charges the battery",
+        "state of charge is high"
+      ]
+    },
+    "tvs-malfunction-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "impending warning",
+        "fault",
+        "periodic maintenance",
+        "Authorised Service station"
+      ]
+    },
+    "tvs-malfunction-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "fault",
+        "diagnosis and troubleshooting",
+        "periodic maintenance"
+      ]
+    },
+    "tvs-sidestand-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "vehicle will be immobile",
+        "side stand indication",
+        "full up position"
+      ]
+    },
+    "tvs-sidestand-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "vehicle will be immobile",
+        "side stand",
+        "before moving the vehicle"
+      ]
+    },
+    "tvs-socket-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Input AC voltage should be within the range of 220 to 240V",
+        "proper earth connection",
+        "Do not use extension cable or box"
+      ]
+    },
+    "tvs-socket-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "220 to 240V",
+        "proper earth connection",
+        "Do not use extension cable or box"
+      ]
+    },
+    "tvs-st-charging-time-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "80% SOC - 3 hrs. (Approx)",
+        "80% SOC - 4.18 hrs. (Approx)"
+      ]
+    },
+    "tvs-st-charging-time-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "0 to 80%",
+        "3 hrs. (Approx)",
+        "4.18 hrs. (Approx)"
+      ]
+    },
+    "magnus-braking-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "left hand brake (HBS)",
+        "Harmonised Braking"
+      ]
+    },
+    "magnus-braking-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "left hand brake (HBS)",
+        "Harmonised Braking"
+      ]
+    },
+    "magnus-water-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "water level is above the centre",
+        "height of the motor and battery"
+      ]
+    },
+    "magnus-water-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "water level is above the centre",
+        "height of the motor and battery"
+      ]
+    },
+    "magnus-tyre-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Rear Wheel is 35 to 38 PSI"
+      ]
+    },
+    "magnus-tyre-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "Rear Wheel is 35 to 38 PSI"
+      ]
+    },
+    "magnus-battery-warranty-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "at least 6 consecutive cycles",
+        "Ampere individual battery charger and discharger"
+      ]
+    },
+    "magnus-battery-warranty-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "6 consecutive cycles",
+        "individual battery charger and discharger"
+      ]
+    },
+    "nexus-modes-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "ECO mode",
+        "City mode",
+        "Power mode",
+        "around 93 kmph"
+      ]
+    },
+    "nexus-modes-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "most battery - friendly driving mode",
+        "65 kmph",
+        "around 93 kmph"
+      ]
+    },
+    "nexus-battery-saver-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Battery percentage reaches 10%",
+        "Battery Saver mode will be activated"
+      ]
+    },
+    "nexus-battery-saver-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "10%",
+        "Battery Saver mode"
+      ]
+    },
+    "vida-tyre-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Rider only",
+        "22 psi",
+        "29 psi"
+      ]
+    },
+    "vida-tyre-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "22 psi",
+        "29 psi"
+      ]
+    },
+    "vida-fast-charge-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "0 to 80% SOC : 62 min",
+        "0 to 100% SOC : 120 min"
+      ]
+    },
+    "vida-fast-charge-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "62 min",
+        "120 min"
+      ]
+    },
+    "vida-modes-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "regenerative braking",
+        "67±3 km/h",
+        "77±3 km/h"
+      ]
+    },
+    "vida-modes-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "regenerative braking",
+        "67±3 km/h",
+        "77±3 km/h"
+      ]
+    },
+    "vida-ports-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Portable/Home/AC charging port",
+        "Fast charging port",
+        "located under the seat"
+      ]
+    },
+    "vida-ports-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "under the seat",
+        "Fast charging port",
+        "front inner cover"
+      ]
+    },
+    "vida-charge-safety-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "damaged connector or connector pins",
+        "dust, soil, oil or water",
+        "multi-electrical port",
+        "Charger is qualified with IP65",
+        "Do not dip"
+      ]
+    },
+    "vida-charge-safety-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "damaged charging cord",
+        "dust, soil, oil or water",
+        "Do not use a multi-electrical port",
+        "Do not dip"
+      ]
+    },
+    "vida-gun-unlock-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "ignition key to",
+        "wait up to 6 seconds",
+        "Pull out the gun"
+      ]
+    },
+    "vida-gun-unlock-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "wait up to 6 seconds",
+        "Pull out the gun",
+        "push the gun in"
+      ]
+    },
+    "simple-specs-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "5 kWh",
+        "5h 20min",
+        "265*km"
+      ]
+    },
+    "simple-specs-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "5 kWh",
+        "5h 20min",
+        "265*km"
+      ]
+    },
+    "simple-range-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Cruise between 40-50 km/h",
+        "maximises your riding range"
+      ]
+    },
+    "simple-range-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "40-50 km/h",
+        "most efficient use of your battery"
+      ]
+    },
+    "simple-service-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "5000 kms or 6 Months whichever is earlier"
+      ]
+    },
+    "simple-service-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "5000 kms",
+        "6 Months whichever is earlier"
+      ]
+    },
+    "simple-battery-health-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Battery health check",
+        "SOC & SOH",
+        "Charging status"
+      ]
+    },
+    "simple-battery-health-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "SOC & SOH",
+        "Charging status"
+      ]
+    },
+    "simple-charge-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "15 Amps socket",
+        "charging port securely"
+      ]
+    },
+    "simple-charge-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "15 Amps socket"
+      ]
+    },
+    "simple-battery-warranty-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "three (3) years or 30,000 kilometres",
+        "minimum State of Health (SoH) of 70%"
+      ]
+    },
+    "simple-battery-warranty-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "70%",
+        "three (3) years or 30,000 kilometres"
+      ]
+    },
+    "simple-warranty-exclusions-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Improper charging practices",
+        "Use of non-compliant chargers",
+        "Physical damage to charging port",
+        "Unauthorized repairs or modifications"
+      ]
+    },
+    "simple-warranty-exclusions-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "non-compliant chargers",
+        "damage to charging port",
+        "Unauthorized repairs or modifications"
+      ]
+    },
+    "uv-f77-temp-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Charging does not occur if the temperature exceeds 50°C"
+      ]
+    },
+    "uv-f77-temp-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "does not occur",
+        "exceeds 50°C"
+      ]
+    },
+    "uv-f77-limit-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "80%, 90%, 100%",
+        "recommends setting a 90% charging limit",
+        "regenerative braking remains operational"
+      ]
+    },
+    "uv-f77-limit-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "80%, 90%, 100%",
+        "90% charging limit",
+        "regenerative braking"
+      ]
+    },
+    "uv-f77-bluetooth-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Bluetooth enables",
+        "push notfications and update information",
+        "Menu > Bluetooth"
+      ]
+    },
+    "uv-f77-bluetooth-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "Bluetooth enables your motorcycle to connect",
+        "push notfications and update information"
+      ]
+    },
+    "uv-x47-fuse-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "5 Amps fuse below the seat",
+        "replace with the spare fuse",
+        "12.6V",
+        "14.2V"
+      ]
+    },
+    "uv-x47-fuse-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "5 Amps fuse",
+        "aux battery might get discharged",
+        "below 10V"
+      ]
+    },
+    "uv-x47-temp-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Battery temp. rising",
+        "above permissible limit",
+        "Contact Ultraviolette support"
+      ]
+    },
+    "uv-x47-temp-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "Battery temp. rising",
+        "above permissible limit",
+        "contact Ultraviolette support"
+      ]
+    },
+    "uv-x47-chain-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "chain slack (40 mm)",
+        "lube every 500kms or 15 days"
+      ]
+    },
+    "uv-x47-chain-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "40 mm",
+        "every 500kms or 15 days"
+      ]
+    },
+    "uv-x47-tyre-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "32-34 PSI for front and rear respectively"
+      ]
+    },
+    "uv-x47-tyre-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "32-34 PSI"
+      ]
+    },
+    "honda-hv-safety-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "High voltage is applied",
+        "wiring",
+        "electric shock or a fire"
+      ]
+    },
+    "honda-hv-safety-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "High voltage",
+        "electric shock or a fire",
+        "authorised dealer"
+      ]
+    },
+    "honda-crash-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Do not touch",
+        "high voltage system components",
+        "qualified service facility"
+      ]
+    },
+    "honda-crash-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "high voltage system components",
+        "thoroughly checked",
+        "qualified service facility"
+      ]
+    },
+    "honda-smell-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "abnormal smell",
+        "Immediately stop your vehicle",
+        "authorised dealer"
+      ]
+    },
+    "honda-smell-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "abnormal smell",
+        "safe place outside",
+        "turn the power switch",
+        "authorised dealer"
+      ]
+    },
+    "honda-combi-brake-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "distributes the braking force between the",
+        "front and rear brakes together",
+        "full braking effectiveness"
+      ]
+    },
+    "honda-combi-brake-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "front and rear brakes together",
+        "full braking effectiveness"
+      ]
+    },
+    "honda-battery-temp-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Blue",
+        "too low",
+        "Red",
+        "too high",
+        "SPORT mode cannot be used"
+      ]
+    },
+    "honda-battery-temp-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "Blue",
+        "too low",
+        "Red",
+        "too high",
+        "SPORT mode"
+      ]
+    },
+    "honda-washing-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Avoid directing water into the electrical parts",
+        "Do not use high-pressure washers"
+      ]
+    },
+    "honda-washing-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "electrical parts",
+        "high-pressure washers"
+      ]
+    },
+    "honda-storage-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "less than 15 %",
+        "fully charged",
+        "gauge at 30 %"
+      ]
+    },
+    "honda-storage-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "less than 15 %",
+        "fully charged",
+        "gauge at 30 %"
+      ]
+    },
+    "honda-motor-cutoff-exact_term": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "banking (lean angle) sensor automatically",
+        "stops the motor if the vehicle falls over",
+        "OFF position and back to the ON position"
+      ]
+    },
+    "honda-motor-cutoff-paraphrased": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "lean angle",
+        "stops the motor",
+        "OFF position",
+        "ON position"
+      ]
+    },
+    "nexus-service-due": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "The alert is triggered by the distance traveled since the last service"
+      ]
+    },
+    "nexus-mcu-over-temperature": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "if there is MCU high temperature fault, the cluster displays “MCU OVER TEMPERATURE”"
+      ]
+    },
+    "nexus-thermal-early-buzzer": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "continuous buzzer when thermal runaway- early warning is enabled",
+        "blinks along with ON and OFF buzzer when thermal runaway- high temperature is enabled"
+      ]
+    },
+    "nexus-earth-leakage": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Earth Leakage OFF ON FLASH"
+      ]
+    },
+    "nexus-reverse-beep": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "Reverse telltale appears blinking along with a buzzer ON/OFF for every 500 ms"
+      ]
+    },
+    "nexus-post-ride-charge": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "give it a rest period of at least 30 minutes after use"
+      ]
+    },
+    "nexus-post-charge-rest": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "Give it a rest of 15 minutes after removing the charger before using the vehicle"
+      ]
+    },
+    "nexus-warranty-report-timing": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "within forty-eight (48) hours after a defect is detected after having duly informed Ampere"
+      ]
+    },
+    "magnus-lower-mileage": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "insuﬃcient tyre pressure",
+        "the battery is not fully charged or the charger is faulty",
+        "a worn out or faulty battery"
+      ]
+    },
+    "magnus-output-indicator": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "If the charging indicator light does not work",
+        "Check whether the output connector is well connected"
+      ]
+    },
+    "magnus-persistent-green": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Check whether the charger DC connection works well with the battery",
+        "Check whether there are any short-circuits or a reverse connection",
+        "Check whether the battery is fully charged"
+      ]
+    },
+    "magnus-front-end-noise": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "If there are, please contact your service centre"
+      ]
+    },
+    "magnus-internal-faults": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "If there are faults pertaining to the inner workings of the motor, controller, charger and battery. Do not dismantle the parts on your own"
+      ]
+    },
+    "magnus-controller-liquid": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "Warranty of controller, converter, and charger will not apply in the following instances",
+        "Failure due to water or liquid content inside the controller"
+      ]
+    },
+    "qc1-standby-indicator": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Make sure the side stand is up",
+        "Make sure the throttle completely closed"
+      ]
+    },
+    "qc1-ready-off-hot": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "Turn the power switch to the OFF",
+        "position, wait a little while, and then turn",
+        "the power switch to the ON position"
+      ]
+    },
+    "qc1-hot-after-riding": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Are you charging the vehicle directly after driving",
+        "Wait a while before charging"
+      ]
+    },
+    "qc1-inverter-charging": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "Is the vehicle being charged from an DC/AC inverter or power generator",
+        "Stop use and charge in the specified charging environment"
+      ]
+    },
+    "qc1-charge-flash-normal": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "If the battery for motor charger heats, the CHARGE indicator will flash even during charging"
+      ]
+    },
+    "qc1-meter-off-at-charge": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "Is the battery for motor fully charged",
+        "Check the remaining charge for the battery for motor"
+      ]
+    },
+    "qc1-fast-flash-twice": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "There is a possibility that the battery for motor temperature is too hot"
+      ]
+    },
+    "qc1-charge-timeout": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "If the charging time exceeds 8 hours, charging will stop"
+      ]
+    },
+    "qc1-electric-system-warning": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "speed and have your vehicle inspected by",
+        "your authorised dealer as soon as possible"
+      ]
+    },
+    "qc1-uphill-power-loss": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "slopes while the power limitation is applied",
+        "this is not a malfunction"
+      ]
+    },
+    "activa-battery-installation-warning": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Installing Operation Guide installation error at and Removing battery for motor. the Battery for Motor"
+      ]
+    },
+    "activa-low-battery-health": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "health low",
+        "for motor inspected by your authorised dealer"
+      ]
+    },
+    "activa-update-download": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "If you turn the power switch to (Off) download. position, download will be interrupted or cancelled",
+        "Download does not proceed while the power switch is (Off)"
+      ]
+    },
+    "activa-update-reboot": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "Press the “Select” switch to reboot the install. vehicle"
+      ]
+    },
+    "activa-power-limit-freezing": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "When the battery for motor warms up and the vehicle is stop, the power limitation is cancelled"
+      ]
+    },
+    "activa-key-led-dark": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "If the Honda SMART Key LED does not radio stations, or airports. respond, replace the battery"
+      ]
+    },
+    "activa-stale-pairing": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "Check that the vehicle pairing information is deleted from your smartphone Bluetooth® setting"
+      ]
+    },
+    "activa-connection-motor-start": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "connection may be temporarily disconnected when activating the motor, which is normal and not a malfunction",
+        "smartphone will be reconnected after the motor is activated"
+      ]
+    },
+    "indie-gen2-prcd-test": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "please stop using the charger immediately and contact River Mobility or an authorized service centre"
+      ]
+    },
+    "indie-gen2-app-charge-failure": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "If the vehicle is plugged in but not charging, you will be notified on the River App regarding the same with suggestions on how to troubleshoot"
+      ]
+    },
+    "indie-gen2-charge-start": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "when charging starts, you will hear a buzzer sound and the estimated charging time will be displayed"
+      ]
+    },
+    "indie-gen2-active-fault": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Warning: Indicates if there are any active faults on the vehicle"
+      ]
+    },
+    "indie-gen2-fota-progress": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "service icon on the display",
+        "blinks and the orange bar",
+        "software update is progressing"
+      ]
+    },
+    "indie-gen2-fota-wait": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "do not operate the vehicle for 1 minute as the system performs internal checks"
+      ]
+    },
+    "indie-gen2-charging-emergency": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "turn off the charger by tripping the MCB of the wall outlet"
+      ]
+    },
+    "indie-gen2-plug-wont-fit": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "Do not attempt to plug the charger gun into the charger inlet by force",
+        "If you are unable to insert the charger gun onto the vehicle, please contact River Mobility"
+      ]
+    },
+    "ultra-high-temp-alert": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "A red warning banner with a message will appear at the top of the screen",
+        "an audio-visual alarm will sound on the instrument cluster assembly"
+      ]
+    },
+    "ultra-high-temp-after-cool": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "If the high temperature alert continues to appear after the battery has cooled down",
+        "take the scooter to an authorised service centre for further inspection and maintenance"
+      ]
+    },
+    "ultra-thermal-runaway": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "the entire screen turns red with white warning messaging, accompanied by a warning buzzer audio alarm",
+        "stop the scooter at safe location and step away from the scooter to a safe distance"
+      ]
+    },
+    "ultra-resume-charge": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "If the Charger remains connected to the vehicle, you can resume an interrupted charge cycle by switching the power supply back ON"
+      ]
+    },
+    "ultra-rate-control": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "The vehicle controls the charging rate during the charge cycle"
+      ]
+    },
+    "ultra-charger-cleaning": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "Clean the charger with dry clothes only and avoid using chemicals for cleaning"
+      ]
+    },
+    "ultra-gun-lock": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Use the charger gun lock knob to remove the charger gun and avoid pulling the cable"
+      ]
+    },
+    "ultra-obd-location": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "Storage 1. OBD 2. Storage Box 3. Storage Box light"
+      ]
+    },
+    "vida-v2-hot-indicator-sources": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Displays when the battery, motor or ambient temperature is high"
+      ]
+    },
+    "vida-v2-cruise-after-brake": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "To resume the cruise in last set speed press",
+        "RES+ switch"
+      ]
+    },
+    "vida-v2-park-speed": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "move forward or reverse in restricted speed (3 km/hr)"
+      ]
+    },
+    "vida-v2-sport-single-pack": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "Sport mode will not be activated if the vehicle is equipped with single traction battery"
+      ]
+    },
+    "vida-v2-sos-cancel": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "presses the SOS switch back again",
+        "clicks stop on below the handlebar to carry a light luggage TFT screen the request will get cancelled"
+      ]
+    },
+    "vida-v2-boost-while-cruising": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "Boost mode will not be activated if the cruise is set"
+      ]
+    },
+    "vida-v2-sos-notifications": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "SMS notification will be sent to emergency contacts",
+        "an emergency request will be raised with Integrated complaint management system"
+      ]
+    },
+    "vida-v2-four-green-leds": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "Once one LED is fixed to glow, the next LED start to blink",
+        "4 LEDs stand for 25%, 50%, 75% and 100% respectively"
+      ]
+    },
+    "x47-blind-spot-glow": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Blind Spot Detection Vehicle in blind spot. Solid amber glow"
+      ]
+    },
+    "x47-lane-assist-speed": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "This function is active at speeds above 16 km/h"
+      ]
+    },
+    "x47-rear-collision-warning": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Indicators on both mirrors will glow solid red"
+      ]
+    },
+    "x47-radar-mud": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "A persistent notification icon will then will activate automatically. remain on the instrument cluster until the blockage is cleared",
+        "All radar warnings will be suspended How to Operate the Radar System during this time"
+      ]
+    },
+    "x47-ballistic-unavailable": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Battery SoC ≤ 30% OR Battery beyond temperature",
+        "temperature Critical Alert Modes available: Combat and Glide limits"
+      ]
+    },
+    "x47-hover-mode-charge": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "Hover mode will initiate at 5% battery"
+      ]
+    },
+    "x47-motor-arm-error": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "MOTOR ARM ERROR Throttle at non zero position Critical Alert Release throttle before Arming"
+      ]
+    },
+    "x47-hill-hold-countdown": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "DISENGAGING HILL HOLD IN 5S Hill hold 5s timer trigger Critical Alert Apply brakes for your safety"
+      ]
+    },
+    "superstreet-abs-after-start": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "key is switched ON until the motorcycle attains a speed ABS Malfunction of 5 km/h. If it persists, an abnormality"
+      ]
+    },
+    "superstreet-regen-telltale": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "Regen is not available if the main Indicator battery pack SoC is above 90%"
+      ]
+    },
+    "superstreet-green-not-blinking": {
+      "query_type": "paraphrased",
+      "key_facts": [
+        "the motorcycle is not charging, the indicator will not blink. It is then recommended that Ultraviolette support be contacted"
+      ]
+    },
+    "superstreet-acws-regen": {
+      "query_type": "exact_term",
+      "key_facts": [
+        "The tail light rapidly flashes during regen braking"
+      ]
+    }
+  },
+  "review_notes": "Gold IDs were reconciled against the MiniLM-ready benchmark corpus using the original parent passages and annotated facts. Query text, query types, and key facts are preserved."
+}

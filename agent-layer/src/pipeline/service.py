@@ -42,6 +42,7 @@ class LivePipelineService:
         logger.info(f"Processing live query: '{query}' (model: {vehicle_model}, top_k: {top_k})")
 
         # Step 1: Call generic backend API to get 5 chunks
+        retrieval_mode = "demo" if backend_adapter.use_mock else "live"
         raw_chunks = await backend_adapter.fetch_raw_chunks_from_backend(
             query=query,
             top_k=top_k,
@@ -62,6 +63,7 @@ class LivePipelineService:
             cleaned_evidence,
             vehicle_model=vehicle_model,
         )
+        card_payload.retrieval_mode = retrieval_mode
         await asyncio.to_thread(
             diagnosis_history_store.save,
             query=query,
@@ -70,7 +72,7 @@ class LivePipelineService:
             result=card_payload,
         )
 
-        logger.info(f"Successfully generated grounded website payload for '{query}' (Grounding: {card_payload.grounding_score})")
+        logger.info(f"Prepared evidence result for '{query}'")
         return card_payload
 
     async def process_raw_chunks_live(

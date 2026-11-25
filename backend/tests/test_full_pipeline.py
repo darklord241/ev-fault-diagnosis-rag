@@ -67,6 +67,9 @@ class LayerRoutingClient:
                 json=json,
             )
 
+    async def get(self, url, *, headers):
+        return await self.request("GET", url, headers=headers)
+
     async def post(self, url, *, json, headers):
         return await self.request("POST", url, json=json, headers=headers)
 
@@ -115,6 +118,12 @@ def test_full_website_gateway_retrieval_agent_and_database_flow(
             },
         )
         history_response = client.get("/api/v1/history")
+        ready = client.get("/api/v1/health")
+        live_dtc = client.get("/api/v1/dtc/E-08")
+        monkeypatch.setattr(backend_adapter, "api_key", "wrong-key")
+        wrong_key = client.get("/api/v1/health")
+        monkeypatch.setattr(backend_adapter, "api_key", None)
+        missing_key = client.get("/api/v1/health")
 
     assert response.status_code == 200, response.text
     result = response.json()
@@ -125,6 +134,13 @@ def test_full_website_gateway_retrieval_agent_and_database_flow(
     assert result["sources"][0]["page_number"] == 12
     assert "inspect battery connector continuity" in result["sources"][0]["content"]
     assert result["sources"][0]["similarity_score"] == 0.82
-    assert result["model_used"] == "deterministic-domain-engine"
+    assert result["model_used"] == "deterministic-excerpt"
+    assert result["sources"][0]["excerpt"] == result["sources"][0]["content"]
+    assert result["retrieval_mode"] == "live"
+    assert ready.json()["retrieval_backend_ready"] is True
+    assert wrong_key.json()["retrieval_backend_ready"] is False
+    assert missing_key.json()["retrieval_backend_ready"] is False
+    assert live_dtc.status_code == 503
+    assert "does not provide live DTC lookup" in live_dtc.json()["detail"]
     assert history_response.status_code == 200
     assert history_response.json()["items"][0]["result"]["case_id"] == result["case_id"]

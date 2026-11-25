@@ -1,0 +1,24 @@
+{
+  "paired_n": 5,
+  "distinct_facts": 5,
+  "unresolved_responses": 0,
+  "rag_minus_llm_percentage_points": 80.0,
+  "paired_fact_bootstrap_95_ci": [
+    40.0,
+    100
+  ],
+  "wrong_to_right": 4,
+  "right_to_wrong": 0,
+  "llm_only": {
+    "correct": 0,
+    "em_percent": 0.0,
+    "median_seconds": 1.079383099999859,
+    "p95_seconds": 1.8885883999998896
+  },
+  "rag": {
+    "correct": 4,
+    "em_percent": 80.0,
+    "median_seconds": 3.0078157999998894,
+    "p95_seconds": 3.6737757999999303
+  }
+}

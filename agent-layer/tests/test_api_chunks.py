@@ -100,17 +100,20 @@ def test_clean_api_chunks_rejects_missing_ids_and_empty_content():
 
 
 @pytest.mark.asyncio
-async def test_gemini_text_blocks_are_parsed_as_structured_summary(monkeypatch):
+@pytest.mark.parametrize("quote, accepted", [
+    ("700W charger is backwards compatible", True),
+    ("The charger has an unsupported voltage rating.", False),
+    (None, False),
+])
+async def test_gemini_quotes_are_verified_against_cited_passage(monkeypatch, quote, accepted):
     class FakeResponse:
         content = [{
             "type": "text",
             "text": json.dumps({
-                "direct_answer": "The cited manual describes a low-charge power reduction.",
-                "key_takeaways": ["Check the dashboard charge level."],
-                "technical_specs": {},
-                "conditions_and_safety": ["Use an authorized service center for repairs."],
-                "formatted_markdown": "### Answer\nThe manual describes a low-charge power reduction.",
-                "grounding_confidence": 0.8,
+                "excerpts": (
+                    [{"chunk_id": SAMPLE_USER_CHUNK["chunk_id"], "quote": quote}]
+                    if quote else []
+                ),
             }),
         }]
 
@@ -132,16 +135,17 @@ async def test_gemini_text_blocks_are_parsed_as_structured_summary(monkeypatch):
         model="gemini-3.5-flash-lite",
     )
 
-    result = await summarizer._call_llm_summarizer(
-        evidence,
-        vehicle_model="Ather 450S",
-    )
+    monkeypatch.setattr("src.pipeline.summarizer.settings.GOOGLE_API_KEY", "test-key")
+    result = await summarizer.summarize(evidence, vehicle_model="Ather 450S")
 
-    assert result.model_used == "gemini-3.5-flash-lite"
-    assert result.direct_answer.startswith("The cited manual")
+    if quote is None:
+        assert result.model_used == "no-evidence"
+        assert result.sources == []
+        return
+    assert result.model_used == ("gemini-3.5-flash-lite" if accepted else "deterministic-excerpt")
     assert result.sources[0].chunk_id == SAMPLE_USER_CHUNK["chunk_id"]
     assert result.sources[0].page_number == 1
-    assert "700W charger is backwards compatible" in result.sources[0].content
+    assert result.sources[0].excerpt == (quote if accepted else result.sources[0].content)
 
 
 @pytest.mark.asyncio
@@ -201,7 +205,6 @@ async def test_empty_evidence_returns_explicit_no_evidence_payload():
     result = await EVSummarizer().summarize(evidence, vehicle_model="Ather 450S")
 
     assert result.model_used == "no-evidence"
-    assert result.grounding_score == 0
     assert result.sources == []
     assert result.vehicle_model == "Ather 450S"
     assert "No relevant source evidence" in result.direct_answer
@@ -216,10 +219,11 @@ async def test_live_pipeline_service(history_database, monkeypatch):
         top_k=5
     )
     assert card.direct_answer
-    assert len(card.key_takeaways) > 0
-    assert len(card.sources) > 0
-    assert card.grounding_score >= 0.8
-    assert diagnosis_history_store.list_recent()[0]["case_id"] == card.case_id
+    assert card.sources[0].excerpt
+    assert card.retrieval_mode == "demo"
+    saved = diagnosis_history_store.list_recent()[0]
+    assert saved["case_id"] == card.case_id
+    assert saved["result"]["retrieval_mode"] == "demo"
 
 @pytest.mark.asyncio
 async def test_api_live_query_endpoint(history_database, monkeypatch):

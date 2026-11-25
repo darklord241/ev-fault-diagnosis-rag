@@ -141,8 +141,8 @@ function DiagnoseContent() {
     <>
       <PageTitle
         eyebrow="RETRIEVAL-FIRST DIAGNOSIS"
-        title="Ask about an EV fault."
-        description="The agent retrieves source evidence, cleans it, and returns a structured answer with citations."
+        title="Find evidence about an EV fault."
+        description="Search technical documents and review excerpts alongside their sources."
       />
 
       {health?.backend_retrieval_mode === 'mock_domain_db' && (
@@ -152,12 +152,12 @@ function DiagnoseContent() {
       )}
       {health?.backend_retrieval_mode === 'live_hybrid_api' && health.retrieval_backend_ready === false && (
         <div className="notice error" role="alert">
-          Live retrieval is configured, but the corpus backend is not ready. Requests will fail rather than use sample evidence.
+          Live retrieval is unavailable. Check the backend, corpus, and retrieval API key.
         </div>
       )}
       {health?.backend_retrieval_mode === 'live_hybrid_api' && health.retrieval_backend_ready === true && (
         <div className="notice success" role="status">
-          Live retrieval backend is ready.
+          The agent can access the live retrieval backend.
         </div>
       )}
       {healthError && (
@@ -208,35 +208,41 @@ function DiagnoseContent() {
       {loading && (
         <div className="loading">
           <span className="loading-dot" />
-          Searching technical evidence and preparing the answer…
+          Searching technical documents…
         </div>
       )}
 
       {result && (
         <div style={{ marginTop: 8 }}>
-          {result.raw_chunks_retrieved === 0 && (
+          {result.model_used === 'no-evidence' && (
             <div className="notice error" role="alert">
-              No evidence was retrieved. This is not a diagnosis; do not use it as repair guidance.
+              No relevant passages were available for this query.
             </div>
           )}
 
           <div className="status-strip" style={{ marginBottom: 20 }}>
-            <span><Database size={15} /> {result.unique_chunks_used} evidence chunks used</span>
-            <span><FileText size={15} /> {result.sources.length} sources cited</span>
+            <span><Database size={15} /> {result.unique_chunks_used} selected chunks</span>
+            <span><FileText size={15} /> {result.sources.length} source passages</span>
             <span><Clock size={15} /> {result.model_used}</span>
             {result.vehicle_model && <span className="muted">{result.vehicle_model}</span>}
           </div>
 
-          {result.model_used.startsWith('deterministic-') && (
+          {result.retrieval_mode === 'demo' && (
+            <div className="notice" role="status">This result uses demo sample evidence.</div>
+          )}
+          {result.retrieval_mode === 'unknown' && (
+            <div className="notice" role="status">Archived result. Its retrieval mode and claim support were not verified.</div>
+          )}
+          {result.model_used === 'deterministic-excerpt' && (
             <div className="notice" role="status">
-              The configured LLM was unavailable, so this response is an extractive local fallback. Review the cited sources.
+              The model could not select an excerpt. Showing the highest-ranked passage for review.
             </div>
           )}
 
           <section className="card" style={{ marginBottom: 16 }}>
             <div className="card-heading">
               <div className="icon-tile"><Wrench size={20} /></div>
-              <h2>Answer</h2>
+              <h2>{result.retrieval_mode === 'unknown' ? 'Archived answer' : 'Evidence result'}</h2>
             </div>
             <p style={{ fontSize: 14, lineHeight: 1.8, color: 'var(--ink)' }}>{result.direct_answer}</p>
             {result.key_takeaways.length > 0 && (
@@ -315,8 +321,14 @@ function DiagnoseContent() {
                         </a>
                       )}
                     </div>
-                    {source.content && (
-                      <blockquote className="evidence-quote">{source.content}</blockquote>
+                    {(source.excerpt || source.content) && (
+                      <blockquote className="evidence-quote">{source.excerpt || source.content}</blockquote>
+                    )}
+                    {source.excerpt && source.content && source.excerpt !== source.content && (
+                      <details className="source-reference">
+                        <summary>Full passage</summary>
+                        <blockquote className="evidence-quote">{source.content}</blockquote>
+                      </details>
                     )}
                     <details className="source-reference">
                       <summary>Chunk reference</summary>
@@ -326,7 +338,7 @@ function DiagnoseContent() {
                 ))}
               </div>
               <p className="muted" style={{ fontSize: 10, marginTop: 8 }}>
-                Relevance and grounding scores are retrieval signals, not diagnostic certainty.
+                Similarity measures how closely the passage matches the search.
               </p>
             </section>
           )}

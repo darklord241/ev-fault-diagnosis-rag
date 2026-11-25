@@ -1,0 +1,37 @@
+{
+  "run_id": "minilm_ft_heldout_200",
+  "run_date_utc": "2026-11-25T15:02:50.093875+00:00",
+  "commit_hash": "f127de5088e3694baf02217e63a7da9c222fb9c8",
+  "evaluation_dataset": "C:\\Users\\Abhay\\Desktop\\Projects\\ev-fault-diagnosis-rag\\results\\domain_adaptation\\benchmark_200_grouped_70_30\\followup_inputs\\cases.json",
+  "evaluation_dataset_sha256": "264f7cd831f54d21998ea65b26b52ffa51255d344e3cb617231f55ef72c36820",
+  "annotations_file": "C:\\Users\\Abhay\\Desktop\\Projects\\ev-fault-diagnosis-rag\\results\\domain_adaptation\\benchmark_200_grouped_70_30\\followup_inputs\\annotations.json",
+  "annotations_sha256": "292a4123bb384c7eb9da366ddcd0ca25a248ea952a16e397fc01765c8bba2345",
+  "latency_repeats": 1,
+  "bootstrap_samples": 5000,
+  "bootstrap_seed": 20261028,
+  "top_k": 5,
+  "mrr_cutoff": 5,
+  "query_type_split": "provided by annotations",
+  "embedding_model": "C:\\Users\\Abhay\\Desktop\\Projects\\ev-fault-diagnosis-rag\\experiments\\models\\minilm_benchmark_200_grouped_70_30",
+  "null_gold_policy": "exclude from metric denominators and report count",
+  "reused_artifact_roots": [],
+  "experiment": 3,
+  "models": [
+    "C:\\Users\\Abhay\\Desktop\\Projects\\ev-fault-diagnosis-rag\\experiments\\models\\minilm_benchmark_200_grouped_70_30",
+    "sentence-transformers/all-MiniLM-L6-v2"
+  ],
+  "alternative_query_prefix": "",
+  "chunk_sizes_tokens": [
+    128,
+    256
+  ],
+  "chunking": "processed-record text, tokenizer offsets, no overlap",
+  "relevance": "a result is relevant when it contains an annotated key-fact phrase",
+  "model_downloads_allowed": false,
+  "processed_record_count": 1297,
+  "empty_processed_records_excluded": 0,
+  "excluded_empty_record_ids": [],
+  "usable_processed_record_count": 1297,
+  "results_csv": "C:\\Users\\Abhay\\Desktop\\Projects\\ev-fault-diagnosis-rag\\results\\compare_retrieval\\minilm_ft_heldout_200\\experiment_3\\results.csv",
+  "per_query_results_csv": "C:\\Users\\Abhay\\Desktop\\Projects\\ev-fault-diagnosis-rag\\results\\compare_retrieval\\minilm_ft_heldout_200\\experiment_3\\per_query_results.csv"
+}

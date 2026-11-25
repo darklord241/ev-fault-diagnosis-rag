@@ -235,3 +235,20 @@ def test_invalid_search_payload_is_rejected():
         )
 
     assert response.status_code == 422
+
+
+def test_search_excludes_weak_matches():
+    app = backend_module.create_app(
+        retriever=FakeRetriever(),
+        backend_api_key="test-secret",
+        min_similarity=0.95,
+    )
+    with TestClient(app) as client:
+        response = client.post(
+            "/api/v1/retrieval/search",
+            headers={"Authorization": "Bearer test-secret"},
+            json={"query": "battery fault"},
+        )
+
+    assert response.status_code == 200
+    assert response.json()["results"] == []

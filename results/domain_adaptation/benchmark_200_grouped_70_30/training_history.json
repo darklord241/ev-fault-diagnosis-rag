@@ -1,0 +1,20 @@
+[
+  {
+    "epoch": 1,
+    "loss": 0.5171144902706146,
+    "training_queries_used": 126,
+    "validation_mrr_at_5": 0.7523809523809524
+  },
+  {
+    "epoch": 2,
+    "loss": 0.2569510042667389,
+    "training_queries_used": 126,
+    "validation_mrr_at_5": 0.7559523809523809
+  },
+  {
+    "epoch": 3,
+    "loss": 0.15601360891014338,
+    "training_queries_used": 126,
+    "validation_mrr_at_5": 0.7559523809523809
+  }
+]

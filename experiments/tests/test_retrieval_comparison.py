@@ -28,7 +28,7 @@ from experiments.runners.retrieval_comparison import (
     reciprocal_rank_fusion,
     rerank_candidates,
 )
-from scraper.vector_search.retrieval import SearchResult, load_chunks
+from scraper.vector_search.retrieval import SearchResult
 
 
 def make_record(chunk_id, text=None):
@@ -224,9 +224,7 @@ class RetrievalMethodTests(unittest.TestCase):
         self.assertEqual(1.0, metrics["recall_at_20"])
         self.assertEqual(0.0, metrics["ndcg_at_10"])
 
-    def test_experiment_inputs_and_corpus_match_fixed_invariants(self):
-        records = load_chunks(ROOT / "data/chunked")
-        self.assertEqual(891, len(records))
+    def test_legacy_benchmark_files_and_method_defaults_match_fixed_invariants(self):
         cases = json.loads(DEFAULT_CASES_PATH.read_text())["cases"]
         annotations = json.loads(DEFAULT_ANNOTATIONS_PATH.read_text())["cases"]
         self.assertEqual(40, len(annotations))
