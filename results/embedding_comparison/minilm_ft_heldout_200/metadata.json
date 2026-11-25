@@ -1,0 +1,80 @@
+{
+  "run_id": "minilm_ft_heldout_200",
+  "timestamp_utc": "2026-11-25T15:05:01.980835+00:00",
+  "git_commit": "f127de5088e3694baf02217e63a7da9c222fb9c8",
+  "runtime": {
+    "python": "3.13.5",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "sentence-transformers": "6.2.0",
+      "torch": "2.15.0"
+    }
+  },
+  "config_sha256": "2f3d0c9f9cc67368bbb67920d9241325d11ab22091a45850ef4083069dd13121",
+  "input_files": {
+    "evaluation_dataset": {
+      "path": "C:\\Users\\Abhay\\Desktop\\Projects\\ev-fault-diagnosis-rag\\results\\domain_adaptation\\benchmark_200_grouped_70_30\\followup_inputs\\cases.json",
+      "sha256": "264f7cd831f54d21998ea65b26b52ffa51255d344e3cb617231f55ef72c36820"
+    },
+    "annotations": {
+      "path": "C:\\Users\\Abhay\\Desktop\\Projects\\ev-fault-diagnosis-rag\\results\\domain_adaptation\\benchmark_200_grouped_70_30\\followup_inputs\\annotations.json",
+      "sha256": "292a4123bb384c7eb9da366ddcd0ca25a248ea952a16e397fc01765c8bba2345"
+    },
+    "model_config": {
+      "path": "C:\\Users\\Abhay\\Desktop\\Projects\\ev-fault-diagnosis-rag\\results\\domain_adaptation\\benchmark_200_grouped_70_30\\followup_inputs\\models.json",
+      "sha256": "8b7bd6b64e948b674dfa7537ad7f36060a630ab812c4d8b102096853ec166818"
+    }
+  },
+  "corpus": {
+    "chunk_directory": "C:\\Users\\Abhay\\Desktop\\Projects\\ev-fault-diagnosis-rag\\data\\chunked\\heldout_200_70_30",
+    "chunk_count": 1297
+  },
+  "benchmark": {
+    "case_count": 60,
+    "scored_query_count": 60,
+    "unscored_null_gold_count": 0,
+    "top_k": 5,
+    "metrics": [
+      "hit_at_1",
+      "hit_at_3",
+      "hit_at_5",
+      "mrr",
+      "ndcg_at_5"
+    ],
+    "bootstrap_samples": 5000,
+    "bootstrap_seed": 20261028,
+    "latency_repeats": 1
+  },
+  "experiment_details": {
+    "model_runtime": {
+      "current": {
+        "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+        "revision": "main",
+        "preprocessing": "sentence-transformers encode; no task prefix; reject over 256 tokens",
+        "dimension": 384,
+        "max_seq_length": 256,
+        "cache_hit": false,
+        "cache_rebuild_reason": "chunk IDs or text changed",
+        "cache_path": "C:\\Users\\Abhay\\Desktop\\Projects\\ev-fault-diagnosis-rag\\data\\embeddings\\experiments\\current.json",
+        "copied_candidate_cache": null
+      },
+      "fine_tuned": {
+        "model_id": "experiments/models/minilm_benchmark_200_grouped_70_30",
+        "revision": "local",
+        "preprocessing": "query_prefix=''; document_prefix=''; max_seq_length=256; reject overlong inputs",
+        "dimension": 384,
+        "max_seq_length": 256,
+        "cache_hit": false,
+        "cache_rebuild_reason": "cache does not exist",
+        "cache_path": "C:\\Users\\Abhay\\Desktop\\Projects\\ev-fault-diagnosis-rag\\data\\embeddings\\experiments\\fine_tuned.json",
+        "copied_candidate_cache": null
+      }
+    },
+    "model_order": [
+      "current",
+      "fine_tuned"
+    ],
+    "reused_cache_candidates": [],
+    "historical_mpnet_results": null
+  }
+}

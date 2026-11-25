@@ -33,7 +33,7 @@ from experiments.run_utils import (
     write_json,
     write_run_metadata,
 )
-from scraper.vector_search.embedding import MiniLMEmbedder
+from scraper.vector_search.embedding import MiniLMEmbedder, SentenceTransformerTaskEmbedder
 from scraper.vector_search.index_embeddings import DEFAULT_CACHE_PATH
 from scraper.vector_search.retrieval import SearchResult, load_chunks
 from scraper.vector_search.retriever import Retriever
@@ -464,7 +464,7 @@ def _aggregate_results(
         ]
         status = (
             "complete"
-            if len(completed_rows) == EXPECTED_QUERY_COUNT
+            if rows and len(completed_rows) == len(rows)
             else "blocked_reranker_unavailable"
         )
         result: dict[str, object] = {
@@ -475,7 +475,7 @@ def _aggregate_results(
             "reranker_error": reranker_error if status != "complete" else "",
             "n_queries": len(completed_rows),
             "n_scored": len(scored_rows),
-            "n_excluded_null_gold": EXPECTED_QUERY_COUNT - len(scored_rows),
+            "n_excluded_null_gold": sum(row["hit_at_1"] is None for row in completed_rows),
         }
         for metric in RETRIEVAL_METHOD_METRICS:
             values = [float(row[metric]) for row in scored_rows]
@@ -514,13 +514,15 @@ def _write_report(
     *,
     corpus_count: int,
     reranker_error: str | None,
+    model_id: str = EMBEDDING_MODEL_ID,
+    case_count: int = EXPECTED_QUERY_COUNT,
+    scored_count: int = EXPECTED_SCORED_QUERY_COUNT,
 ) -> None:
     lines = [
         "# Retrieval-method comparison",
         "",
-        "- Embedding is fixed to `sentence-transformers/all-MiniLM-L6-v2`.",
-        f"- Corpus: {corpus_count} unchanged chunks; benchmark: 40 queries, "
-        "39 scored and one null-gold.",
+        f"- Embedding is fixed to `{model_id}`.",
+        f"- Corpus: {corpus_count} passages. Benchmark: {case_count} queries, {scored_count} scored.",
         "- R1 and R2 both use production dense cosine without vehicle filtering; "
         "their rankings should be identical.",
         "- BM25: `rank_bm25.BM25Okapi`, `k1=1.2`, `b=0.75`.",
@@ -673,6 +675,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Compare fixed retrieval methods on the 40-query benchmark."
     )
+    parser.add_argument("--checkpoint", type=Path)
+    parser.add_argument("--cases", type=Path, default=DEFAULT_CASES_PATH)
+    parser.add_argument("--annotations", type=Path, default=DEFAULT_ANNOTATIONS_PATH)
+    parser.add_argument("--cache-path", type=Path, default=DEFAULT_CACHE_PATH)
     parser.add_argument("--chunked-dir", type=Path, default=DEFAULT_CHUNKED_DIR)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
     parser.add_argument("--run-id", help="optional explicit run directory ID")
@@ -695,34 +701,36 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.repeats <= 0 or args.bootstrap_samples <= 0:
         parser.error("--repeats and --bootstrap-samples must be positive")
 
-    cases_path = DEFAULT_CASES_PATH
-    annotations_path = DEFAULT_ANNOTATIONS_PATH
+    cases_path = args.cases
+    annotations_path = args.annotations
     records = load_chunks(args.chunked_dir)
     cases, annotations = load_evaluation_inputs(
         cases_path, annotations_path, records
     )
-    if len(records) != EXPECTED_CHUNK_COUNT:
+    if not args.checkpoint and len(records) != EXPECTED_CHUNK_COUNT:
         raise ValueError(
             f"expected {EXPECTED_CHUNK_COUNT} chunks; found {len(records)}"
         )
-    if len(cases) != EXPECTED_QUERY_COUNT:
+    if not args.checkpoint and len(cases) != EXPECTED_QUERY_COUNT:
         raise ValueError(
             f"expected {EXPECTED_QUERY_COUNT} benchmark queries; found {len(cases)}"
         )
     scored_count = sum(case["gold_chunk_ids"] is not None for case in cases)
-    if scored_count != EXPECTED_SCORED_QUERY_COUNT:
+    if not args.checkpoint and scored_count != EXPECTED_SCORED_QUERY_COUNT:
         raise ValueError(
             f"expected {EXPECTED_SCORED_QUERY_COUNT} scored queries; "
             f"found {scored_count}"
         )
 
-    embedding = MiniLMEmbedder(local_files_only=True)
-    if embedding.identity.model_id != EMBEDDING_MODEL_ID:
+    embedding = (SentenceTransformerTaskEmbedder(str(args.checkpoint.resolve(strict=True)),
+                                                revision="local", local_files_only=True)
+                 if args.checkpoint else MiniLMEmbedder(local_files_only=True))
+    if not args.checkpoint and embedding.identity.model_id != EMBEDDING_MODEL_ID:
         raise ValueError(
             f"expected embedding model {EMBEDDING_MODEL_ID}; "
             f"loaded {embedding.identity.model_id}"
         )
-    retriever = Retriever(records, embedding, DEFAULT_CACHE_PATH)
+    retriever = Retriever(records, embedding, args.cache_path)
     bm25_index = build_bm25_index(records)
     try:
         reranker = _load_reranker(allow_download=args.allow_model_download)
@@ -829,7 +837,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             "revision": embedding.identity.revision,
             "preprocessing": embedding.identity.preprocessing,
             "dimension": embedding.identity.dimension,
-            "cache_path": str(DEFAULT_CACHE_PATH),
+            "cache_path": str(args.cache_path),
         },
         "corpus": {
             "chunk_directory": str(args.chunked_dir.resolve()),
@@ -888,6 +896,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         per_query_rows,
         corpus_count=len(records),
         reranker_error=reranker_error,
+        model_id=embedding.identity.model_id, case_count=len(cases), scored_count=scored_count,
     )
     write_run_metadata(
         output_dir,

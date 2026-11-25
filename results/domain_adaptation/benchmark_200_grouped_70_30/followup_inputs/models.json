@@ -1,0 +1,13 @@
+{
+  "models": [
+    {
+      "key": "current",
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2"
+    },
+    {
+      "key": "fine_tuned",
+      "model_id": "experiments/models/minilm_benchmark_200_grouped_70_30",
+      "revision": "local"
+    }
+  ]
+}

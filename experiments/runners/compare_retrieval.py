@@ -889,9 +889,9 @@ def _experiment3(
     for model_name, backend in model_backends.items():
         for token_limit in CHUNK_SIZES:
             config_name = (
-                f"3a_minilm_{token_limit}" if model_name == "all-MiniLM-L6-v2"
+                f"3a_minilm_{token_limit}" if backend is baseline_backend
                 and token_limit == 128 else
-                f"3b_minilm_{token_limit}" if model_name == "all-MiniLM-L6-v2"
+                f"3b_minilm_{token_limit}" if backend is baseline_backend
                 else f"3c_alternative_{token_limit}" if token_limit == 128
                 else f"3d_alternative_{token_limit}"
             )
@@ -1153,7 +1153,8 @@ def _save_config(
         "bootstrap_seed": args.seed,
         "top_k": TOP_K,
         "mrr_cutoff": TOP_K,
-        "query_type_split": "first 20 exact_term; final 20 paraphrased",
+        "query_type_split": "provided by annotations",
+        "embedding_model": str(args.checkpoint.resolve()) if args.checkpoint else MiniLMEmbedder.MODEL_ID,
         "null_gold_policy": "exclude from metric denominators and report count",
         "reused_artifact_roots": [str(path.resolve()) for path in args.reuse_artifacts_from],
     }
@@ -1179,7 +1180,7 @@ def _config_for_experiment3(
         **config,
         "experiment": 3,
         "models": [
-            MiniLMEmbedder.MODEL_ID,
+            config["embedding_model"],
             args.alternative_model,
         ],
         "alternative_query_prefix": args.alternative_query_prefix,
@@ -1196,6 +1197,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Run Phase 2 retrieval experiments 2 and 3."
     )
+    parser.add_argument("--checkpoint", type=Path)
     parser.add_argument("--experiment", choices=("2", "3", "both"), default="both")
     parser.add_argument("--cases", type=Path, default=DEFAULT_CASES_PATH)
     parser.add_argument("--annotations", type=Path, default=DEFAULT_ANNOTATIONS_PATH)
@@ -1263,7 +1265,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         args=args,
     )
 
-    backend = MiniLMEmbedder(local_files_only=True)
+    backend = (LocalSentenceTransformerBackend(str(args.checkpoint.resolve(strict=True)),
+                                               query_prefix="", allow_download=False)
+               if args.checkpoint else MiniLMEmbedder(local_files_only=True))
     if args.experiment in ("2", "both"):
         experiment_dir = output_dir / "experiment_2"
         experiment_dir.mkdir()

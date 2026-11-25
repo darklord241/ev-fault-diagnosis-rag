@@ -1,0 +1,70 @@
+{
+  "run_id": "minilm_ft_heldout_200",
+  "timestamp_utc": "2026-11-25T15:12:27.842204+00:00",
+  "git_commit": "f127de5088e3694baf02217e63a7da9c222fb9c8",
+  "runtime": {
+    "python": "3.13.5",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "rank-bm25": "0.2.2",
+      "sentence-transformers": "6.2.0",
+      "transformers": "5.21.0"
+    }
+  },
+  "config_sha256": "b004d6483e27362386b218453cc7e51e589691e5cf704dacceed17f157bf4249",
+  "input_files": {
+    "benchmark": {
+      "path": "C:\\Users\\Abhay\\Desktop\\Projects\\ev-fault-diagnosis-rag\\results\\domain_adaptation\\benchmark_200_grouped_70_30\\followup_inputs\\cases.json",
+      "sha256": "264f7cd831f54d21998ea65b26b52ffa51255d344e3cb617231f55ef72c36820"
+    },
+    "annotations": {
+      "path": "C:\\Users\\Abhay\\Desktop\\Projects\\ev-fault-diagnosis-rag\\results\\domain_adaptation\\benchmark_200_grouped_70_30\\followup_inputs\\annotations.json",
+      "sha256": "292a4123bb384c7eb9da366ddcd0ca25a248ea952a16e397fc01765c8bba2345"
+    }
+  },
+  "corpus": {
+    "chunk_directory": "C:\\Users\\Abhay\\Desktop\\Projects\\ev-fault-diagnosis-rag\\data\\chunked\\heldout_200_70_30",
+    "chunk_count": 1297,
+    "sha256": "c64c81bc962404dfa0dc3dda40c268b617efd24ef3bc039ce7b869998e712f97"
+  },
+  "benchmark": {
+    "query_count": 60,
+    "scored_query_count": 60,
+    "metrics": [
+      "hit_at_1",
+      "hit_at_3",
+      "hit_at_5",
+      "recall_at_5",
+      "recall_at_10",
+      "recall_at_20",
+      "mrr_at_5",
+      "ndcg_at_10"
+    ]
+  },
+  "experiment_details": {
+    "embedding_model": {
+      "model_id": "C:\\Users\\Abhay\\Desktop\\Projects\\ev-fault-diagnosis-rag\\experiments\\models\\minilm_benchmark_200_grouped_70_30",
+      "revision": "local",
+      "preprocessing": "query_prefix=''; document_prefix=''; max_seq_length=256; reject overlong inputs"
+    },
+    "reranker": {
+      "model_id": "BAAI/bge-reranker-base",
+      "revision": "main",
+      "candidate_pool_size": 20,
+      "final_top_k": 5,
+      "loaded": true,
+      "load_error": null,
+      "download_allowed": false
+    },
+    "bm25": {
+      "implementation": "rank_bm25.BM25Okapi",
+      "k1": 1.2,
+      "b": 0.75
+    },
+    "rrf": {
+      "formula": "sum(1 / (k + one_based_rank))",
+      "k": 60
+    },
+    "cache_hit": false
+  }
+}

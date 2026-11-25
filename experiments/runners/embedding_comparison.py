@@ -326,6 +326,9 @@ def _write_report(
     per_query_rows: Sequence[Mapping[str, object]],
     historical_mpnet_rows: Sequence[Mapping[str, object]],
     run_id: str,
+    corpus_count: int = 891,
+    case_count: int = 40,
+    scored_count: int = 39,
 ) -> None:
     def value_with_ci(row: Mapping[str, object], metric: str) -> str:
         value = row.get(metric)
@@ -344,11 +347,8 @@ def _write_report(
         "# Encoder embedding model comparison",
         "",
         f"- Run: `{run_id}`",
-        f"- Objective: compare embedding models while holding the existing 891 chunks,",
-        "  chunk IDs, cosine retrieval, top-k, queries, and gold labels fixed.",
-        "- Chunking is unchanged: FAQs remain single chunks; PDFs use 600-word chunks",
-        "  with 100-word overlap.",
-        "- Benchmark: 40 evaluation cases; 39 have gold labels and are scored.",
+        f"- All models use the same {corpus_count} passages, queries, gold labels, and cosine top-k.",
+        f"- Benchmark: {case_count} evaluation cases, {scored_count} scored.",
         "- Metrics: Hit@1/3/5, MRR@5, nDCG@5, and query latency.",
         "- Latency measures query embedding plus top-5 cosine retrieval; model loading,",
         "  document embedding, and cache/index construction are excluded.",
@@ -588,12 +588,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     cases, annotations = load_evaluation_inputs(
         cases_path, annotations_path, chunks
     )
-    if len(chunks) != 891:
+    if cases_path == DEFAULT_CASES_PATH.resolve() and len(chunks) != 891:
         raise ValueError(
             f"controlled comparison expects the existing 891 chunks; found {len(chunks)}"
         )
     scored_count = sum(case["gold_chunk_ids"] is not None for case in cases)
-    if scored_count != 39:
+    if cases_path == DEFAULT_CASES_PATH.resolve() and scored_count != 39:
         raise ValueError(
             f"controlled comparison expects 39 scored cases; found {scored_count}"
         )
@@ -643,7 +643,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "model_order": [model.key for model in models],
         "retrieval": {"method": "dense_cosine", "top_k": TOP_K},
         "benchmark": {
-            "dataset": "retrieval_eval_40.json",
+            "dataset": cases_path.name,
             "case_count": len(cases),
             "scored_query_count": scored_count,
             "unscored_null_gold_count": len(cases) - scored_count,
@@ -658,11 +658,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             "same exact cosine index and top-k",
             "same CPU and batch settings",
         ],
-        "chunking": {
-            "faq": "one self-contained chunk per record",
-            "pdf_chunk_words": 600,
-            "pdf_overlap_words": 100,
-        },
+        "chunking": "fixed input passages",
     }
     write_json(output_dir / "config.json", config)
     write_result_tables(output_dir, aggregate_rows, per_query_rows)
@@ -680,6 +676,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         per_query_rows=per_query_rows,
         historical_mpnet_rows=historical_mpnet_rows,
         run_id=run_id,
+        corpus_count=len(chunks), case_count=len(cases), scored_count=scored_count,
     )
 
     input_files = {

@@ -1,0 +1,454 @@
+{
+  "version": 3,
+  "status": "Held-out split from benchmark_200_grouped_70_30.",
+  "cases": [
+    {
+      "id": "charging-time-450s",
+      "query": "What home charging time is listed for the Ather 450S?",
+      "gold_chunk_ids": [
+        "ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7262_chunk_0",
+        "ather_charging_faqs_8134_chunk_0",
+        "ather_electric_scooter_faqs___support_&_help_center_7262_chunk_0",
+        "ather_electric_scooter_faqs___support_&_help_center_8134_chunk_0"
+      ]
+    },
+    {
+      "id": "eight70-battery-degradation",
+      "query": "What battery degradation protection is described by Eight70 Warranty?",
+      "gold_chunk_ids": [
+        "ather_electric_scooter_faqs___support_&_help_center_7383_chunk_0",
+        "ather_electric_scooter_faqs___support_&_help_center_7406_chunk_0",
+        "battery_warranty_details_for_ather_scooters___faqs_7406_chunk_0"
+      ]
+    },
+    {
+      "id": "ather-dot-charging",
+      "query": "What are the steps for connecting the Ather Dot charger to the scooter?",
+      "gold_chunk_ids": [
+        "450S_User_Manual_Jan_24_page_38_chunk_0",
+        "450X_Gen_4_2023_QSG_page_38_chunk_0"
+      ]
+    },
+    {
+      "id": "left-lever-both-wheels",
+      "query": "Does pulling the left-hand brake lever apply braking to both wheels?",
+      "gold_chunk_ids": [
+        "2025-450-Apex-QSG_page_11_chunk_0",
+        "2025-450S-QSG_page_11_chunk_0",
+        "2025-450X-QSG_page_11_chunk_0",
+        "450S_User_Manual_Jan_24_page_11_chunk_0",
+        "450X_Gen_4_2023_QSG_page_11_chunk_0",
+        "Rizta S Quick Start Guide_page_11_chunk_0",
+        "Rizta Z Quick Start Guide_page_11_chunk_0"
+      ]
+    },
+    {
+      "id": "battery-capacity-warranty",
+      "query": "What battery capacity degradation limit is stated in the 2024 Ather warranty policy?",
+      "gold_chunk_ids": [
+        "ather_warranty_policy_2024_page_2_chunk_0_split_1"
+      ]
+    },
+    {
+      "id": "battery-warranty-plain-language",
+      "query": "How much battery capacity loss does the applicable warranty allow before its degradation protection threshold is exceeded?",
+      "gold_chunk_ids": [
+        "ather_warranty_policy_2024_page_2_chunk_0_split_1",
+        "ather_electric_scooter_faqs___support_&_help_center_7379_chunk_0",
+        "ather_electric_scooter_faqs___support_&_help_center_7383_chunk_0",
+        "ather_electric_scooter_faqs___support_&_help_center_7406_chunk_0",
+        "battery_warranty_details_for_ather_scooters___faqs_7406_chunk_0"
+      ]
+    },
+    {
+      "id": "charging-time-plain-language",
+      "query": "How long should I expect to wait for my Ather 450S to charge at home?",
+      "gold_chunk_ids": [
+        "ather_450_series_faqs___450x_vs_450s,_charging,_warranty_7262_chunk_0",
+        "ather_charging_faqs_8134_chunk_0",
+        "ather_electric_scooter_faqs___support_&_help_center_7262_chunk_0",
+        "ather_electric_scooter_faqs___support_&_help_center_8134_chunk_0"
+      ]
+    },
+    {
+      "id": "river-charger-port-exact_term",
+      "query": "Where is the River Indie charger port and what must be done to access it?",
+      "gold_chunk_ids": [
+        "river_indie_gen1_owners_manual_page_29_chunk_0"
+      ]
+    },
+    {
+      "id": "river-charger-port-paraphrased",
+      "query": "How do I reach the Indie’s charging socket safely before plugging it in?",
+      "gold_chunk_ids": [
+        "river_indie_gen1_owners_manual_page_29_chunk_0"
+      ]
+    },
+    {
+      "id": "river-storage-exact_term",
+      "query": "What are the glovebox and under-seat storage capacities of the River Indie?",
+      "gold_chunk_ids": [
+        "river_indie_gen1_owners_manual_page_39_chunk_0_split_0",
+        "river_indie_gen1_owners_manual_page_39_chunk_0_split_1"
+      ]
+    },
+    {
+      "id": "river-storage-paraphrased",
+      "query": "How much space and load can the Indie’s front compartment and under-seat compartment handle?",
+      "gold_chunk_ids": [
+        "river_indie_gen1_owners_manual_page_39_chunk_0_split_0",
+        "river_indie_gen1_owners_manual_page_39_chunk_0_split_1"
+      ]
+    },
+    {
+      "id": "tvs-regen-exact_term",
+      "query": "How does regenerative braking work on the TVS iQube ST?",
+      "gold_chunk_ids": [
+        "TVS iQube ST 51 kWh  34 kWh_page_29_chunk_0_split_0",
+        "TVS iQube ST 51 kWh  34 kWh_page_29_chunk_0_split_1"
+      ]
+    },
+    {
+      "id": "tvs-regen-paraphrased",
+      "query": "When can the iQube ST recover energy during deceleration, and when might that recovery be reduced?",
+      "gold_chunk_ids": [
+        "TVS iQube ST 51 kWh  34 kWh_page_29_chunk_0_split_0",
+        "TVS iQube ST 51 kWh  34 kWh_page_29_chunk_0_split_1"
+      ]
+    },
+    {
+      "id": "nexus-modes-exact_term",
+      "query": "What are the Ampere Nexus riding modes and their approximate speed limits?",
+      "gold_chunk_ids": [
+        "ampere_nexus_owners_manual_page_15_chunk_0_split_0",
+        "ampere_nexus_owners_manual_page_15_chunk_0_split_1"
+      ]
+    },
+    {
+      "id": "nexus-modes-paraphrased",
+      "query": "How do the Nexus efficiency, city, and performance settings differ in speed and use?",
+      "gold_chunk_ids": [
+        "ampere_nexus_owners_manual_page_15_chunk_0_split_0",
+        "ampere_nexus_owners_manual_page_15_chunk_0_split_1"
+      ]
+    },
+    {
+      "id": "nexus-battery-saver-exact_term",
+      "query": "When does Battery Saver Mode activate on the Ampere Nexus?",
+      "gold_chunk_ids": [
+        "ampere_nexus_owners_manual_page_15_chunk_0_split_1"
+      ]
+    },
+    {
+      "id": "nexus-battery-saver-paraphrased",
+      "query": "At what remaining battery level does the Nexus automatically enter its low-charge saving mode?",
+      "gold_chunk_ids": [
+        "ampere_nexus_owners_manual_page_15_chunk_0_split_1"
+      ]
+    },
+    {
+      "id": "vida-tyre-exact_term",
+      "query": "What cold tyre pressures does the VIDA VX2 specify for a rider-only load?",
+      "gold_chunk_ids": [
+        "vida_vx2_before_2026_07_15_owners_manual_page_5_chunk_0_split_0"
+      ]
+    },
+    {
+      "id": "vida-tyre-paraphrased",
+      "query": "What should the front and rear tyre pressures be when only the rider is aboard a VIDA VX2?",
+      "gold_chunk_ids": [
+        "vida_vx2_before_2026_07_15_owners_manual_page_5_chunk_0_split_0"
+      ]
+    },
+    {
+      "id": "vida-ports-exact_term",
+      "query": "What two traction-battery charging ports are provided on the VIDA VX2?",
+      "gold_chunk_ids": [
+        "vida_vx2_before_2026_07_15_owners_manual_page_37_chunk_0"
+      ]
+    },
+    {
+      "id": "vida-ports-paraphrased",
+      "query": "Where can the two different charging connections on the VX2 be found?",
+      "gold_chunk_ids": [
+        "vida_vx2_before_2026_07_15_owners_manual_page_37_chunk_0"
+      ]
+    },
+    {
+      "id": "vida-charge-safety-exact_term",
+      "query": "What charging precautions does the VIDA VX2 give regarding damaged plugs, moisture, and electrical load?",
+      "gold_chunk_ids": [
+        "vida_vx2_before_2026_07_15_owners_manual_page_52_chunk_0_split_0",
+        "vida_vx2_before_2026_07_15_owners_manual_page_52_chunk_0_split_1"
+      ]
+    },
+    {
+      "id": "vida-charge-safety-paraphrased",
+      "query": "What should be checked before connecting the VX2 charger to avoid electrical or fire hazards?",
+      "gold_chunk_ids": [
+        "vida_vx2_before_2026_07_15_owners_manual_page_52_chunk_0_split_0",
+        "vida_vx2_before_2026_07_15_owners_manual_page_52_chunk_0_split_1"
+      ]
+    },
+    {
+      "id": "simple-specs-exact_term",
+      "query": "What battery capacity, 0–80% home-charging time, and IDC range are listed for the Simple One Gen 2?",
+      "gold_chunk_ids": [
+        "simple_one_gen2_owners_manual_page_11_chunk_0"
+      ]
+    },
+    {
+      "id": "simple-specs-paraphrased",
+      "query": "What headline energy capacity, home recharge time, and claimed test-cycle range does the Simple One Gen 2 manual give?",
+      "gold_chunk_ids": [
+        "simple_one_gen2_owners_manual_page_11_chunk_0"
+      ]
+    },
+    {
+      "id": "simple-service-exact_term",
+      "query": "How often does the Simple One service schedule call for servicing?",
+      "gold_chunk_ids": [
+        "simple_one_gen2_owners_manual_page_91_chunk_0_split_0"
+      ]
+    },
+    {
+      "id": "simple-service-paraphrased",
+      "query": "What time-or-distance trigger determines the Simple One’s service interval?",
+      "gold_chunk_ids": [
+        "simple_one_gen2_owners_manual_page_91_chunk_0_split_0"
+      ]
+    },
+    {
+      "id": "simple-battery-health-exact_term",
+      "query": "What battery health checks are included in the Simple One maintenance schedule?",
+      "gold_chunk_ids": [
+        "simple_one_gen2_owners_manual_page_90_chunk_0"
+      ]
+    },
+    {
+      "id": "simple-battery-health-paraphrased",
+      "query": "Which battery condition metrics should technicians inspect during Simple One servicing?",
+      "gold_chunk_ids": [
+        "simple_one_gen2_owners_manual_page_90_chunk_0"
+      ]
+    },
+    {
+      "id": "simple-battery-warranty-exact_term",
+      "query": "What State of Health does the Simple One battery warranty promise?",
+      "gold_chunk_ids": [
+        "simple_one_gen2_owners_manual_page_102_chunk_0_split_0"
+      ]
+    },
+    {
+      "id": "simple-battery-warranty-paraphrased",
+      "query": "What minimum battery-health level is covered by Simple Energy during its standard battery warranty?",
+      "gold_chunk_ids": [
+        "simple_one_gen2_owners_manual_page_102_chunk_0_split_0"
+      ]
+    },
+    {
+      "id": "uv-f77-bluetooth-exact_term",
+      "query": "How is Bluetooth used on the Ultraviolette F77 Mach 2?",
+      "gold_chunk_ids": [
+        "ultraviolette_f77_mach2_owners_manual_page_38_chunk_0"
+      ]
+    },
+    {
+      "id": "uv-f77-bluetooth-paraphrased",
+      "query": "What does the F77’s Bluetooth connection provide when paired with the UV smartphone app?",
+      "gold_chunk_ids": [
+        "ultraviolette_f77_mach2_owners_manual_page_38_chunk_0"
+      ]
+    },
+    {
+      "id": "uv-x47-fuse-exact_term",
+      "query": "What should be checked if the Ultraviolette X-47 will not turn on because of a suspected fuse failure?",
+      "gold_chunk_ids": [
+        "ultraviolette_x47_owners_manual_page_139_chunk_0_split_0"
+      ]
+    },
+    {
+      "id": "uv-x47-fuse-paraphrased",
+      "query": "What first troubleshooting steps does the X-47 manual give for a suspected blown fuse or discharged auxiliary battery?",
+      "gold_chunk_ids": [
+        "ultraviolette_x47_owners_manual_page_139_chunk_0_split_0"
+      ]
+    },
+    {
+      "id": "uv-x47-tyre-exact_term",
+      "query": "What tyre pressure does the Ultraviolette X-47 troubleshooting guidance give for visibility and handlebar-pull issues?",
+      "gold_chunk_ids": [
+        "ultraviolette_x47_owners_manual_page_141_chunk_0"
+      ]
+    },
+    {
+      "id": "uv-x47-tyre-paraphrased",
+      "query": "What inflation range should be checked on both X-47 tyres when the bike has visibility or pulling issues?",
+      "gold_chunk_ids": [
+        "ultraviolette_x47_owners_manual_page_141_chunk_0"
+      ]
+    },
+    {
+      "id": "honda-battery-temp-exact_term",
+      "query": "What do the blue and red battery-temperature indicators mean on the Honda Activa e:?",
+      "gold_chunk_ids": [
+        "honda_activa_e_2025_owners_manual_page_31_chunk_0"
+      ]
+    },
+    {
+      "id": "honda-battery-temp-paraphrased",
+      "query": "How does the Activa e: dashboard indicate that the traction battery is unusually cold or hot?",
+      "gold_chunk_ids": [
+        "honda_activa_e_2025_owners_manual_page_31_chunk_0"
+      ]
+    },
+    {
+      "id": "honda-motor-cutoff-exact_term",
+      "query": "How does the Honda QC1 Motor Drive Cut-off System behave after the vehicle falls over?",
+      "gold_chunk_ids": [
+        "honda_qc1_2025_owners_manual_page_100_chunk_0"
+      ]
+    },
+    {
+      "id": "honda-motor-cutoff-paraphrased",
+      "query": "What happens to the QC1 motor after a tip-over, and how can the rider reset it?",
+      "gold_chunk_ids": [
+        "honda_qc1_2025_owners_manual_page_100_chunk_0"
+      ]
+    },
+    {
+      "id": "nexus-earth-leakage",
+      "query": "Which charger LED and buzzer states indicate Earth Leakage on the Ampere Nexus?",
+      "gold_chunk_ids": [
+        "ampere_nexus_owners_manual_page_32_chunk_0_split_0"
+      ]
+    },
+    {
+      "id": "nexus-reverse-beep",
+      "query": "My Ampere Nexus beeps in a repeating pattern while backing up. What is the expected sound timing?",
+      "gold_chunk_ids": [
+        "ampere_nexus_owners_manual_page_23_chunk_0"
+      ]
+    },
+    {
+      "id": "magnus-front-end-noise",
+      "query": "My Ampere Magnus makes a sound at the front when I shake the handlebars. What does the manual suggest doing if it sounds unusual?",
+      "gold_chunk_ids": [
+        "ampere_magnus_owners_manual_page_27_chunk_0"
+      ]
+    },
+    {
+      "id": "qc1-standby-indicator",
+      "query": "What does Honda say to check about the QC1 side stand and throttle if the Standby Indicator does not flash?",
+      "gold_chunk_ids": [
+        "honda_qc1_2025_owners_manual_page_86_chunk_0"
+      ]
+    },
+    {
+      "id": "activa-stale-pairing",
+      "query": "My Activa e: and phone no longer pair. What saved setting on the phone might need to be removed before retrying?",
+      "gold_chunk_ids": [
+        "honda_activa_e_2025_owners_manual_page_176_chunk_0"
+      ]
+    },
+    {
+      "id": "indie-gen2-fota-progress",
+      "query": "What does the River Indie Gen 2 cluster show while a FOTA update is in progress?",
+      "gold_chunk_ids": [
+        "river_indie_gen2_owners_manual_page_127_chunk_0"
+      ]
+    },
+    {
+      "id": "ultra-thermal-runaway",
+      "query": "How does the Simple Ultra cluster indicate Thermal Runaway, and what immediate action should the rider take?",
+      "gold_chunk_ids": [
+        "simple_ultra_owners_manual_page_20_chunk_0"
+      ]
+    },
+    {
+      "id": "ultra-resume-charge",
+      "query": "Power to my Simple Ultra charger was switched off midway through. Can I pick up again without unplugging the scooter?",
+      "gold_chunk_ids": [
+        "simple_ultra_owners_manual_page_79_chunk_0"
+      ]
+    },
+    {
+      "id": "ultra-rate-control",
+      "query": "Which component controls the charging rate during the Simple Ultra charge cycle?",
+      "gold_chunk_ids": [
+        "simple_ultra_owners_manual_page_79_chunk_0"
+      ]
+    },
+    {
+      "id": "ultra-obd-location",
+      "query": "Where on the Simple Ultra would a technician look for the diagnostics connector near the luggage area?",
+      "gold_chunk_ids": [
+        "simple_ultra_owners_manual_page_26_chunk_0"
+      ]
+    },
+    {
+      "id": "vida-v2-cruise-after-brake",
+      "query": "I braked and my VIDA V2 stopped holding speed. Which button recalls the last speed I set?",
+      "gold_chunk_ids": [
+        "vida_v2_owners_manual_page_27_chunk_0_split_0",
+        "vida_v2_owners_manual_page_27_chunk_0_split_1"
+      ]
+    },
+    {
+      "id": "vida-v2-sos-cancel",
+      "query": "How can a VIDA V2 rider cancel an SOS request during the countdown?",
+      "gold_chunk_ids": [
+        "vida_v2_owners_manual_page_32_chunk_0"
+      ]
+    },
+    {
+      "id": "vida-v2-boost-while-cruising",
+      "query": "Why won’t my VIDA V2 give me the extra overtaking power while it’s holding a set speed?",
+      "gold_chunk_ids": [
+        "vida_v2_owners_manual_page_32_chunk_0"
+      ]
+    },
+    {
+      "id": "x47-blind-spot-glow",
+      "query": "What mirror indication does the Ultraviolette X-47 use for Blind Spot Detection?",
+      "gold_chunk_ids": [
+        "ultraviolette_x47_owners_manual_page_49_chunk_0"
+      ]
+    },
+    {
+      "id": "x47-rear-collision-warning",
+      "query": "What do the Omnisense Mirrors show during an Ultraviolette X-47 Rear Collision Warning?",
+      "gold_chunk_ids": [
+        "ultraviolette_x47_owners_manual_page_52_chunk_0"
+      ]
+    },
+    {
+      "id": "x47-ballistic-unavailable",
+      "query": "Which conditions cause BALLISTIC UNAVAILABLE on the Ultraviolette X-47?",
+      "gold_chunk_ids": [
+        "ultraviolette_x47_owners_manual_page_76_chunk_0"
+      ]
+    },
+    {
+      "id": "x47-hover-mode-charge",
+      "query": "The X-47 warns that the main battery is nearly empty. How much charge remains when it is set to enter its bottom-of-charge riding mode?",
+      "gold_chunk_ids": [
+        "ultraviolette_x47_owners_manual_page_77_chunk_0"
+      ]
+    },
+    {
+      "id": "x47-motor-arm-error",
+      "query": "What throttle condition causes MOTOR ARM ERROR on the Ultraviolette X-47?",
+      "gold_chunk_ids": [
+        "ultraviolette_x47_owners_manual_page_76_chunk_0"
+      ]
+    },
+    {
+      "id": "x47-hill-hold-countdown",
+      "query": "My X-47 is holding itself on a slope and the dash says it’ll let go in five seconds. What should I do?",
+      "gold_chunk_ids": [
+        "ultraviolette_x47_owners_manual_page_77_chunk_0"
+      ]
+    }
+  ]
+}

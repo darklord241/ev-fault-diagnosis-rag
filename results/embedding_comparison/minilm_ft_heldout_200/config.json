@@ -1,0 +1,52 @@
+{
+  "experiment": "embedding_comparison",
+  "varied_parameter": "embedding_model",
+  "objective": "compare encoder embedding models only",
+  "models": [
+    {
+      "key": "current",
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "query_prefix": "",
+      "document_prefix": "",
+      "revision": "main"
+    },
+    {
+      "key": "fine_tuned",
+      "model_id": "experiments/models/minilm_benchmark_200_grouped_70_30",
+      "query_prefix": "",
+      "document_prefix": "",
+      "revision": "local"
+    }
+  ],
+  "model_order": [
+    "current",
+    "fine_tuned"
+  ],
+  "retrieval": {
+    "method": "dense_cosine",
+    "top_k": 5
+  },
+  "benchmark": {
+    "dataset": "cases.json",
+    "case_count": 60,
+    "scored_query_count": 60,
+    "unscored_null_gold_count": 0
+  },
+  "metrics": [
+    "hit_at_1",
+    "hit_at_3",
+    "hit_at_5",
+    "mrr",
+    "ndcg_at_5"
+  ],
+  "latency_repeats": 1,
+  "bootstrap_samples": 5000,
+  "bootstrap_seed": 20261028,
+  "controlled_variables": [
+    "same corpus and chunk IDs",
+    "same query texts and gold labels",
+    "same exact cosine index and top-k",
+    "same CPU and batch settings"
+  ],
+  "chunking": "fixed input passages"
+}
